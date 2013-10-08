@@ -51,21 +51,48 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 :: Deployment
 :: ----------
 
+
+::
+:: 0. Figure out the best version of node to use
+::
+:: The following was taken from the Node deployment script provided by Azure...
+::
+
+IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
+  :: The following are done only on Windows Azure Websites environment
+  call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
+  IF !ERRORLEVEL! NEQ 0 goto error
+
+  IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
+    SET /p NODE_EXE=<"%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
+    IF !ERRORLEVEL! NEQ 0 goto error
+  )
+
+  IF NOT DEFINED NODE_EXE (
+    SET NODE_EXE=node
+  )
+
+  SET NPM_CMD="!NODE_EXE!" "%NPM_JS_PATH%"
+) ELSE (
+  SET NPM_CMD=npm
+  SET NODE_EXE=node
+)
+
 :: 1. Install npm packages
 echo Installing Node Modules...
 pushd "%DEPLOYMENT_SOURCE%"
 rd /s /q node_modules
-call npm install --production
+call !NPM_CMD! install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
 :: 2. Build DocPad site
 echo Cleaning Existing Files...
 pushd "%DEPLOYMENT_SOURCE%"
-node .\node_modules\docpad\bin\docpad -e static clean >nul 2>nul
+"!NODE_EXE!" .\node_modules\docpad\bin\docpad -e static clean >nul 2>nul
 IF !ERRORLEVEL! NEQ 0 goto error
 echo Building DocPad Site...
-node .\node_modules\docpad\bin\docpad -e static generate
+"!NODE_EXE!" .\node_modules\docpad\bin\docpad -e static generate
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
@@ -73,6 +100,7 @@ popd
 echo Copying Files...
 call %KUDU_SYNC_CMD% -v 500 -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.gitignore;posts;drafts"
 IF !ERRORLEVEL! NEQ 0 goto error
+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
