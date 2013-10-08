@@ -1,6 +1,7 @@
 ---
 layout: narrow-page
 title: TrendWeight
+priority: 0.3
 ---
 
 <div id="trendweight-header">

@@ -2,6 +2,7 @@
 layout: page
 title: Oops! Page Not Found
 skipCleanUrls: true
+sitemap: false
 ---
 <div class="row">
     <div class="col-sm-12 col-md-10">

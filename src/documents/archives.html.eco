@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Blog Archives
+priority: 0.3
 ---
 
 <%- @partial('abstract-list', {collection: @getCollection('posts')}) %>
