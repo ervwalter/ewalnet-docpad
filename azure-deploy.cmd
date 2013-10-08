@@ -54,7 +54,7 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 :: 1. Install npm packages
 echo Installing Node Modules...
 pushd "%DEPLOYMENT_SOURCE%"
-call npm install --production
+call npm update --production
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
@@ -70,7 +70,7 @@ popd
 
 :: 3. KuduSync
 echo Copying Files...
-call %KUDU_SYNC_CMD% -v 50 -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.gitignore;posts;drafts"
+call %KUDU_SYNC_CMD% -v 500 -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.gitignore;posts;drafts"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

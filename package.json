@@ -15,7 +15,6 @@
     "docpad": "~6.53.0",
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-eco": "~2.0.2",
-    "docpad-plugin-livereload": "~2.5.3",
     "docpad-plugin-dateurls": "~2.3.0",
     "docpad-plugin-less": "~2.2.0",
     "docpad-plugin-rss": "~2.0.1",
@@ -30,5 +29,8 @@
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
     "start": "node_modules/docpad/bin/docpad-server"
+  },
+  "devDependencies": {
+    "docpad-plugin-livereload": "~2.5.3"
   }
 }
