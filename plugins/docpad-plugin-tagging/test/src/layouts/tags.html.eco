@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<h1>Pages tagged with '<%= @document.tag %>'</h1>
+
+<ul>
+<% for doc in @getCollection('documents').findAll({tags: '$in': @document.tag}).toJSON(): %>
+	<li><a href="<%= doc.url %>"><%= doc.title %></a></li>
+<% end %>
+</ul>

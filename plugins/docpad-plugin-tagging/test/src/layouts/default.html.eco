@@ -1,0 +1,18 @@
+<html>
+	<head></head>
+	<body>
+
+		<%- @content %>
+	
+		<h2>Tag Cloud</h2>
+
+		<ul>
+			<% for key, item of @getTagCloud(): %>
+				<li>
+					<a href="<%= item.url %>" data-tag-count="<%= item.count %>" data-tag-weight="<%= item.weight %>"><%= item.tag %> (<%= item.count %>)</a>
+				</li>
+			<% end %>
+		</ul>
+
+	</body>
+</html>

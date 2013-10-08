@@ -1,0 +1,7 @@
+.travis*
+Makefile
+Cakefile
+*~
+src/
+out/test/
+test/

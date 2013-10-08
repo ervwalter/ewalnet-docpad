@@ -1,0 +1,44 @@
+---
+layout: narrow-page
+title: TrendWeight
+---
+
+<div id="trendweight-header">
+    <div><a href="https://trendweight.com"><img id="trendweight-logo" src="/images/trendweightlogo.png"/></a></div>
+    <div><img id="trendweight-guy" src="/images/trendweightguy.png"/></div>
+    <div id="trendweight-updates">
+        <p>Follow TrendWeight:</p>
+        <a href="http://twitter.com/trendweight">@TrendWeight</a>,
+        <a href="http://www.facebook.com/trendweight">Facebook</a>
+    </div>
+</div>
+
+<div class="trendweight-intro">
+    <p>
+        Hey, there! As you may be aware, TrendWeight is a web application that I originally created for myself, but then
+        decided to make available for anyone to use. In reality, though, I am just a computer geek who likes to develop
+        web applications in his free time&mdash;I'm not some big corporation with a team of support staff. That said, I
+        am always willing to try to help or answer questions if you have them. Just email me at <a
+            href="mailto:support@trendweight.com">support@trendweight.com</a> and I'll try to get back to you as soon as
+        I can.
+    </p>
+
+    <p>
+        From time to time, I post on my blog when there are new features or important announcements regarding
+        TrendWeight. You'll find the most recent blog posts related to TrendWeight below.
+    </p>
+
+    <p>
+        Odds are, you probably aren't interested in subscribing to my entire blog since it has posts about computer
+        geek-y things not related to TrendWeight. So, if you want to stay in the loop with just TrendWeight things, your
+        best bet is to follow <a href="http://twitter.com/trendweight">@TrendWeight</a> on Twitter or 'Like' the <a
+            href="http://www.facebook.com/trendweight">TrendWeight Facebook Page</a>.
+    </p>
+</div>
+
+<% for document in @getCollection('posts').findAll({tags: '$in': 'TrendWeight'}).toJSON()[0..4]: %>
+<%- @partial('post', {title: document.title, url: document.url, tags: document.tags, date: document.date, content: document.contentRenderedWithoutLayouts }) %>
+<% end %>
+<div class="page-nav">
+    <div class="page-nav-archives"><a href="/tags/trendweight/">- All TrendWeight Posts -</a></div>
+</div>

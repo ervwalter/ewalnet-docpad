@@ -1,0 +1,6 @@
+---
+layout: page
+title: Blog Archives
+---
+
+<%- @partial('abstract-list', {collection: @getCollection('posts')}) %>
