@@ -59,10 +59,11 @@ IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
 :: 2. Build DocPad site
-echo Building DocPad Site...
+echo Cleaning Existing Files...
 pushd "%DEPLOYMENT_SOURCE%"
-node .\node_modules\docpad\bin\docpad -e static clean
+node .\node_modules\docpad\bin\docpad -e static clean >nul 2>nul
 IF !ERRORLEVEL! NEQ 0 goto error
+echo Building DocPad Site...
 node .\node_modules\docpad\bin\docpad -e static generate
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
