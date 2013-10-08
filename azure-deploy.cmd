@@ -54,7 +54,8 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 :: 1. Install npm packages
 echo Installing Node Modules...
 pushd "%DEPLOYMENT_SOURCE%"
-call npm update --production
+rd /s /q node_modules
+call npm install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
