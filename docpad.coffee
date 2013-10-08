@@ -58,6 +58,9 @@ docpadConfig = {
 		# Discus.com settings
 		disqusShortName: 'ewalnet'
 
+		# Google+ settings
+		googlePlusId: '103974853049200513652'
+
 	outPath: 'out/development'
 
 	collections:
