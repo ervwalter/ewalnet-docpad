@@ -22,9 +22,9 @@
     "docpad-plugin-highlightjs": "~2.1.8",
     "docpad-plugin-coffeescript": "~2.2.2",
     "docpad-plugin-sitemap": "~2.0.1",
-    "docpad-plugin-cleanurls": "https://github.com/ervwalter/docpad-plugin-cleanurls.git#compiled",
-    "docpad-plugin-paged": "https://github.com/ervwalter/docpad-plugin-paged.git#compiled",
-    "docpad-plugin-tagging": "https://github.com/ervwalter/docpad-plugin-tagging.git#compiled"
+    "docpad-plugin-cleanurls": "https://github.com/ervwalter/docpad-plugin-cleanurls/tarball/compiled",
+    "docpad-plugin-paged": "https://github.com/ervwalter/docpad-plugin-paged/tarball/compiled",
+    "docpad-plugin-tagging": "https://github.com/ervwalter/docpad-plugin-tagging/tarball/compiled"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
