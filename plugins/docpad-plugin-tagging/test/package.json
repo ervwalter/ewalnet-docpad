@@ -1,8 +1,0 @@
-{
-	"name": "docpad-plugin-tagging-testsuite",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"docpad-plugin-eco": "latest"
-	}
-}
