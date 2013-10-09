@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Bitcoin Command: A Mining & Wallet Management Web App"
-date: 2013-09-24
-sequence: 1
+date: 2013-09-24 12:00
 published: true
 comments: true
 tags: Bitcoin Gadgets

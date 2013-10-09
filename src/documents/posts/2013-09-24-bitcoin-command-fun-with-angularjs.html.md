@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "Bitcoin Command: Fun with AngularJS, NodeJS, and MongoDB"
-date: 2013-09-24
-sequence: 2
+date: 2013-09-24 12:30
 published: true
 comments: true
 tags: Bitcoin AngularJS NodeJS MongoDB
