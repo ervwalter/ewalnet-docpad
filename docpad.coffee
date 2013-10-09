@@ -65,7 +65,7 @@ docpadConfig = {
 
 	collections:
 		posts: ->
-			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1])
+			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1, sequence: -1])
 
 	environments:
 		static:
