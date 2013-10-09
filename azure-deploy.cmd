@@ -46,17 +46,12 @@ IF NOT DEFINED KUDU_SYNC_CMD (
   :: Locally just running "kuduSync" would also work
   SET KUDU_SYNC_CMD=node "%appdata%\npm\node_modules\kuduSync\bin\kuduSync"
 )
+goto Deployment
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: Deployment
-:: ----------
+:: Utility Functions
+:: -----------------
 
-
-::
-:: 0. Figure out the best version of node to use
-::
-:: The following was taken from the Node deployment script provided by Azure...
-::
+:SelectNodeVersion
 
 IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   :: The following are done only on Windows Azure Websites environment
@@ -78,8 +73,20 @@ IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
   SET NODE_EXE=node
 )
 
-:: 1. Install npm packages
-echo Installing Node Modules...
+goto :EOF
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: Deployment
+:: ----------
+
+:Deployment
+echo Handling DocPad deployment.
+
+:: 1. Select node version
+call :SelectNodeVersion
+
+:: 2. Install npm packages
+echo Installing npm packages...
 pushd "%DEPLOYMENT_SOURCE%"
 rd /s /q node_modules
 call !NPM_CMD! install --production
@@ -87,20 +94,18 @@ IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
 :: 2. Build DocPad site
-echo Cleaning Existing Files...
+echo Building DocPad site...
 pushd "%DEPLOYMENT_SOURCE%"
-"!NODE_EXE!" .\node_modules\docpad\bin\docpad -e static clean >nul 2>nul
+rd /s /q out
 IF !ERRORLEVEL! NEQ 0 goto error
-echo Building DocPad Site...
 "!NODE_EXE!" .\node_modules\docpad\bin\docpad -e static generate
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 
 :: 3. KuduSync
 echo Copying Files...
-call %KUDU_SYNC_CMD% -v 500 -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.gitignore;posts;drafts"
+call %KUDU_SYNC_CMD% -v 500 -i "posts;drafts" -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%"
 IF !ERRORLEVEL! NEQ 0 goto error
-
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
