@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Blogging With DocPad"
-date: 2013-10-08
+date: 2013-10-08 22:00
 published: true
 comments: true
 tags:

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "For Sale By Owner"
-date: 2013-10-06
+date: 2013-10-06 20:00
 published: true
 comments: true
 tags: NodeJS DocPad

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "FitBit Aria, Retina Displays, User Interface Improvements"
-date: 2012-07-09
+date: 2012-07-09 22:00
 comments: true
 tags: TrendWeight FitBit
 ---

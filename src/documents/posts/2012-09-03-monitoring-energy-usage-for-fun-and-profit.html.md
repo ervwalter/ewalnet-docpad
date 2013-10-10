@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Monitoring Energy Usage For Fun and Profit"
-date: 2012-09-03
+date: 2012-09-03 22:00
 published: true
 comments: true
 tags: Gadgets CurrentCost PlotWatt Cosm

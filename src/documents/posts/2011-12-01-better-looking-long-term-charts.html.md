@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Better Looking Long Term Charts"
-date: 2011-12-01
+date: 2011-12-01 20:00
 comments: true
 tags: TrendWeight
 ---

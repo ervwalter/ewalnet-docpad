@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Connecting CurrentCost, PlotWatt, and Cosm"
-date: 2012-09-15
+date: 2012-09-15 22:00
 published: true
 comments: true
 tags: CurrentCost PlotWatt Cosm Gadgets

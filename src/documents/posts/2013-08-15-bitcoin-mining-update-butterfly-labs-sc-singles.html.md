@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Bitcoin Mining Update: Butterfly Labs SC Singles"
-date: 2013-08-15
+date: 2013-08-15 22:00
 published: true
 comments: true
 tags: Bitcoin Gadgets

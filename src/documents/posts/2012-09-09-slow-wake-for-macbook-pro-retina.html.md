@@ -1,7 +1,7 @@
 ---
 layout: post
 title: '"Fixing" Slow Wake for MacBook Pro w/ Retina Display'
-date: 2012-09-09
+date: 2012-09-09 22:00
 published: true
 comments: true
 tags: Apple Hardware Gadgets

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What's Next for TrendWeight?"
-date: 2012-08-29
+date: 2012-08-29 22:00
 published: true
 comments: true
 tags: TrendWeight

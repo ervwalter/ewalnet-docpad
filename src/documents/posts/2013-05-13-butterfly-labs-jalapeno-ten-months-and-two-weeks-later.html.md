@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Butterfly Labs Jalapeno: Ten Months and Two Weeks Later"
-date: 2013-05-13
+date: 2013-05-13 22:00
 published: true
 comments: true
 tags: Bitcoin Gadgets

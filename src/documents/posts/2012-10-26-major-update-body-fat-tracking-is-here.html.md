@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Major Update: Body Fat Tracking is Here"
-date: 2012-10-26
+date: 2012-10-26 22:00
 published: true
 comments: true
 tags: TrendWeight

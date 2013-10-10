@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Missed a Day?  No Problem!  Linear Interpolation to the Rescue"
-date: 2012-01-15
+date: 2012-01-15 22:00
 comments: true
 tags: TrendWeight
 ---

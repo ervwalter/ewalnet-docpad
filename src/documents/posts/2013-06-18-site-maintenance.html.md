@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "TrendWeight Maintenance [All Clear]"
-date: 2013-06-18
+date: 2013-06-18 22:00
 published: true
 comments: true
 tags: TrendWeight

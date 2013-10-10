@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Minor Updates for FitBit Users"
-date: 2012-09-26
+date: 2012-09-26 22:00
 published: true
 comments: true
 tags: TrendWeight FitBit

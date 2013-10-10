@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'New Feature: Goal "Bands"'
-date: 2011-11-29
+date: 2011-11-29 23:00
 comments: true
 tags: TrendWeight
 ---

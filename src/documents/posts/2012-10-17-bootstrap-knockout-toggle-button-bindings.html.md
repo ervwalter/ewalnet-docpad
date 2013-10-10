@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Bootstrap + Knockout: Toggle Button Bindings"
-date: 2012-10-17
+date: 2012-10-17 22:00
 published: true
 comments: true
 tags: Bootstrap Knockout CoffeeScript

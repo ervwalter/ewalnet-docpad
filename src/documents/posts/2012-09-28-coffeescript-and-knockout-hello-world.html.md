@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CoffeeScript and Knockout: Hello, World!"
-date: 2012-09-28
+date: 2012-09-28 22:00
 published: true
 comments: true
 tags: CoffeeScript Knockout

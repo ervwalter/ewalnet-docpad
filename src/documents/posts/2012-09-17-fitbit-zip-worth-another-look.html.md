@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "FitBit Zip: Worth Another Look?"
-date: 2012-09-17
+date: 2012-09-17 22:00
 published: true
 comments: true
 tags: Gadgets FitBit

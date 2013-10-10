@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dealing with Lots of Historical Data"
-date: 2013-06-08
+date: 2013-06-08 22:00
 published: true
 comments: true
 tags: TrendWeight

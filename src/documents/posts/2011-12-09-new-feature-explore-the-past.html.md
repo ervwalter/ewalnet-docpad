@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "New Feature: Explore the Past"
-date: 2011-12-09
+date: 2011-12-09 20:00
 comments: true
 tags: TrendWeight
 ---

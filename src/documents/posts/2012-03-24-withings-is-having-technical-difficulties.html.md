@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Withings is Having Technical Difficulties [Resolved]"
-date: 2012-03-24
+date: 2012-03-24 22:00
 comments: true
 tags: TrendWeight
 ---

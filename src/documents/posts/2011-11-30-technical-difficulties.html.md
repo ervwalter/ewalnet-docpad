@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Technical Difficulties [Resolved]"
-date: 2011-11-30
+date: 2011-11-30 20:00
 comments: true
 tags: TrendWeight
 ---

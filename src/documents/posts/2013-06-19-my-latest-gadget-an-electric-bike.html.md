@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My Latest Gadget: An Electric Bike and Many Accessories"
-date: 2013-06-19
+date: 2013-06-19 22:00
 published: true
 comments: true
 tags: Gadgets

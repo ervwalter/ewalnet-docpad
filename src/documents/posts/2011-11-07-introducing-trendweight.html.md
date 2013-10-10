@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introducing TrendWeight
-date: 2011-11-07
+date: 2011-11-07 17:00
 comments: true
 tags: TrendWeight
 ---

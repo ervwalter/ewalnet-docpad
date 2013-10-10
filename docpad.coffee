@@ -65,7 +65,7 @@ docpadConfig = {
 
 	collections:
 		posts: ->
-			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1, sequence: -1])
+			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1])
 
 	environments:
 		static:
@@ -73,7 +73,7 @@ docpadConfig = {
 		development:
 			collections:
 				posts: ->
-					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1, sequence: -1])
+					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1])
 
 	plugins:
 		rss:
@@ -85,6 +85,8 @@ docpadConfig = {
 			cleanurl: true
 			trailingSlashes: true
 			keepOriginalUrls: false
+			collectionName: 'posts'
+			dateIncludesTime: true
 		paged:
 			cleanurl: true
 			startingPageNumber: 2

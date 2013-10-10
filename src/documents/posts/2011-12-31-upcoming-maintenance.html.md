@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Upcoming Maintenance [Finished]"
-date: 2011-12-31
+date: 2011-12-31 22:00
 comments: true
 tags: TrendWeight
 ---

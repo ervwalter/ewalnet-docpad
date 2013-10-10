@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Knockout Samples in CoffeeScript"
-date: 2012-10-04
+date: 2012-10-04 22:00
 published: true
 comments: true
 tags: Knockout CoffeeScript

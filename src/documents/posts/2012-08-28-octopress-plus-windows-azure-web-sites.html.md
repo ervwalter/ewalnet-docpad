@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress + Windows Azure Web Sites"
-date: 2012-08-28
+date: 2012-08-28 22:00
 comments: true
 tags: Azure Octopress
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Day-to-Day Weight Fluctuations and Mental Stress"
-date: 2012-10-05
+date: 2012-10-05 22:00
 published: true
 comments: true
 tags:

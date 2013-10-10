@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "New Feature: 1 kg = 2.20462 lb"
-date: 2012-08-20
+date: 2012-08-20 22:00
 comments: true
 tags: TrendWeight
 ---

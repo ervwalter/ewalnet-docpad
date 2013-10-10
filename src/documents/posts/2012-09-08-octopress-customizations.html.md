@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Octopress Customizations"
-date: 2012-09-08
+date: 2012-09-08 22:00
 published: true
 comments: true
 tags: Octopress
