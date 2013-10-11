@@ -53,7 +53,7 @@ Put these three files in the root folder of your source tree (next to docpad.cof
 * [web.config](https://github.com/ervwalter/ewalnet-docpad/blob/master/web.config)
 * [azure-deploy.cmd](https://github.com/ervwalter/ewalnet-docpad/blob/master/azure-deploy.cmd)
 
-These files are completely generic and should work with any DocPad site, not just blogs, and definitely not just _my_ site.  You don't need to customize them at all.  They will adapt to the specifics of your particular site automatically.
+These files are _almost_ completely generic and can be made to work with any DocPad site, not just _my_ docpad site.  They automatically figure out things like the version of node your project requires, etc.  There is essentially only one thing you might need to tweak in azure-deploy.cmd, and it's explained below.
 
 That said, I'll explain how so that they are less magical...
 
@@ -130,6 +130,9 @@ echo Copying Files...
 call %KUDU_SYNC_CMD% -v 500 -i "posts;drafts" -f "%DEPLOYMENT_SOURCE%\out" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%"
 IF !ERRORLEVEL! NEQ 0 goto error
 ```
+
+__Note:__ This is the one section you might need to tweak.  Notice the `-i "posts;drafts"` in the third line.  That tells the [KuduSync](https://github.com/projectkudu/KuduSync.NET) tool to not copy anything in the `posts/` or `drafts/` folders.  This is specific to my particular blog and you may want to remove it or modify it for your own purposes.  I don't copy anything from `posts/` because I am using the [dateurls](https://github.com/mgroves84/docpad-plugin-dateurls/) plugin which changes the URLs of documents in that folder to live elsewhere.  I ignore that folder because I don't want the left over files from the `posts/` folder to be copied to the live site. I also exclude files in the 'drafts/' folder because, well, they are drafts and I don't want them to appear on the live site.  I'll talk more about how I handle draft posts in my next blog post.
+
 ## Summary
 
 That's it.  Add those three files and you get easy continuous integration support with Azure and DocPad.  Pretty sweet.
