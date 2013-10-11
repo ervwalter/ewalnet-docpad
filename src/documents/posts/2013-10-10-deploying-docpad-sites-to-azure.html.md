@@ -82,7 +82,7 @@ The Setup' section initializes a number of variables that hold things like the p
 
 #### Node Version Detection
 
-Next, this code uses a Microsoft-provided script to parse our package.json file to determine what version of Node and NPM we need and it initializes a couple variables to hold the paths to those too executables.
+Next, this code uses a Microsoft-provided script to parse our package.json file to determine what version of Node and NPM we need and it initializes a couple variables to hold the paths to those two executables.
 
 ``` dos
 :: 1. Select node version
