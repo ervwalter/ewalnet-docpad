@@ -61,15 +61,11 @@ docpadConfig = {
 		# Google+ settings
 		googlePlusId: '103974853049200513652'
 
-	outPath: 'out/development'
-
 	collections:
 		posts: ->
 			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1])
 
 	environments:
-		static:
-			outPath: 'out/generated'
 		development:
 			collections:
 				posts: ->

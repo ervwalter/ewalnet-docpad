@@ -104,7 +104,7 @@ popd
 
 :: 3. KuduSync
 echo Copying Files...
-call %KUDU_SYNC_CMD% -v 500 -i "posts;drafts" -f "%DEPLOYMENT_SOURCE%\out\generated" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%"
+call %KUDU_SYNC_CMD% -v 500 -i "posts;drafts" -f "%DEPLOYMENT_SOURCE%\out" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
