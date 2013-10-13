@@ -72,8 +72,6 @@ docpadConfig = {
 					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1])
 
 	plugins:
-		rss:
-			collection: 'posts'
 		tagging:
 			collectionName: 'posts'
 			indexPageLowercase: true
