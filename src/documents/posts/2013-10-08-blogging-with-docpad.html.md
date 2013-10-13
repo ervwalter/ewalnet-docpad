@@ -44,7 +44,7 @@ That said, I also plan to create another copy of the code that has my content st
 For those that are more interested in building there own projects, there are a couple non-obvious things I plan to write about over the next couple days:
 
 * [Generating Functional Atom Feeds](/2013/10/09/atom-feeds-with-docpad/)
-* Deploying DocPad Sites to Windows Azure
+* [Deploying DocPad Sites to Windows Azure](/2013/10/10/deploying-docpad-sites-to-azure/)
 * Dealing With Draft Posts
 
 Stay tuned...

@@ -1,6 +1,6 @@
 # Ewal.net
 
-This is the source for the [DocPad-based](http://docpad.org) blog hosted at [www.ewal.net](http://www.ewal.net).
+This is the source for the [DocPad-based](http://docpad.org) blog hosted at [www.ewal.net](http://www.ewal.net).  For more information, see [this blog post](http://www.ewal.net/2013/10/08/blogging-with-docpad/).
 
 ## License
 Copyright (c) 2013 Erv Walter
