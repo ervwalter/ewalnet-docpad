@@ -35,7 +35,11 @@ I looked, and as far as I can tell, there is no one who has really created a com
 * A reasonable workflow for draft posts that aren't ready to be published
 * Windows Azure hosting with automatic production-site updates anytime I update GitHub
 
-If you'd like to build off of what I have done, you're absolutely welcome to.  The source for this website is available on GitHub [here](https://github.com/ervwalter/ewalnet-docpad).  Keep in mind that it has all my content in it (which you would need to clean out), and it has _my_ blog's look and feel (which you may not want), but it may be a helpful starting point.
+If you'd like to build off of what I have done, you're absolutely welcome to.  The source for this website is available on GitHub:
+
+<https://github.com/ervwalter/ewalnet-docpad>
+
+Keep in mind that it has all my content in it (which you would need to clean out), and it has _my_ blog's look and feel (which you may not want), but it may be a helpful starting point.
 
 That said, I also plan to create another copy of the code that has my content stripped out and has a more generic look and feel that may be useful as an true skeleton project you can use to get started very quickly.
 
