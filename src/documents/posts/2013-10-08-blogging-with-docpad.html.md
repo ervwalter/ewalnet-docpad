@@ -45,10 +45,8 @@ That said, I also plan to create another copy of the code that has my content st
 
 ## Building Blocks
 
-For those that are more interested in building there own projects, there are a couple non-obvious things I plan to write about over the next couple days:
+For those that are more interested in building there own projects, there are a few non-obvious things I wrote about related to my use of DocPad:
 
 * [Generating Functional Atom Feeds](/2013/10/09/atom-feeds-with-docpad/)
 * [Deploying DocPad Sites to Windows Azure](/2013/10/10/deploying-docpad-sites-to-azure/)
-* Dealing With Draft Posts
-
-Stay tuned...
+* [Dealing With Draft Posts](/2013/10/13/draft-posts-with-docpad/)
