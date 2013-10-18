@@ -1,3 +1,6 @@
+htmlEncode = (value) ->
+	$('<div/>').text(value).html()
+
 $ ->
 	$('.post img').each ->
 		$el = $(this)
@@ -17,19 +20,29 @@ $ ->
 	$(".fancybox").fancybox();
 
 	codeIndex = 0
-
 	$('pre code.lang-coffeescript').each ->
 		codeIndex++
 		$code = $(this)
 		$pre = $code.parent()
-		coffee = $code.text()
-		$content = $pre.wrap("<div class='tab-content'><div class='tab-pane active' id='code-#{codeIndex}-coffee'></div></div>").parent().parent()
 
-		js = CoffeeScript.compile(coffee, {bare: true})
-		$content.append("<div class='tab-pane' id='code-#{codeIndex}-js'><pre><code class='lang-javascript'>" + js + "</code></pre></div>")
-		$("<ul class='nav nav-tabs auto-coffee'><li class='active'><a href='#code-#{codeIndex}-coffee' data-toggle='tab'>CoffeeScript</a></li><li><a href='#code-#{codeIndex}-js' data-toggle='tab'>JavaScript</a></li></ul>").insertBefore($content)
+		# add the markup to create the tabbed display
+		$tabContent = $pre.wrap("<div class='tab-content'><div class='tab-pane active' id='code-#{codeIndex}-coffee'></div></div>").parent().parent()
+		$("<ul class='nav nav-tabs auto-coffee'><li class='active'><a href='#code-#{codeIndex}-coffee' data-toggle='tab'>CoffeeScript</a></li><li><a href='#code-#{codeIndex}-js' data-toggle='tab'>JavaScript</a></li></ul>").insertBefore($tabContent)
+
+		# compile into javascript
+		coffeeSource = $code.text()
+		jsSource = CoffeeScript.compile(coffeeSource, {bare: true})
+
+		# add the javascript code block
+		$tabContent.append("<div class='tab-pane' id='code-#{codeIndex}-js'><pre><code class='lang-javascript'>#{htmlEncode(jsSource)}</code></pre></div>")
 
 	$('.lang-coffeescript-nojs').removeClass('lang-coffeescript-nojs').addClass('lang-coffeescript')
+	$('.lang-none').removeClass('lang-none').addClass('lang-no-highlight')
 
-	$('pre code').each (i, e) ->
-		hljs.highlightBlock(e)
+	$('pre code').each (index, element) ->
+		$code = $(this)
+		classes = $code.attr('class')?.split(' ')
+		if classes? then for origClass in classes
+			fixedClass = origClass.replace /^lang-/, 'language-'
+			$code.removeClass(origClass).addClass(fixedClass) if fixedClass isnt origClass
+		hljs.highlightBlock(element)
