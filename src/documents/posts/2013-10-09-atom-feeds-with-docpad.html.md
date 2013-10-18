@@ -15,7 +15,7 @@ First, start with a `feed.xml.eco` document that looks like this:
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><%= @site.title %></title>
-    <link href="<%= @site.url %>/atom.xml" rel="self"/>
+    <link href="<%= @site.url %>/feed.xml" rel="self"/>
     <link href="<%= @site.url %>"/>
     <updated><%= @site.date.toISOString() %></updated>
     <id><%= @site.url %></id>
@@ -29,7 +29,7 @@ First, start with a `feed.xml.eco` document that looks like this:
         <title><%= document.title %></title>
         <link href="<%= @site.url %><%= document.url %>"/>
         <updated><%= document.date.toISOString() %></updated>
-        <id><%= document.url %></id>
+        <id><%= @getIdForDocument(document) %></id>
         <content type="html"><![CDATA[<%- @fixLinks(document.contentRenderedWithoutLayouts) %>]]></content>
     </entry>
     <% end %>
@@ -50,11 +50,20 @@ becomes:
 
 This is very important if you include links in your blog posts that don't always include your domain's hostname.  Without this fix, people will see broken images and your internal site links won't work if they read you blog in a newsreader.
 
-The code for fixLinks lives in `docpad.coffee` as a function added to templateData.  It looks like this:
+The `@getIdForDocument()` call just creates an appropriate unique Id for each post using [Mark Pilgrim's guidelines](http://web.archive.org/web/20110514113830/http://diveintomark.org/archives/2004/05/28/howto-atom-id).
+
+The code for `fixLinks` and `getIdForDocument` lives in `docpad.coffee` as functions added to templateData.  They look like this:
 
 ``` coffeescript
 docpadConfig = {
     templateData:
+
+        getIdForDocument: (document) ->
+            hostname = url.parse(@site.url).hostname
+            date = document.date.toISOString().split('T')[0]
+            path = document.url
+            "tag:#{hostname},#{date},#{path}"
+
         fixLinks: (content) ->
             baseUrl = @site.url
             regex = /^(http|https|ftp|mailto):/
@@ -72,9 +81,10 @@ docpadConfig = {
 }
 ```
 
-It uses a node module named [cheerio](http://matthewmueller.github.io/cheerio/) to parse the HTML using a jQuery-like API.  To use cheerio in docpad.coffee, you also need to add this line to the top of the file (after you `npm install --save cheerio` of course):
+These two functions use a couple node modules&mdash;one named [cheerio](http://matthewmueller.github.io/cheerio/) to parse the HTML using a jQuery-like API and the standard `url` module from node.js.  Add references to them at the top of docpad.coffee (after you `npm install --save cheerio` of course):
 
     cheerio = require('cheerio')
+    url = require('url')
 
 You can see this code "in context" in [docpad.coffee](https://github.com/ervwalter/ewalnet-docpad/blob/master/docpad.coffee) and [feed.xml.eco](https://github.com/ervwalter/ewalnet-docpad/blob/master/src/documents/feed.xml.eco) from my blog's source code.
 

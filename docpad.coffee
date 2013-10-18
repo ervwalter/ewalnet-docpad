@@ -2,6 +2,7 @@
 # http://docpad.org/docs/config
 
 cheerio = require('cheerio')
+url = require('url')
 
 # Define the DocPad Configuration
 docpadConfig = {
@@ -37,6 +38,12 @@ docpadConfig = {
 
 		getPageUrlWithHostname: ->
 			"#{@site.url}#{@document.url}"
+
+		getIdForDocument: (document) ->
+			hostname = url.parse(@site.url).hostname
+			date = document.date.toISOString().split('T')[0]
+			path = document.url
+			"tag:#{hostname},#{date},#{path}"
 
 		fixLinks: (content) ->
 			baseUrl = @site.url

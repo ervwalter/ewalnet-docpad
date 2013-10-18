@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><%= @site.title %></title>
-    <link href="<%= @site.url %>/atom.xml" rel="self"/>
+    <link href="<%= @site.url %>/feed.xml" rel="self"/>
     <link href="<%= @site.url %>"/>
     <updated><%= @site.date.toISOString() %></updated>
     <id><%= @site.url %></id>
@@ -15,7 +15,7 @@
         <title><%= document.title %></title>
         <link href="<%= @site.url %><%= document.url %>"/>
         <updated><%= document.date.toISOString() %></updated>
-        <id><%= document.url %></id>
+        <id><%= @getIdForDocument(document) %></id>
         <content type="html"><![CDATA[<%- @fixLinks(document.contentRenderedWithoutLayouts) %>]]></content>
     </entry>
     <% end %>
