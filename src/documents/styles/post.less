@@ -85,3 +85,19 @@ a.float-left, .float-left {
   }
 }
 
+.auto-coffee {
+  border-bottom: none;
+
+  & > li {
+    //margin-bottom: 0;
+
+    & > a {
+      color: #444;
+      padding: 5px 15px;
+    }
+  }
+}
+
+.auto-coffee > li.active > a {
+  color: #000;
+}

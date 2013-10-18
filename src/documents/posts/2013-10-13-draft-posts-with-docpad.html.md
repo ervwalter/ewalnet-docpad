@@ -15,7 +15,7 @@ In my blog, any document in the `drafts/` subfolder is not included in any site 
 
 I accomplish this by defining a collection named `posts` in my `docpad.coffee`.  By default, the collection contains only the documents in the `posts/` subfolder.  But when run in development mode, the documents from `drafts/` are included in the collection and I sort them to the top so that they are always visible on the main blog index.
 
-``` coffeescript
+``` coffeescript-nojs
 collections:
     posts: ->
         @getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1])

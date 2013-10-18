@@ -19,7 +19,6 @@
     "docpad-plugin-eco": "~2.0.2",
     "docpad-plugin-less": "~2.2.0",
     "docpad-plugin-partials": "~2.8.0",
-    "docpad-plugin-highlightjs": "~2.1.8",
     "docpad-plugin-coffeescript": "~2.2.2",
     "docpad-plugin-sitemap": "~2.0.1",
     "docpad-plugin-dateurls": "~2.3.1",

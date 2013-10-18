@@ -53,20 +53,23 @@ This is very important if you include links in your blog posts that don't always
 The code for fixLinks lives in `docpad.coffee` as a function added to templateData.  It looks like this:
 
 ``` coffeescript
-fixLinks: (content) ->
-    baseUrl = @site.url
-    regex = /^(http|https|ftp|mailto):/
+docpadConfig = {
+    templateData:
+        fixLinks: (content) ->
+            baseUrl = @site.url
+            regex = /^(http|https|ftp|mailto):/
 
-    $ = cheerio.load(content)
-    $('img').each ->
-        $img = $(@)
-        src = $img.attr('src')
-        $img.attr('src', baseUrl + src) unless regex.test(src)
-    $('a').each ->
-        $a = $(@)
-        href = $a.attr('href')
-        $a.attr('href', baseUrl + href) unless regex.test(href)
-    $.html()
+            $ = cheerio.load(content)
+            $('img').each ->
+                $img = $(@)
+                src = $img.attr('src')
+                $img.attr('src', baseUrl + src) unless regex.test(src)
+            $('a').each ->
+                $a = $(@)
+                href = $a.attr('href')
+                $a.attr('href', baseUrl + href) unless regex.test(href)
+            $.html()
+}
 ```
 
 It uses a node module named [cheerio](http://matthewmueller.github.io/cheerio/) to parse the HTML using a jQuery-like API.  To use cheerio in docpad.coffee, you also need to add this line to the top of the file (after you `npm install --save cheerio` of course):
