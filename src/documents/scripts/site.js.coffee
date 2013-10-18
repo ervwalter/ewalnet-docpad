@@ -21,20 +21,23 @@ $ ->
 
 	codeIndex = 0
 	$('pre code.lang-coffeescript').each ->
-		codeIndex++
-		$code = $(this)
-		$pre = $code.parent()
+		try
+			codeIndex++
+			$code = $(this)
+			$pre = $code.parent()
 
-		# add the markup to create the tabbed display
-		$tabContent = $pre.wrap("<div class='tab-content'><div class='tab-pane active' id='code-#{codeIndex}-coffee'></div></div>").parent().parent()
-		$("<ul class='nav nav-tabs auto-coffee'><li class='active'><a href='#code-#{codeIndex}-coffee' data-toggle='tab'>CoffeeScript</a></li><li><a href='#code-#{codeIndex}-js' data-toggle='tab'>JavaScript</a></li></ul>").insertBefore($tabContent)
+			# compile into javascript
+			coffeeSource = $code.text()
+			jsSource = CoffeeScript.compile(coffeeSource, {bare: true})
 
-		# compile into javascript
-		coffeeSource = $code.text()
-		jsSource = CoffeeScript.compile(coffeeSource, {bare: true})
+			# add the markup to create the tabbed display
+			$tabContent = $pre.wrap("<div class='tab-content'><div class='tab-pane active' id='code-#{codeIndex}-coffee'></div></div>").parent().parent()
+			$("<ul class='nav nav-tabs auto-coffee'><li class='active'><a href='#code-#{codeIndex}-coffee' data-toggle='tab'>CoffeeScript</a></li><li><a href='#code-#{codeIndex}-js' data-toggle='tab'>JavaScript</a></li></ul>").insertBefore($tabContent)
 
-		# add the javascript code block
-		$tabContent.append("<div class='tab-pane' id='code-#{codeIndex}-js'><pre><code class='lang-javascript'>#{htmlEncode(jsSource)}</code></pre></div>")
+			# add the javascript code block
+			$tabContent.append("<div class='tab-pane' id='code-#{codeIndex}-js'><pre><code class='lang-javascript'>#{htmlEncode(jsSource)}</code></pre></div>")
+		catch e
+			# absorb exceptions, usually coffeescript compilation errors
 
 	$('.lang-coffeescript-nojs').removeClass('lang-coffeescript-nojs').addClass('lang-coffeescript')
 	$('.lang-none').removeClass('lang-none').addClass('lang-no-highlight')
@@ -45,4 +48,7 @@ $ ->
 		if classes? then for origClass in classes
 			fixedClass = origClass.replace /^lang-/, 'language-'
 			$code.removeClass(origClass).addClass(fixedClass) if fixedClass isnt origClass
-		hljs.highlightBlock(element)
+		try
+			hljs.highlightBlock(element)
+		catch e
+			# absorb any problems, usually with older browsers
