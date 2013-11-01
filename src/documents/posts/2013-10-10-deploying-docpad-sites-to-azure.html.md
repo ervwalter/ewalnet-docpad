@@ -91,19 +91,18 @@ call :SelectNodeVersion
 
 #### Install Modules
 
-Next, this section code deletes the previous node_modules folder and then runs `npm install` to populate a new one from scratch. 
+Next, this section of code runs `npm install` to install the required node modules.
 
 ``` dos
 :: 2. Install npm packages
 echo Installing npm packages...
 pushd "%DEPLOYMENT_SOURCE%"
-rd /s /q node_modules
 call !NPM_CMD! install --production
 IF !ERRORLEVEL! NEQ 0 goto error
 popd
 ```
 
-By doing this you can be sure that you'll have a node_modules folder that exactly matches your package.json file every time you deploy no matter what changes you might have made to package.json over time.
+I use an [npm-shrinkwrap.json](https://npmjs.org/doc/shrinkwrap.html) file to ensure that dependencies only change when I have tested them on my development machine.  Keep in mind that if you remove a dependency, it will not get removed from the `node_modules` folder on azure automatically with this approach.  Usually, that isn't a problem and just amounts to a small amount of wasted disk space.  I did experiment, for a while, with deleting the `node_modules` folder and reinstalling everything from scratch with every deployment, but that made deployments take a very long time, so I stopped doing that.
 
 #### Generate Static Files
 
