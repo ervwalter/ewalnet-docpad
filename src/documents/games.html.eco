@@ -17,8 +17,9 @@ title: Board Games
 
     <p>Since getting started, my collection has grown, and it's not uncommon for the UPS guy to drop by once a week or
         so to add something new to the collection. I track the games that I own and the games that I play on <a
-                href="http://boardgamegeek.com/">BoardGameGeek</a>. Some have suggested that I may be obsessed, but I
-        don't know what they are talking about. <img src="/stuff/smiley.png" alt="*smile*" />
+                href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession. Some have
+        suggested that I may have a problem, but I don't know what they are talking about.
+        <img src="/stuff/smiley.png" alt="*smile*"/>
     </p>
 
 
@@ -94,6 +95,9 @@ title: Board Games
         </div>
     </div>
 </div>
+
+<%- @partial('me', false) %>
+
 
 <script src="/scripts/vendor/angular.min.js"></script>
 <script src="/scripts/vendor/angular-resource.min.js"></script>
