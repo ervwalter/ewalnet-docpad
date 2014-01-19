@@ -1,160 +1,370 @@
+.rounded-corners (@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -ms-border-radius: @radius;
+    -o-border-radius: @radius;
+    border-radius: @radius;
+}
+
 body {
 }
 
 a {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 h1, h2, h3, h4, h5 {
-  font-weight: bold;
-  margin-top: (@line-height-computed / 2);
+    font-weight: bold;
+    margin-top: (@line-height-computed / 2);
 }
 
-p + h1, p + h2, p + h3, p + h4, p + h5 {
-  margin-top: (@line-height-computed );
+p + h1, p + h2, p + h3, p + h4, p + h5, div + h1, div + h2, div + h3, div + h4, div + h5 {
+    margin-top: (@line-height-computed );
 }
 
 h1 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  a {
-    font-weight: inherit;
-  }
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    a {
+        font-weight: inherit;
+    }
 }
 
 h2 {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 h3 {
-  font-size: 17px;
+    font-size: 17px;
 }
 
 h4 {
-  font-size: 16px;
-  font-weight: normal;
-  font-style: italic;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: italic;
 }
 
 h5 {
-  font-size: 16px;
-  font-weight: 600;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .navbar {
-  font-weight: 300;
+    font-weight: 300;
 
-  .navbar-form {
-    font-weight: normal;
-    width: 180px;
-  }
-
-  .navbar-brand {
-    font-weight: normal;
-    font-size: 24px;
-    @media (min-width: 768px) {
-      font-size: 28px;
-    }
-  }
-
-  .nav {
-    @horizontal-padding: 15px;
-    a {
-      font-weight: normal;
-      text-transform: uppercase;
-      @media (min-width: 768px) {
-        padding-left: @horizontal-padding;
-        padding-right: @horizontal-padding;
-      }
+    .navbar-form {
+        font-weight: normal;
+        width: 180px;
     }
 
-    .rss, .github, .twitter {
-      font-size: 18px;
-      display: inline-block;
-      padding-left: 6px;
-      padding-right: 6px;
-
-      @media (min-width: 768px) {
-        padding-left: 6px;
-        padding-right: 6px;
-      }
+    .navbar-brand {
+        font-weight: normal;
+        font-size: 24px;
+        @media (min-width: 768px) {
+            font-size: 28px;
+        }
     }
 
-    .twitter:hover {
-      color: #00bef6;
-    }
+    .nav {
+        @horizontal-padding: 15px;
+        a {
+            font-weight: normal;
+            text-transform: uppercase;
+            @media (min-width: 768px) {
+                padding-left: @horizontal-padding / 2;
+                padding-right: @horizontal-padding / 2;
+            }
+            @media (min-width: 992px) {
+                padding-left: @horizontal-padding;
+                padding-right: @horizontal-padding;
+            }
+        }
 
-    .rss {
-      padding-left: 15px;
-      @media (min-width: 768px) {
-        padding-left: @horizontal-padding;
-      }
-      &:hover {
-        color: #FF6600;
-      }
-    }
+        .rss, .github, .twitter {
+            font-size: 18px;
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
 
-    .github {
-      padding-right: 15px;
-      @media (min-width: 768px) {
-        padding-right: @horizontal-padding;
-      }
-      &:hover {
-        color: #000;
-      }
+            @media (min-width: 992px) {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+        }
+
+        .twitter:hover {
+            color: #00bef6;
+        }
+
+        .rss {
+            padding-left: 15px;
+            @media (min-width: 768px) {
+                padding-left: @horizontal-padding / 2;
+            }
+            @media (min-width: 992px) {
+                padding-left: @horizontal-padding;
+            }
+            &:hover {
+                color: #FF6600;
+            }
+        }
+
+        .github {
+            padding-right: 15px;
+            @media (min-width: 768px) {
+                padding-right: @horizontal-padding / 2;
+            }
+            @media (min-width: 992px) {
+                padding-right: @horizontal-padding;
+            }
+            &:hover {
+                color: #000;
+            }
+        }
     }
-  }
 }
 
 .navbar-footer {
-  min-height: 30px;
-  margin-top: 40px;
-  margin-bottom: 0;
-  border-top: 1px solid @seperator-color;
+    min-height: 30px;
+    margin-top: 40px;
+    margin-bottom: 0;
+    border-top: 1px solid @seperator-color;
 
-  .navbar-center {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
+    .navbar-center {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
 
-  .navbar-text {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #aaa;
-  }
+    .navbar-text {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        color: #aaa;
+    }
 }
 
 #me {
-  background-color: #eee;
-  padding: 20px;
-  margin-top: 20px;
+    background-color: #eee;
+    padding: 20px;
+    margin-top: 20px;
 
-  img {
-    float: right;
-    padding-left: 20px;
-  }
+    img {
+        float: right;
+        padding-left: 20px;
+    }
 }
 
 .tag-title {
-  font-size: 22px;
-  color: #555;
-  font-weight: normal;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid @seperator-color;
-  @media (min-width: 768px) {
-    font-size: 32px;
-  }
+    font-size: 22px;
+    color: #555;
+    font-weight: normal;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid @seperator-color;
+    @media (min-width: 768px) {
+        font-size: 32px;
+    }
 }
 
 .tag-tagname {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .googleplus-hidden {
-  position: absolute;
-  top: -1000em;
-  left: -1000em;
+    position: absolute;
+    top: -1000em;
+    left: -1000em;
+}
+
+.list-flow {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+        display: inline-block;
+    }
+}
+
+#games {
+    a {
+        font-weight: normal;
+    }
+
+    table tr:first-child td {
+        border-top: 0;
+    }
+}
+
+.games-multiplay {
+    margin-left: 5px;
+    display: inline-block;
+}
+
+.games-date {
+    white-space: nowrap;
+    width: 1px;
+    padding-right: 20px !important;
+}
+
+.games-game {
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+
+    display: inline-block;
+    width: 100%;
+    min-height: 120px;
+
+    @media (min-width: 768px) {
+        margin-bottom: 20px;
+        padding: 20px;
+        min-height: 190px;
+    }
+
+    table {
+        width: 100%;
+
+        tr {
+            vertical-align: top;
+        }
+    }
+
+    .games-game-image {
+        text-align: center;
+        white-space: nowrap;
+        width: 100px;
+        img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        @media (min-width: 768px) {
+            width: 150px;
+            img {
+                max-width: 150px;
+                max-height: 150px;
+            }
+        }
+    }
+
+    .games-expansions {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .games-game-info {
+        padding-left: 20px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .games-num-plays {
+        font-size: 14px;
+        font-style: italic;
+
+        b {
+            color: #222;
+        }
+    }
+
+    .games-game-name {
+        font-size: 18px;
+    }
+
+    .games-ratings {
+        font-size: 14px;
+    }
+
+    .games-rating-1,
+    .games-rating-2,
+    .games-rating-3,
+    .games-rating-4,
+    .games-rating-5,
+    .games-rating-6,
+    .games-rating-7,
+    .games-rating-8,
+    .games-rating-9,
+    .games-rating-10 {
+        font-weight: bold;
+        font-size: 14px;
+        border: none;
+    }
+
+    .games-rating-1, .games-rating-2 {
+        color: #d20000;
+        border-color: #d20000;
+    }
+
+    .games-rating-3, .games-rating-4 {
+        color: #df8e11;
+        border-color: #df8e11;
+    }
+
+    .games-rating-5, .games-rating-6, {
+        color: #316cef;
+        border-color: #316cef;
+    }
+
+    .games-rating-7, .games-rating-8, .games-rating-9, .games-rating-10 {
+        color: #00ac00;
+        border-color: #00ac00;
+    }
+
+}
+
+.games-thumbnails-only {
+    .games-game {
+        width: auto;
+        margin-right: 10px;
+
+        @media (min-width: 768px) {
+            margin-right: 20px;
+        }
+    }
+}
+
+.actions {
+    font-size: 16px;
+    margin-left: 10px;
+    color: #aaa;
+    font-weight: normal;
+    display: block;
+    margin-top: 8px;
+
+    @media (min-width: 768px) {
+        display: inline;
+        margin-top: 0;
+    }
+
+    a {
+        color: #666;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #222;
+    }
+}
+
+//
+//.games-has-expansion {
+//    .games-game-image {
+//        img {
+//            max-width: 150px;
+//            max-height: 150px;
+//        }
+//    }
+//}
+
+.games-header-extra-text {
+    display: inline !important;
+    @media (min-width: 768px) and (max-width: 991px) {
+        display: none !important;
+    }
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
 }

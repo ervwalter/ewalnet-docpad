@@ -1,0 +1,69 @@
+---
+layout: page
+title: Board Games
+---
+
+<div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
+    <p>
+        I was recently introduced to the world of modern board gaming, and I have started a modest
+        collection. I track my game collection and the games that I play on <a href="http://boardgamegeek.com/">BoardGameGeek</a>.
+        Some might even say I have a problem, but I wouldn't know what they are talking about :)
+    </p>
+
+
+    <h1>Recently Played</h1>
+
+    <div>
+        <table class="table" ng-cloak>
+            <tbody>
+            <tr ng-repeat="play in plays | limitTo:8">
+                <td class="games-date">{{ play.playDate | date:'MMM dd, yyyy' }}</td>
+                <td>
+                    <a ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/">{{ play.name }}</a>
+                    <span ng-if="play.numPlays > 1"
+                          class="text-muted games-multiplay">({{ play.numPlays }} times)</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Game Collection
+        <span class="actions">sort by: <a href="" ng-click="sortByName()">name</a>, <a href="" ng-click="sortByRating()">rating</a>, <a href="" ng-click="sortByPlays()"># plays</a></span>
+        <span class="actions">show: <a href="" ng-click="showDetails()">details</a>, <a href="" ng-click="showThumbnails()">thumbnails</a></span>
+    </h1>
+
+    <div ng-class="{ 'games-thumbnails-only': thumbnailsOnly }">
+        <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy:reverse" class="games-game" ng-class="{ 'games-has-expansion': game.expansions }">
+            <table>
+                <tr>
+                    <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"><img ng-src="{{ game.thumbnail }}" alt="{{ game.name }} "/></a></td>
+                    <td class="games-game-info" ng-hide="thumbnailsOnly">
+                        <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="games-game-name">{{
+                            game.name }}</a></div>
+                        <div class="games-num-plays" ng-if="game.numPlays > 0">Played <b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' :
+                            'time' }}
+                        </div>
+                        <div class="games-ratings"><span ng-if="game.rating >= 0">My Rating: <span
+                                class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span>, </span>Average
+                            Rating: <span class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
+                        </div>
+                        <div ng-if="hasExpansion(game)" class="games-expansions">
+                            Expansions:
+                            <ul>
+                                <li ng-repeat="expansion in game.expansions | filter:{owned: true}">
+                                    <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{
+                                        expansion.abbreviatedName }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/vendor/angular.min.js"></script>
+<script src="/scripts/vendor/angular-resource.min.js"></script>
+<script src="/scripts/games.js"></script>
