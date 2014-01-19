@@ -31,7 +31,7 @@ title: Board Games
         <table class="table" ng-cloak>
             <tbody>
             <tr ng-repeat="play in plays | limitTo:playsLimit">
-                <td class="games-date">{{ play.playDate | date:'MMM dd, yyyy' }}</td>
+                <td class="games-date">{{ play.playDate | relativeDate:'MMM dd, yyyy' }}</td>
                 <td>
                     <a ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/">{{ play.name }}</a>
                     <span ng-if="play.numPlays > 1"
@@ -99,6 +99,7 @@ title: Board Games
 <%- @partial('me', false) %>
 
 
+<script src="/scripts/vendor/moment.min.js"></script>
 <script src="/scripts/vendor/angular.min.js"></script>
 <script src="/scripts/vendor/angular-resource.min.js"></script>
 <script src="/scripts/games.js"></script>
