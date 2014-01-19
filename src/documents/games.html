@@ -62,7 +62,7 @@ title: Board Games
     <p ng-hide="games && games.length && games.length > 0">Loading...</p>
 
     <div ng-class="{ 'games-thumbnails-only': thumbnailsOnly }" ng-cloak>
-        <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy:reverse" class="games-game"
+        <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy" class="games-game"
              ng-class="{ 'games-has-expansion': game.expansions }">
             <table>
                 <tr>
@@ -80,7 +80,7 @@ title: Board Games
                             Rating: <span class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
                         </div>
                         <div ng-if="hasExpansion(game)" class="games-expansions">
-                            Expansions:
+                            Including Expansions:
                             <ul>
                                 <li ng-repeat="expansion in game.expansions | filter:{owned: true}">
                                     <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{

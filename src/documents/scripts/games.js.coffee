@@ -25,16 +25,12 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 		$scope.playsLimit = 8
 	$scope.showFewerPlays()
 
-
 	$scope.sortByName = ->
-		$scope.sortBy = 'name'
-		$scope.reverse = false
+		$scope.sortBy = '+name'
 	$scope.sortByRating = ->
-		$scope.sortBy = 'rating'
-		$scope.reverse = true
+		$scope.sortBy = ['-rating', '+name']
 	$scope.sortByPlays = ->
-		$scope.sortBy = 'numPlays'
-		$scope.reverse = true
+		$scope.sortBy = ['-numPlays', '+name']
 	$scope.sortByName()
 
 	$scope.showDetails = ->
