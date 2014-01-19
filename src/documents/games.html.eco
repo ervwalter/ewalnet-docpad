@@ -23,8 +23,7 @@ title: Board Games
         <img src="/stuff/smiley.png" alt="*smile*"/>
     </p>
 
-
-    <h2>Recently Played</h2>
+    <h2 id="games-recent-plays">Recently Played</h2>
 
     <p ng-hide="plays && plays.length && plays.length > 0">Loading...</p>
 

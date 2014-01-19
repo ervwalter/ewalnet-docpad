@@ -18,12 +18,15 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
+	$scope.playsLimit = 8
+	$scope.sortBy = '+name'
+	$scope.thumbnailsOnly = false
 
 	$scope.showMorePlays = ->
 		$scope.playsLimit = 50
 	$scope.showFewerPlays = ->
 		$scope.playsLimit = 8
-	$scope.showFewerPlays()
+		$('#games-recent-plays').scrollTo()
 
 	$scope.sortByName = ->
 		$scope.sortBy = '+name'
@@ -31,13 +34,11 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 		$scope.sortBy = ['-rating', '+name']
 	$scope.sortByPlays = ->
 		$scope.sortBy = ['-numPlays', '+name']
-	$scope.sortByName()
 
 	$scope.showDetails = ->
 		$scope.thumbnailsOnly = false
 	$scope.showThumbnails = ->
 		$scope.thumbnailsOnly = true
-	$scope.showDetails()
 
 app.filter 'floor', ->
 	return (input) ->

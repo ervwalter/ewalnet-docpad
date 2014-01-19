@@ -52,3 +52,14 @@ $ ->
 			hljs.highlightBlock(element)
 		catch e
 			# absorb any problems, usually with older browsers
+
+(($) ->
+	$.fn.scrollTo = (padding = 20) ->
+		top = $(this).offset().top;
+		top -= padding
+		top = 0 if top < 0
+		$("html, body").animate
+			scrollTop: top + "px"
+		, "fast"
+		this
+) jQuery
