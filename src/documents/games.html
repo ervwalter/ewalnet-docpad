@@ -4,19 +4,32 @@ title: Board Games
 ---
 
 <div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
+
+    <h1>Board Games Anonymous</h1>
+
+    <img src="/stuff/games.jpg" class="float-right"/>
+
     <p>
-        I was recently introduced to the world of modern board gaming, and I have started a modest
-        collection. I track my game collection and the games that I play on <a href="http://boardgamegeek.com/">BoardGameGeek</a>.
-        Some might even say I have a problem, but I wouldn't know what they are talking about :)
+        In late 2013, some of my colleagues invited me to a "board game night" after work. I was skeptical, but they
+        twisted my arm and eventually I relented. That night was my first introduction to the world of modern board
+        gaming (aka Euro-style games), and within a week I had started putting together my own collection of games, and
+        my wife and I play games most nights of the week after dinner.</p>
+
+    <p>Since then my collection has grown, and it's not uncommon for the UPS guy to drop by once a week or so to add
+        something new to the collection. I track my game collection and the games that I play on <a
+                href="http://boardgamegeek.com/">BoardGameGeek</a>. Some have suggested that I may be obsessed, but I
+        don't know what they are talking about. &#9786;
     </p>
 
 
-    <h1>Recently Played</h1>
+    <h2>Recently Played</h2>
+
+    <p ng-hide="plays && plays.length && plays.length > 0">Loading...</p>
 
     <div>
         <table class="table" ng-cloak>
             <tbody>
-            <tr ng-repeat="play in plays | limitTo:8">
+            <tr ng-repeat="play in plays | limitTo:playsLimit">
                 <td class="games-date">{{ play.playDate | date:'MMM dd, yyyy' }}</td>
                 <td>
                     <a ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/">{{ play.name }}</a>
@@ -24,24 +37,42 @@ title: Board Games
                           class="text-muted games-multiplay">({{ play.numPlays }} times)</span>
                 </td>
             </tr>
+            <tr ng-hide="playsLimit != 8">
+                <td colspan="2"><a href="" ng-click="showMorePlays()">show more...</a></td>
+            </tr>
+            <tr ng-hide="playsLimit == 8">
+                <td colspan="2"><a href="" ng-click="showFewerPlays()">show fewer...</a></td>
+            </tr>
             </tbody>
         </table>
     </div>
 
-    <h1>Game Collection
-        <span class="actions">sort by: <a href="" ng-click="sortByName()">name</a>, <a href="" ng-click="sortByRating()">rating</a>, <a href="" ng-click="sortByPlays()"># plays</a></span>
-        <span class="actions">show: <a href="" ng-click="showDetails()">details</a>, <a href="" ng-click="showThumbnails()">thumbnails</a></span>
-    </h1>
+    <h2>Game Collection
+        <span class="actions">
+            sort by: <a href="" ng-click="sortByName()">name</a>,
+            <a href="" ng-click="sortByRating()">rating</a>, or
+            <a href="" ng-click="sortByPlays()"># plays</a>
+        </span>
+        <span class="actions">
+            show: <a href="" ng-click="showDetails()">game details</a> or
+            <a href="" ng-click="showThumbnails()">thumbnails</a>
+        </span>
+    </h2>
 
-    <div ng-class="{ 'games-thumbnails-only': thumbnailsOnly }">
-        <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy:reverse" class="games-game" ng-class="{ 'games-has-expansion': game.expansions }">
+    <p ng-hide="games && games.length && games.length > 0">Loading...</p>
+
+    <div ng-class="{ 'games-thumbnails-only': thumbnailsOnly }" ng-cloak>
+        <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy:reverse" class="games-game"
+             ng-class="{ 'games-has-expansion': game.expansions }">
             <table>
                 <tr>
-                    <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"><img ng-src="{{ game.thumbnail }}" alt="{{ game.name }} "/></a></td>
+                    <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"><img
+                            ng-src="{{ game.thumbnail }}" alt="{{ game.name }} "/></a></td>
                     <td class="games-game-info" ng-hide="thumbnailsOnly">
                         <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="games-game-name">{{
                             game.name }}</a></div>
-                        <div class="games-num-plays" ng-if="game.numPlays > 0">Played <b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' :
+                        <div class="games-num-plays" ng-if="game.numPlays > 0">Played <b>{{ game.numPlays }}</b> {{
+                            game.numPlays > 1 ? 'times' :
                             'time' }}
                         </div>
                         <div class="games-ratings"><span ng-if="game.rating >= 0">My Rating: <span

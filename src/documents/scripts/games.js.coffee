@@ -19,6 +19,13 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
 
+	$scope.showMorePlays = ->
+		$scope.playsLimit = 50
+	$scope.showFewerPlays = ->
+		$scope.playsLimit = 8
+	$scope.showFewerPlays()
+
+
 	$scope.sortByName = ->
 		$scope.sortBy = 'name'
 		$scope.reverse = false
@@ -39,3 +46,5 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 app.filter 'floor', ->
 	(input) ->
 		Math.floor(parseFloat(input)).toString()
+
+

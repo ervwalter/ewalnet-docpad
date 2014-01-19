@@ -318,9 +318,32 @@ h5 {
     .games-game {
         width: auto;
         margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border: none;
+        min-height: 0;
+
+        .games-game-image {
+            width: auto;
+
+            img {
+                max-width: none;
+                max-height: none;
+            }
+
+            @media (min-width: 768px) {
+                width: auto;
+                img {
+                    max-width: none;
+                    max-height: none;
+                }
+            }
+        }
 
         @media (min-width: 768px) {
-            margin-right: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
         }
     }
 }
