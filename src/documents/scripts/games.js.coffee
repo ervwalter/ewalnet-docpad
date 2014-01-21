@@ -66,7 +66,7 @@ NUMBER_STRING = /^\-?\d+$/
 
 isString = (value) -> typeof value is 'string'
 isNumber = (value) -> typeof value is 'number'
-isDate = (value) -> toString.call(value) is '[object Date]'
+isDate = (value) -> value instanceof Date
 int = (str) -> parseInt(str, 10)
 
 app.filter 'relativeDate', ($filter) ->
