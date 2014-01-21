@@ -7,20 +7,18 @@ title: Board Games
 
     <h1>Board Games</h1>
 
-    <img src="/stuff/games.jpg" class="float-right"/>
+    <img id="games-shelf" src="/stuff/games.jpg" class="float-right"/>
 
     <p>
         In late 2013, some guys at work invited me to a "board game night" after work. I was skeptical, but they
         twisted my arm, and eventually I relented. That night was my first introduction to the world of modern board
-        gaming (aka 'designer' board games or Euro-style games), and within a week I had started putting together my own
-        collection of games. Now, my wife and I play games most nights of the week after dinner instead of watching
+        gaming. I was immediately hooked. Now, my wife and I play games most nights of the week after dinner instead of
+        watching
         TV.</p>
 
-    <p>Since getting started, my collection has grown, and it's not uncommon for the UPS guy to drop by once a week or
+    <p>I now have my own collection, and it's not uncommon for the UPS guy to drop by once a week or
         so to add something new to the collection. I track the games that I own and the games that I play on <a
-                href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession. Some have
-        suggested that I may have a problem, but I don't know what they are talking about.
-        <img src="/stuff/smiley.png" alt="*smile*"/>
+                href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
     </p>
 
     <h2 id="games-recent-plays">Recently Played</h2>
@@ -38,10 +36,10 @@ title: Board Games
                           class="text-muted games-multiplay">({{ play.numPlays }} times)</span>
                 </td>
             </tr>
-            <tr ng-hide="playsLimit != 8">
+            <tr ng-show="playsLimit < 25">
                 <td colspan="2"><a href="" ng-click="showMorePlays()">show more...</a></td>
             </tr>
-            <tr ng-hide="playsLimit == 8">
+            <tr ng-show="playsLimit >= 25">
                 <td colspan="2"><a href="" ng-click="showFewerPlays()">show fewer...</a></td>
             </tr>
             </tbody>
@@ -102,4 +100,5 @@ title: Board Games
 <script src="/scripts/vendor/moment.min.js"></script>
 <script src="/scripts/vendor/angular.min.js"></script>
 <script src="/scripts/vendor/angular-resource.min.js"></script>
+<script src="/scripts/vendor/angular-route.min.js"></script>
 <script src="/scripts/games.js"></script>

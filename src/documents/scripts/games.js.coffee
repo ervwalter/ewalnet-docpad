@@ -2,13 +2,15 @@ username = 'edwalter'
 
 app = angular.module 'GamesApp', ['ngResource']
 
-app.controller 'GamesCtrl', ($scope, $resource) ->
+app.config ($locationProvider) ->
+	$locationProvider.html5Mode true
+
+app.controller 'GamesCtrl', ($scope, $resource, $location) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
 		jsonp: { method: 'JSONP', params: { callback: 'JSON_CALLBACK' }, isArray: true }
 
 	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true", {},
 		jsonp: { method: 'JSONP', params: { callback: 'JSON_CALLBACK' }, isArray: true }
-
 
 	$scope.hasExpansion = (game) ->
 		return false unless game?.expansions?
@@ -18,27 +20,41 @@ app.controller 'GamesCtrl', ($scope, $resource) ->
 
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
-	$scope.playsLimit = 8
-	$scope.sortBy = '+name'
-	$scope.thumbnailsOnly = false
+	$scope.playsLimit = 7
 
 	$scope.showMorePlays = ->
 		$scope.playsLimit = 50
 	$scope.showFewerPlays = ->
-		$scope.playsLimit = 8
+		$scope.playsLimit = 7
 		$('#games-recent-plays').scrollTo()
 
 	$scope.sortByName = ->
-		$scope.sortBy = '+name'
+		$location.search 'sort', 'name'
 	$scope.sortByRating = ->
-		$scope.sortBy = ['-rating', '+name']
+		$location.search 'sort', 'rating'
 	$scope.sortByPlays = ->
-		$scope.sortBy = ['-numPlays', '+name']
+		$location.search 'sort', 'plays'
 
 	$scope.showDetails = ->
-		$scope.thumbnailsOnly = false
+		$location.search 'show', 'details'
 	$scope.showThumbnails = ->
-		$scope.thumbnailsOnly = true
+		$location.search 'show', 'thumbnails'
+
+	$scope.$watch ->
+		$location.search().sort
+	, (sort) ->
+		switch sort
+			when 'rating' then $scope.sortBy = ['-rating', '+name']
+			when 'plays' then $scope.sortBy = ['-numPlays', '+name']
+			else $scope.sortBy = '+name'
+
+	$scope.$watch ->
+		$location.search().show
+	, (show) ->
+		switch show
+			when 'thumbnails' then $scope.thumbnailsOnly = true
+			else $scope.thumbnailsOnly = false
+
 
 app.filter 'floor', ->
 	return (input) ->
