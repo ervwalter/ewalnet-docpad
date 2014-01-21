@@ -2,8 +2,8 @@ username = 'edwalter'
 
 app = angular.module 'GamesApp', ['ngResource']
 
-app.config ($locationProvider) ->
-	$locationProvider.html5Mode true
+#app.config ($locationProvider) ->
+#	$locationProvider.html5Mode true
 
 app.controller 'GamesCtrl', ($scope, $resource, $location) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
