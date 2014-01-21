@@ -1,6 +1,12 @@
 ---
 layout: page
 title: Board Games
+scripts:
+ - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
+ - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js
+ - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
+ - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js
+ - /scripts/games.js
 ---
 
 <div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
@@ -97,8 +103,4 @@ title: Board Games
 <%- @partial('me', false) %>
 
 
-<script src="/scripts/vendor/moment.min.js"></script>
-<script src="/scripts/vendor/angular.min.js"></script>
-<script src="/scripts/vendor/angular-resource.min.js"></script>
-<script src="/scripts/vendor/angular-route.min.js"></script>
-<script src="/scripts/games.js"></script>
+

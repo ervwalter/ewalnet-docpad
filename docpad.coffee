@@ -21,6 +21,9 @@ docpadConfig = {
 			# The website author's email
 			email: "erv@ewal.net"
 
+			# cache-busting timestamp
+			timestamp: new Date().getTime()
+
 
 		# -----------------------------
 		# Helper Functions
