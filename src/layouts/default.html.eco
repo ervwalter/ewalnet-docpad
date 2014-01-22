@@ -93,7 +93,6 @@
 
 <% if @document.meta.scripts?: %>
     <% for script in @document.meta.scripts: %>
-        <% console.log script.substring(0,2) %>
         <% script += '?' + @site.timestamp if script.substring(0,2) != '//' %>
         <script src="<%- script %>"></script>
     <% end %>

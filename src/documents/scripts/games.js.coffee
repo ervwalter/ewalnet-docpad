@@ -5,12 +5,19 @@ app = angular.module 'GamesApp', ['ngResource']
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
 
-app.controller 'GamesCtrl', ($scope, $resource, $location) ->
+app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
 		jsonp: { method: 'JSONP', params: { callback: 'JSON_CALLBACK' }, isArray: true }
 
 	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true", {},
-		jsonp: { method: 'JSONP', params: { callback: 'JSON_CALLBACK' }, isArray: true }
+		jsonp: {
+			method: 'JSONP'
+			params: { callback: 'JSON_CALLBACK' }
+			isArray: true
+			transformResponse: $http.defaults.transformResponse.concat (data) ->
+				item.sortableName = item.name.toLowerCase().replace(/^the\ |a\ |an\ /, '') for item in data
+				return data
+		}
 
 	$scope.hasExpansion = (game) ->
 		return false unless game?.expansions?
@@ -44,9 +51,9 @@ app.controller 'GamesCtrl', ($scope, $resource, $location) ->
 		$location.search().sort
 	, (sort) ->
 		switch sort
-			when 'rating' then $scope.sortBy = ['-rating', '+name']
-			when 'plays' then $scope.sortBy = ['-numPlays', '+name']
-			else $scope.sortBy = '+name'
+			when 'rating' then $scope.sortBy = ['-rating', '+sortableName']
+			when 'plays' then $scope.sortBy = ['-numPlays', '+sortableName']
+			else $scope.sortBy = '+sortableName'
 
 	$scope.$watch ->
 		$location.search().show
