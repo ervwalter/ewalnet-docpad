@@ -88,7 +88,7 @@ scripts:
                         <div ng-if="hasExpansion(game)" class="games-expansions">
                             Including Expansions:
                             <ul>
-                                <li ng-repeat="expansion in game.expansions | filter:{owned: true}">
+                                <li ng-repeat="expansion in game.expansions | filter:{owned: true} | orderBy:'sortableName'">
                                     <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{
                                         expansion.name }}</a>
                                 </li>

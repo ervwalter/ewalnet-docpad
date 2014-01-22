@@ -69,21 +69,23 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			when 'thumbnails' then $scope.thumbnailsOnly = true
 			else $scope.thumbnailsOnly = false
 
+updateGameProperties = (game) ->
+	game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
+	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
+	game.sortableName = game.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
+	return
+
 processPlays = (plays) ->
-	for play in plays
-		play.name = play.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
-		play.name = play.name.substr(0, play.name.length - 10).trim() if play.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
+	updateGameProperties play for play in plays
 	return plays
 
 processGames = (games) ->
 	for game in games
-		game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
-		game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
-		game.sortableName = game.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
+		updateGameProperties game
 		parentName = game.name.toLowerCase()
 		if game.expansions?
 			for expansion in game.expansions
-				expansion.name = expansion.name.trim().replace(/\ \ +/, ' ') # remove extra spaces in expansion name also
+				updateGameProperties expansion
 				if expansion.name.toLowerCase().substr(0, parentName.length) is parentName
 					expansion.name = expansion.name.substr(parentName.length).trimStart(['-', ':', ' '])
 	return games
