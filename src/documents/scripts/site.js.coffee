@@ -1,3 +1,29 @@
+String::trimStart = (c) ->
+	return this  if @length is 0
+	c = (if c? then (if _.isArray(c) then c else [c]) else [' '])
+	i = 0
+	while @charAt(i) in c and i < @length
+		i++
+	@substring i
+
+String::trimEnd = (c) ->
+	c = (if c? then (if _.isArray(c) then c else [c]) else [' '])
+	i = @length - 1
+	while i >= 0 and @charAt(i) in c
+		i--
+	@substring 0, i + 1
+
+String::trim = (c) ->
+	@trimStart(c).trimEnd(c)
+
+if (typeof String::startsWith != 'function')
+	String::startsWith = (str) ->
+		return this.slice(0, str.length) == str
+
+if (typeof String::endsWith != 'function')
+	String::endsWith = (str) ->
+		return this.slice(-str.length) == str
+
 htmlEncode = (value) ->
 	$('<div/>').text(value).html()
 

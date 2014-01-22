@@ -7,7 +7,14 @@ app = angular.module 'GamesApp', ['ngResource']
 
 app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
-		jsonp: { method: 'JSONP', params: { callback: 'JSON_CALLBACK' }, isArray: true }
+		jsonp: {
+			method: 'JSONP'
+			params: { callback: 'JSON_CALLBACK' }
+			isArray: true
+			transformResponse: $http.defaults.transformResponse.concat (data) ->
+				processPlays(data)
+				return data
+		}
 
 	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true", {},
 		jsonp: {
@@ -15,7 +22,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			params: { callback: 'JSON_CALLBACK' }
 			isArray: true
 			transformResponse: $http.defaults.transformResponse.concat (data) ->
-				item.sortableName = item.name.toLowerCase().replace(/^the\ |a\ |an\ /, '') for item in data
+				processGames(data)
 				return data
 		}
 
@@ -62,6 +69,24 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			when 'thumbnails' then $scope.thumbnailsOnly = true
 			else $scope.thumbnailsOnly = false
 
+processPlays = (plays) ->
+	for play in plays
+		play.name = play.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
+		play.name = play.name.substr(0, play.name.length - 10).trim() if play.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
+	return plays
+
+processGames = (games) ->
+	for game in games
+		game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
+		game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
+		game.sortableName = game.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
+		parentName = game.name.toLowerCase()
+		if game.expansions?
+			for expansion in game.expansions
+				expansion.name = expansion.name.trim().replace(/\ \ +/, ' ') # remove extra spaces in expansion name also
+				if expansion.name.toLowerCase().substr(0, parentName.length) is parentName
+					expansion.name = expansion.name.substr(parentName.length).trimStart(['-', ':', ' '])
+	return games
 
 app.filter 'floor', ->
 	return (input) ->

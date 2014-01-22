@@ -2,6 +2,7 @@
 layout: page
 title: Board Games
 scripts:
+ - //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
  - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
  - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js
  - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
@@ -89,7 +90,7 @@ scripts:
                             <ul>
                                 <li ng-repeat="expansion in game.expansions | filter:{owned: true}">
                                     <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{
-                                        expansion.abbreviatedName }}</a>
+                                        expansion.name }}</a>
                                 </li>
                             </ul>
                         </div>
