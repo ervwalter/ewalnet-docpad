@@ -208,19 +208,13 @@ h5 {
 }
 
 .games-game {
-    padding: 10px;
-    background-color: #f4f4f4;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+    padding: 10px 0;
 
-    display: inline-block;
+    display: block;
     width: 100%;
-    min-height: 120px;
 
     @media (min-width: 768px) {
-        margin-bottom: 20px;
-        padding: 20px;
-        min-height: 190px;
+        padding: 15px 0;
     }
 
     table {
@@ -234,10 +228,10 @@ h5 {
     .games-game-image {
         text-align: center;
         white-space: nowrap;
-        width: 100px;
+        width: 80px;
         img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 80px;
+            max-height: 80px;
         }
 
         @media (min-width: 768px) {
@@ -314,6 +308,10 @@ h5 {
 
 }
 
+.games-game + .games-game {
+  border-top: 1px solid #ddd;
+}
+
 .games-thumbnails-only {
     .games-game {
         width: auto;
@@ -323,6 +321,7 @@ h5 {
         background-color: #f4f4f4;
         border: none;
         min-height: 0;
+        display: inline-block;
 
         .games-game-image {
             width: auto;
