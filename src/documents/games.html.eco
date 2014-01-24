@@ -2,12 +2,14 @@
 layout: page
 title: Board Games
 scripts:
- - //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
- - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
- - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js
- - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
- - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js
- - /scripts/games.js
+- //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
+- //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js
+- /scripts/vendor/ui-bootstrap-custom-0.10.0.min.js
+- /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.min.js
+- /scripts/games.js
 ---
 
 <div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
@@ -72,21 +74,37 @@ scripts:
              ng-class="{ 'games-has-expansion': game.expansions }">
             <table>
                 <tr>
-                    <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" title="{{ game.name }}"><img
-                            ng-src="{{ game.thumbnail }}" alt="{{ game.name }}" title="{{ game.name }}" /></a></td>
+                    <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
+                                                    title="{{ game.name }}"><img
+                            ng-src="{{ game.thumbnail }}" alt="{{ game.name }}" title="{{ game.name }}"/></a></td>
                     <td class="games-game-info" ng-hide="thumbnailsOnly">
                         <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="games-game-name">{{
                             game.name }}</a></div>
+                        <div class="games-ratings">
+                            <table>
+                                <tr ng-if="game.rating >= 0">
+                                    <td>My Rating:</td>
+                                    <td>
+                                        <rating value="game.rating" max="10" readonly="true"></rating>
+                                    </td>
+                                    <td class="games-numeric-rating">
+                                        <span class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Community Average Rating:</td>
+                                    <td class="games-numeric-rating">
+                                        <span class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                         <div class="games-num-plays" ng-if="game.numPlays > 0">Played <b>{{ game.numPlays }}</b> {{
                             game.numPlays > 1 ? 'times' :
                             'time' }}
                         </div>
-                        <div class="games-ratings"><span ng-if="game.rating >= 0">My Rating: <span
-                                class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span>, </span>Average
-                            Rating: <span class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
-                        </div>
                         <div ng-if="hasExpansion(game)" class="games-expansions">
-                            Including Expansions:
+                            With Expansions:
                             <ul>
                                 <li ng-repeat="expansion in game.expansions | filter:{owned: true} | orderBy:'sortableName'">
                                     <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{
