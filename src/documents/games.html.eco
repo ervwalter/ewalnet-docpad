@@ -81,7 +81,13 @@ scripts:
                         <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="games-game-name">{{
                             game.name }}</a></div>
                         <div class="games-ratings">
-                            <table>
+                            <span class="visible-xs">
+                                <span ng-if="game.rating >= 0">My Rating: <span
+                                        class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span><br/></span>
+                                    Average Rating: <span
+                                    class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
+                            </span>
+                            <table class="hidden-xs">
                                 <tr ng-if="game.rating >= 0">
                                     <td>My Rating:</td>
                                     <td>
