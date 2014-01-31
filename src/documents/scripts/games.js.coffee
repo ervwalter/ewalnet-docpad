@@ -42,9 +42,17 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 
 	$scope.hoverCoordinates = (game) ->
 		return {} unless game.hover
+		top = $scope.mouseY + 10
+		if $scope.mouseX < 200
+			left = 0
+		else
+			left = $scope.mouseX - 200
+		viewport = $(window).width()
+		if left > (viewport - 400)
+			left = viewport - 400
 		return {
-			top: "#{$scope.mouseY + 10}px"
-			left: "#{$scope.mouseX - 200}px"
+			top: "#{top}px"
+			left: "#{left}px"
 		}
 
 	$scope.showMorePlays = ->
