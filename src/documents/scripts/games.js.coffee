@@ -36,6 +36,17 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 	$scope.games = collectionApi.jsonp()
 	$scope.playsLimit = 7
 
+	$scope.trackMouse = ($event) ->
+		$scope.mouseX = $event.pageX
+		$scope.mouseY = $event.pageY
+
+	$scope.hoverCoordinates = (game) ->
+		return {} unless game.hover
+		return {
+			top: "#{$scope.mouseY + 10}px"
+			left: "#{$scope.mouseX - 200}px"
+		}
+
 	$scope.showMorePlays = ->
 		$scope.playsLimit = 50
 	$scope.showFewerPlays = ->
@@ -66,8 +77,8 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 		$location.search().show
 	, (show) ->
 		switch show
-			when 'thumbnails' then $scope.thumbnailsOnly = true
-			else $scope.thumbnailsOnly = false
+			when 'details' then $scope.thumbnailsOnly = false
+			else $scope.thumbnailsOnly = true
 
 updateGameProperties = (game) ->
 	game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
