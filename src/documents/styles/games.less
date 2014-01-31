@@ -123,7 +123,27 @@
         border-top: 1px solid #ddd;
     }
 
+    .expanded {
+        display: none;
+    }
+
     .games-thumbnails-only {
+
+        .games-game-image {
+            position: relative;
+        }
+
+        .games-has-expansion {
+            .expanded {
+                position: absolute;
+                top: 0;
+                right: 0;
+                display: inline;
+                .opacity(0.85);
+            ;
+            }
+        }
+
         .games-game {
             width: auto;
             margin-right: 5px;
@@ -160,6 +180,7 @@
 
         .games-infobox {
             display: none;
+            z-index: 99;
             a {
                 color: @text-color;
                 font-weight: bold;

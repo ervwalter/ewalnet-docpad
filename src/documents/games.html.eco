@@ -68,7 +68,7 @@ scripts:
                     <tr>
                         <td class="games-game-image"><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
                                                         title="{{ game.name }}"><img
-                                ng-src="{{ game.thumbnail }}" alt="{{ game.name }}" title="{{ game.name }}"/></a></td>
+                                ng-src="{{ game.thumbnail }}" alt="{{ game.name }}" title="{{ game.name }}"/></a><img class="expanded" src="/images/expanded.png" alt="expanded" /></td>
                         <td class="games-game-info" ng-class="{ 'hide-gameinfo': thumbnailsOnly }">
                             <div class="games-infobox" ng-class="{hover: game.hover}" ng-style="hoverCoordinates(game)">
                                 <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
