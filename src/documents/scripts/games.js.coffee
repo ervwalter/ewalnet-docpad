@@ -1,6 +1,6 @@
 username = 'edwalter'
 
-app = angular.module 'GamesApp', ['ngResource', 'ui.bootstrap']
+app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ui.bootstrap']
 
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
@@ -54,6 +54,9 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			top: "#{top}px"
 			left: "#{left}px"
 		}
+
+	$scope.bgg = (game) ->
+		$location.path "http://boardgamegeek.com/boardgame/#{game.gameId}/"
 
 	$scope.showMorePlays = ->
 		$scope.playsLimit = 50

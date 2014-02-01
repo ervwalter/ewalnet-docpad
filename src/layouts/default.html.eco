@@ -58,7 +58,7 @@
                 <!--<li><a href="/">Blog</a></li>-->
                 <li><a href="/archives/">Archives</a></li>
                 <li><a href="/projects/">Projects</a></li>
-                <li><a href="/games/"><span class="games-header-extra-text">Board </span>Games</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
                 <li class="hidden-xs">
                     <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
                     <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>

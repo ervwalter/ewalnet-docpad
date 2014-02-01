@@ -184,3 +184,10 @@ h5 {
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
+
+.header-if-wide {
+    display: inline !important;
+    @media (min-width: 768px) and (max-width: 991px) {
+        display: none !important;
+    }
+}
