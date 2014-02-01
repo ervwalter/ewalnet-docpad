@@ -76,8 +76,7 @@ scripts:
                         <td class="games-game-info" ng-class="{ 'hide-gameinfo': thumbnailsOnly }">
                             <div class="games-infobox" ng-class="{hover: game.hover}" ng-style="hoverCoordinates(game)">
                                 <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
-                                        class="games-game-name">{{
-                                    game.name }}</a></div>
+                                        class="games-game-name">{{ game.name }}</a></div>
                                 <div class="games-ratings">
                             <span class="visible-xs">
                                 <span ng-if="game.rating >= 0">My Rating: <span
