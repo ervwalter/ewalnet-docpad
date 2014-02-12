@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Electrical Preparation for CoinTerra Miners"
+title: "Bitcoin Mining with 240V"
 date: 2014-02-10 20:22
 published: true
 comments: true
