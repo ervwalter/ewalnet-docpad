@@ -1,6 +1,6 @@
 username = 'edwalter'
 
-app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ui.bootstrap']
+app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ui.bootstrap']
 
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
@@ -16,7 +16,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 				return data
 		}
 
-	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true", {},
+	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true&details=true", {},
 		jsonp: {
 			method: 'JSONP'
 			params: { callback: 'JSON_CALLBACK' }

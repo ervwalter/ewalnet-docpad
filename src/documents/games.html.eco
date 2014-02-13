@@ -9,6 +9,7 @@ scripts:
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-sanitize.min.js
 - /scripts/vendor/ui-bootstrap-custom-0.10.0.min.js
 - /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.min.js
 - /scripts/games.js
@@ -63,16 +64,17 @@ scripts:
 
         <p ng-hide="games && games.length && games.length > 0">Loading...</p>
 
-        <div class="games-collection" ng-class="{ 'games-thumbnails-only': thumbnailsOnly }" ng-cloak ng-mousemove="trackMouse($event)">
+        <div class="games-collection" ng-class="{ 'games-thumbnails-only': thumbnailsOnly }" ng-cloak
+             ng-mousemove="trackMouse($event)">
             <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy" class="games-game"
                  ng-class="{ 'games-has-expansion': game.expansions }">
                 <table ng-mouseenter="game.hover = true" ng-mouseleave="game.hover = false">
                     <tr>
                         <td class="games-game-image"><a
                                 ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"><img
-                                ng-src="{{ game.thumbnail }}" alt="{{ game.name }}" /></a><a
+                                ng-src="{{ game.thumbnail }}" alt="{{ game.name }}"/></a><a
                                 ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="expanded"><img
-                                src="/images/expanded.png" alt="expanded" /></a></td>
+                                src="/images/expanded.png" alt="expanded"/></a></td>
                         <td class="games-game-info" ng-class="{ 'hide-gameinfo': thumbnailsOnly }">
                             <div class="games-infobox" ng-class="{hover: game.hover}" ng-style="hoverCoordinates(game)">
                                 <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
@@ -106,6 +108,12 @@ scripts:
                                     {{
                                     game.numPlays > 1 ? 'times' :
                                     'time' }}
+                                </div>
+                                <div class="games-mechanics" ng-if="game.mechanics">
+                                    Game Mechanics:
+                                    <div class="games-mechanics-list">
+                                        {{ game.mechanics.join(', ') }}
+                                    </div>
                                 </div>
                                 <div ng-if="hasExpansion(game)" class="games-expansions">
                                     With Expansions:
