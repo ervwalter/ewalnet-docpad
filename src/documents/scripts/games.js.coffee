@@ -108,8 +108,10 @@ processGames = (games) ->
 		if game.expansions?
 			for expansion in game.expansions
 				updateGameProperties expansion
-				if expansion.name.toLowerCase().substr(0, parentName.length) is parentName
-					expansion.name = expansion.name.substr(parentName.length).trimStart(['-', ':', ' '])
+				if expansion.name.toLowerCase().substr(0, parentName.length) is (parentName)
+					shortName = expansion.name.substr(parentName.length).trimStart(' ')
+					unless shortName.toLowerCase().match(/^[a-z]/)
+						expansion.name = shortName.trimStart(['-', ':', ' '])
 	return games
 
 app.filter 'floor', ->
