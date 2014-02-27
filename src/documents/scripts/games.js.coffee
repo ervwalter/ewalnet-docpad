@@ -94,6 +94,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 updateGameProperties = (game) ->
 	game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
 	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
+	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('– base set') # fix Pathfinder games
 	game.sortableName = game.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
 	return
 
@@ -111,7 +112,7 @@ processGames = (games) ->
 				if expansion.name.toLowerCase().substr(0, parentName.length) is (parentName)
 					shortName = expansion.name.substr(parentName.length).trimStart(' ')
 					unless shortName.toLowerCase().match(/^[a-z]/)
-						expansion.name = shortName.trimStart(['-', ':', ' '])
+						expansion.name = shortName.trimStart(['–', '-', ':', ' '])
 	return games
 
 app.filter 'floor', ->
