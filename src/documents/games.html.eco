@@ -5,13 +5,13 @@ scripts:
 - //cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js
 - //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
 - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
-- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js
-- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js
-- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js
-- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-touch.min.js
-- //ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-sanitize.min.js
-- /scripts/vendor/ui-bootstrap-custom-0.10.0.min.js
-- /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-touch.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-sanitize.min.js
+- //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js
+- /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.js
 - /scripts/games.js
 ---
 
@@ -19,118 +19,72 @@ scripts:
 
     <h1>Board Games</h1>
 
-    <o>You might say I am obsessed with modern/designer board games. I have a growing collection of games, and it's not
+    <p>You might say I am obsessed with modern/designer board games. I have a growing collection of games, and it's
+        not
         uncommon for the UPS guy to drop by once a week or
         so to add something new to the collection. I track the games that I own and the games that I play on <a
                 href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
-        </p>
+    </p>
 
-        <h2 id="games-recent-plays">Recently Played</h2>
 
-        <p ng-hide="plays && plays.length && plays.length > 0">Loading...</p>
+    <div class="row fade-in" ng-show="plays && plays.length && plays.length > 0" ng-cloak>
+        <div class="col-xs-12">
+            <h2 id="games-recent-plays">Recently Played</h2>
 
-        <div>
-            <table class="table" ng-cloak>
+            <div class="games-recent">
+                <a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
+                   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
+                        ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="fade-in row" ng-show="games && games.length && games.length > 0" ng-cloak>
+        <div class="col-xs-12">
+            <h2>Game Collection</h2>
+
+            <table class="table table-striped">
+                <thead>
+                <tr class="actions">
+                    <th><a href="" ng-click="sortByName()">Name</a></th>
+                    <th><a href="" ng-click="sortByPlays()"><span class="wide-only">Times </span>Played</a></th>
+                    <th><a href="" ng-click="sortByRating()"><span class="wide-only">My </span>Rating</a></th>
+                </tr>
+                </thead>
                 <tbody>
-                <tr ng-repeat="play in plays | limitTo:playsLimit">
-                    <td class="games-date">{{ play.playDate | relativeDate:'MMM dd, yyyy' }}</td>
+                <tr ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy">
                     <td>
-                        <a ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/">{{ play.name }}</a>
-                    <span ng-if="play.numPlays > 1"
-                          class="text-muted games-multiplay">({{ play.numPlays }} times)</span>
+                        <a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
+                        <span ng-if="hasExpansion(game)" class="games-expansions wide-only" popover="{{ expansions(game) }}" popover-trigger="mouseenter" popover-placement="right" popover-title="Expansions">
+							({{ game.expansions.length }} <span class="games-expansions-link">{{ game.expansions.length > 1 ? 'expansions' : 'expansion' }}</span>)
+                        </span>
                     </td>
-                </tr>
-                <tr ng-show="playsLimit < 25">
-                    <td colspan="2"><a href="" ng-click="showMorePlays()">show more...</a></td>
-                </tr>
-                <tr ng-show="playsLimit >= 25">
-                    <td colspan="2"><a href="" ng-click="showFewerPlays()">show fewer...</a></td>
+                    <td class="games-times-played">
+                        <span ng-if="game.numPlays > 0"><span class="wide-only">Played </span><b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' : 'time' }}</span>
+                        <span ng-if="!(game.numPlays > 0)" class="mdash">&mdash;</span>
+                    </td>
+                    <td class="games-rating">
+                        <span ng-if="game.rating >= 0"><span class="wide-only"><rating value="game.rating" max="10" readonly="true"></rating></span><span class="narrow-only">{{ game.rating }}</span></span>
+                        <span ng-if="!(game.rating >= 0)" class="mdash">&mdash;</span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </div>
 
-        <h2>Game Collection
-        <span class="actions">
-            sort by: <a href="" ng-click="sortByName()">name</a>,
-            <a href="" ng-click="sortByRating()">rating</a>, or
-            <a href="" ng-click="sortByPlays()">times played</a>
-        </span>
-        <span class="actions">
-            show: <a href="" ng-click="showDetails()">game details</a> or
-            <a href="" ng-click="showThumbnails()">thumbnails</a>
-        </span>
-        </h2>
-
-        <p ng-hide="games && games.length && games.length > 0">Loading...</p>
-
-        <div class="games-collection" ng-class="{ 'games-thumbnails-only': thumbnailsOnly }" ng-cloak
-             ng-mousemove="trackMouse($event)">
-            <div ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy" class="games-game"
-                 ng-class="{ 'games-has-expansion': game.expansions }">
-                <table ng-mouseenter="game.hover = true" ng-mouseleave="game.hover = false">
-                    <tr>
-                        <td class="games-game-image"><a
-                                ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"><img
-                                ng-src="{{ game.thumbnail }}" alt="{{ game.name }}"/></a><a
-                                ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/" class="expanded"><img
-                                src="/images/expanded.png" alt="expanded"/></a></td>
-                        <td class="games-game-info" ng-class="{ 'hide-gameinfo': thumbnailsOnly }">
-                            <div class="games-infobox" ng-class="{hover: game.hover}" ng-style="hoverCoordinates(game)">
-                                <div><a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/"
-                                        class="games-game-name">{{ game.name }}</a></div>
-                                <div class="games-ratings">
-                            <span class="visible-xs">
-                                <span ng-if="game.rating >= 0">My Rating: <span
-                                        class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span><br/></span>
-                                    Average Rating: <span
-                                    class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
-                            </span>
-                                    <table class="hidden-xs">
-                                        <tr ng-if="game.rating >= 0">
-                                            <td>My Rating:</td>
-                                            <td>
-                                                <rating value="game.rating" max="10" readonly="true"></rating>
-                                            </td>
-                                            <td class="games-numeric-rating">
-                                                <span class="games-rating-{{ game.rating | number:0 }}">{{ game.rating }}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Community Average Rating:</td>
-                                            <td class="games-numeric-rating">
-                                                <span class="games-rating-{{ game.averageRating | number:0 }}">{{ game.averageRating | number:1 }}</span>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="games-num-plays" ng-if="game.numPlays > 0">Played <b>{{ game.numPlays }}</b>
-                                    {{
-                                    game.numPlays > 1 ? 'times' :
-                                    'time' }}
-                                </div>
-                                <div class="games-mechanics" ng-if="game.mechanics">
-                                    Game Mechanics:
-                                    <div class="games-mechanics-list">
-                                        {{ game.mechanics.join(', ') }}
-                                    </div>
-                                </div>
-                                <div ng-if="hasExpansion(game)" class="games-expansions">
-                                    With Expansions:
-                                    <ul>
-                                        <li ng-repeat="expansion in game.expansions | filter:{owned: true} | orderBy:'sortableName'">
-                                            <a ng-href="http://boardgamegeek.com/boardgame/{{ expansion.gameId }}/">{{
-                                                expansion.name }}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="/images/loading.gif"
+                 ng-hide="plays && plays.length && plays.length > 0 && games && games.length && games.length > 0"
+                 alt=" Loading..."/>
         </div>
+    </div>
+
+
 </div>
+
 
 <%- @partial('me', false) %>
 

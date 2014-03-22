@@ -3,261 +3,84 @@
         font-weight: normal;
     }
 
+    .row + .row {
+        margin-top: 22px;
+    }
+
     table tr:first-child td {
-        border-top: 0;
+//        border-top: 0;
     }
 
-    .games-multiplay {
-        margin-left: 5px;
+    .popover {
+        max-width: none;
+    }
+
+    .popover-title {
+        font-weight: 600;
+    }
+
+    .games-recent {
+        overflow: hidden;
+
+        height: 202px;
+        @media (min-width: 768px) {
+            height: 175px;
+        }
+
+    }
+
+    .games-recent-item {
+        padding: 0 2px 2px 0;
         display: inline-block;
+
+        img {
+            height: 100px;
+            visibility: hidden;
+
+            @media (min-width: 768px) {
+                height: 175px;
+            }
+
+            &.loaded {
+                visibility: visible;
+                -webkit-animation: fadeIn 0.5s;
+                animation: fadeIn 0.5s;
+            }
+
+        }
     }
 
-    .games-date {
+    .games-expansions {
+        display: inline-block;
+        padding-left: 10px;
+        color: #222;
+        cursor: default;
+    }
+
+    .games-expansions-link {
+        border-bottom: 1px dotted #999;
+    }
+
+    .games-times-played, .games-rating {
         white-space: nowrap;
-        width: 1px;
-        padding-right: 20px !important;
     }
 
-    .games-game {
-        padding: 10px 0;
-
-        display: block;
-        width: 100%;
-
-        @media (min-width: 768px) {
-            padding: 15px 0;
-        }
-
-        table {
-            width: 100%;
-
-            tr {
-                vertical-align: top;
-            }
-        }
-
-        .games-game-image {
-            text-align: center;
-            white-space: nowrap;
-            width: 80px;
-            img {
-                max-width: 80px;
-                max-height: 80px;
-            }
-
-            @media (min-width: 768px) {
-                width: 150px;
-                img {
-                    max-width: 150px;
-                    max-height: 150px;
-                }
-            }
-        }
-
-        .games-expansions {
-            margin-top: 20px;
-            font-size: 12px;
-        }
-
-        .games-mechanics {
-            margin-top: 20px;
-            font-size: 12px;
-        }
-
-        .games-mechanics-list {
-            margin-left: 22px;
-            color: #000;
-            font-weight: 600;
-        }
-
-        .games-game-info {
-            padding-left: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .games-num-plays {
-            font-size: 14px;
-            font-style: italic;
-
-            b {
-                color: #222;
-            }
-        }
-
-        .games-game-name {
-            font-size: 18px;
-        }
-
-        .games-ratings {
-            font-size: 14px;
-        }
-
-        .games-rating-1,
-        .games-rating-2,
-        .games-rating-3,
-        .games-rating-4,
-        .games-rating-5,
-        .games-rating-6,
-        .games-rating-7,
-        .games-rating-8,
-        .games-rating-9,
-        .games-rating-10 {
-            font-weight: bold;
-            font-size: 14px;
-            border: none;
-        }
-
-        .games-rating-1, .games-rating-2 {
-            color: #d20000;
-            border-color: #d20000;
-        }
-
-        .games-rating-3, .games-rating-4 {
-            color: #df8e11;
-            border-color: #df8e11;
-        }
-
-        .games-rating-5, .games-rating-6, {
-            color: #316cef;
-            border-color: #316cef;
-        }
-
-        .games-rating-7, .games-rating-8, .games-rating-9, .games-rating-10 {
-            color: #00ac00;
-            border-color: #00ac00;
-        }
-
-    }
-
-    .games-game + .games-game {
-        border-top: 1px solid #ddd;
-    }
-
-    .expanded {
-        display: none;
-    }
-
-    .games-thumbnails-only {
-        margin-top: 20px;
-
-        .games-game-image {
-            position: relative;
-        }
-
-        .games-has-expansion {
-            .expanded {
-                position: absolute;
-                top: 0;
-                right: 1px;
-                display: inline;
-            }
-        }
-
-        .games-game {
-            width: auto;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            padding: 5px;
-            //background-color: #f4f4f4;
-            border: none;
-            min-height: 0;
-            display: inline-block;
-
-            .games-game-image {
-                width: auto;
-                padding: 0;
-
-                img {
-                    max-width: 110px;
-                    max-height: 110px;
-                }
-
-                @media (min-width: 768px) {
-                    width: auto;
-                    img {
-                        max-width: none;
-                        max-height: none;
-                    }
-                }
-            }
-
-            @media (min-width: 768px) {
-                margin-right: 10px;
-                margin-bottom: 10px;
-                padding: 10px;
-            }
-        }
-
-        .games-infobox {
-            display: none;
-            z-index: 99;
-            padding: 0 0 10px 0;
-            background-color: #f0f0f0;
-            background-color: rgba(240, 240, 240, 0.97);
-            border: 2px solid #222;
-            width: 400px;
-            position: absolute;
-            .rounded-corners(5px);
-
-            a {
-                color: @text-color;
-                font-weight: bold;
-            }
-
-            .games-game-name {
-                font-size: 16px;
-                padding: 5px 10px;
-                display: block;
-                background-color: #c8c8c8;
-                background-color: rgba(200, 200, 200, 0.97);
-                border-bottom: 1px solid #222;
-            }
-
-            .games-ratings {
-                padding: 10px 10px 0 10px;
-            }
-            .games-num-plays {
-                padding: 0 10px;
-            }
-            .games-expansions, .games-mechanics {
-                padding: 0 10px;
-                ul {
-                    margin-bottom: 0;
-                }
-            }
-        }
-
-        @media (min-width: 768px) {
-            .games-infobox.hover {
-                display: block;
-            }
+    th:first-child, td:first-child {
+        @media (max-width: 767px) {
+            padding-left: 0;
         }
     }
 
-    .hide-gameinfo {
-        overflow: hidden !important;
-        width: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
+    tr {
+        vertical-align: top;
     }
 
-    .actions {
-        font-size: 16px;
-        margin-left: 10px;
-        color: #aaa;
-        font-weight: normal;
-        display: block;
-        margin-top: 8px;
-
-        @media (min-width: 768px) {
-            display: inline;
-            margin-top: 0;
-        }
+    th {
+        border-bottom-width: 1px;
 
         a {
-            color: #666;
-            font-weight: bold;
+            font-weight: 600;
+            color: #222;
         }
 
         a:hover {
@@ -265,30 +88,16 @@
         }
     }
 
-    #games-shelf {
-        margin-top: 0;
-        @media (min-width: 768px) {
-            margin-top: -10px;
-        }
-    }
-
-    .games-ratings {
-        table {
-            width: auto;
-            td {
-                padding-right: 10px;
-            }
-
-            .games-numeric-rating {
-                text-align: center;
-            }
-        }
-
+    .games-rating {
         .glyphicon-star {
             color: #666;
         }
         .glyphicon-star-empty {
             color: #ddd;
+        }
+
+        @media (max-width: 767px) {
+            text-align: center;
         }
     }
 
@@ -296,8 +105,13 @@
         position: inherit;
     }
 
+    .mdash {
+        color: #999;
+    }
+
 }
 
-.touch #games .games-infobox.hover {
-    display: none !important;
+.ng-hide-remove {
+    -webkit-animation: fadeInUp 0.5s;
+    animation: fadeInUp 0.5s;
 }

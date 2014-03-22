@@ -1,6 +1,6 @@
 username = 'edwalter'
 
-app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ui.bootstrap']
+app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ngAnimate', 'ui.bootstrap']
 
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
@@ -12,8 +12,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			params: { callback: 'JSON_CALLBACK' }
 			isArray: true
 			transformResponse: $http.defaults.transformResponse.concat (data) ->
-				processPlays(data)
-				return data
+				return processPlays(data)
 		}
 
 	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true&details=true", {},
@@ -22,8 +21,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			params: { callback: 'JSON_CALLBACK' }
 			isArray: true
 			transformResponse: $http.defaults.transformResponse.concat (data) ->
-				processGames(data)
-				return data
+				return processGames(data)
 		}
 
 	$scope.hasExpansion = (game) ->
@@ -32,9 +30,13 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 		(result = true if e.owned) for e in game.expansions
 		return result
 
+	$scope.expansions = (game) ->
+		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
+		list.join(',<br/>')
+
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
-	$scope.playsLimit = 7
+	$scope.playsLimit = 4
 
 	$scope.trackMouse = ($event) ->
 		$scope.mouseX = $event.pageX
@@ -61,7 +63,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 	$scope.showMorePlays = ->
 		$scope.playsLimit = 50
 	$scope.showFewerPlays = ->
-		$scope.playsLimit = 7
+		$scope.playsLimit = 4
 		$('#games-recent-plays').scrollTo()
 
 	$scope.sortByName = ->
@@ -92,6 +94,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 			else $scope.thumbnailsOnly = true
 
 updateGameProperties = (game) ->
+	#game.largeThumbnail = game.image.replace(/^(.+)\.([0-9a-zA-Z]+)$/, "$1_md.$2")
 	game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
 	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
 	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('– base set') # fix Pathfinder games
@@ -100,18 +103,21 @@ updateGameProperties = (game) ->
 
 processPlays = (plays) ->
 	updateGameProperties play for play in plays
-	return plays
+	_.uniq plays, (item) ->
+		item.gameId
 
 processGames = (games) ->
 	for game in games
 		updateGameProperties game
 		parentName = game.name.toLowerCase()
 		if game.expansions?
+			game.expansionList = (expansion.name for expansion in game.expansions).join('<br/>')
 			for expansion in game.expansions
 				updateGameProperties expansion
 				if expansion.name.toLowerCase().substr(0, parentName.length) is (parentName)
 					shortName = expansion.name.substr(parentName.length).trimStart(' ')
 					unless shortName.toLowerCase().match(/^[a-z]/)
+						expansion.longName = expansion.name
 						expansion.name = shortName.trimStart(['–', '-', ':', ' '])
 	return games
 
@@ -172,7 +178,9 @@ app.filter 'relativeDate', ($filter) ->
 		else
 			return dateFilter(date, format)
 
-
-
-
-
+app.directive 'trackLoaded', ($animate) ->
+	{
+		link: (scope, element, attrs) ->
+			element.bind "load", (event) ->
+				element.addClass('loaded')
+	}
