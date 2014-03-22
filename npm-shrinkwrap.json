@@ -80,7 +80,7 @@
     },
     "coffee-script": {
       "version": "1.6.3",
-      "from": "coffee-script@~1.6.3"
+      "from": "coffee-script@1.6.3"
     },
     "docpad": {
       "version": "6.54.10",
@@ -154,6 +154,10 @@
           "version": "1.4.5",
           "from": "cson@~1.4.5",
           "dependencies": {
+            "coffee-script": {
+              "version": "1.6.3",
+              "from": "coffee-script@1.6.3"
+            },
             "js2coffee": {
               "version": "0.2.7",
               "from": "js2coffee@~0.2.3",
@@ -161,6 +165,10 @@
                 "underscore": {
                   "version": "1.5.2",
                   "from": "underscore@~1.5.1"
+                },
+                "coffee-script": {
+                  "version": "1.6.3",
+                  "from": "coffee-script@1.6.3"
                 },
                 "file": {
                   "version": "0.2.2",
@@ -535,7 +543,13 @@
     },
     "docpad-plugin-coffeescript": {
       "version": "2.2.3",
-      "from": "docpad-plugin-coffeescript@~2.2.2"
+      "from": "docpad-plugin-coffeescript@~2.2.2",
+      "dependencies": {
+        "coffee-script": {
+          "version": "1.6.3",
+          "from": "coffee-script@1.6.3"
+        }
+      }
     },
     "docpad-plugin-dateurls": {
       "version": "2.3.0",
@@ -553,6 +567,17 @@
             "strscan": {
               "version": "1.0.1",
               "from": "strscan@>=1.0.1"
+            },
+            "coffee-script": {
+              "version": "1.7.1",
+              "from": "coffee-script@1.7.1",
+              "resolved": "https://registry.npmjs.org/coffee-script/-/coffee-script-1.7.1.tgz",
+              "dependencies": {
+                "mkdirp": {
+                  "version": "0.3.5",
+                  "from": "mkdirp@~0.3.5"
+                }
+              }
             }
           }
         }
