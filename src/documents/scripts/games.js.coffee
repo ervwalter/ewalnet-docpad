@@ -189,7 +189,7 @@ app.filter 'relativeDate', ($filter) ->
 		if diff < -6
 			return dateFilter(date, format)
 		else if diff < -1
-			return "Last #{m.format('ddd')}"
+			return "#{m.format('dddd')}"
 		else if diff < 0
 			return 'Yesterday'
 		else if diff == 0
