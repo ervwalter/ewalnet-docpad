@@ -33,11 +33,8 @@ scripts:
 
 			<p>
 				I am participating in a challenge to play 10 different games 10 times each during 2014. The idea is to
-				focus on
-				replaying games and getting into the strategy of them.My detailed progress is tracked on a <a
-					href="http://boardgamegeek.com/geeklist/171319/challenge-play-10-games-10-times-each-in-2014">GeekList</a>
-				on BoardGameGeek, but you can also see my selections and the number of times I
-				have played each game below.</p>
+				focus on replaying games and getting into the strategy of them. My selections and the number of times I
+				have played each game are listed below.</p>
 			<table class="table table-striped" id="challenge-progress">
 				<thead>
 				<tr>
