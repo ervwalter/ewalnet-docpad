@@ -59,7 +59,7 @@ scripts:
 
 	<div class="row fade-in" ng-show="plays && plays.length && plays.length > 0" ng-cloak>
 		<div class="col-xs-12">
-			<h2 id="games-recent-plays">Mostly Recently Played Games</h2>
+			<h2 id="games-recent-plays">Mostly Recently Played Games - <a href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
 
 			<div class="games-recent">
 				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
