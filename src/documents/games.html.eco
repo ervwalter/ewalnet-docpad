@@ -50,7 +50,10 @@ scripts:
 				<tr ng-repeat="item in challenge.items">
 					<td><a ng-href="http://boardgamegeek.com/boardgame/{{ item.gameId }}/">{{ item.name }}</a></td>
 					<td class="wide-only"><i ng-repeat="n in range(item.playCount)" class="icon icon-check"></i></td>
-					<td>{{ item.playCount }} Plays</td>
+					<td>
+						<span ng-if="item.playCount >= 10" class="label label-success">Completed!</span>
+						<span ng-if="item.playCount < 10">{{ item.playCount }} Plays</span>
+					</td>
 				</tr>
 				</tbody>
 			</table>
@@ -63,6 +66,8 @@ scripts:
 
 			<div class="games-recent">
 				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
+				   popover="{{ playDetails(play) }}" popover-trigger="mouseenter" popover-placement="top"
+				   popover-title="{{ play.name }}"
 				   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
 						ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
 			</div>

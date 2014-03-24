@@ -5,7 +5,7 @@ app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ngAnim
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
 
-app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
+app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
 		jsonp: {
 			method: 'JSONP'
@@ -42,6 +42,13 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 	$scope.expansions = (game) ->
 		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
 		list.join(',<br/>')
+
+	$scope.playDetails = (play) ->
+		details = ""
+		#details += "<b>#{htmlEncode(play.name)}</b><br/>"
+		details += "<i>Played #{$filter('relativeDate')(play.playDate)}</i> - "
+		details += "#{htmlEncode(play.comments)}"
+		return details
 
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
@@ -135,6 +142,8 @@ app.filter 'floor', ->
 	return (input) ->
 		Math.floor(parseFloat(input)).toString()
 
+htmlEncode = (value) ->
+	$('<div/>').text(value).html()
 
 R_ISO8601_STR = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/
 NUMBER_STRING = /^\-?\d+$/

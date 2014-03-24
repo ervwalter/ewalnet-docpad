@@ -27,6 +27,14 @@
             height: 175px;
         }
 
+        .popover {
+            max-width: 350px;
+
+            @media (max-width: 1190px) {
+                display: none !important;
+            }
+        }
+
     }
 
     .games-recent-item {
@@ -106,6 +114,10 @@
         clear: both;
         margin-bottom: 0;
 
+        tr {
+            vertical-align: top;
+        }
+
         td, th {
             padding-left: 10px;
             padding-right: 20px;
@@ -114,6 +126,13 @@
         .icon {
             padding: 0 1px;
         }
+
+        .label {
+            display: inline-block;
+            padding: .3em .6em;
+            line-height: inherit;
+        }
+
     }
 
     #challenge-image {
