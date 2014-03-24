@@ -17,70 +17,104 @@ scripts:
 
 <div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
 
-    <h1>Board Games</h1>
+	<h1>Board Games</h1>
 
-    <p>You might say I am obsessed with modern/designer board games. I have a growing collection of games, and it's
-        not
-        uncommon for the UPS guy to drop by once a week or
-        so to add something new to the collection. I track the games that I own and the games that I play on <a
-                href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
-    </p>
+	<p>You might say I am obsessed with modern/designer board games. I have a growing collection of games, and it's
+		not
+		uncommon for the UPS guy to drop by once a week or
+		so to add something new to the collection. I track the games that I own and the games that I play on <a
+				href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
+	</p>
 
 
-    <div class="row fade-in" ng-show="plays && plays.length && plays.length > 0" ng-cloak>
-        <div class="col-xs-12">
-            <h2 id="games-recent-plays">Recently Played</h2>
+	<div class="fade-in row" ng-show="challenge && challenge.items && challenge.items.length > 0" ng-cloak>
+		<div class="col-xs-12">
+			<h2>Challenge 2014: Play 10 Games 10 Times Each</h2>
 
-            <div class="games-recent">
-                <a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
-                   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
-                        ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
-            </div>
+			<p>
+				I am participating in a challenge to play 10 different games 10 times each during 2014. The idea is to
+				focus on
+				replaying games and getting into the strategy of them.My detailed progress is tracked on a <a
+					href="http://boardgamegeek.com/geeklist/171319/challenge-play-10-games-10-times-each-in-2014">GeekList</a>
+				on BoardGameGeek, but you can also see my selections and the number of times I
+				have played each game below.</p>
+			<table class="table table-striped" id="challenge-progress">
+				<thead>
+				<tr>
+					<th>Name</th>
+					<th class="wide-only">Progress</th>
+					<th>&nbsp;</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="item in challenge.items">
+					<td><a ng-href="http://boardgamegeek.com/boardgame/{{ item.gameId }}/">{{ item.name }}</a></td>
+					<td class="wide-only"><i ng-repeat="n in range(item.playCount)" class="icon icon-check"></i></td>
+					<td>{{ item.playCount }} Plays</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-        </div>
-    </div>
+	<div class="row fade-in" ng-show="plays && plays.length && plays.length > 0" ng-cloak>
+		<div class="col-xs-12">
+			<h2 id="games-recent-plays">Mostly Recently Played Games</h2>
 
-    <div class="fade-in row" ng-show="games && games.length && games.length > 0" ng-cloak>
-        <div class="col-xs-12">
-            <h2>Game Collection</h2>
+			<div class="games-recent">
+				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
+				   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
+						ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
+			</div>
 
-            <table class="table table-striped">
-                <thead>
-                <tr class="actions">
-                    <th><a href="" ng-click="sortByName()">Name</a></th>
-                    <th><a href="" ng-click="sortByPlays()"><span class="wide-only">Times </span>Played</a></th>
-                    <th><a href="" ng-click="sortByRating()"><span class="wide-only">My </span>Rating</a></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy">
-                    <td>
-                        <a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
-                        <span ng-if="hasExpansion(game)" class="games-expansions wide-only" popover="{{ expansions(game) }}" popover-trigger="mouseenter" popover-placement="right" popover-title="Expansions">
+		</div>
+	</div>
+
+	<div class="fade-in row" ng-show="games && games.length && games.length > 0" ng-cloak>
+		<div class="col-xs-12">
+			<h2>My Game Collection</h2>
+
+			<table class="table table-striped">
+				<thead>
+				<tr class="actions">
+					<th><a href="" ng-click="sortByName()">Name</a></th>
+					<th><a href="" ng-click="sortByPlays()"><span class="wide-only">Times </span>Played</a></th>
+					<th><a href="" ng-click="sortByRating()"><span class="wide-only">My </span>Rating</a></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy">
+					<td>
+						<a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
+                        <span ng-if="hasExpansion(game)" class="games-expansions wide-only"
+							  popover="{{ expansions(game) }}" popover-trigger="mouseenter" popover-placement="right"
+							  popover-title="Expansions">
 							({{ game.expansions.length }} <span class="games-expansions-link">{{ game.expansions.length > 1 ? 'expansions' : 'expansion' }}</span>)
                         </span>
-                    </td>
-                    <td class="games-times-played">
-                        <span ng-if="game.numPlays > 0"><span class="wide-only">Played </span><b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' : 'time' }}</span>
-                        <span ng-if="!(game.numPlays > 0)" class="mdash">&mdash;</span>
-                    </td>
-                    <td class="games-rating">
-                        <span ng-if="game.rating >= 0"><span class="wide-only"><rating value="game.rating" max="10" readonly="true"></rating></span><span class="narrow-only">{{ game.rating }}</span></span>
-                        <span ng-if="!(game.rating >= 0)" class="mdash">&mdash;</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+					</td>
+					<td class="games-times-played">
+						<span ng-if="game.numPlays > 0"><span class="wide-only">Played </span><b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' : 'time' }}</span>
+						<span ng-if="!(game.numPlays > 0)" class="mdash">&mdash;</span>
+					</td>
+					<td class="games-rating">
+						<span ng-if="game.rating >= 0"><span class="wide-only"><rating value="game.rating" max="10"
+																					   readonly="true"></rating></span><span
+								class="narrow-only">{{ game.rating }}</span></span>
+						<span ng-if="!(game.rating >= 0)" class="mdash">&mdash;</span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <img src="/images/loading.gif"
-                 ng-hide="plays && plays.length && plays.length > 0 && games && games.length && games.length > 0"
-                 alt=" Loading..."/>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-xs-12">
+			<img src="/images/loading.gif"
+				 ng-hide="plays && plays.length && plays.length > 0 && games && games.length && games.length > 0"
+				 alt=" Loading..."/>
+		</div>
+	</div>
 
 
 </div>

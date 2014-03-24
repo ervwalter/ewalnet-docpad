@@ -24,6 +24,15 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 				return processGames(data)
 		}
 
+	challengeApi = $resource "http://bgg-json.azurewebsites.net/challenge/171319", {},
+		jsonp: {
+			method: 'JSONP'
+			params: { callback: 'JSON_CALLBACK' }
+		}
+
+	$scope.range = (n) ->
+		(num for num in [1..n])
+
 	$scope.hasExpansion = (game) ->
 		return false unless game?.expansions?
 		result = false
@@ -36,6 +45,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http) ->
 
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
+	$scope.challenge = challengeApi.jsonp()
 	$scope.playsLimit = 4
 
 	$scope.trackMouse = ($event) ->
