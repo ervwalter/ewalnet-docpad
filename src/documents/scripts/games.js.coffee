@@ -30,6 +30,19 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 			params: { callback: 'JSON_CALLBACK' }
 		}
 
+	$scope.plays = playsApi.jsonp()
+	$scope.games = collectionApi.jsonp()
+	$scope.challenge = challengeApi.jsonp()
+
+	$scope.challengeLoaded = ->
+		$scope.challenge?.items?.length > 0
+
+	$scope.playsLoaded = ->
+		$scope.plays?.length > 0
+
+	$scope.gamesLoaded = ->
+		$scope.games?.length > 0
+
 	$scope.range = (n) ->
 		(num for num in [1..n])
 
@@ -50,50 +63,12 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		details += "#{htmlEncode(play.comments)}"
 		return details
 
-	$scope.plays = playsApi.jsonp()
-	$scope.games = collectionApi.jsonp()
-	$scope.challenge = challengeApi.jsonp()
-	$scope.playsLimit = 4
-
-	$scope.trackMouse = ($event) ->
-		$scope.mouseX = $event.pageX
-		$scope.mouseY = $event.pageY
-
-	$scope.hoverCoordinates = (game) ->
-		return {} unless game.hover
-		top = $scope.mouseY + 10
-		if $scope.mouseX < 200
-			left = 0
-		else
-			left = $scope.mouseX - 200
-		viewport = $(window).width()
-		if left > (viewport - 400)
-			left = viewport - 400
-		return {
-			top: "#{top}px"
-			left: "#{left}px"
-		}
-
-	$scope.bgg = (game) ->
-		$location.path "http://boardgamegeek.com/boardgame/#{game.gameId}/"
-
-	$scope.showMorePlays = ->
-		$scope.playsLimit = 50
-	$scope.showFewerPlays = ->
-		$scope.playsLimit = 4
-		$('#games-recent-plays').scrollTo()
-
 	$scope.sortByName = ->
 		$location.search 'sort', 'name'
 	$scope.sortByRating = ->
 		$location.search 'sort', 'rating'
 	$scope.sortByPlays = ->
 		$location.search 'sort', 'plays'
-
-	$scope.showDetails = ->
-		$location.search 'show', 'details'
-	$scope.showThumbnails = ->
-		$location.search 'show', 'thumbnails'
 
 	$scope.$watch ->
 		$location.search().sort
@@ -103,15 +78,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 			when 'plays' then $scope.sortBy = ['-numPlays', '+sortableName']
 			else $scope.sortBy = '+sortableName'
 
-	$scope.$watch ->
-		$location.search().show
-	, (show) ->
-		switch show
-			when 'details' then $scope.thumbnailsOnly = false
-			else $scope.thumbnailsOnly = true
-
 updateGameProperties = (game) ->
-	#game.largeThumbnail = game.image.replace(/^(.+)\.([0-9a-zA-Z]+)$/, "$1_md.$2")
 	game.name = game.name.trim().replace(/\ \ +/, ' ') # remove extra spaces
 	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('- base set') # fix Pathfinder games
 	game.name = game.name.substr(0, game.name.length - 10).trim() if game.name.toLowerCase().endsWith('– base set') # fix Pathfinder games

@@ -27,7 +27,7 @@ scripts:
 	</p>
 
 
-	<div class="fade-in row" ng-show="challenge && challenge.items && challenge.items.length > 0" ng-cloak>
+	<div class="fade-in row" ng-show="challengeLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2>Challenge 2014: Play 10 Games 10 Times Each</h2>
 
@@ -57,7 +57,7 @@ scripts:
 		</div>
 	</div>
 
-	<div class="row fade-in" ng-show="plays && plays.length && plays.length > 0" ng-cloak>
+	<div class="row fade-in" ng-show="challengeLoaded() && playsLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2 id="games-recent-plays">Mostly Recently Played Games - <a href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
 
@@ -72,7 +72,7 @@ scripts:
 		</div>
 	</div>
 
-	<div class="fade-in row" ng-show="games && games.length && games.length > 0" ng-cloak>
+	<div class="fade-in row" ng-show="challengeLoaded() && playsLoaded() && gamesLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2>My Game Collection</h2>
 
@@ -113,7 +113,7 @@ scripts:
 	<div class="row">
 		<div class="col-xs-12">
 			<img src="/images/loading.gif"
-				 ng-hide="plays && plays.length && plays.length > 0 && games && games.length && games.length > 0"
+				 ng-hide="challengeLoaded() && playsLoaded() && gamesLoaded()"
 				 alt=" Loading..."/>
 		</div>
 	</div>
