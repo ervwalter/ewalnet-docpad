@@ -9,25 +9,22 @@
   },
   "license": "MIT",
   "dependencies": {
-    "taskgroup": "~3.2.4",
-    "safefs": "~3.0.3",
-    "coffee-script": "~1.6.3",
-    "cheerio": "~0.12.3",
-    "moment": "~2.4.0",
-    "docpad": "~6.54.2",
-    "docpad-plugin-marked": "~2.1.1",
-    "docpad-plugin-eco": "~2.0.2",
-    "docpad-plugin-less": "~2.2.0",
-    "docpad-plugin-partials": "~2.8.0",
-    "docpad-plugin-coffeescript": "~2.2.2",
-    "docpad-plugin-sitemap": "~2.0.1",
-    "docpad-plugin-tagging": "~2.0.2",
+    "docpad": "~6.64.0",
+    "cheerio": "~0.13.1",
+    "moment": "~2.5.1",
+    "docpad-plugin-marked": "~2.2.0",
+    "docpad-plugin-eco": "~2.0.3",
+    "docpad-plugin-less": "~2.4.1",
+    "docpad-plugin-coffeescript": "~2.3.0",
+    "docpad-plugin-sitemap": "~2.2.0",
+    "docpad-plugin-partials": "~2.9.0",
+    "docpad-plugin-cleanurls": "~2.7.0",
+    "docpad-plugin-tags": "~2.0.7",
     "docpad-plugin-dateurls": "https://github.com/ervwalter/docpad-plugin-dateurls/tarball/compiled",
-    "docpad-plugin-cleanurls": "https://github.com/ervwalter/docpad-plugin-cleanurls/tarball/compiled",
     "docpad-plugin-paged": "https://github.com/ervwalter/docpad-plugin-paged/tarball/compiled"
   },
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.5.3"
+    "docpad-plugin-livereload": "~2.6.0"
   },
   "engines": {
     "node": "0.10",

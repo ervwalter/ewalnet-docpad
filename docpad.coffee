@@ -71,9 +71,16 @@ docpadConfig = {
 		# Google+ settings
 		googlePlusId: '103974853049200513652'
 
+		getTagUrl: (tag) ->
+			slug = tag.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+			"/tags/#{slug}/"
+
 	collections:
 		posts: ->
 			@getCollection('documents').findAllLive({relativeDirPath: 'posts'}, [date: -1])
+
+		cleanurls: ->
+			@getCollection('html').findAllLive(skipCleanUrls: $ne: true)
 
 	environments:
 		development:
@@ -82,9 +89,13 @@ docpadConfig = {
 					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1])
 
 	plugins:
-		tagging:
-			collectionName: 'posts'
-			indexPageLowercase: true
+		tags:
+			findCollectionName: 'posts'
+			extension: '.html'
+			injectDocumentHelper: (document) ->
+				document.setMeta(
+					layout: 'tags'
+				)
 		dateurls:
 			cleanurl: true
 			trailingSlashes: true
@@ -96,6 +107,7 @@ docpadConfig = {
 			startingPageNumber: 2
 		cleanurls:
 			trailingSlashes: true
+			collectionName: 'cleanurls'
 }
 
 # Export the DocPad Configuration
