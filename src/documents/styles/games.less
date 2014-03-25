@@ -3,6 +3,14 @@
         font-weight: normal;
     }
 
+    p {
+        margin: 0;
+    }
+
+    p + p, p + div, div + p {
+        margin-top: 11px;
+    }
+
     p + .row, .row + .row {
         margin-top: 22px;
     }
@@ -133,6 +141,12 @@
             line-height: inherit;
         }
 
+    }
+
+    .overall-progress {
+        font-weight: bold;
+        display: inline-block;
+        margin-left: 10px;
     }
 
     #challenge-image {

@@ -56,6 +56,13 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
 		list.join(',<br/>')
 
+	$scope.percentComplete = (challenge) ->
+		return 0 unless challenge?.items?.length > 0
+		sum = _.reduce challenge.items, ((s, i) -> s + i.playCount), 0
+		total = challenge.items.length * challenge.goalPerGame
+		return 100 if sum > total
+		return Math.floor(100 * sum / total)
+
 	$scope.playDetails = (play) ->
 		details = ""
 		#details += "<b>#{htmlEncode(play.name)}</b><br/>"

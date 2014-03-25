@@ -32,9 +32,13 @@ scripts:
 			<h2>Challenge 2014: Play 10 Games 10 Times Each</h2>
 
 			<p>
-				I am participating in a <a href="http://boardgamegeek.com/geeklist/166160/2014-challenge-play-10-games-10-times-each">challenge</a> to play 10 different games 10 times each during 2014. The idea is to
+				I am participating in a <a
+					href="http://boardgamegeek.com/geeklist/166160/2014-challenge-play-10-games-10-times-each">challenge</a>
+				to play 10 different games 10 times each during 2014. The idea is to
 				focus on replaying games and getting into the strategy of them. My selections and the number of times I
 				have played each game are listed below.</p>
+
+			<p>
 			<table class="table table-striped" id="challenge-progress">
 				<thead>
 				<tr>
@@ -54,12 +58,15 @@ scripts:
 				</tr>
 				</tbody>
 			</table>
+			</p>
+			<p>Overall Progress: <span class="overall-progress">{{ percentComplete(challenge) }}% Complete</span></p>
 		</div>
 	</div>
 
 	<div class="row fade-in" ng-show="challengeLoaded() && playsLoaded()" ng-cloak>
 		<div class="col-xs-12">
-			<h2 id="games-recent-plays">Mostly Recently Played Games - <a href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
+			<h2 id="games-recent-plays">Mostly Recently Played Games - <a
+					href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
 
 			<div class="games-recent">
 				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
