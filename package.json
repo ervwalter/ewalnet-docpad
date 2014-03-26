@@ -21,11 +21,10 @@
     "docpad-plugin-cleanurls": "~2.7.0",
     "docpad-plugin-tags": "~2.0.7",
     "docpad-plugin-dateurls": "https://github.com/ervwalter/docpad-plugin-dateurls/tarball/compiled",
-    "docpad-plugin-paged": "https://github.com/ervwalter/docpad-plugin-paged/tarball/compiled"
-  },
-  "devDependencies": {
+    "docpad-plugin-paged": "https://github.com/ervwalter/docpad-plugin-paged/tarball/compiled",
     "docpad-plugin-livereload": "~2.6.0"
   },
+  "devDependencies": {},
   "engines": {
     "node": "0.10",
     "npm": "1.3"

@@ -94,8 +94,7 @@ updateGameProperties = (game) ->
 
 processPlays = (plays) ->
 	updateGameProperties play for play in plays
-	_.uniq plays, (item) ->
-		item.gameId
+	plays
 
 processGames = (games) ->
 	for game in games

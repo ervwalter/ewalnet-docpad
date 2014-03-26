@@ -88,6 +88,10 @@ docpadConfig = {
 				posts: ->
 					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1])
 
+	watchOptions:
+		interval: 2007
+		preferredMethods: ['watchFile','watch']
+
 	plugins:
 		tags:
 			findCollectionName: 'posts'
