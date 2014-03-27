@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fat Mass is Missing for Withings Users"
+title: "Fat Mass is Missing for Withings Users [Updated 3/27]"
 date: 2014-03-26 08:30
 comments: true
 tags: TrendWeight
