@@ -63,12 +63,9 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		return 100 if sum > total
 		return Math.floor(100 * sum / total)
 
-	$scope.playDetails = (play) ->
-		details = ""
-		#details += "<b>#{htmlEncode(play.name)}</b><br/>"
-		details += "<i>Played #{$filter('relativeDate')(play.playDate)}</i> - "
-		details += "#{htmlEncode(play.comments)}"
-		return details
+	$scope.playDetails = (game) ->
+		details = ("<i>Played #{$filter('relativeDate')(play.playDate)}</i> - #{htmlEncode(play.comments)}" for play in game.plays)
+		return details.join('<br/><br/>')
 
 	$scope.sortByName = ->
 		$location.search 'sort', 'name'
@@ -93,8 +90,19 @@ updateGameProperties = (game) ->
 	return
 
 processPlays = (plays) ->
-	updateGameProperties play for play in plays
-	plays
+	result = _.chain(plays).groupBy('gameId').sortBy((game) -> game[0].playDate).reverse().value()
+	cutoff = result[Math.min(10, result.length)][0].playDate
+	result = _.map result, (item) ->
+		game = {
+			gameId: item[0].gameId
+			image: item[0].image
+			name: item[0].name
+			thumbnail: item[0].thumbnail
+			plays: _.chain(item).filter((play) -> play.playDate > cutoff).map((play) -> { playDate: play.playDate, comments: play.comments}).value()
+		}
+		return game
+	updateGameProperties game for game in result
+	result
 
 processGames = (games) ->
 	for game in games
