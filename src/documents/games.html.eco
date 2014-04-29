@@ -50,7 +50,7 @@ scripts:
 				<tbody>
 				<tr ng-repeat="item in challenge.items">
 					<td><a ng-href="http://boardgamegeek.com/boardgame/{{ item.gameId }}/">{{ item.name }}</a></td>
-					<td class="wide-only"><i ng-repeat="n in range(item.playCount)" class="icon icon-check"></i></td>
+					<td class="wide-only"><i ng-repeat="n in range(item.playCount, challenge.goalPerGame)" class="icon icon-check"></i></td>
 					<td>
 						<span ng-if="item.playCount >= 10" class="label label-success">Completed!</span>
 						<span ng-if="item.playCount < 10">{{ item.playCount }} Plays</span>

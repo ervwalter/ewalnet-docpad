@@ -19,12 +19,12 @@
     <meta name="author" content="<%= @site.author %>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
-	<link rel="icon" sizes="300x300" href="/icon.png">
-	<link rel="icon" sizes="196x196" href="/icon-196.png">
-	<link rel="icon" sizes="128x128" href="/icon-128.png">
-	<link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
-	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
-	<link href="/favicon.png" rel="shortcut icon">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
 
     <style>
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

@@ -43,7 +43,8 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 	$scope.gamesLoaded = ->
 		$scope.games?.length > 0
 
-	$scope.range = (n) ->
+	$scope.range = (n, max) ->
+		n = Math.min(n, max)
 		(num for num in [1..n])
 
 	$scope.hasExpansion = (game) ->
@@ -58,7 +59,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 
 	$scope.percentComplete = (challenge) ->
 		return 0 unless challenge?.items?.length > 0
-		sum = _.reduce challenge.items, ((s, i) -> s + i.playCount), 0
+		sum = _.reduce challenge.items, ((s, i) -> s + Math.min(i.playCount, challenge.goalPerGame)), 0
 		total = challenge.items.length * challenge.goalPerGame
 		return 100 if sum > total
 		return Math.floor(100 * sum / total)
