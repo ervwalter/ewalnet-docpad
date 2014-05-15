@@ -81,7 +81,7 @@ scripts:
 
 	<div class="fade-in row" ng-show="challengeLoaded() && playsLoaded() && gamesLoaded()" ng-cloak>
 		<div class="col-xs-12">
-			<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a></h2>
+			<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a><span class="pull-right hidden-xs game-counts"><b>{{ gameCount(games) }}</b> games, <b>{{ expansionCount(games) }}</b> expansions</span></h2>
 
 			<table class="table table-striped">
 				<thead>

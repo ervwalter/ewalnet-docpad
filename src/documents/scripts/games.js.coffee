@@ -57,6 +57,14 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
 		list.join(',<br/>')
 
+	$scope.gameCount = (games) ->
+		games.length
+
+	$scope.expansionCount = (games) ->
+		count = 0
+		count += game.expansions.length for game in games when game.expansions?
+		count
+
 	$scope.percentComplete = (challenge) ->
 		return 0 unless challenge?.items?.length > 0
 		sum = _.reduce challenge.items, ((s, i) -> s + Math.min(i.playCount, challenge.goalPerGame)), 0
