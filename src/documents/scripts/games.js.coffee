@@ -58,11 +58,14 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		list.join(',<br/>')
 
 	$scope.gameCount = (games) ->
-		games.length
+		count = 0
+		count++ for game in games when game.owned
+		count
 
 	$scope.expansionCount = (games) ->
 		count = 0
-		count += game.expansions.length for game in games when game.expansions?
+		for game in games when game.expansions?
+			count++ for expansion in game.expansions when expansion.owned
 		count
 
 	$scope.percentComplete = (challenge) ->
