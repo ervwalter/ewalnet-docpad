@@ -26,8 +26,23 @@ scripts:
 				href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
 	</p>
 
+	<div class="row fade-in" ng-show="playsLoaded()" ng-cloak>
+		<div class="col-xs-12">
+			<h2 id="games-recent-plays">Mostly Recently Played Games - <a
+					href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
 
-	<div class="fade-in row" ng-show="challengeLoaded()" ng-cloak>
+			<div class="games-recent">
+				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
+				   popover="{{ playDetails(play) }}" popover-trigger="mouseenter" popover-placement="top"
+				   popover-title="{{ play.name }}"
+				   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
+						ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="fade-in row" ng-show="challengeLoaded() && playsLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2>Challenge 2014: Play 10 Games 10 Times Each</h2>
 
@@ -60,22 +75,6 @@ scripts:
 			</table>
 			</p>
 			<p>Overall Progress: <span class="overall-progress">{{ percentComplete(challenge) }}% Complete</span></p>
-		</div>
-	</div>
-
-	<div class="row fade-in" ng-show="challengeLoaded() && playsLoaded()" ng-cloak>
-		<div class="col-xs-12">
-			<h2 id="games-recent-plays">Mostly Recently Played Games - <a
-					href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
-
-			<div class="games-recent">
-				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
-				   popover="{{ playDetails(play) }}" popover-trigger="mouseenter" popover-placement="top"
-				   popover-title="{{ play.name }}"
-				   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
-						ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
-			</div>
-
 		</div>
 	</div>
 
