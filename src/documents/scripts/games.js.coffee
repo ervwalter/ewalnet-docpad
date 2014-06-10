@@ -5,6 +5,32 @@ app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ngAnim
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
 
+app.directive 'playsTooltip', ($http, $compile, $templateCache) ->
+	return {
+	restrict: 'A'
+	scope: {
+		game: '=playsTooltip'
+	}
+	link: (scope, element, attrs) ->
+		template = '<div><p ng-repeat="play in game.plays"><i>Played {{ play.playDate | relativeDate}}</i> - {{ play.comments }}</p></div>'
+		compiledContent = $compile(template)(scope)
+		console.log compiledContent
+		$(element).qtip({
+			content:
+				title: scope.game.name
+				text: compiledContent
+			position:
+				my: 'bottom center'
+				at: 'top center'
+				target: $(element)
+				viewport: $(window)
+			hide:
+				fixed: true
+			style:
+				classes: 'qtip-bootstrap qtip-play'
+		})
+	}
+
 app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
 		jsonp: {

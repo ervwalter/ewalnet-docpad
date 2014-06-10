@@ -5,6 +5,7 @@ scripts:
 - //cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js
 - //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
 - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
+- //cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js
@@ -14,6 +15,8 @@ scripts:
 - /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.js
 - /scripts/games.js
 ---
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" media="screen">
 
 <div id="games" ng-app="GamesApp" ng-controller="GamesCtrl">
 
@@ -32,9 +35,7 @@ scripts:
 					href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
 
 			<div class="games-recent">
-				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item"
-				   popover="{{ playDetails(play) }}" popover-trigger="mouseenter" popover-placement="top"
-				   popover-title="{{ play.name }}"
+				<a ng-repeat="play in plays | limitTo:10" class="games-recent-item" plays-tooltip="play"
 				   ng-href="http://boardgamegeek.com/boardgame/{{ play.gameId }}/"><img
 						ng-src="{{ play.thumbnail }}" alt="{{ play.name }}" track-loaded/></a>
 			</div>
