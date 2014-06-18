@@ -95,9 +95,9 @@ scripts:
 				<tr ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy">
 					<td>
 						<a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
-                        <span ng-if="hasExpansion(game)" class="games-expansions wide-only"
+                        <span ng-if="game.expansionCountOwned > 0" class="games-expansions wide-only"
 							  tooltip-html="expansions(game)" tooltip-title="Expansions">
-							({{ game.expansions.length }} <span class="games-expansions-link">{{ game.expansions.length > 1 ? 'expansions' : 'expansion' }}</span>)
+							({{ game.expansionCountOwned }} <span class="games-expansions-link">{{ game.expansionCountOwned > 1 ? 'expansions' : 'expansion' }}</span>)
                         </span>
 					</td>
 					<td class="games-times-played">

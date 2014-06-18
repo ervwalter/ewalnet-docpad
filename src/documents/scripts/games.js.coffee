@@ -41,7 +41,6 @@ app.directive 'tooltipHtml', ($http, $compile, $templateCache) ->
 	link: (scope, element, attrs) ->
 		template = '<div ng-bind-html="content"></div>'
 		compiledContent = $compile(template)(scope)
-		console.log compiledContent
 		$(element).qtip({
 			content:
 				title: scope.title
@@ -99,12 +98,6 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 	$scope.range = (n, max) ->
 		n = Math.min(n, max)
 		(num for num in [1..n])
-
-	$scope.hasExpansion = (game) ->
-		return false unless game?.expansions?
-		result = false
-		(result = true if e.owned) for e in game.expansions
-		return result
 
 	$scope.expansions = (game) ->
 		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
@@ -175,13 +168,16 @@ processGames = (games) ->
 		parentName = game.name.toLowerCase()
 		if game.expansions?
 			game.expansionList = (expansion.name for expansion in game.expansions).join('<br/>')
+			ownedCount = 0
 			for expansion in game.expansions
 				updateGameProperties expansion
+				ownedCount++ if expansion.owned
 				if expansion.name.toLowerCase().substr(0, parentName.length) is (parentName)
 					shortName = expansion.name.substr(parentName.length).trimStart(' ')
 					unless shortName.toLowerCase().match(/^[a-z]/)
 						expansion.longName = expansion.name
 						expansion.name = shortName.trimStart(['–', '-', ':', ' '])
+			game.expansionCountOwned = ownedCount
 	return games
 
 app.filter 'floor', ->
@@ -198,6 +194,10 @@ isString = (value) -> typeof value is 'string'
 isNumber = (value) -> typeof value is 'number'
 isDate = (value) -> value instanceof Date
 int = (str) -> parseInt(str, 10)
+
+app.filter 'count', () ->
+	return (arr) ->
+		return arr.length
 
 app.filter 'relativeDate', ($filter) ->
 	jsonStringToDate = (string) ->
