@@ -31,6 +31,33 @@ app.directive 'playsTooltip', ($http, $compile, $templateCache) ->
 		})
 	}
 
+app.directive 'tooltipHtml', ($http, $compile, $templateCache) ->
+	return {
+	restrict: 'A'
+	scope: {
+		content: '=tooltipHtml'
+		title: '@tooltipTitle'
+	}
+	link: (scope, element, attrs) ->
+		template = '<div ng-bind-html="content"></div>'
+		compiledContent = $compile(template)(scope)
+		console.log compiledContent
+		$(element).qtip({
+			content:
+				title: scope.title
+				text: compiledContent
+			position:
+				my: 'left center'
+				at: 'right center'
+				target: $(element)
+				viewport: $(window)
+			hide:
+				fixed: true
+			style:
+				classes: 'qtip-bootstrap qtip-play'
+		})
+	}
+
 app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
 		jsonp: {

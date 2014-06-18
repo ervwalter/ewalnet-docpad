@@ -5,7 +5,7 @@ scripts:
 - //cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js
 - //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js
 - //cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.0/moment.min.js
-- //cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.js
+- //cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js
@@ -96,8 +96,7 @@ scripts:
 					<td>
 						<a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
                         <span ng-if="hasExpansion(game)" class="games-expansions wide-only"
-							  popover="{{ expansions(game) }}" popover-trigger="mouseenter" popover-placement="right"
-							  popover-title="Expansions">
+							  tooltip-html="expansions(game)" tooltip-title="Expansions">
 							({{ game.expansions.length }} <span class="games-expansions-link">{{ game.expansions.length > 1 ? 'expansions' : 'expansion' }}</span>)
                         </span>
 					</td>
