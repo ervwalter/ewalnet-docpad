@@ -5,7 +5,7 @@ app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ngAnim
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
 
-app.directive 'playsTooltip', ($http, $compile, $templateCache) ->
+app.directive 'playsTooltip', ($http, $compile) ->
 	return {
 	restrict: 'A'
 	scope: {
@@ -177,6 +177,7 @@ processGames = (games) ->
 					unless shortName.toLowerCase().match(/^[a-z]/)
 						expansion.longName = expansion.name
 						expansion.name = shortName.trimStart(['–', '-', ':', ' '])
+						expansion.sortableName = expansion.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
 			game.expansionCountOwned = ownedCount
 	return games
 
