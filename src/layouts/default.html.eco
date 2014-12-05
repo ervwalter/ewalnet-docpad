@@ -102,43 +102,5 @@
     <% end %>
 <% end %>
 
-<script type="text/javascript">
-	var $buoop = {
-		url: 'http://whatbrowser.org/',
-		newwindow: false,
-		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
-		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
-		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
-		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
-		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
-		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
-		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
-		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
-		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
-		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
-		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
-		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
-		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
-		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
-		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
-		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
-		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
-		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
-		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
-		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
-		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
-		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
-		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
-	};
-	$buoop.ol = window.onload;
-	window.onload=function(){
-		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
-		var e = document.createElement("script");
-		e.setAttribute("type", "text/javascript");
-		e.setAttribute("src", "//browser-update.org/update.js");
-		document.body.appendChild(e);
-	}
-</script>
-
 </body>
 </html>
