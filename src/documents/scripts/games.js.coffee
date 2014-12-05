@@ -67,7 +67,7 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 				return processPlays(data)
 		}
 
-	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}?grouped=true&details=true", {},
+	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}", {},
 		jsonp: {
 			method: 'JSONP'
 			params: { callback: 'JSON_CALLBACK' }
@@ -76,18 +76,8 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 				return processGames(data)
 		}
 
-	challengeApi = $resource "http://bgg-json.azurewebsites.net/challenge/171319", {},
-		jsonp: {
-			method: 'JSONP'
-			params: { callback: 'JSON_CALLBACK' }
-		}
-
 	$scope.plays = playsApi.jsonp()
 	$scope.games = collectionApi.jsonp()
-	$scope.challenge = challengeApi.jsonp()
-
-	$scope.challengeLoaded = ->
-		$scope.challenge?.items?.length > 0
 
 	$scope.playsLoaded = ->
 		$scope.plays?.length > 0
@@ -99,27 +89,10 @@ app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
 		n = Math.min(n, max)
 		(num for num in [1..n])
 
-	$scope.expansions = (game) ->
-		list = _.chain(game.expansions).where(owned: true).sortBy('sortableName').pluck('name').value()
-		list.join(',<br/>')
-
 	$scope.gameCount = (games) ->
 		count = 0
-		count++ for game in games when game.owned
+		count++ for game in games when game.owned and (not game.isExpansion)
 		count
-
-	$scope.expansionCount = (games) ->
-		count = 0
-		for game in games when game.expansions?
-			count++ for expansion in game.expansions when expansion.owned
-		count
-
-	$scope.percentComplete = (challenge) ->
-		return 0 unless challenge?.items?.length > 0
-		sum = _.reduce challenge.items, ((s, i) -> s + Math.min(i.playCount, challenge.goalPerGame)), 0
-		total = challenge.items.length * challenge.goalPerGame
-		return 100 if sum > total
-		return Math.floor(100 * sum / total)
 
 	$scope.playDetails = (game) ->
 		details = ("<i>Played #{$filter('relativeDate')(play.playDate)}</i> - #{htmlEncode(play.comments)}" for play in game.plays)
@@ -165,20 +138,6 @@ processPlays = (plays) ->
 processGames = (games) ->
 	for game in games
 		updateGameProperties game
-		parentName = game.name.toLowerCase()
-		if game.expansions?
-			game.expansionList = (expansion.name for expansion in game.expansions).join('<br/>')
-			ownedCount = 0
-			for expansion in game.expansions
-				updateGameProperties expansion
-				ownedCount++ if expansion.owned
-				if expansion.name.toLowerCase().substr(0, parentName.length) is (parentName)
-					shortName = expansion.name.substr(parentName.length).trimStart(' ')
-					unless shortName.toLowerCase().match(/^[a-z]/)
-						expansion.longName = expansion.name
-						expansion.name = shortName.trimStart(['–', '-', ':', ' '])
-						expansion.sortableName = expansion.name.toLowerCase().trim().replace(/^the\ |a\ |an\ /, '') # create a sort-friendly name without 'the', 'a', and 'an' at the start of titles
-			game.expansionCountOwned = ownedCount
 	return games
 
 app.filter 'floor', ->

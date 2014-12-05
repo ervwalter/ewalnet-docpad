@@ -43,45 +43,9 @@ scripts:
 		</div>
 	</div>
 
-	<div class="fade-in row" ng-show="challengeLoaded() && playsLoaded()" ng-cloak>
+	<div class="fade-in row" ng-show="playsLoaded() && gamesLoaded()" ng-cloak>
 		<div class="col-xs-12">
-			<h2>Challenge 2014: Play 10 Games 10 Times Each</h2>
-
-			<p>
-				I am participating in a <a
-					href="http://boardgamegeek.com/geeklist/166160/2014-challenge-play-10-games-10-times-each">challenge</a>
-				to play 10 different games 10 times each during 2014. The idea is to
-				focus on replaying games and getting into the strategy of them. My selections and the number of times I
-				have played each game are listed below.</p>
-
-			<p>
-			<table class="table table-striped" id="challenge-progress">
-				<thead>
-				<tr>
-					<th>Name</th>
-					<th class="wide-only">Progress</th>
-					<th>&nbsp;</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr ng-repeat="item in challenge.items">
-					<td><a ng-href="http://boardgamegeek.com/boardgame/{{ item.gameId }}/">{{ item.name }}</a></td>
-					<td class="wide-only"><i ng-repeat="n in range(item.playCount, challenge.goalPerGame)" class="icon icon-check"></i></td>
-					<td>
-						<span ng-if="item.playCount >= 10" class="label label-success">Completed!</span>
-						<span ng-if="item.playCount < 10">{{ item.playCount }} Plays</span>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-			</p>
-			<p>Overall Progress: <span class="overall-progress">{{ percentComplete(challenge) }}% Complete</span></p>
-		</div>
-	</div>
-
-	<div class="fade-in row" ng-show="challengeLoaded() && playsLoaded() && gamesLoaded()" ng-cloak>
-		<div class="col-xs-12">
-			<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a><span class="pull-right hidden-xs game-counts"><b>{{ gameCount(games) }}</b> games, <b>{{ expansionCount(games) }}</b> expansions</span></h2>
+			<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a><span class="pull-right hidden-xs game-counts"><b>{{ gameCount(games) }}</b> games</span></h2>
 
 			<table class="table table-striped">
 				<thead>
@@ -92,13 +56,9 @@ scripts:
 				</tr>
 				</thead>
 				<tbody>
-				<tr ng-repeat="game in games | filter:{owned: true} | orderBy:sortBy">
+				<tr ng-repeat="game in games | filter:{owned: true, isExpansion: false} | orderBy:sortBy">
 					<td>
 						<a ng-href="http://boardgamegeek.com/boardgame/{{ game.gameId }}/">{{ game.name }}</a>
-                        <span ng-if="game.expansionCountOwned > 0" class="games-expansions wide-only"
-							  tooltip-html="expansions(game)" tooltip-title="Expansions">
-							({{ game.expansionCountOwned }} <span class="games-expansions-link">{{ game.expansionCountOwned > 1 ? 'expansions' : 'expansion' }}</span>)
-                        </span>
 					</td>
 					<td class="games-times-played">
 						<span ng-if="game.numPlays > 0"><span class="wide-only">Played </span><b>{{ game.numPlays }}</b> {{ game.numPlays > 1 ? 'times' : 'time' }}</span>
@@ -119,7 +79,7 @@ scripts:
 	<div class="row">
 		<div class="col-xs-12">
 			<img src="/images/loading.gif"
-				 ng-hide="challengeLoaded() && playsLoaded() && gamesLoaded()"
+				 ng-hide="playsLoaded() && gamesLoaded()"
 				 alt=" Loading..."/>
 		</div>
 	</div>
