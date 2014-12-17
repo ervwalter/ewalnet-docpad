@@ -58,26 +58,22 @@ app.directive 'tooltipHtml', ($http, $compile, $templateCache) ->
 	}
 
 app.controller 'GamesCtrl', ($scope, $resource, $location, $http, $filter) ->
-	playsApi = $resource "http://bgg-json.azurewebsites.net/plays/#{username}", {},
-		jsonp: {
-			method: 'JSONP'
-			params: { callback: 'JSON_CALLBACK' }
+	playsApi = $resource "http://www.ewal.net/api/plays", {},
+		get: {
 			isArray: true
 			transformResponse: $http.defaults.transformResponse.concat (data) ->
 				return processPlays(data)
 		}
 
-	collectionApi = $resource "http://bgg-json.azurewebsites.net/collection/#{username}", {},
-		jsonp: {
-			method: 'JSONP'
-			params: { callback: 'JSON_CALLBACK' }
+	collectionApi = $resource "http://www.ewal.net/api/collection", {},
+		get: {
 			isArray: true
 			transformResponse: $http.defaults.transformResponse.concat (data) ->
 				return processGames(data)
 		}
 
-	$scope.plays = playsApi.jsonp()
-	$scope.games = collectionApi.jsonp()
+	$scope.plays = playsApi.get()
+	$scope.games = collectionApi.get()
 
 	$scope.playsLoaded = ->
 		$scope.plays?.length > 0
