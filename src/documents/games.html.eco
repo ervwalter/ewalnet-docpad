@@ -22,14 +22,11 @@ scripts:
 
 	<h1>Board Games</h1>
 
-	<p>You might say I am obsessed with modern/designer board games. I have a growing collection of games, and it's
-		not
-		uncommon for the UPS guy to drop by once a week or
-		so to add something new to the collection. I track the games that I own and the games that I play on <a
+	<p>You might say I am obsessed with modern/designer board games. I have a respectable collection of games, and I seem to add to it perhaps a bit too frequently. I track the games that I own and the games that I play on <a
 				href="http://boardgamegeek.com/">BoardGameGeek</a>, and this page chronicles my obsession.
 	</p>
 
-	<div class="row fade-in" ng-show="playsLoaded()" ng-cloak>
+	<div class="row fade-in" ng-if="playsLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2 id="games-recent-plays">Mostly Recently Played Games - <a
 					href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
@@ -43,7 +40,7 @@ scripts:
 		</div>
 	</div>
 
-	<div class="fade-in row" ng-show="playsLoaded() && gamesLoaded()" ng-cloak>
+	<div class="fade-in row" ng-if="playsLoaded() && gamesLoaded()" ng-cloak>
 		<div class="col-xs-12">
 			<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a><span class="pull-right hidden-xs game-counts"><b>{{ gameCount(games) }}</b> games</span></h2>
 

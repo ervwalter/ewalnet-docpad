@@ -1,6 +1,6 @@
 username = 'edwalter'
 
-app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ngAnimate', 'ui.bootstrap']
+app = angular.module 'GamesApp', ['ngResource', 'ngTouch', 'ngSanitize', 'ui.bootstrap']
 
 #app.config ($locationProvider) ->
 #	$locationProvider.html5Mode true
