@@ -8,13 +8,17 @@ using Microsoft.Azure.WebJobs;
 
 namespace CacheUpdateJob
 {
-    public class Functions
-    {
-        [NoAutomaticTrigger]
-        public static void UpdateCache()
-        {
+	public class Functions
+	{
+		[NoAutomaticTrigger]
+		public static void UpdateCache()
+		{
+			Console.WriteLine("Starting update.");
 
-        }
+			// do stuff
 
-    }
+			Console.WriteLine("Completed update.");
+		}
+
+	}
 }
