@@ -15,13 +15,16 @@ namespace CacheUpdateJob
 	{
 		static void Main()
 		{
-			Console.WriteLine("Starting update");
+			Console.WriteLine();
+			Console.WriteLine("Starting update.");
 
 			UpdateGames();
 			UpdatePlays();
 			UpdateCollections();
 
-			Console.WriteLine("Completed update");
+			Console.WriteLine();
+			Console.WriteLine("Completed update.");
+			Console.WriteLine();
 		}
 
 
@@ -77,6 +80,7 @@ namespace CacheUpdateJob
 
 		private static void UpdateGames()
 		{
+			Console.WriteLine();
 			Console.WriteLine("Updating games details.");
 			var provider = new BggDataProvider();
 			var table = CacheManager.GetTable<GameDetails>();

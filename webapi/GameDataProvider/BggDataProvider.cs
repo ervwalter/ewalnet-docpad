@@ -12,13 +12,14 @@ namespace GamesDataProvider
 
         public async Task<Collection> GetCollection(string username)
         {
-            var baseGames = _client.GetPartialCollection(username, false);
-            var expansions = _client.GetPartialCollection(username, true);
+            //var baseGames = _client.GetPartialCollection(username, false);
+            //var expansions = _client.GetPartialCollection(username, true);
+            //await Task.WhenAll(baseGames, expansions);
 
-            await Task.WhenAll(baseGames, expansions);
+			var baseGames = await _client.GetPartialCollection(username, false);
 
             //manually mark games as expansions if they are flagged as such in the comments
-            foreach (var game in baseGames.Result)
+            foreach (var game in baseGames)
             {
                 if (game.UserComment != null && game.UserComment.Contains("%Expands:"))
                 {
@@ -29,7 +30,8 @@ namespace GamesDataProvider
             return new Collection
             {
                 Username = username,
-                Games = baseGames.Result.Concat(expansions.Result).OrderBy(g => g.Name).ToList(),
+                //Games = baseGames.Result.Concat(expansions.Result).OrderBy(g => g.Name).ToList(),
+				Games = baseGames.OrderBy(g => g.Name).ToList(),
                 Timestamp = DateTimeOffset.Now,
             };
         }
