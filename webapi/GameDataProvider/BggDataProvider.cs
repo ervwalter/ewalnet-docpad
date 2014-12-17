@@ -38,7 +38,7 @@ namespace GamesDataProvider
         {
             var plays = await _client.GetPlays(username);
 			var gameIds = new HashSet<string>(from play in plays select play.GameId);
-			var games = await CacheManager.GetOrCreateObjectsAsync(gameIds, true, 600, (id) => _client.GetGame(id));
+			var games = await CacheManager.GetOrCreateObjectsAsync(gameIds, true, 600, async (id) => await GetGame(id));
 			foreach (var play in plays) {
 				if (games.ContainsKey(play.GameId))
 				{
@@ -55,5 +55,10 @@ namespace GamesDataProvider
                 Timestamp = DateTimeOffset.Now
             };
         }
+
+		public async Task<GameDetails> GetGame(string gameId)
+		{
+			return await _client.GetGame(gameId);
+		}
     }
 }

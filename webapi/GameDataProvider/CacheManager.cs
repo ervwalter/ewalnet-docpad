@@ -58,10 +58,10 @@ namespace GamesDataProvider
 			//return result;
 		}
 
-		public static async Task<Dictionary<string,T>> GetOrCreateObjectsAsync<T>(IEnumerable<string> keys, bool alwaysUseStorageCache, int memoryCacheDuration, CreatorMethodAsync<T> creator) where T : class
+		public static async Task<Dictionary<string, T>> GetOrCreateObjectsAsync<T>(IEnumerable<string> keys, bool alwaysUseStorageCache, int memoryCacheDuration, CreatorMethodAsync<T> creator) where T : class
 		{
 			var todo = new List<string>(keys);
-			var results = new Dictionary<string,T>();
+			var results = new Dictionary<string, T>();
 
 			var type = typeof(T);
 			foreach (var key in keys)
@@ -79,13 +79,13 @@ namespace GamesDataProvider
 				if (result != null)
 				{
 					results.Add(key, result);
-					todo.Remove(key);					
+					todo.Remove(key);
 				}
 			}
 
 			if (todo.Count > 0 && alwaysUseStorageCache)
 			{
-				var table = GetTable<T>(type);
+				var table = GetTable<T>();
 				foreach (var entity in table.Get(PartitionKey, todo))
 				{
 					if (entity != null && entity.Value != null)
@@ -118,7 +118,7 @@ namespace GamesDataProvider
 
 			if (todo.Count > 0)
 			{
-				var table = GetTable<T>(type);
+				var table = GetTable<T>();
 				foreach (var entity in table.Get(PartitionKey, todo))
 				{
 					if (entity != null && entity.Value != null)
@@ -132,16 +132,16 @@ namespace GamesDataProvider
 			return results;
 		}
 
-		private static CloudTable<T> GetTable<T>(Type type) where T : class
+		public static CloudTable<T> GetTable<T>() where T : class
 		{
-			return new CloudTable<T>(TableStorageProvider(), GetTypeName(type));
+			return new CloudTable<T>(TableStorageProvider(), GetTypeName(typeof(T)));
 		}
 
 		public static async Task AddObjectAsync<T>(string key, int memoryCacheDuration, T value) where T : class
 		{
 			var type = typeof(T);
 			CacheObject(key, memoryCacheDuration, value);
-			var table = GetTable<T>(type);
+			var table = GetTable<T>();
 			table.Upsert(new CloudEntity<T>
 			{
 				PartitionKey = PartitionKey,
@@ -159,15 +159,7 @@ namespace GamesDataProvider
 
 		private static ITableStorageProvider TableStorageProvider()
 		{
-			var connectionString = ConfigurationManager.ConnectionStrings["CacheManagerStorage"];
-			if (connectionString != null && !string.IsNullOrWhiteSpace(connectionString.ConnectionString))
-			{
-				return CloudStorage.ForAzureConnectionString(connectionString.ConnectionString).BuildTableStorage();
-			}
-			else
-			{
-				return CloudStorage.ForDevelopmentStorage().BuildTableStorage();
-			}
+			return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).BuildTableStorage();
 		}
 
 		private static string GetCacheKey(string key, Type type)
