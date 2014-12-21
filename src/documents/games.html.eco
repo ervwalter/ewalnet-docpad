@@ -1,0 +1,16 @@
+---
+layout: page
+title: Board Games
+scripts:
+- /scripts/traceur-runtime.js
+- /scripts/games-react.js
+---
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" media="screen">
+
+<div id="games"></div>
+
+<%- @partial('me', false) %>
+
+
+
