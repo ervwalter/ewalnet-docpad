@@ -1,0 +1,78 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Board Games - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/styles/site.css" rel="stylesheet" media="screen">
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" media="screen">
+
+    <div id="games">
+    </div>
+
+
+    <div id="me">
+        <p>
+            <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+            I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+        </p>
+        <p>
+            <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+            <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+            <a href="mailto:erv@ewal.net">Email Me</a>
+        </p>
+    </div>
+
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/scripts/traceur-runtime.js"></script>
+<script src="/scripts/games-react.js"></script>
+
+</body>
+</html>

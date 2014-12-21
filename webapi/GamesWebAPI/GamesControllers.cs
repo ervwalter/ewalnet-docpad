@@ -6,12 +6,14 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using WebApi.OutputCache.V2;
 
 namespace GamesWebAPI
 {
     public class CollectionController : ApiController
     {
+        [EnableCors("*","*","*")]
 		[CacheOutput(ClientTimeSpan = 60)]
 		public async Task<List<CollectionItem>> Get()
         {

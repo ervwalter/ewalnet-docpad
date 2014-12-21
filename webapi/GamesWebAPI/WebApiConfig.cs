@@ -19,10 +19,6 @@ namespace GamesWebAPI
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             config.Formatters.JsonFormatter.Indent = true;
 
-			var cors = new EnableCorsAttribute("*", "*", "*");
-			config.EnableCors(cors);
-
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -31,6 +27,10 @@ namespace GamesWebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
         }
     }
 }

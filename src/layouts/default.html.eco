@@ -105,6 +105,7 @@
 <script type="text/javascript">
 	var $buoop = {
 		url: 'http://whatbrowser.org/',
+        reminder: 0,
 		newwindow: false,
 		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
 		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',

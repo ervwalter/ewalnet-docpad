@@ -23,7 +23,8 @@
     "docpad-plugin-raw": "^2.3.2",
     "docpad-plugin-sitemap": "^2.2.0",
     "docpad-plugin-tags": "^2.0.7",
-    "moment": "^2.8.4"
+    "moment": "^2.8.4",
+    "safeps": "^2.2.12"
   },
   "devDependencies": {},
   "engines": {
