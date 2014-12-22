@@ -60,7 +60,9 @@ namespace GamesDataProvider
 
 		public async Task<GameDetails> GetGame(string gameId)
 		{
-			return await _client.GetGame(gameId);
+			var game = await _client.GetGame(gameId);
+			game.Timestamp = DateTimeOffset.UtcNow;
+			return game;
 		}
     }
 }

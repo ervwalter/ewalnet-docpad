@@ -85,15 +85,22 @@ namespace GamesDataProvider
 
 			if (todo.Count > 0 && alwaysUseStorageCache)
 			{
-				var table = GetTable<T>();
-				foreach (var entity in table.Get(PartitionKey, todo))
+				try
 				{
-					if (entity != null && entity.Value != null)
+					var table = GetTable<T>();
+					foreach (var entity in table.Get(PartitionKey, todo))
 					{
-						results.Add(entity.RowKey, entity.Value);
-						CacheObject(entity.RowKey, memoryCacheDuration, entity.Value);
-						todo.Remove(entity.RowKey);
+						if (entity != null && entity.Value != null)
+						{
+							results.Add(entity.RowKey, entity.Value);
+							CacheObject(entity.RowKey, memoryCacheDuration, entity.Value);
+							todo.Remove(entity.RowKey);
+						}
 					}
+				}
+				catch
+				{
+					//absorb
 				}
 			}
 
@@ -159,7 +166,7 @@ namespace GamesDataProvider
 
 		private static ITableStorageProvider TableStorageProvider()
 		{
-			return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).BuildTableStorage();
+			return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).WithDataSerializer(new JsonDataSerializer()).BuildTableStorage();
 		}
 
 		private static string GetCacheKey(string key, Type type)

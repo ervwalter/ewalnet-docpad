@@ -135,6 +135,7 @@ namespace GamesDataProvider
         public List<BoardGameLink> Expansions { get; set; }
         public List<BoardGameLink> Expands { get; set; }
 
+		public DateTimeOffset Timestamp { get; set; }
     }
 
     public class Comment

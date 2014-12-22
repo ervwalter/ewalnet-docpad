@@ -84,9 +84,9 @@ namespace CacheUpdateJob
 			Console.WriteLine("Updating games details.");
 			var provider = new BggDataProvider();
 			var table = CacheManager.GetTable<GameDetails>();
-			var cutoff = DateTime.UtcNow.AddHours(-6);
+			var cutoff = DateTimeOffset.UtcNow.AddHours(-6);
 			var entities = table.Get().ToList();
-			var outdated = entities.Where(e => e.Timestamp < cutoff).ToList();
+			var outdated = entities.Where(e => e.Value.Timestamp < cutoff).ToList();
 			Console.WriteLine("Found {0} games, {1} needing updates.", entities.Count, outdated.Count);
 
 			foreach (var entity in outdated)
