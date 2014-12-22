@@ -34,7 +34,7 @@ namespace CacheUpdateJob
 			Console.WriteLine("Updating collections.");
 			var provider = new BggDataProvider();
 			var table = CacheManager.GetTable<Collection>();
-			var cutoff = DateTime.UtcNow.AddMinutes(-10);
+			var cutoff = DateTime.UtcNow.AddMinutes(-2);
 			var entities = table.Get().ToList();
 			var outdated = entities.Where(e => e.Timestamp < cutoff).ToList();
 			Console.WriteLine("Found {0} collections, {1} needing updates.", entities.Count, outdated.Count);
@@ -59,7 +59,7 @@ namespace CacheUpdateJob
 			Console.WriteLine("Updating recent plays.");
 			var provider = new BggDataProvider();
 			var table = CacheManager.GetTable<Plays>();
-			var cutoff = DateTime.UtcNow.AddMinutes(-10);
+			var cutoff = DateTime.UtcNow.AddMinutes(-2);
 			var entities = table.Get().ToList();
 			var outdated = entities.Where(e => e.Timestamp < cutoff).ToList();
 			Console.WriteLine("Found {0} recent play lists, {1} needing updates.", entities.Count, outdated.Count);

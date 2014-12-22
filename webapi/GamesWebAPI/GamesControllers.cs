@@ -17,7 +17,7 @@ namespace GamesWebAPI
 		[CacheOutput(ClientTimeSpan = 60)]
 		public async Task<List<CollectionItem>> Get()
         {
-            var collection = await CacheManager.GetOrCreateObjectAsync("edwalter", false, 15, async (k) => {
+            var collection = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (k) => {
                 var provider = new BggDataProvider();
                 return await provider.GetCollection("edwalter");
             });
@@ -30,7 +30,7 @@ namespace GamesWebAPI
 		[CacheOutput(ClientTimeSpan = 60)]
 		public async Task<List<PlayItem>> Get()
         {
-            var plays = await CacheManager.GetOrCreateObjectAsync("edwalter", false, 15, async (k) =>
+            var plays = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (k) =>
             {
                 var provider = new BggDataProvider();
                 return await provider.GetPlays("edwalter");
