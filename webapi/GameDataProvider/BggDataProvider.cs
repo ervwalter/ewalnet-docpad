@@ -32,7 +32,7 @@ namespace GamesDataProvider
                 Username = username,
                 //Games = baseGames.Result.Concat(expansions.Result).OrderBy(g => g.Name).ToList(),
 				Games = baseGames.OrderBy(g => g.Name).ToList(),
-                Timestamp = DateTimeOffset.Now,
+                Timestamp = DateTimeOffset.UtcNow,
             };
         }
 
@@ -54,7 +54,7 @@ namespace GamesDataProvider
             {
                 Username = username,
                 Items = plays,
-                Timestamp = DateTimeOffset.Now
+				Timestamp = DateTimeOffset.UtcNow
             };
         }
 
