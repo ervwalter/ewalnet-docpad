@@ -1,11 +1,12 @@
-
-var React = require('react'),
+var Fluxxor = require('fluxxor'),
+	constants = require('./constants'),
+	actions = require('./actions'),
+	stores = require('./stores'),
 	Collection = require('./collection'),
 	Plays = require('./plays');
 
-window.React = React;
-
 var GamesPage = React.createClass({
+	mixins: [Fluxxor.FluxMixin(React)],
 	render() {
 		return (
 			<div>
@@ -18,4 +19,12 @@ var GamesPage = React.createClass({
 	}
 })
 
-React.render(<GamesPage/>, document.getElementById("games"));
+var flux = new Fluxxor.Flux(stores, actions);
+
+flux.on("dispatch", function (type, payload) {
+	if (console && console.log) {
+		console.log("[Dispatch]", type, payload);
+	}
+});
+
+React.render(<GamesPage flux={flux}/>, document.getElementById("games"));

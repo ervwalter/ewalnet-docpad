@@ -2,6 +2,7 @@
 layout: page
 title: Board Games
 scripts:
+- //cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js
 - /scripts/traceur-runtime.js
 - /scripts/games-react.js
 ---

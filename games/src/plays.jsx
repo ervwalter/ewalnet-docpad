@@ -1,12 +1,22 @@
-var React = require('react'),
-	Reflux = require('reflux'),
-	Actions = require('./actions'),
-	playsStore = require('./playsStore'),
-	dateHelper = require('./dateHelper'),
+var Fluxxor = require('fluxxor'),
+	helper = require('./helper'),
 	qtip = require('qtip2');
 
 var Plays = React.createClass({
-	mixins: [Reflux.connect(playsStore)],
+	mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin('PlaysStore')],
+
+	getStateFromFlux() {
+		var store = this.getFlux().store('PlaysStore');
+		return {
+			loading: store.loading,
+			plays: store.plays
+		};
+	},
+
+	componentDidMount() {
+		this.getFlux().actions.loadPlays();
+	},
+
 	render() {
 		return (
 			<div className="row">
@@ -21,7 +31,7 @@ var Plays = React.createClass({
 
 var PlaysTable = React.createClass({
 	render() {
-		if (this.props.loading) {
+		if (this.props.plays.length === 0) {
 			return <WireframePlaysList />;
 		} else {
 			var plays = this.props.plays;
@@ -46,7 +56,7 @@ var PlayItem = React.createClass({
 		if ($) {
 			var play = this.props.play;
 			var playDetails = this.props.play.plays.map(entry => {
-				return "<i>Played " + dateHelper.relativeDate(entry.playDate)
+				return "<i>Played " + helper.relativeDate(entry.playDate)
 					+ "</i> - " + htmlEncode(entry.comments);
 			});
 			var tooltipContent = playDetails.join("<br/><br/>");
@@ -86,21 +96,11 @@ var WireframePlaysList = React.createClass({
 	render() {
 		return (
 			<div className="games-recent wireframe">
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
-				<a className="games-recent-item"><img src="/images/wireframe-image.png" /></a>
+				{ helper.repeat(10, <a className="games-recent-item"><img src="/images/blank.gif" /></a>, 10) }
 			</div>
 		)
 	}
 });
+
 
 module.exports = Plays;

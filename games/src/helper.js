@@ -70,6 +70,15 @@ function relativeDate(date, format) {
 	}
 }
 
+function repeat(count, value) {
+	var results = [];
+	for (var i=0; i<count; i++) {
+		results.push(value);
+	}
+	return results;
+}
+
 module.exports = {
-	relativeDate: relativeDate
+	relativeDate: relativeDate,
+	repeat: repeat
 };
