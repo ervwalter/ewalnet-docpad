@@ -1,0 +1,278 @@
+#games {
+    a {
+        font-weight: normal;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    p + p, p + div, div + p {
+        margin-top: 11px;
+    }
+
+    p + .row, .row + .row {
+        margin-top: 22px;
+    }
+
+    .games-recent {
+        overflow: hidden;
+
+        height: 202px;
+        @media (min-width: 768px) {
+            height: 175px;
+        }
+
+        .popover {
+            max-width: 350px;
+
+            @media (max-width: 1190px) {
+                display: none !important;
+            }
+        }
+
+    }
+
+    .games-recent-item {
+        padding: 0 2px 2px 0;
+        display: inline-block;
+
+        img {
+            height: 100px;
+            -webkit-animation: fadeIn 0.3s;
+            animation: fadeIn 0.3s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+
+            @media (min-width: 768px) {
+                height: 175px;
+            }
+        }
+
+        &:nth-child(1) img {
+            -webkit-animation-delay: 0.1s;
+            animation-delay: 0.1s;
+        }
+        &:nth-child(2) img {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.15s;
+        }
+        &:nth-child(3) img {
+            -webkit-animation-delay: 0.3s;
+            animation-delay: 0.2s;
+        }
+        &:nth-child(4) img {
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.25s;
+        }
+        &:nth-child(5) img {
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.3s;
+        }
+        &:nth-child(6) img {
+            -webkit-animation-delay: 0.6s;
+            animation-delay: 0.35s;
+        }
+        &:nth-child(7) img {
+            -webkit-animation-delay: 0.65s;
+            animation-delay: 0.4s;
+        }
+        &:nth-child(8) img {
+            -webkit-animation-delay: 0.7s;
+            animation-delay: 0.45s;
+        }
+        &:nth-child(9) img {
+            -webkit-animation-delay: 0.75s;
+            animation-delay: 0.5s;
+        }
+        &:nth-child(10) img {
+            -webkit-animation-delay: 0.8s;
+            animation-delay: 0.55s;
+        }
+
+    }
+
+    .games-recent.wireframe {
+        .games-recent-item {
+            img {
+                visibility: visible;
+                opacity: 1;
+                -webkit-animation: none;
+                animation: none;
+            }
+        }
+    }
+
+    .games-expansions {
+        display: inline-block;
+        padding-left: 10px;
+        color: #222;
+        cursor: default;
+    }
+
+    .games-expansions-link {
+        border-bottom: 1px dotted #999;
+    }
+
+    .games-times-played, .games-rating {
+        white-space: nowrap;
+    }
+
+    .games-times-played {
+        width: 145px;
+
+        @media (max-width: 767px) {
+            width: 85px;
+        }
+    }
+    .games-rating {
+        width: 1%;
+    }
+
+
+    th:first-child, td:first-child {
+        @media (max-width: 767px) {
+            padding-left: 0;
+        }
+    }
+
+    tr {
+        vertical-align: top;
+    }
+
+    th {
+        border-bottom-width: 1px;
+
+        a {
+            font-weight: 600;
+            color: #222;
+        }
+
+        a:hover {
+            color: #222;
+        }
+    }
+
+    .games-rating {
+        .glyphicon-star {
+            color: #666;
+        }
+        .glyphicon-star-empty {
+            color: #ddd;
+        }
+
+        @media (max-width: 767px) {
+            text-align: center;
+        }
+    }
+
+    #challenge-progress {
+        width: auto;
+        clear: both;
+        margin-bottom: 0;
+
+        tr {
+            vertical-align: top;
+        }
+
+        td, th {
+            padding-left: 10px;
+            padding-right: 20px;
+        }
+
+        .icon {
+            padding: 0 1px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: .3em .6em;
+            line-height: inherit;
+        }
+
+    }
+
+    .overall-progress {
+        font-weight: bold;
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    #challenge-image {
+        margin-right: 20px;
+    }
+
+    .games-infobox {
+        position: inherit;
+    }
+
+    .mdash {
+        color: #999;
+    }
+
+    .game-counts {
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    .collection-table {
+        &.wireframe {
+            width: 100%;
+            margin-bottom: 60px;
+
+            td, th {
+                white-space: nowrap;
+            }
+
+            > tbody {
+                > tr:nth-child(2) {
+                    opacity: 0.8;
+                    > td { border-top-color: rgba(221, 221, 221, 0.8); }
+                }
+                > tr:nth-child(3) {
+                    opacity: 0.6;
+                    > td { border-top-color: rgba(221, 221, 221, 0.6); }
+                }
+                > tr:nth-child(4) {
+                    opacity: 0.4;
+                    > td { border-top-color: rgba(221, 221, 221, 0.4); }
+                }
+                > tr:nth-child(5) {
+                    opacity: 0.2;
+                    > td { border-top-color: rgba(221, 221, 221, 0.2); }
+                }
+                > tr:nth-child(6) {
+                    opacity: 0;
+                    > td { border-top-color: rgba(221, 221, 221, 0); }
+                }
+            }
+        }
+    }
+}
+
+
+.qtip-play {
+    font-size: 16px !important;
+    max-width: 350px !important;
+
+    .qtip-title {
+        font-size: 16px !important;
+        font-weight: 600;
+    }
+}
+
+
+.fade-in {
+    -webkit-animation: fadeIn 0.1s;
+    animation: fadeIn 0.1s;
+}
+
+.fade-in-slow {
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+
+
+
+

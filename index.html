@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            
+    <article id="post" class="post">
+    <div class="post-date">Apr 18th, 2014</div>
+    
+    <h1><a href='/2014/04/18/dealing-with-heartbleed/'>Dealing with Heartbleed</a></h1>
+    
+    <div class="post-content">
+        <p>If you have been on the internet for the last couple weeks, you have likely heard of the Heartbleed bug.  If not, read about it <a href="http://heartbleed.com/">here</a>.  Here&#39;s what you need to know about TrendWeight.</p>
+<h2 id="fitbit-and-withings-connections">FitBit and Withings Connections</h2>
+<p>FitBit has announced that they were affected (like many other sites) by this bug and they are recommending that FitBit users reauthorize third party applications like TrendWeight.  I have not heard anything from Withings, but it doesn&#39;t hurt to reauthorize your Withings account just in case as well.  Doing this is easy regardless of if you use FitBit or Withings.</p>
+<ol>
+<li>Go to your <a href="https://trendweight.com">Settings</a> page and scroll to the bottom.</li>
+<li>Click the <strong>Disconnect Scale</strong> button.  This will deauthorize TrendWeight from getting at your FitBit or Withings data.</li>
+<li>You&#39;ll be taken back to a page where you can reconnect to FitBit or Withings.  Once you do this, new authentication keys will be generated for you, and your data will be completely redownloaded (you won&#39;t lose anything).</li>
+<li>You&#39;re done.  There is no step 4.</li>
+</ol>
+<h2 id="trendweight-itself">TrendWeight Itself</h2>
+<p>Our SSL provider, CloudFlare, has already fixed their servers, and in fact <a href="http://blog.cloudflare.com/staying-ahead-of-openssl-vulnerabilities">fixed them before the bug was made public</a>.  I have no reason to believe that anyone exploited the bug to attack TrendWeight prior to CloudFlare fixing the bug. That said, better safe than sorry, as they say.  If you want to be extra cautious, you may want to consider changing your TrendWeight password <a href="https://trendweight.com/changepassword/">here</a>.</p>
+<p>Isn&#39;t the Internet fun?  If you have any questions, feel free to email me at <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x73;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#x74;&#114;&#101;&#110;&#100;&#119;&#x65;&#105;&#103;&#x68;&#116;&#46;&#99;&#x6f;&#109;">&#x73;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#x74;&#114;&#101;&#110;&#100;&#119;&#x65;&#105;&#103;&#x68;&#116;&#46;&#99;&#x6f;&#109;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Mar 26th, 2014</div>
+    
+    <h1><a href='/2014/03/26/withings-fat-mass-problems/'>Fat Mass is Missing for Withings Users [Resolved]</a></h1>
+    
+    <div class="post-content">
+        <p>Multiple Withings users have let me know that their Fat Mass data has disappeared from TrendWeight.  Apparently something is going on with the Withings API.  I don&#39;t know what the problem is yet, but I am investigating.  Please stay tuned.</p>
+<p><strong>3/27 Update:</strong>  I have confirmed with multiple users that the body fat data is simply missing from the data that the Withings API is giving TrendWeight.  At this point, I don&#39;t know of anything I can do to change that.  I still don&#39;t know why it is only happening to some people and not others.  I have sent an email to Withings support asking if they know of anything that might have changed, and someone from Withings has already responded and is actively investigating the problem.</p>
+<p><strong>3/28 Updated:</strong> A developer at Withings emailed me to let me know that they found and fixed the problem.  I confirmed that body mass data is once again appearing for several of the people who I know were affected and everything looks good.  I automatically did a full resync for all Withings users who updated in the last week (which should catch anyone who might have been affected), so your missing data should now be back.  If you notice anything wrong, though, don&#39;t hesitate to contact me.</p>
+<p> And thanks to the folks at Withings for finding and fixing the problem so quickly.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Feb 10th, 2014</div>
+    
+    <h1><a href='/2014/02/10/bitcoin-mining-with-240v/'>Bitcoin Mining with 240V</a></h1>
+    
+    <div class="post-content">
+        <p>I have two <a href="http://cointerra.com/">CoinTerra</a> TerraMiner IVs on order, one in the December batch and one in the March batch.  As the December batch orders are now shipping, I spent the past week planning for the device&#39;s arrival and wanted to share the details for others in the U.S. that may also need to make similar preparation.</p>
+<p>Why are preparations necessary?  First, let me say that I am in the U.S. and all of the following is specific to U.S. electrical standards.  Anyway, it turns out that CoinTerra missed their power utilization goals and these devices use between 1900 and 2100 watts <em>each</em>.  That is far too much for a single 110V 15A circuit which is what is typically found in U.S. homes.  In theory, you can connect each of these devices to two separate 110V circuits (they presumably have two 1200 watt power supplies that each will be plugged in), but that is a major hassle if you don&#39;t have multiple unused circuits in close proximity.</p>
+<p>The solution is to use 240V circuits. Electrical devices use less current (amps) when run at higher voltage and so a single 240V circuit can power a CoinTerra miner (instead of multiple 110V circuits).  Adding a 240V circuit sounds hard if you don&#39;t have any experience with electrical work and I had no idea how to even begin to getting that done.  After a little research and a couple conversations with some local electricians, it turned out to not be too bad, after all.</p>
+<p>You essentially need two things to make this work:</p>
+<ol>
+<li>A 240V circuit with an appropriate receptacle.</li>
+<li>Some way to connect a standard computer <a href="http://amzn.com/B008Q7HUR0?tag=ewalnet-20">power supply</a> to that circuit.</li>
+</ol>
+<h2 id="getting-power">Getting Power</h2>
+<p>Getting a 240V circuit should hopefully be straightforward.  In the U.S., home circuits are typically either 110V or 240V, and most home probably already have at least one 240V circuit for things like an air conditioner or an electric range.  Adding another one should be straightforward as long as your breaker box has capacity.  Just call an electrician and ask them to install an additional 240V circuit.  You&#39;ll have to let them know what kind of receptacle you want, and how many Amps you want the circuit to be (more on that later).</p>
+<p>The only challenge might be finding a location for the receptacle.  If you don&#39;t want to keep your Bitcoin miners near your breaker box, you might be looking at a larger project as the electrician may need to run wires through walls (i.e. a much larger project).  In my case, my Bitcoin miners are all in the unfinished portion of my basement right next to the electrical panel, so getting the additional circuits was painless.</p>
+<h2 id="distributing-the-power">Distributing the Power</h2>
+<p>Choosing the type of receptacle and the number of amps will depend on your specific power needs and what kind of cable you plan to plug into it.</p>
+<p>You probably aren&#39;t going to want to plug your miners directly into your 240V receptacle.  First you&#39;d need an outlet for each item you wanted to plug in and that is not particularly cost effective for the electrician to install.  Second, and more importantly, you aren&#39;t going to easily find a cable that can connect a typical computer power supply to typical high amperage 240V receptacles.  The answer is to get a Power Distribution Unit (or PDU).  These are essentially specialized power strips for computer hardware.  They are typically used in data centers, but can also be used in your home without any significant problems.</p>
+<p>After some tips from some folks on bitcointalk.org, I settled on these two PDUs as good choices:</p>
+<ul>
+<li><a href="http://amzn.com/B004P3X4ZQ?tag=ewalnet-20">Tripp Lite 240V 20A PDU</a>.</li>
+<li><a href="http://amzn.com/B0012VN0I0?tag=ewalnet-20">Tripp Lite 240V 30A PDU</a>.</li>
+</ul>
+<p>The first one is a horizontal PDU that uses a NEMA L6-20P plug and needs a 20 amp circuit with an L6-20P receptacle. The second one is a vertical PDU that uses a NEMA L6-30P plug (similar but not identical) and needs a 30 amp circuit with a L6-30P receptacle.</p>
+<p>For my own project, I decided to get one of each and to have the electrician install two circuits: a 20A L6-20P receptacle and a 30A L6-30P receptacle.  I decided to get both because I wanted to convert all my existing mining hardware over to 240V as part of this project because it is slightly more efficient.  I will use the 30A circuit for my CoinTerra miners (at 240V, 2200 watts = 9.2 amps), and I am using the 20A circuit for all the rest of my hardware.</p>
+<p>The 20A version can just sit on a shelf easily enough.  I mounted the 30A version to the wall next to my shelves, but had to get creative with the mounting hardware since this is designed to be mounted to a rack in a data center and not to a basement wall :)</p>
+<p>To calculate what kind of capacity you&#39;ll need, remember that Amps = Watts / Volts.</p>
+<h2 id="cables">Cables</h2>
+<p>Ok, so now you have a PDU, but you&#39;ll also need cables to connect the mining power supplies to the PDU.  I bought several of <a href="http://amzn.com/B002O0KMJS?tag=ewalnet-20">these</a> cables.  They have a C13/C14 connectors that will plug into your PDU on one end and directly into your computer power supply on the other.</p>
+<h2 id="results">Results</h2>
+<p>Both PDUs are up and running, and I switched all my existing miners over to 240V.  Now I just need to wait for the first TerraMiner to arrive.  Here are a couple photos (click to view larger)...</p>
+<p><img class="fancybox border" src="/stuff/cointerra-outlets.jpg" width="250" />
+<img class="fancybox border" src="/stuff/cointerra-l6-30p.jpg" width="250" />
+<img class="fancybox border" src="/stuff/cointerra-full-setup.jpg" width="250" /></p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/bitcoin/'>Bitcoin</a>, <a href='/tags/gadgets/'>Gadgets</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Jan 27th, 2014</div>
+    
+    <h1><a href='/2014/01/27/mystery-solved-fitbit-rounding-error/'>Mystery Solved: FitBit Rounding Error</a></h1>
+    
+    <div class="post-content">
+        <p>A long-standing mystery has finally been solved...</p>
+<p><strong>Short Version:</strong></p>
+<p>If your TrendWeight account is connected to Fitbit, and you don&#39;t use the metric system (kilograms), you may have noticed that the actual weights shown on TrendWeight were often different from the weights show on fitbit.com by 0.1 - 0.2 pounds.  This doesn&#39;t happen anymore.</p>
+<p><strong>Long Version:</strong></p>
+<p>Sometimes Trendweight shows my actual scale weight as 0.1 lb higher or lower than what I remember the scale actually showing.  I&#39;ve noticed it on and off for a while, and I have gotten quite a few emails about it.  I had looked into it in the past several times and confirmed that I am displaying <em>exactly</em> what Fitbit tells me in their API.  So, I chalked it up to an idiosyncrasy on the Fitbit side.  Who cares about 0.1 lb anyway?</p>
+<p>Well, after yet another email today, I started looking into it again.  After some research (aka Google searches), I found a couple other cases where people were having similar problems and in those reports was the nudge I needed to finally understand the problem.  The problem is a rounding error when converting between Metric and English weight units.  Here&#39;s what happens:</p>
+<ol>
+<li>You step on the scale and it displays your weight in pounds and sends it to the fitbit.com database.</li>
+<li>TrendWeight makes an API request and fitbit.com returns your recent weight readings in kilograms and <em>rounded to 1 decimal place</em>.</li>
+<li>TrendWeight converts your recent weight readings back into pounds.</li>
+</ol>
+<p>The problem is the <em>highlighted</em> part of step #2.  When your weight gets converted to kilograms and <em>rounded to 1 decimal place</em> and then converted back into pounds, the 0.1 - 0.2 lbs error gets introduced.</p>
+<p>If only there was a way to tell the Fitbit API that I want the results in pounds (for users who are using pounds) so that I don&#39;t have to convert them myself, then this problem would go away... Oh wait.  There is. Doh!</p>
+<p>By asking Fitbit for weights directly in pounds, TrendWeight now gets actual scale weights that exactly match what was displayed on your scale and what you see on fitbit.com.  I should have realized this a long time ago, and so I feel a little foolish.  Sorry.</p>
+<p>TrendWeight&#39;s logic has been updated, and the next time you visit your dashboard, your weight readings for the past 21 days will automatically be re-downloaded and &quot;fixed&quot;.  That will result in an accurate current &#39;trend weight&#39; (because that trend weight is based, essentially, on the past 20 days of weight readings).</p>
+<p>If you really want to retroactively fix all your historical scale readings, you can do so by going into your <a href="https://trendweight.com/settings">settings</a> and clicking the &#39;Resync All Data&#39; button at the bottom of the page. However, <strong>do not click this</strong> if you have more than 3or 4 years of historical data in TrendWeight or you will risk running into <a href="/2013/06/08/dealing-with-lots-of-historical-data/">the other Fitbit limitation</a> that prevents TrendWeight from loading lots of historical data.  If you have that much old data, you&#39;ll want to wait until that other limitation has been addressed.</p>
+<p><strong>Side Note</strong></p>
+<p>I also want to mention that I am actively working on a new version of the TrendWeight backend that addresses that <a href="/2013/06/08/dealing-with-lots-of-historical-data/">Fitbit API limitation</a> and also opens up the doors for addressing some of the long requested enhancements you all have made.  I still have a bunch of work left to finish before it is ready, but at least the work is in progress...</p>
+<p>As always, email me at <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#x73;&#117;&#112;&#112;&#111;&#x72;&#116;&#x40;&#116;&#x72;&#x65;&#110;&#100;&#x77;&#x65;&#x69;&#x67;&#104;&#116;&#x2e;&#x63;&#111;&#x6d;">&#x73;&#117;&#112;&#112;&#111;&#x72;&#116;&#x40;&#116;&#x72;&#x65;&#110;&#100;&#x77;&#x65;&#x69;&#x67;&#104;&#116;&#x2e;&#x63;&#111;&#x6d;</a> if you have any questions or concerns.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Nov 4th, 2013</div>
+    
+    <h1><a href='/2013/11/04/ios7-and-trendweight/'>iOS 7 and TrendWeight</a></h1>
+    
+    <div class="post-content">
+        <p>I have gotten several reports of problems with using TrendWeight on iOS7 devices.  Most commonly, I hear that TrendWeight seems to force you to login every time you open the site.</p>
+<p>The underlying issue seems to be a bug or a series of bugs in Safari/iOS7 related to storing <a href="http://en.wikipedia.org/wiki/HTTP_cookie">cookies</a>.  This Apple bug appears to affect all web apps, and not just TrendWeight, and other people are also <a href="http://www.infoworld.com/t/html5/bad-news-ios-7s-html5-full-of-bugs-227685">reporting</a> <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">problems</a> with iOS7 on this front.  There have always been oddities in iOS with web apps that are pinned to the home screen, but it appears that iOS 7 made things noticeably worse.</p>
+<p>Unfortunately, there is not anything I can do to fix the underlying problem, but I did make a small change that should cause TrendWeight to launch in the full Safari app instead of by itself.  For some users, this seems to make your login session last longer, but it isn&#39;t a real fix and you&#39;ll eventually be asked to login again.</p>
+<p>Until Apple addresses the underlying problems, there are two other workarounds I can suggest:</p>
+<ul>
+<li>Instead of bookmarking your normal TrendWeight dashboard, bookmark (or add to your home screen) your public &quot;sharing URL&quot; (which you can find on your <a href="https://trendweight.com/settings/">settings</a> page).  Your public &quot;sharing URL&quot; doesn&#39;t require you to login, so you won&#39;t see a login page when you visit that page regardless of if cookies are working or not.</li>
+<li>You can also choose to use <a href="http://itunes.apple.com/us/app/chrome/id535886823">Chrome</a> instead of Safari as a browser on iOS as cookies work fine in Chrome and so it will have no problem remembering your login.</li>
+</ul>
+<p>If I hear more about the underlying Apple bug, I&#39;ll let you all know.  Until then, if you have questions or concerns, email me at <a href="&#109;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#x73;&#x75;&#x70;&#112;&#111;&#114;&#x74;&#x40;&#x74;&#x72;&#x65;&#x6e;&#x64;&#119;&#101;&#x69;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;">&#x73;&#x75;&#x70;&#112;&#111;&#114;&#x74;&#x40;&#x74;&#x72;&#x65;&#x6e;&#x64;&#119;&#101;&#x69;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+
+<div class="page-nav">
+    
+    <a class="page-nav-older" href="/page/2/"><span class="icon icon-arrow-left-2"></span> Older</a>
+    
+    
+    <div class="page-nav-archives"><a href="/archives/">- Blog Archives -</a></div>
+</div>
+
+<div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

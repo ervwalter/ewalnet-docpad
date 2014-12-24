@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Automatic CoffeeScript Translation in Blog Posts - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Oct 17th, 2013</div>
+    
+    <h1>Automatic CoffeeScript Translation in Blog Posts</h1>
+    
+    <div class="post-content">
+        <p>I like <a href="http://coffeescript.org/">CoffeeScript</a>, and I often include CoffeeScript code samples in blog posts.  But not everyone likes or has learned CoffeeScript.  To make my posts useful to a broader crowd, I could manually include the JavaScript equivalent for each CoffeeScript code block, but that is extra work for me, and it makes the posts more verbose.  Instead, I decided to see if I could automatically detect my CoffeeScript code blocks, and automatically make JavaScript translations available to readers on the fly.</p>
+<p>It turns out it wasn&#39;t that hard.  In fact, you can see it in action in this blog post, itself.  Keep in mind that because this is client-side code, it won&#39;t be visible for people reading the blog in an RSS reader.  Those users will just see the normal CoffeeScript code blocks as before.</p>
+<p>The first step was to remove <a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a> processing from the server side of my DocPad blog engine and move it to the client side.  I did this because highlight.js adds additional markup to the code blocks, and I needed access to the unmolested CoffeeScript code.  Removing highlight.js from the server side was as easy as <code>npm remove --save docpad-plugin-highlightjs</code>.</p>
+<p>The next step was to include highlight.js and coffee-script.js in my web pages.  I chose to most vendor scripts from the excellent <a href="http://cdnjs.com/">cdnjs</a>, but have to serve highlight.js myself because the CDN version doesn&#39;t have support for all the languages I care about (notably, CoffeeScript is not included).</p>
+<pre><code class="lang-html">&lt;script src=&quot;/scripts/vendor/highlight.pack.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Next, in my site&#39;s JavaScript code, I look for any code samples that are flagged as CoffeeScript by looking for the css class <code>lang-coffeescript</code>.  This css class is added by the markdown engine in DocPad when I add code blocks to my blog posts.  For each code block, I retrieve the CoffeeScript source code, compile it into JavaScript and then insert a new code block with the JavaScript source.  The extra markup uses Bootstrap tabs to make it easy to toggle between the two sets of code.</p>
+<pre><code class="lang-coffeescript">codeIndex = 0
+$(&#39;pre code.lang-coffeescript&#39;).each -&gt;
+    codeIndex++
+    $code = $(this)
+    $pre = $code.parent()
+
+    # add the markup to create the tabbed display
+    $tabContent = $pre.wrap(&quot;&lt;div class=&#39;tab-content&#39;&gt;&lt;div class=&#39;tab-pane active&#39; id=&#39;code-#{codeIndex}-coffee&#39;&gt;&lt;/div&gt;&lt;/div&gt;&quot;).parent().parent()
+    $(&quot;&lt;ul class=&#39;nav nav-tabs auto-coffee&#39;&gt;&lt;li class=&#39;active&#39;&gt;&lt;a href=&#39;#code-#{codeIndex}-coffee&#39; data-toggle=&#39;tab&#39;&gt;CoffeeScript&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#39;#code-#{codeIndex}-js&#39; data-toggle=&#39;tab&#39;&gt;JavaScript&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&quot;).insertBefore($tabContent)
+
+    # compile into javascript
+    coffeeSource = $code.text()
+    jsSource = CoffeeScript.compile(coffeeSource, {bare: true})
+
+    # add the javascript code block
+    $tabContent.append(&quot;&lt;div class=&#39;tab-pane&#39; id=&#39;code-#{codeIndex}-js&#39;&gt;&lt;pre&gt;&lt;code class=&#39;lang-javascript&#39;&gt;#{htmlEncode(jsSource)}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&quot;)
+</code></pre>
+<p>The second-to-last step is to translate a couple language aliases I use.  <code>coffeescript-nojs</code> is an alias for <code>coffeescript</code> that just bypasses the code above and so won&#39;t be auto-translated.  <code>none</code> is just a shorter alias for highligh.js&#39;s normal <code>no-highlight</code>.  For example, I&#39;ll use <code>coffeescript-nojs</code> on the following code block to prevent the CoffeeScript/JavaScript UI from appearing:</p>
+<pre><code class="lang-coffeescript-nojs">$(&#39;.lang-coffeescript-nojs&#39;).removeClass(&#39;lang-coffeescript-nojs&#39;).addClass(&#39;lang-coffeescript&#39;)
+$(&#39;.lang-none&#39;).removeClass(&#39;lang-none&#39;).addClass(&#39;lang-no-highlight&#39;)
+</code></pre>
+<p>The last step is to use highlight.js to format any code blocks on the page.  First, the code translates any <code>lang-whatever</code> classes into <code>language-whatever</code> because that is what the client-side highlight.js class is expecting.  Then highlight.js is called on any code blocks to do its thing.</p>
+<pre><code class="lang-coffeescript">$(&#39;pre code&#39;).each (index, element) -&gt;
+    $code = $(this)
+    classes = $code.attr(&#39;class&#39;)?.split(&#39; &#39;)
+    if classes? then for origClass in classes
+        fixedClass = origClass.replace /^lang-/, &#39;language-&#39;
+        $code.removeClass(origClass).addClass(fixedClass) if fixedClass isnt origClass
+    hljs.highlightBlock(element)
+</code></pre>
+<p>Throw in some CSS to make things look the way I wanted, and there you have it.</p>
+<p>To see what the markdown source for this post looks like, look <a href="https://raw.github.com/ervwalter/ewalnet-docpad/master/src/documents/posts/2013-10-17-automatic-coffeescript-translation.html.md">here</a>.  And as always, you can find the complete source for my blog on GitHub, <a href="https://github.com/ervwalter/ewalnet-docpad">here</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/docpad/'>DocPad</a>, <a href='/tags/coffeescript/'>CoffeeScript</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2013/10/17/automatic-coffeescript-translation/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Automatic CoffeeScript Translation in Blog Posts';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

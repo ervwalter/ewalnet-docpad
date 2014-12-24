@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Mystery Solved: FitBit Rounding Error - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Jan 27th, 2014</div>
+    
+    <h1>Mystery Solved: FitBit Rounding Error</h1>
+    
+    <div class="post-content">
+        <p>A long-standing mystery has finally been solved...</p>
+<p><strong>Short Version:</strong></p>
+<p>If your TrendWeight account is connected to Fitbit, and you don&#39;t use the metric system (kilograms), you may have noticed that the actual weights shown on TrendWeight were often different from the weights show on fitbit.com by 0.1 - 0.2 pounds.  This doesn&#39;t happen anymore.</p>
+<p><strong>Long Version:</strong></p>
+<p>Sometimes Trendweight shows my actual scale weight as 0.1 lb higher or lower than what I remember the scale actually showing.  I&#39;ve noticed it on and off for a while, and I have gotten quite a few emails about it.  I had looked into it in the past several times and confirmed that I am displaying <em>exactly</em> what Fitbit tells me in their API.  So, I chalked it up to an idiosyncrasy on the Fitbit side.  Who cares about 0.1 lb anyway?</p>
+<p>Well, after yet another email today, I started looking into it again.  After some research (aka Google searches), I found a couple other cases where people were having similar problems and in those reports was the nudge I needed to finally understand the problem.  The problem is a rounding error when converting between Metric and English weight units.  Here&#39;s what happens:</p>
+<ol>
+<li>You step on the scale and it displays your weight in pounds and sends it to the fitbit.com database.</li>
+<li>TrendWeight makes an API request and fitbit.com returns your recent weight readings in kilograms and <em>rounded to 1 decimal place</em>.</li>
+<li>TrendWeight converts your recent weight readings back into pounds.</li>
+</ol>
+<p>The problem is the <em>highlighted</em> part of step #2.  When your weight gets converted to kilograms and <em>rounded to 1 decimal place</em> and then converted back into pounds, the 0.1 - 0.2 lbs error gets introduced.</p>
+<p>If only there was a way to tell the Fitbit API that I want the results in pounds (for users who are using pounds) so that I don&#39;t have to convert them myself, then this problem would go away... Oh wait.  There is. Doh!</p>
+<p>By asking Fitbit for weights directly in pounds, TrendWeight now gets actual scale weights that exactly match what was displayed on your scale and what you see on fitbit.com.  I should have realized this a long time ago, and so I feel a little foolish.  Sorry.</p>
+<p>TrendWeight&#39;s logic has been updated, and the next time you visit your dashboard, your weight readings for the past 21 days will automatically be re-downloaded and &quot;fixed&quot;.  That will result in an accurate current &#39;trend weight&#39; (because that trend weight is based, essentially, on the past 20 days of weight readings).</p>
+<p>If you really want to retroactively fix all your historical scale readings, you can do so by going into your <a href="https://trendweight.com/settings">settings</a> and clicking the &#39;Resync All Data&#39; button at the bottom of the page. However, <strong>do not click this</strong> if you have more than 3or 4 years of historical data in TrendWeight or you will risk running into <a href="/2013/06/08/dealing-with-lots-of-historical-data/">the other Fitbit limitation</a> that prevents TrendWeight from loading lots of historical data.  If you have that much old data, you&#39;ll want to wait until that other limitation has been addressed.</p>
+<p><strong>Side Note</strong></p>
+<p>I also want to mention that I am actively working on a new version of the TrendWeight backend that addresses that <a href="/2013/06/08/dealing-with-lots-of-historical-data/">Fitbit API limitation</a> and also opens up the doors for addressing some of the long requested enhancements you all have made.  I still have a bunch of work left to finish before it is ready, but at least the work is in progress...</p>
+<p>As always, email me at <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#x73;&#x75;&#x70;&#x70;&#111;&#x72;&#x74;&#x40;&#116;&#114;&#101;&#x6e;&#x64;&#x77;&#x65;&#105;&#x67;&#104;&#116;&#46;&#99;&#111;&#109;">&#x73;&#x75;&#x70;&#x70;&#111;&#x72;&#x74;&#x40;&#116;&#114;&#101;&#x6e;&#x64;&#x77;&#x65;&#105;&#x67;&#104;&#116;&#46;&#99;&#111;&#109;</a> if you have any questions or concerns.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2014/01/27/mystery-solved-fitbit-rounding-error/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Mystery Solved: FitBit Rounding Error';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

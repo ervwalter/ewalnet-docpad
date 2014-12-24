@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            
+    <article id="post" class="post">
+    <div class="post-date">Jul 9th, 2012</div>
+    
+    <h1><a href='/2012/07/09/fitbit-aria-retina-displays-user-interface-improvements/'>FitBit Aria, Retina Displays, User Interface Improvements</a></h1>
+    
+    <div class="post-content">
+        <p>I just pushed a bunch of updates to the website. A lot of the user interface code changed and so it&#39;s possible that I introduced some new bugs in the process.  If you see something fishy, please let me know at <a href="&#109;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#x40;&#x74;&#x72;&#101;&#110;&#x64;&#x77;&#x65;&#105;&#103;&#104;&#x74;&#46;&#x63;&#111;&#x6d;">&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#x40;&#x74;&#x72;&#101;&#110;&#x64;&#x77;&#x65;&#105;&#103;&#104;&#x74;&#46;&#x63;&#111;&#x6d;</a>.</p>
+<h2 id="fitbit-aria-support">FitBit Aria Support</h2>
+<p>Although it has been live for a while, I wanted to mention that TrendWeight now officially supports the FitBit Aria scale in addition to the Withings Scale.  There are a bunch of people who have been using it for a few weeks and things seem to be working quite smoothly.  I have a couple more tweaks planned over the next couple weeks, such as better handling for weight readings that you delete on the FitBit website.</p>
+<h2 id="retina-display-support">Retina Display Support</h2>
+<p>I just got my MacBook Pro w/ Retina Display this past week and that was enough motivation for me to go make TrendWeight work well with a Retina Display and not be blurry.  It should look much more crisp on the current generation of iPads as well.</p>
+<h2 id="general-user-interface-improvements">General User Interface Improvements</h2>
+<p>I also made a ton of small user interface improvements that will hopefully make the site nicer to use on more devices.  In particular, the site will now automatically use more space if you have a widescreen monitor so that you can see more of your charts at one time.</p>
+<p>Again, if you notice anything wrong, or have any feedback, feel free to email me at <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#115;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#116;&#114;&#101;&#x6e;&#100;&#x77;&#101;&#105;&#103;&#104;&#116;&#46;&#99;&#x6f;&#109;">&#115;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#116;&#114;&#101;&#x6e;&#100;&#x77;&#101;&#105;&#103;&#104;&#116;&#46;&#99;&#x6f;&#109;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>, <a href='/tags/fitbit/'>FitBit</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Apr 24th, 2012</div>
+    
+    <h1><a href='/2012/04/24/fitbit-aria-support-coming-soon/'>FitBit Aria Support: Coming Soon!</a></h1>
+    
+    <div class="post-content">
+        <p><img class="float-right" src="/stuff/fitbit-aria.jpg" width="200" /></p>
+<p>The <a href="http://www.fitbit.com/product/aria">FitBit Aria</a> is about to launch on April 30th, and my pre-order is on a FedEx truck headed to the midwest.</p>
+<p>If you haven&#39;t heard of the Aria before, it is a WiFi scale with functionality similar to the Withings scale.  If you already have a Withings scale, you probably don&#39;t care that much, but if you don&#39;t have a WiFi enabled scale yet, the Aria is worth looking at.  It sells for $129 (get it at <a href="http://amzn.com/B0077L8YFI?tag=trendweight-20">Amazon</a> and support TrendWeight in the process).</p>
+<p>The FitBit team seems very friendly and I am making progress on integrating TrendWeight with their API.  My intention is to make TrendWeight work equally well with either the Withings or FitBit scales. </p>
+<p>I am nearly done with the development to enable FitBit Aria integration, but I plan to wait until my Aria actually arrives so that I can test it for a few days before I turn it on for everyone.  Expect an update in the next two weeks...</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>, <a href='/tags/fitbit/'>FitBit</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Mar 24th, 2012</div>
+    
+    <h1><a href='/2012/03/24/withings-is-having-technical-difficulties/'>Withings is Having Technical Difficulties [Resolved]</a></h1>
+    
+    <div class="post-content">
+        <p>The Withings folks are having technical difficulties again.  As a result, TrendWeight has not been able to connect to retrieve new weight readings for anyone for the past 12 hours or so.</p>
+<p>I&#39;ll post updates as the situation evolves.</p>
+<p><strong>Update</strong>: Things seem to be working again.  Sorry for the disruption.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Jan 19th, 2012</div>
+    
+    <h1><a href='/2012/01/19/withings-is-having-technical-difficulties/'>Withings is Having Technical Difficulties [Resolved?]</a></h1>
+    
+    <div class="post-content">
+        <p>Withings has been struggling with keeping their website running on and off for the past few days.  The result is that you may see an occasional warning in TrendWeight about not being able to get your latest weight data.  Even if you don&#39;t see a warning, you still may not see your latest weight data until they resolve the issues.</p>
+<p>Yesterday they posted on their Facebook page that they are doing some maintenance to try to resolve the issues and that it may not be finished until the end of the week.</p>
+<p>Things do seem to be working on and off (this morning&#39;s weight did get loaded for me).  All we can do is be patient, I guess.</p>
+<p><strong>Update:</strong>
+It&#39;s been a couple days since there have been any errors, so this appears to be resolved.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Jan 15th, 2012</div>
+    
+    <h1><a href='/2012/01/15/missed-a-day-no-problem/'>Missed a Day?  No Problem!  Linear Interpolation to the Rescue</a></h1>
+    
+    <div class="post-content">
+        <p>If you go on a trip for a few days and aren&#39;t able to weigh yourself, TrendWeight now has an option to estimate your weight on those missing days so that your trend line and statistics are more accurate.</p>
+<p>Previously, if you missed a few days, your trend line would look &quot;flatter&quot; than it should have been.  This is an artifact of how the exponentially weighted moving average works when there are missing data points.  Here is an example from my own recent chart.  In this example, you can see the 4 days where I wasn&#39;t able to weigh myself because I was out of town for the holiday:</p>
+<p><img src="/stuff/trendweight-interpolation1.png" /></p>
+<p>Now, there is a option in TrendWeight to fill in those missing days using <a href="http://en.wikipedia.org/wiki/Linear_interpolation">linear interpolation</a>.  Obviously, having real data would be better than this estimation, but this is usually better than nothing.  This option helps when you miss a day or two every once in a while.  Think of it like this: when there are days missing, TrendWeight will look at the scale readings right before and right after the missing days and fill in the gap by drawing a straight line between the surrounding scale readings.</p>
+<p>With this option enabled, my chart looks like this instead:</p>
+<p><img src="/stuff/trendweight-interpolation2.png" /></p>
+<p>This option can be turned on and off on your TrendWeight <a href="https://trendweight.com/settings">settings</a> page.  Because this almost always results in a better trend line, I enabled it for all users by default, but you can turn it off if you don&#39;t like it and prefer the old behavior.</p>
+<p>Keep in mind that if your missing days become more frequent than the days on which you actually weigh yourself, this technique will be less accurate.  An occasional missed day or two won&#39;t matter much, but for the most accurate statistics, you should still try to weigh in more or less every day.</p>
+<p>One other note is that the original Hacker&#39;s Diet Online tool didn&#39;t do this linear interpolation, so if you want TrendWeight&#39;s calculations to stay 100% consistent with that tool, make sure to turn this option off.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+
+<div class="page-nav">
+    
+    <a class="page-nav-older" href="/page/9/"><span class="icon icon-arrow-left-2"></span> Older</a>
+    
+    
+    <a class="page-nav-newer" href="/page/7/">Newer <span class="icon icon-arrow-right-2"></span></a>
+    
+    <div class="page-nav-archives"><a href="/archives/">- Blog Archives -</a></div>
+</div>
+
+<div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

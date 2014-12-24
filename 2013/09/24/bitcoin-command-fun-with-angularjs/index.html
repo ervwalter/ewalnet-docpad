@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Bitcoin Command: Fun with AngularJS, NodeJS, and MongoDB - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Sep 24th, 2013</div>
+    
+    <h1>Bitcoin Command: Fun with AngularJS, NodeJS, and MongoDB</h1>
+    
+    <div class="post-content">
+        <p>This is one of two posts about my Bitcoin Command app.  </p>
+<ul>
+<li>The <a href="/2013/09/24/bitcoin-command-a-mining-slash-wallet-management-web-app/">first post</a> focuses on the actual functionality of the app and will be of interest mostly to other Bitcoin miners.</li>
+<li>The second post (this post) focuses on the technology I used to create the app and may be of interest to other web developers regardless of their interest in Bitcoin.</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Bitcoin Command Center is a relatively simple (in the grand scheme of things) single page application built with <a href="http://angularjs.org/">AngularJS</a>, <a href="http://nodejs.org/">NodeJS</a>, and <a href="http://www.mongodb.org/">MongoDB</a>.</p>
+<p>I suppose I am a little late to the party, but this fall I attended <a href="http://www.thatconference.com/">That Conference</a> and got excited to play around with AngularJS based on a couple of the sessions I attended there.  Rewriting my Bitcoin dashboard seemed like an ideal project to use as an excuse for playing around with a bunch of new-to-me technology.  So, I decided to not just try out AngularJS for the first time, but I also decided to use NodeJS and MongoDB in my new dashboard for added excitement.  My usual development stack is ASP.NET MVC, Knockout, and SQL Server, so this was really almost entirely new ground for me.  Fun!!</p>
+<p>They are not new to me, but I also used <a href="http://coffeescript.org/">CoffeeScript</a>, <a href="http://compass-style.org/">Compass</a>, and <a href="http://getbootstrap.com/">Bootstrap</a> with this project.</p>
+<p>I have to say that I love the way things turned out and these technologies work <em>very</em> well together.  I certainly would consider using them again for future projects.</p>
+<p>At a very high level, this is a fully client-side <a href="http://en.wikipedia.org/wiki/Single-page_application">single page application</a> (or SPA) written in AngularJS.  The application gets data from the web server via a set of REST APIs that are implemented in NodeJS.  The REST API wraps a backend MongoDB database that stores JSON documents.</p>
+<h2 id="the-lay-of-the-land">The Lay of the Land</h2>
+<p>First, the code can be found here:</p>
+<p><a href="https://github.com/ervwalter/bitcoin-command">https://github.com/ervwalter/bitcoin-command</a></p>
+<p>Let me start with a review my high level folder structure:</p>
+<pre><code class="lang-none">config/
+public/
+    sass/
+    scripts/
+        compiled/
+        controllers/
+        directives/
+        services/
+        vendor/
+        app.coffee
+        filters.coffee
+    stylesheets/
+    templates/
+    index.ejs
+server/
+app.coffee
+</code></pre>
+<p>And here is a bit of explanation for the key pieces:</p>
+<ul>
+<li><code>app.coffee</code>: This is the top level Node entry point.  It sets up the Express server</li>
+<li><code>server/</code>: This folder contains all the .coffee files that make up my server-side Node code including all of the code for my REST API.</li>
+<li><code>config/</code>: This is where configuration files live.  I am using the <a href="https://github.com/lorenwest/node-config">node-config</a> module which allows me to define a default set of configuration options (which are in the GitHub repository) and then override them with host-specific settings on my development and production servers. </li>
+<li><code>public/</code>: This folder contains all of the files that the browser uses for the SPA including all the JavaScript, CSS, Images, etc.</li>
+<li><code>public/index.ejs</code>: This is the main HTML file for the client-side application.  The only reason it is an EJS file is so that it can dynamically switch between debug and minified versions of the included JavaScript files based on a debug configuration flag.</li>
+<li><code>public/sass/</code>: This is where all of the Compass source files (.scss) live.  They get compiled into .css files that end up in the <code>public/stylesheets/</code>.</li>
+<li><code>public/scripts/</code>: All of the client side scripts live here...<ul>
+<li><code>vendor/</code>: These are all the third party JavaScript libraries.  They get bundled into a single <code>libraries.js</code> file for the browser to download.</li>
+<li><code>controllers/</code>, <code>directives/</code>, <code>services/</code>, <code>filters.coffee</code>, <code>app.coffee</code>: These are my AngularJS source files.  They get compiled into a single <code>app.js</code> for the browser to download by the CoffeeScript compiler.</li>
+<li><code>compiled/</code>: This is where the compiled JavaScript files (mentioned above) end up.</li>
+</ul>
+</li>
+<li><code>templates/</code>: This folder holds all of the .html template files that my AngularJS application uses.  They get <a href="https://github.com/ericclemmons/grunt-angular-templates">compiled</a> into a single <code>templates.js</code> file that the browser downloads so that AngularJS doesn&#39;t have to load each template with a separate HTTP request.</li>
+</ul>
+<h2 id="nodejs">NodeJS</h2>
+<p>I found Node to be be very easy to work with.  Besides static files (CSS, JavaScript, images, etc), I have, essentially, only REST APIs exposed by my Node server using <a href="http://expressjs.com/">Express</a>.</p>
+<p>Each REST API endpoint is defined in my main <code>app.coffee</code> file like this:</p>
+<pre><code class="lang-coffeescript">security = require(&#39;./server/security&#39;)
+mining = require(&#39;./server/mining&#39;)
+wallet = require(&#39;./server/wallet&#39;)
+
+# code to initialize the express app appears here...
+
+# setup the REST API routes
+app.post &#39;/submitshare&#39;, noCache, mining.submitshare
+app.get &#39;/mining/summary&#39;, noCache, security.requireAuthentication, mining.summarydata
+app.get &#39;/mining/chart&#39;, noCache, security.requireAuthentication, mining.chartdata
+
+app.get &#39;/wallet/summary&#39;, noCache, security.requireAuthentication, wallet.summary
+app.get &#39;/wallet/price&#39;, noCache, security.requireAuthentication, wallet.price
+app.get &#39;/wallet/recentRecipients&#39;, noCache, security.requireAuthentication, wallet.recentRecipients
+app.post &#39;/wallet/send&#39;, noCache, security.requireAuthentication, wallet.sendTx
+</code></pre>
+<p>In those routes, <code>security.requireAuthentication</code> is part of how I implemented authentication between AngularJS and NodeJS.  I plan to explain that in a separate blog post.  <code>noCache</code> is a simple Express middleware function that ensures appropriate HTTP headers are included to prevent the browser from caching the API results:</p>
+<pre><code class="lang-coffeescript">noCache = (req, res, next) -&gt;
+    res.header(&#39;Cache-Control&#39;, &#39;no-cache, private, no-store, must-revalidate&#39;);
+    next()
+</code></pre>
+<h2 id="angularjs">AngularJS</h2>
+<p>I <em>really</em> like AngularJS.  When I first looked at it a long time ago, I was turned off by its complexity and its learning curve.  But now that I have taken the time to get up to speed, I am impressed by how robust it is.  I still like KnockoutJS and will probably continue to use it from time to time, but I think AngularJS may become my preferred framework anytime I am making something sophisticated.</p>
+<p>I wrote all my AngularJS source in CoffeeScript, and found that to be very clean.  I will post about my development environment in greater detail in a separate post, but in a nutshell, my build script compiled all of the various .coffee source files from my <code>public/scripts/</code> source tree into a single app.js file for the browser to use.</p>
+<p>The only thing I am not entirely satisfied with yet is minification of my application source.  I just can&#39;t bring myself to hand-write <a href="http://thegreenpizza.github.io/2013/05/25/building-minification-safe-angular.js-applications/">minification-safe AngularJS code</a>.  I tried using <a href="https://github.com/btford/ngmin">ngmin</a> to automatically convert my happy, clean AngularJS code into minification-safe code, but it didn&#39;t catch 100% of the use cases.  </p>
+<p>As a result, I am currently opting for suboptimal minification of my application code.  I use an <a href="https://github.com/mishoo/UglifyJS2">uglify</a> configuration that removes whitespace but doesn&#39;t rename variables.  In the end, my app code amounts to only about 6k when gzipped, so it&#39;s not tragic that I am not fully minifying it.</p>
+<p>I ran into a couple interesting scenarios as part of my project that I plan to write detailed posts about (stay tuned):</p>
+<ul>
+<li><strong>Security &amp; Authentication</strong> There are a number of approaches out there for implementing a complete authentication system in an AngularJS + NodeJS application, but I didn&#39;t find any of them to be sufficient to my needs, so I created a hybrid that combined several approaches.</li>
+<li><strong>Form Validation</strong> There are also a number of resources on the net for cleanly handling form validation in conjunction with Bootstrap.  Again, I didn&#39;t find an existing pattern that I was completely happy with.  I&#39;ll talk about my approach in a separate post.</li>
+</ul>
+<h2 id="mongodb">MongoDB</h2>
+<p>This was my first project using a JSON-focused database.  I have to say that I found it very liberating to not have to define a schema for my data.  That&#39;s not to say that it doesn&#39;t conceptually have a schema, I just enjoyed not having to worry about &quot;fixing the schema definition&quot; each time I decided to tweak the schema I was using in practice.  I decided to use the <a href="http://mongodb.github.io/node-mongodb-native/">native MongoDB driver</a> for NodeJS and not something like <a href="http://mongoosejs.com/">Mongoose</a> because I like the low level, schema-less approach that the native client provides.</p>
+<p>The app has just a few collections:</p>
+<ul>
+<li><strong>db.shares</strong> stores one JSON document per share found by a device.  All of the statistics shown on the dashboard come from aggregate analyses of this collection</li>
+<li><strong>db.devices</strong> and <strong>db.pools</strong> hold stats about individual devices and mining pools</li>
+<li><strong>db.savings</strong> is just a simple collection of manually maintained (I use <a href="http://genghisapp.com/">Genghis</a> which is AWESOME) documents about details of offline bitcoins I am holding.  These are used only to calculate my total &quot;bitcoin net worth&quot; on the dashboard.</li>
+<li><strong>db.addresses</strong> is a utility collection holding details of any addresses that have been archived or renamed.  Since bitcoind doesn&#39;t support renaming or archiving of addresses, I handle that with an application level layer based on this collection.</li>
+</ul>
+<p>I found MongoDB&#39;s aggregation pipeline to be extremely powerful.  In my old ASP.NET/SQL Server dashboard, I had a really painful (and really slow) stored procedure that used multiple sub-select statements to figure out stats by pool.  In MongoDB, it was a (realtively) easy to understand aggregation:</p>
+<pre><code class="lang-coffeescript">pipeline = [
+    { 
+        $match:  # only include recent shares
+            timestamp: $gte: cuttoff
+    }
+    { 
+        $sort: timestamp: 1 # need to sort in order for $last to work below
+    }
+    { 
+        $project: # select the data I care about
+            timestamp: 1
+            pool: 1
+            targetDifficulty: 1
+            acceptedDifficulty: { $cond: [
+                $eq: [&#39;$result&#39;, &#39;accept&#39;]
+                &#39;$targetDifficulty&#39;
+                0
+            ]}
+            rejectedDifficulty: { $cond: [
+                $ne: [&#39;$result&#39;, &#39;accept&#39;]
+                &#39;$targetDifficulty&#39;
+                0
+            ]}
+    }
+    {
+        $group: # group data by pool
+            _id: &#39;$pool&#39;
+            shares: $sum: &#39;$targetDifficulty&#39;
+            accepted: $sum: &#39;$acceptedDifficulty&#39;
+            rejected: $sum: &#39;$rejectedDifficulty&#39;
+            lastShare: $last: &#39;$timestamp&#39;
+    }
+    {
+        $project:  # clean up the results and add the calculated hashrate property 
+            _id: 0
+            url: &#39;$_id&#39;
+            hashrate: $multiply: [ &#39;$shares&#39;, 0.397682157037037 ] # $shares * 2^32 / (3600 * 3) / 1000000
+            shares: 1
+            accepted: 1
+            rejected: 1
+            lastShare: 1
+    }
+]
+db.shares.aggregate(pipeline, callback)
+</code></pre>
+<p>I plan to write a dedicated blog post about how I used the MongoDB aggregation pipeline to calculate the hashrate histogram that drives the chart at the top of the dashboard.</p>
+<h2 id="questions-">Questions...</h2>
+<p>Anyway, I think that is enough rambling.  If you&#39;re interested in exploring the source code for this application, hopefully you found this helpful.  If you have specific questions, please feel free to post them in the comments or email me at <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#101;&#x72;&#118;&#x40;&#x65;&#x77;&#x61;&#108;&#46;&#x6e;&#101;&#116;">&#101;&#x72;&#118;&#x40;&#x65;&#x77;&#x61;&#108;&#46;&#x6e;&#101;&#116;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/bitcoin/'>Bitcoin</a>, <a href='/tags/angularjs/'>AngularJS</a>, <a href='/tags/nodejs/'>NodeJS</a>, <a href='/tags/mongodb/'>MongoDB</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2013/09/24/bitcoin-command-fun-with-angularjs/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Bitcoin Command: Fun with AngularJS, NodeJS, and MongoDB';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

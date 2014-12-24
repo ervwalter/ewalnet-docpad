@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            
+    <article id="post" class="post">
+    <div class="post-date">Sep 28th, 2012</div>
+    
+    <h1><a href='/2012/09/28/coffeescript-and-knockout-hello-world/'>CoffeeScript and Knockout: Hello, World!</a></h1>
+    
+    <div class="post-content">
+        <p>I recently decided to try my hand at writing some <a href="http://coffeescript.org/">CoffeeScript</a>, and since a lot of my web development uses <a href="http://knockoutjs.com/">Knockout</a>, I was curious if the two would play nicely together.  It turns out that they fit together very well.</p>
+<p>Let&#39;s start with the standard <a href="http://knockoutjs.com/examples/helloWorld.html">Hello, World</a> example.  Hit the link for the full example if you&#39;re not familiar with it.  Here, I&#39;m only going to focus on the script.</p>
+<p>Here is the CoffeeScript version of the example&#39;s JavaScript:</p>
+<pre><code class="lang-coffeescript">class ViewModel
+    constructor: (first, last) -&gt;
+        @firstName = ko.observable(first)
+        @lastName = ko.observable(last)
+        @fullName = ko.computed =&gt;
+            @firstName() + &quot; &quot; + @lastName()
+
+$ -&gt;
+    ko.applyBindings(new ViewModel(&quot;CoffeeScript&quot;, &quot;Fan&quot;))
+</code></pre>
+<p>You can try this example live on <a href="http://jsfiddle.net/ervwalter/FNDep/">jsFiddle</a>.</p>
+<p>A few things are worth pointing out in the example.</p>
+<p>First is the use of <code>@</code>.  When I first started learning CoffeeScript, I missed the fact that <code>@</code> was an alias for <code>this</code>.  So in the example above, <code>@firstName</code> is equivalent to <code>this.firstName</code>.</p>
+<p>The second thing to notice is that I used the fat arrow (<code>=&gt;</code>) for the computed observable in order to ensure that <code>this</code> is set correctly when the function runs.  I could have alternatively passed <code>this</code> as a second parameter to <code>ko.computed()</code> but I think that the approach above is easier to read.</p>
+<p>Third, the last two lines may look a little odd if you haven&#39;t seen the pattern before, but this is a simple way to write a handler for the jQuery document ready event.</p>
+<p>When processed by CoffeeScript, the code above turns into familiar looking JavaScript:</p>
+<pre><code class="lang-javascript">var ViewModel;
+
+ViewModel = (function () {
+
+    function ViewModel(first, last) {
+        var _this = this;
+        this.firstName = ko.observable(first);
+        this.lastName = ko.observable(last);
+        this.fullName = ko.computed(function () {
+            return _this.firstName() + &quot; &quot; + _this.lastName();
+        });
+    }
+
+    return ViewModel;
+
+})();
+
+$(function () {
+    return ko.applyBindings(new ViewModel(&quot;CoffeeScript&quot;, &quot;Fan&quot;));
+});
+</code></pre>
+<p>Note that the fat arrow (<code>=&gt;</code>) has introduced the use of <code>_this</code> in the computed observable.  This is essentially the same pattern that people use when they define <code>var self = this;</code> and then use <code>self</code> instead of <code>this</code> in closures in their view model, but it is done automatically by the CoffeeScript compiler.</p>
+<p>In the end, the score is 9 lines of CoffeeScript instead of 20 lines of JavaScript and the CoffeeScript version is (in my opinion) easier to read with a higher signal-to-noise ratio.</p>
+<p>This is just a very simple example, and it doesn&#39;t really exercise the full power of CoffeeScript. The next few posts will walk through a few more scenarios including CoffeeScript versions of some of the more complex Knockout samples and examples of how to use the Knockout mapping plugin with CoffeeScript.</p>
+<p>Next post in this series: <a href="/2012/10/04/knockout-samples-in-coffeescript/">Knockout Samples in CoffeeScript</a></p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/coffeescript/'>CoffeeScript</a>, <a href='/tags/knockout/'>Knockout</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Sep 26th, 2012</div>
+    
+    <h1><a href='/2012/09/26/minor-updates-for-fitbit-users/'>Minor Updates for FitBit Users</a></h1>
+    
+    <div class="post-content">
+        <p>I just pushed out a minor update that applies mostly to users who have FitBit scales.  A few of you have noticed that when you delete a weight reading on the FitBit website, it doesn&#39;t seem to get removed from your TrendWeight charts.  That has changed as of tonight.</p>
+<p>The problem is that when TrendWeight asks the FitBit website for your new weight data, the FitBit website doesn&#39;t give any indication that you have deleted or updated an old weight reading.  That&#39;s still the case, but as of tonight, when you visit the TrendWeight site, my code will now automatically look at all of your weight readings for the past 14 days and will notice if you deleted or updated any old readings from that 2 week time period.  </p>
+<p>That means that the vast majority of the time, things will just work automatically.  For example, if you go in and delete an erroneous weight reading for yesterday, TrendWeight will automatically notice and delete the corresponding weight reading from the TrendWeight database.</p>
+<p>But what happens if you delete something from more than 14 days ago?  Because of the limitations of the FitBit API, it&#39;s not practical for me to automatically look through your entire list of historical weight readings and so if you do happen to make a change to weight data, for example, from 2 months ago, you&#39;ll need to let TrendWeight know about it.</p>
+<p>There is now a new button in your <a href="https://trendweight.com/settings">account settings</a> to fully resynchronize all of your weight readings, no matter how old any changes are:</p>
+<p><img class="fancybox" src="/stuff/trendweight-resync.png" /></p>
+<p>Just click the <strong>Resync All Data</strong> button and any changes you have made to old data will get correctly picked up in TrendWeight.</p>
+<p>Note, this button is also available for Withings scale users, but if you have a Withings scale, you&#39;ll generally not need to use this as the Withings API tells me if you have updated or deleted old data and TrendWeight handles those changes automatically.  That said, if you ever think the data looks fishy, the resync button may come in handy.</p>
+<p>As always, if you have questions, email me at <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#116;&#x72;&#101;&#110;&#x64;&#119;&#101;&#105;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#64;&#116;&#x72;&#101;&#110;&#x64;&#119;&#101;&#105;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>, <a href='/tags/fitbit/'>FitBit</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Sep 17th, 2012</div>
+    
+    <h1><a href='/2012/09/17/fitbit-zip-worth-another-look/'>FitBit Zip: Worth Another Look?</a></h1>
+    
+    <div class="post-content">
+        <p><img class="float-right" src="/stuff/fitbit-zip.png" /></p>
+<p>FitBit announced two new trackers today: the <a href="http://www.fitbit.com/zip">FitBit Zip</a> and the <a href="http://www.fitbit.com/one">FitBit One</a>.  </p>
+<p>The FitBit One appears to just be an iteration of the previous FitBit trackers.  It adds a wake-up-via-vibration alarm clock and it syncs with Bluetooth 4.0 instead of syncing via a proprietary dock.  Nice improvements, for sure, but the One appears to no longer come with a dock to facilitate easy charging.</p>
+<p>The FitBit Zip is a new product.  It&#39;s different from the One in several ways, but the two that I think are important are that it uses a non-rechargeable battery that lasts for 4 months, and oddly enough, that it is larger.  As a side bonus, it&#39;s also much less expensive at only $60.  I imagine that the reduced price compared to the $100 FitBit One will make it attractive to many more people.</p>
+<p>Why do I think the FitBit Zip is a better option (at least for me)? </p>
+<p>First, I think the larger FitBit Zip is actually a bonus for careless people like me.  As a gadget nerd that is interested in weight loss, I have owned multiple FitBit trackers in the past but have recently stopped carrying them.  Yes, I said &#39;multiple.&#39;  That is because I lost one and accidentally sent another through the washing machine.  Partly this is because I am careless, but it&#39;s partly also because the traditional FitBit is tiny and lightweight.  It&#39;s easy to forget it is in your pocket, and it&#39;s easy to not notice that it fell off your belt.  I hope that the new form factor of the Zip will actually remedy this for me.  It looks like the belt clip for the Zip is actually a little neoprene case that fits around the actual ovoid Zip tracker.  It would be neat if FitBit released additional types of holders. Perhaps a keychain holder?  A wristband holder?</p>
+<p>The second reason I like the Zip is the fact that the Zip has a battery that lasts 4 months even if that means I have to keep a small supply of watch batteries at home.  With the original FitBit trackers, I&#39;d often forget to put it in my pocket the mornings that it was sitting on the charger (about once a week).  With the Zip, I&#39;ll be able to just leave it with my keys and wallet each night and not have to worry about charging the battery once a week.</p>
+<p>The Bluetooth 4.0 connectivity is a nice bonus for both new units.  Previously, the FitBit tracker would only upload its data to my FitBit dashboard at the end of the day when I came within range of its dock at home.  Now, it will update via my iPhone anytime I use the FitBit app.  This is particularly helpful for people like me who are using the FitBit meal tracking features because it means that the app&#39;s calculation for how many more calories I can consume will be accurate based on an up to the minute understanding of my activity level so far for the day.</p>
+<p>All in all, these are enough improvements for me to rationalize trying a FitBit tracker one more time.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/gadgets/'>Gadgets</a>, <a href='/tags/fitbit/'>FitBit</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Sep 15th, 2012</div>
+    
+    <h1><a href='/2012/09/15/connecting-currentcost-plotwatt-and-cosm/'>Connecting CurrentCost, PlotWatt, and Cosm</a></h1>
+    
+    <div class="post-content">
+        <p>In my post, <a href="/2012/09/03/monitoring-energy-usage-for-fun-and-profit/">Monitoring Energy Usage for Fun and Profit</a>, I described my energy monitoring setup which consists of a CurrentCost energy monitor feeding data to PlotWatt.com and Cosm.com for analysis.  In this post, I will explain how all the connections work.</p>
+<p>At a high level, the CurrentCost receiver is connected to a Windows computer via a special USB data cable.  That Windows box is running a piece of software, the CurrentCost Agent, that reads data from the CurrentCost receiver and feeds it to PlotWatt and Cosm using their APIs.</p>
+<p>If you go to the CurrentCost website, you may notice that they have something called the Enerati Web Bridge (also sometimes called the CurrentCost Web Bridge).  This is a device that plugs into the receiver and into an Ethernet connection and sends energy data to their web service without the need for a computer in the middle.  I am not uses this box for several reasons:</p>
+<ol>
+<li>The web bridge only uploads one data point every 5 minutes even though the CurrentCost receiver is capable of providing data points every 7 seconds.</li>
+<li>Feedback from others who have these web bridges is that they are flaky.  In other words, sometimes they just stop uploading data and have to be power cycled to start working again.</li>
+<li>The web bridge only uploads data to a single place.  In the latest iteration of the web bridge, that is the Enerati web site.  My personal opinion is that the Enerati web site is ugly and doesn&#39;t provide terribly useful functionality.  But most of all, I want to be able to control what happens with my data.  I want to send it to multiple web sites, and I want the option to store it in my own database, etc.</li>
+</ol>
+<p>So, instead of using the web bridge that CurrentCost sells, I bought the USB Data Cable from them and wrote my own software to read the data and send it to the places I wanted to send it.</p>
+<p>Note, all of the code I discuss below is available in this <a href="https://github.com/ervwalter/currentcost-agent">GitHub repository</a>.</p>
+<p>The agent is internally broken into two pieces as shown below.  The serial port reader thread reads from the CurrentCost display as data comes in and queues it for processing.  An uploader thread wakes up periodically to upload any queued data to the cloud.</p>
+<p><img src="/stuff/currentcost-agent-diagram.png" /></p>
+<h2 id="getting-data-from-the-currentcost-receiver">Getting Data from the CurrentCost Receiver</h2>
+<p>When you use the USB Data Cable, the CurrentCost receiver will appear as a virtual COM port.  Fair warning, getting the USB Data Cable to work correctly with 64bit Windows 7 is a pain in the ass.  They provide <a href="http://www.currentcost.net/Windows%207%2064bit%20Prolific%20Data%20Cable%20Drivers%20Code%2010%20Workaround.pdf">some instructions</a> but it is still painful, and you have to be careful not to deviate from them at all.  First, you have to use the driver <em>they</em> provide (not the one included with Windows 7).  The correct driver is included in the <a href="http://www.currentcost.net/softwareoptions.html">Current Cost Smart Software</a> download, so install that even if you don&#39;t want the CurrentCost application.  Note, the C2 Terminal application on that same download page is very useful for debugging, so you might want to get that too.</p>
+<p>Anyway, once you get the device showing up in Windows successfully, you will have a virtual COM port you can open and read from.  In my agent, I start a thread that will be dedicated to reading from the serial port.  The first step is opening the serial port for reading:</p>
+<pre><code class="lang-cs">using (SerialPort port = new SerialPort())
+{
+    port.PortName = _comPort;  // e.g. &quot;COM5&quot;
+    port.BaudRate = _baudRate; // e.g. 57600
+    port.DtrEnable = true;
+    port.ReadTimeout = 5000;
+    port.Open();
+
+    // read data, etc...
+
+}
+</code></pre>
+<p>Once the COM port is open, you can just read from it forever (until the app is terminated).  For each sensor paired with the receiver, you&#39;ll get one line of XML every 7 seconds.  That XML contains information on the current readings for that sensor.  If the sensor is a whole home transmitter, it may have multiple channels--one per connected CT clamp.  If it is an IAM, it will have only a single channel.  I parse the XML and add a SensorReading object to a <code>ConcurrentQueue&lt;SensorReading&gt;</code> queue for the other thread to eventually deal with:</p>
+<pre><code class="lang-cs">while (true)
+{
+    // exception handling has been removed for brevity. look on github for the real code.
+
+    string line = port.ReadLine();
+    XDocument doc = XDocument.Parse(line, LoadOptions.None);
+    var msg = doc.Element(&quot;msg&quot;);
+    if (msg != null)
+    {
+        SensorReading reading = new SensorReading();
+        var ch1 = msg.Element(&quot;ch1&quot;);
+        if (ch1 != null)
+        {
+            reading.Timestamp = (int)(DateTime.UtcNow - epochStart).TotalSeconds; // unix timestamp
+            reading.Sensor = int.Parse(msg.Element(&quot;sensor&quot;).Value);
+            reading.Watts = int.Parse(ch1.Element(&quot;watts&quot;).Value);
+            var ch2 = msg.Element(&quot;ch2&quot;);
+            if (ch2 != null)
+            {
+                reading.Watts += int.Parse(ch2.Element(&quot;watts&quot;).Value);
+            }
+            var ch3 = msg.Element(&quot;ch3&quot;);
+            if (ch3 != null)
+            {
+                reading.Watts += int.Parse(ch3.Element(&quot;watts&quot;).Value);
+            }
+            readings.Enqueue(reading);
+            _statusForm.Invoke(new NewReadingHandler(_statusForm.NewReading), reading); // inform the UI of the new reading
+        }
+    }
+}
+</code></pre>
+<p>This is basically all the sensor reading thread does. Note, in my agent, I ignore the timestamp that comes from the receiver (because I don&#39;t want to bother keeping the receiver&#39;s clock accurate) and I just use the Windows computer&#39;s clock.  </p>
+<h2 id="processing-sensor-readings">Processing Sensor Readings</h2>
+<p>There is a second thread in my agent that wakes up every 30 seconds and processes any pending new readings.  In my case, this means sending the data to PlotWatt and Cosm, but you could also store the data in a database or send it to some other cloud service for analysis.</p>
+<pre><code class="lang-cs">// exception handling has been removed for brevity. look on github for the real code.
+DateTime nextUpload = DateTime.Now.AddSeconds(UploadFrequency);
+while (true)
+{
+    Thread.Sleep(1000);
+    if (DateTime.Now &lt; nextUpload)
+    {
+        continue;  // it&#39;s not time for another upload, so go back to sleep
+    }
+    nextUpload = DateTime.Now.AddSeconds(UploadFrequency);
+    List&lt;SensorReading&gt; newReadings = new List&lt;SensorReading&gt;();
+    SensorReading newReading;
+    while (readings.TryDequeue(out newReading))
+    {
+        newReadings.Add(newReading);
+    }
+
+    if (newReadings.Count == 0)
+    {
+        continue;
+    }
+
+    //upload to cloud services
+    PostToPlotWatt(newReadings);
+    PostToCosm(newReadings);
+
+    //notify the UI that we did an upload
+    _statusForm.Invoke(new NotifyUploadHandler(_statusForm.NotifyUpload));
+}
+</code></pre>
+<h2 id="uploading-to-cosm">Uploading to Cosm</h2>
+<p>Uploading to Cosm requires two things.  First, you need to get an API key from your dashboard, and second, you need to create datastreams for each sensor that you have.  I have a main sensor and four IAMs, so that means I needed to create datastreams 0, 1, 2, 3, and 4.</p>
+<p>The actual upload is pretty straightforward. The Cosm API requires one HTTP POST per datastream, so the first step is to organize the new readings by sensor id.  While doing that, each reading is converted to the required JSON format.  The second step is to make an HTTP POST for each datastream with all of the readings for that sensor.</p>
+<pre><code class="lang-cs">private void PostToCosm(List&lt;SensorReading&gt; newReadings)
+{
+    // organize new readings by sensor id
+    DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    Dictionary&lt;int, JArray&gt; feeds = new Dictionary&lt;int, JArray&gt;();
+    foreach (var reading in newReadings)
+    {
+        if (!feeds.ContainsKey(reading.Sensor))
+        {
+            feeds.Add(reading.Sensor, new JArray());
+        }
+        JObject o = new JObject();
+        o[&quot;at&quot;] = epoch.AddSeconds(reading.Timestamp).ToString(&quot;o&quot;);  // convert unix timestamp to the required format
+        o[&quot;value&quot;] = (int)reading.Watts;
+        feeds[reading.Sensor].Add(o);
+    }
+
+    // upload all the readings for each datastream
+    WebClient cosmClient = new WebClient();
+    foreach (var feedId in feeds.Keys)
+    {
+        string cosmUrl = string.Format(&quot;http://api.cosm.com/v2/feeds/71541/datastreams/{0}/datapoints?key={1}&quot;, feedId, _cosmKey);
+        JObject cosm = new JObject();
+        cosm[&quot;datapoints&quot;] = feeds[feedId];
+        string cosmData = cosm.ToString();
+        cosmClient.UploadString(cosmUrl, cosmData);
+    }
+}
+</code></pre>
+<p>Cosm provides a nice API debugging console on their dashboard that you can use to watch your uploads happening in real time.</p>
+<h2 id="uploading-to-plotwatt">Uploading to PlotWatt</h2>
+<p>Uploading to PlotWat also requires an API key.  To get one, go through the PlotWatt setup steps and when it asks you how you want to connect data, choose &quot;Web-Connected Energy Meter&quot; and then &quot;PlotWatt API&quot; from the list of energy meter types.  Last, to get your actual API key after you go through the setup, you have to go to your Settings page and click on &quot;Connected Gateways&quot;.  This page will show your API key which will look something like <code>OGNmMmRhMWFjODBj</code>.  Perhaps in the future, PlotWatt will show the API key on a page during the initial setup so that you don&#39;t have to go looking for it afterwards.</p>
+<p>With PlotWatt, the agent will automatically create &quot;meters&quot; based on the sensors connected to your receiver.  It does this in kind of a dumb way though.  First, it asks PlotWatt how many meters you already have and then it creates additional meters if it looks like you have data for more meters than that.  Depending on your situation, you may or may not have to contact PlotWatt support to get some help after the agent does this:</p>
+<p>If you have only a single, whole home sensor connected to your CurrentCost system, the agent will create a single meter and everything will work fine for you.</p>
+<p>If you have have multiple sensors (multiple transmitters or a single transmitter + IAMs, etc) then you&#39;ll probably have to have the PlotWatt guys tweak things for you.  The agent will create the correct number of meters, but there is no way in the API to tell PlotWatt what kind of sensor each is.  For example in my case, sensor 0 was the whole home sensor and sensors 1-4 were IAMs that represented a subset of the energy usage from sensor 0.  Until the PlotWatt guys tweaked my meters, the PlotWatt website didn&#39;t seem to understand how to handle this data.  Similarly, if you had multiple whole home meters and perhaps a meter for your solar power generation, the I don&#39;t know if PlotWatt would automatically know how to add the meters together.  In any case, my experience was that the PlotWatt staff are very friendly and willing to help get this initial setup in place, so I&#39;d say don&#39;t hesitate to email them.</p>
+<p>After the meters are setup, the last step is uploading the data.  The PlotWatt API supports a single bulk HTTP POST for all of the pending data for all sensors in a comma delimited format:</p>
+<pre><code class="lang-cs">private void PostToPlotWatt(List&lt;SensorReading&gt; newReadings)
+{
+    WebClient client = new WebClient();
+    //tell the WebClient to use your API key
+    string authInfo = _plotWattKey + &quot;:&quot;;
+    authInfo = Convert.ToBase64String(Encoding.Default.GetBytes(authInfo));
+    client.Headers[&quot;Authorization&quot;] = &quot;Basic &quot; + authInfo;
+
+    //first check how many meters are on the account already and create new ones if necessary
+    int maxSensorReadings = newReadings.Max(sr =&gt; sr.Sensor) + 1;
+    string rawMeters = client.DownloadString(&quot;http://plotwatt.com/api/v2/list_meters&quot;).Trim().Trim(&#39;[&#39;, &#39;]&#39;);
+    string[] meters = rawMeters.Split(&#39;,&#39;);
+    if (string.IsNullOrWhiteSpace(rawMeters) || meters.Length &lt; maxSensorReadings)
+    {
+        int numberToCreate;
+        if (string.IsNullOrWhiteSpace(rawMeters))
+        {
+            numberToCreate = maxSensorReadings;
+        }
+        else
+        {
+            numberToCreate = maxSensorReadings - meters.Length;
+        }
+        //create new meters if more are required
+        client.UploadString(&quot;http://plotwatt.com/api/v2/new_meters&quot;, &quot;number_of_new_meters=&quot; + numberToCreate.ToString());
+        rawMeters = client.DownloadString(&quot;http://plotwatt.com/api/v2/list_meters&quot;).Trim().Trim(&#39;[&#39;, &#39;]&#39;);
+        meters = rawMeters.Split(&#39;,&#39;);
+    }
+
+    //now build the upload and post the readings
+    List&lt;string&gt; readingsToPost = new List&lt;string&gt;();
+    foreach (var reading in newReadings)
+    {
+        readingsToPost.Add(string.Format(&quot;{0},{1},{2}&quot;, meters[reading.Sensor], reading.Watts / 1000.0, reading.Timestamp));
+    }
+    string postData = string.Join(&quot;,&quot;, readingsToPost);
+    client.UploadString(&quot;http://plotwatt.com/api/v2/push_readings&quot;, postData);
+}
+</code></pre>
+<h2 id="user-interface">User Interface</h2>
+<p><img class="float-right" src="/stuff/currentcost-agent.png" /></p>
+<p>My agent has a minimal user interface that sits in the lower right corner of the screen.  There is also a system tray icon that can be used to reopen the UI if you close it.  You could just as easily create a Windows service instead of a system tray application if you didn&#39;t care about the UI.  Frankly the UI I created isn&#39;t terribly interesting and the only reason I created it was so that I had something I could look at the make sure the agent was still alive and functioning.  I&#39;m sure you could do something much better if you really wanted to :)</p>
+<p>In the code above there are two places where the background threads interact with the UI.  First, when the sensor reading thread gets a new reading, it tells the UI thread about it.</p>
+<ul>
+<li>The UI is updated with the new wattage reading</li>
+<li>The counter of pending uploads can be incremented</li>
+</ul>
+<p>The second notification happens in the uploader thread.  After an upload is completed, the UI is notified so that the counter of pending uploads can be reset and so the &quot;Last Upload: MM/DD/YYYY&quot; message can be updated.</p>
+<p>Of course, because the UI is running on the main application thread, the background threads use <code>_statusForm.Invoke(...)</code> to notify the UI thread of the relevant events.
+<br class="clear" /></p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/currentcost/'>CurrentCost</a>, <a href='/tags/plotwatt/'>PlotWatt</a>, <a href='/tags/cosm/'>Cosm</a>, <a href='/tags/gadgets/'>Gadgets</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Sep 9th, 2012</div>
+    
+    <h1><a href='/2012/09/09/slow-wake-for-macbook-pro-retina/'>&quot;Fixing&quot; Slow Wake for MacBook Pro w/ Retina Display</a></h1>
+    
+    <div class="post-content">
+        <p>My main machine is a MacBook Pro w/ Retina Display.  I carry it at work every day and use it on and off throughout the day, mostly in meetings.  At home, I use it connected to a 27 inch Thunderbolt Display which powers the laptop and charges the battery.  I love almost everything about this laptop.  The one thing that has been getting on my nerves is that it is often painfully slow to wake up when I open the lid.</p>
+<p>After opening the lid, it pretty instantly shows the password dialog box, but that UI is a lie.  In reality, what is immediately shown is a screenshot of what the screen looked like when it went to sleep.  The UI, although visible, is not functional for almost 10 seconds.  You can most easily tell that this is happening by watching the clock display in the upper right of the display.  Right after opening the lid, it will show the incorrect time (the time when the laptop went to sleep).  After 8-10 seconds, the time will become accurate and this is the signal that you can actually start typing your password to unlock the laptop.</p>
+<p>What is actually happening is that these new MacBook Pro&#39;s (and recent MacBook Air&#39;s) have a new powersaving mode which Apple calls <a href="http://support.apple.com/kb/HT4392">standby</a>.  Standby mode kicks in after the laptop has been in normal sleep mode for about an hour.  When that happens, the contents of RAM are written to the hard drive and the RAM is powered down to further extend battery life.  In theory, the laptop will last up to 30 days in standby mode.  The trade off is that, when waking up, it takes a long time to reload 16 GB of RAM from the hard drive (even with SSD).</p>
+<p>Note that if the laptop sleeps for less than an hour, then it will wake up nearly instantly.  I&#39;ve seen this myself in cases where I close the lid briefly while walking between meetings.  This fact is the key to my workaround.  It turns out that this 1 hour delay is configurable.</p>
+<p>I changed the standby delay for my machine from 1 hour to be 24 hours by running this command from a terminal window (86400 seconds = 24 hours):</p>
+<pre><code>sudo pmset -a standbydelay 86400
+</code></pre><p>Given that I plug my laptop into the Thunderbolt Display every night (which recharges the battery), I don&#39;t care as much about the standby feature keeping my battery alive for 30 days.  In theory, I may go on a trip or something and standby mode may be more useful, so I didn&#39;t disable it completely (which can be done by setting the delay to 0).  By setting it to 24 hours, standby will almost never happen with my normal day to day usage patterns and I&#39;ll almost always have instant wake times.  It may be that 24 hours is unnecessarily long and 12 or 18 hours would have worked just as well while providing a little better balance between battery life and day to day convenience.  Time will tell.</p>
+<p>P.S. If you want to see what your current settings are, you can run this command from the terminal:</p>
+<pre><code>pmset -g
+</code></pre>
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/apple/'>Apple</a>, <a href='/tags/hardware/'>Hardware</a>, <a href='/tags/gadgets/'>Gadgets</a>
+    </div>
+    
+</article>
+
+
+<div class="page-nav">
+    
+    <a class="page-nav-older" href="/page/7/"><span class="icon icon-arrow-left-2"></span> Older</a>
+    
+    
+    <a class="page-nav-newer" href="/page/5/">Newer <span class="icon icon-arrow-right-2"></span></a>
+    
+    <div class="page-nav-archives"><a href="/archives/">- Blog Archives -</a></div>
+</div>
+
+<div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

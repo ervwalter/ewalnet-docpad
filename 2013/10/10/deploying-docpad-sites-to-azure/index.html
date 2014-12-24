@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Deploying DocPad Sites To Windows Azure - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Oct 10th, 2013</div>
+    
+    <h1>Deploying DocPad Sites To Windows Azure</h1>
+    
+    <div class="post-content">
+        <p>There are many ways you can deploy a <a href="http://docpad.org">DocPad</a> site.  One of the simplest options is just to generate a static set of HTML/JavaScript/CSS/etc files and upload them to your favorite web host.  Or you can upload your source files to a Node.js host and run the DocPad Node app interactively.  I&#39;m going to talk about a hybrid approach, specifically with Windows Azure Web Sites.</p>
+<h2 id="why-azure-">Why Azure?</h2>
+<p>I like Azure.  I&#39;m not going to try to argue that it&#39;s &#39;better&#39; than other cloud hosting vendors.  A lot of it comes down to personal preference.  Part of it comes from my background as a Microsoft-ecosystem developer (C#, ASP.NET MVC, etc).  But Azure is not just a cloud provider for Microsoft-ecosystem projects anymore.  They&#39;ve broadened their horizons in the past few years, and have made a push to attack developers from popular non-Microsoft communities to Azure including Node.js, PHP, Ruby, and Python developers.</p>
+<p>Windows Azure <a href="http://www.windowsazure.com/en-us/documentation/services/web-sites/">Web Sites</a> are an interesting service.  They are similar to services like Heroku in that they abstract away the management of the platform and OS and you just deploy &#39;apps&#39;.  They have free, cheap, and not-cheap pricing tiers depending on what features you want and what level of scalability you need. </p>
+<p>A couple of my other <a href="/projects/">projects</a> are hosted on Azure Web Sites, and <a href="https://trendweight.com">TrendWeight</a>, in particular, is running on the &#39;standard&#39; tier which essentially means I have an entire VM to myself that I can use for as many web apps as I want.</p>
+<h2 id="static-site-vs-live-node-js-app-">Static Site vs Live Node.js App?</h2>
+<p>As I mentioned, DocPad sites can be either run as live Node.js apps, or you can generate a static site on your development machine and upload the static files.  There are pros and cons to each.  </p>
+<p>If you run a live Node.js app, you can write additional code to change the behavior of the app at runtime (e.g. dynamically intercepting requests and redirecting them based on whatever criteria you like, etc.)  You upload your DocPad source files to the web server and they get run by Node.js dynamically at runtime.</p>
+<p>My blog doesn&#39;t need that level of dynamic behavior, so my preference was for a static site just for raw speed.  Azure (IIS 8.0, really) is really good at serving up static files, and core IIS functionality, configured by web.config, can handle all the extra stuff I need (e.g. redirecting requests that leave the &#39;www&#39; off the hostname).</p>
+<p>But what I <em>didn&#39;t</em> want to have is a painful authoring workflow:</p>
+<ol>
+<li>Write a blog post by creating a markdown file</li>
+<li>Commit my markdown file to my local git repo</li>
+<li>Open a terminal window</li>
+<li>Manually run <code>docpad -e static clean</code> and then <code>docpad -e static generate</code> to regenerate the static files</li>
+<li>Copy the generated static files to Azure via one of their supported deployment options.</li>
+</ol>
+<p>I was intrigued by the Windows Azure <a href="http://docpad.org/docs/deploy">deployment instructions</a> on the DocPad site, but they didn&#39;t do exactly what I wanted and more importantly, they don&#39;t work anymore (Microsoft must have changed something to break them).  The idea of this approach is that you push your DocPad <em>source</em> to Azure and then leverage the fact that Azure servers already have Node.js installed on them (since they support running Node.js apps) and run the DocPad generation command directly on the Azure server at deployment time instead of on your local development workstation.</p>
+<p><img class="fancybox border float-right" src="/stuff/docpad-azure-deploy.png" width="250"/></p>
+<p>I chose to use the GitHub integration, but you can also use DropBox or simply <code>git push</code> to get your files up to Azure. With this process, the authoring workflow looks like this:</p>
+<ol>
+<li>Write a blog post by creating a markdown file</li>
+<li>Commit my markdown file to my local git repo</li>
+<li>Push my changes to GitHub</li>
+</ol>
+<p>GitHub notifies Azure about the new commits, Azure pulls them, and runs the deployment script to generate fresh static files, then copies the new set of static files to the folder where the site is being served from (see the screenshot for an example).</p>
+<h2 id="how-">How?</h2>
+<p>Put these three files in the root folder of your source tree (next to docpad.coffee) and push your changes to Azure:</p>
+<ul>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/.deployment">.deployment</a></li>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/web.config">web.config</a></li>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/azure-deploy.cmd">azure-deploy.cmd</a></li>
+</ul>
+<p>These files are <em>almost</em> completely generic and can be made to work with any DocPad site, not just <em>my</em> docpad site.  They automatically figure out things like the version of node your project requires, etc.  There is essentially only one thing you might need to tweak in azure-deploy.cmd, and it&#39;s explained below.</p>
+<p>That said, I&#39;ll explain how so that they are less magical...</p>
+<h3 id="-deployment">.deployment</h3>
+<p>The <code>.deployment</code> file is a special file that Azure looks at to decide how to deploy your site.  If you have a <code>.deployment</code> file, Azure will do what it says instead of trying to auto-detect what kind of project you have.  Our file is simple and just tells Azure to run the <code>azure-deploy.cmd</code> script to do the actual deployment:</p>
+<pre><code>[config]
+command = azure-deploy.cmd
+</code></pre><h3 id="web-config">web.config</h3>
+<p>This <code>web.config</code> file is just a dummy file.  It is <em>not</em> the <code>web.config</code> file that will actually be used by your website once deployed.  If yout want a <code>web.config</code> file for your site, you should put it in <code>./src/files/web.config</code> and it will be copied to the root of your site by the DocPad static file generation process.  </p>
+<p>This file is just there to trick Microsoft&#39;s node/npm version detection script that we&#39;re going to use.  If you don&#39;t have one, it gives you a (benign) warning message currently.  Technically this file isn&#39;t necessary today, but I include one anyway because in the future Microsoft may change their script to do something not-benign if they don&#39;t detect an existing <code>web.config</code>.</p>
+<h3 id="azure-deploy-cmd">azure-deploy.cmd</h3>
+<p>This is the meat of the magic.  It does these main things:</p>
+<h4 id="setup">Setup</h4>
+<p>The Setup&#39; section initializes a number of variables that hold things like the path to our source code and the path to the root folder of our web site.</p>
+<h4 id="node-version-detection">Node Version Detection</h4>
+<p>Next, this code uses a Microsoft-provided script to parse our package.json file to determine what version of Node and NPM we need and it initializes a couple variables to hold the paths to those two executables.</p>
+<pre><code class="lang-dos">:: 1. Select node version
+call :SelectNodeVersion
+</code></pre>
+<h4 id="install-modules">Install Modules</h4>
+<p>Next, this section of code runs <code>npm install</code> to install the required node modules.</p>
+<pre><code class="lang-dos">:: 2. Install npm packages
+echo Installing npm packages...
+pushd &quot;%DEPLOYMENT_SOURCE%&quot;
+call !NPM_CMD! install --production
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+</code></pre>
+<p>I use an <a href="https://npmjs.org/doc/shrinkwrap.html">npm-shrinkwrap.json</a> file to ensure that dependencies only change when I have tested them on my development machine.  Keep in mind that if you remove a dependency, it will not get removed from the <code>node_modules</code> folder on azure automatically with this approach.  Usually, that isn&#39;t a problem and just amounts to a small amount of wasted disk space.  I did experiment, for a while, with deleting the <code>node_modules</code> folder and reinstalling everything from scratch with every deployment, but that made deployments take a very long time, so I stopped doing that.</p>
+<h4 id="generate-static-files">Generate Static Files</h4>
+<p>The next bit of code runs <code>docpad -e static generate</code> to generate your site.  Again, prior to running the command, it deletes the existing <code>out</code> folder so that you always have exactly the right files every time you deploy even if you remove files over time.</p>
+<pre><code class="lang-dos">:: 2. Build DocPad site
+echo Building DocPad site...
+pushd &quot;%DEPLOYMENT_SOURCE%&quot;
+rd /s /q out
+IF !ERRORLEVEL! NEQ 0 goto error
+&quot;!NODE_EXE!&quot; .\node_modules\docpad\bin\docpad -e static generate
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+</code></pre>
+<h4 id="copy-files">Copy Files</h4>
+<p>Finally, we use the Microsoft file-copy tool to copy the generated files to the root folder of our web site:</p>
+<pre><code class="lang-dos">:: 3. KuduSync
+echo Copying Files...
+call %KUDU_SYNC_CMD% -v 500 -i &quot;posts;drafts&quot; -f &quot;%DEPLOYMENT_SOURCE%\out&quot; -t &quot;%DEPLOYMENT_TARGET%&quot; -n &quot;%NEXT_MANIFEST_PATH%&quot; -p &quot;%PREVIOUS_MANIFEST_PATH%&quot;
+IF !ERRORLEVEL! NEQ 0 goto error
+</code></pre>
+<p><strong>Note:</strong> This is the one section you might need to tweak.  Notice the <code>-i &quot;posts;drafts&quot;</code> in the third line.  That tells the <a href="https://github.com/projectkudu/KuduSync.NET">KuduSync</a> tool to not copy anything in the <code>posts/</code> or <code>drafts/</code> folders.  This is specific to my particular blog and you may want to remove it or modify it for your own purposes.  I don&#39;t copy anything from <code>posts/</code> because I am using the <a href="https://github.com/mgroves84/docpad-plugin-dateurls/">dateurls</a> plugin which changes the URLs of documents in that folder to live elsewhere.  I ignore that folder because I don&#39;t want the left over files from the <code>posts/</code> folder to be copied to the live site. I also exclude files in the &#39;drafts/&#39; folder because, well, they are drafts and I don&#39;t want them to appear on the live site.  I&#39;ll talk more about how I handle draft posts in my next blog post.</p>
+<h2 id="summary">Summary</h2>
+<p>That&#39;s it.  Add those three files and you get easy continuous integration support with Azure and DocPad.  Pretty sweet.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/docpad/'>DocPad</a>, <a href='/tags/azure/'>Azure</a>, <a href='/tags/nodejs/'>NodeJS</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2013/10/10/deploying-docpad-sites-to-azure/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Deploying DocPad Sites To Windows Azure';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Ewal.net</title>
+    <link href="http://www.ewal.net/atom.xml" rel="self"/>
+    <link href="http://www.ewal.net"/>
+    <updated>2014-12-24T05:03:09.735Z</updated>
+    <id>http://www.ewal.net</id>
+    <author>
+        <name>Erv Walter</name>
+        <email>erv@ewal.net</email>
+    </author>
+
+    
+    <entry>
+        <title>Dealing with Heartbleed</title>
+        <link href="http://www.ewal.net/2014/04/18/dealing-with-heartbleed/"/>
+        <updated>2014-04-19T03:30:00.000Z</updated>
+        <id>/2014/04/18/dealing-with-heartbleed/</id>
+        <content type="html"><![CDATA[<p>If you have been on the internet for the last couple weeks, you have likely heard of the Heartbleed bug.  If not, read about it <a href="http://heartbleed.com/">here</a>.  Here&#39;s what you need to know about TrendWeight.</p>
+<h2 id="fitbit-and-withings-connections">FitBit and Withings Connections</h2>
+<p>FitBit has announced that they were affected (like many other sites) by this bug and they are recommending that FitBit users reauthorize third party applications like TrendWeight.  I have not heard anything from Withings, but it doesn&#39;t hurt to reauthorize your Withings account just in case as well.  Doing this is easy regardless of if you use FitBit or Withings.</p>
+<ol>
+<li>Go to your <a href="https://trendweight.com">Settings</a> page and scroll to the bottom.</li>
+<li>Click the <strong>Disconnect Scale</strong> button.  This will deauthorize TrendWeight from getting at your FitBit or Withings data.</li>
+<li>You&#39;ll be taken back to a page where you can reconnect to FitBit or Withings.  Once you do this, new authentication keys will be generated for you, and your data will be completely redownloaded (you won&#39;t lose anything).</li>
+<li>You&#39;re done.  There is no step 4.</li>
+</ol>
+<h2 id="trendweight-itself">TrendWeight Itself</h2>
+<p>Our SSL provider, CloudFlare, has already fixed their servers, and in fact <a href="http://blog.cloudflare.com/staying-ahead-of-openssl-vulnerabilities">fixed them before the bug was made public</a>.  I have no reason to believe that anyone exploited the bug to attack TrendWeight prior to CloudFlare fixing the bug. That said, better safe than sorry, as they say.  If you want to be extra cautious, you may want to consider changing your TrendWeight password <a href="https://trendweight.com/changepassword/">here</a>.</p>
+<p>Isn&#39;t the Internet fun?  If you have any questions, feel free to email me at <a href="mailto:support@trendweight.com">&#x73;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#x74;&#114;&#101;&#110;&#100;&#119;&#x65;&#105;&#103;&#x68;&#116;&#46;&#99;&#x6f;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Fat Mass is Missing for Withings Users [Resolved]</title>
+        <link href="http://www.ewal.net/2014/03/26/withings-fat-mass-problems/"/>
+        <updated>2014-03-26T13:30:00.000Z</updated>
+        <id>/2014/03/26/withings-fat-mass-problems/</id>
+        <content type="html"><![CDATA[<p>Multiple Withings users have let me know that their Fat Mass data has disappeared from TrendWeight.  Apparently something is going on with the Withings API.  I don&#39;t know what the problem is yet, but I am investigating.  Please stay tuned.</p>
+<p><strong>3/27 Update:</strong>  I have confirmed with multiple users that the body fat data is simply missing from the data that the Withings API is giving TrendWeight.  At this point, I don&#39;t know of anything I can do to change that.  I still don&#39;t know why it is only happening to some people and not others.  I have sent an email to Withings support asking if they know of anything that might have changed, and someone from Withings has already responded and is actively investigating the problem.</p>
+<p><strong>3/28 Updated:</strong> A developer at Withings emailed me to let me know that they found and fixed the problem.  I confirmed that body mass data is once again appearing for several of the people who I know were affected and everything looks good.  I automatically did a full resync for all Withings users who updated in the last week (which should catch anyone who might have been affected), so your missing data should now be back.  If you notice anything wrong, though, don&#39;t hesitate to contact me.</p>
+<p> And thanks to the folks at Withings for finding and fixing the problem so quickly.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Mystery Solved: FitBit Rounding Error</title>
+        <link href="http://www.ewal.net/2014/01/27/mystery-solved-fitbit-rounding-error/"/>
+        <updated>2014-01-27T21:34:00.000Z</updated>
+        <id>/2014/01/27/mystery-solved-fitbit-rounding-error/</id>
+        <content type="html"><![CDATA[<p>A long-standing mystery has finally been solved...</p>
+<p><strong>Short Version:</strong></p>
+<p>If your TrendWeight account is connected to Fitbit, and you don&#39;t use the metric system (kilograms), you may have noticed that the actual weights shown on TrendWeight were often different from the weights show on fitbit.com by 0.1 - 0.2 pounds.  This doesn&#39;t happen anymore.</p>
+<p><strong>Long Version:</strong></p>
+<p>Sometimes Trendweight shows my actual scale weight as 0.1 lb higher or lower than what I remember the scale actually showing.  I&#39;ve noticed it on and off for a while, and I have gotten quite a few emails about it.  I had looked into it in the past several times and confirmed that I am displaying <em>exactly</em> what Fitbit tells me in their API.  So, I chalked it up to an idiosyncrasy on the Fitbit side.  Who cares about 0.1 lb anyway?</p>
+<p>Well, after yet another email today, I started looking into it again.  After some research (aka Google searches), I found a couple other cases where people were having similar problems and in those reports was the nudge I needed to finally understand the problem.  The problem is a rounding error when converting between Metric and English weight units.  Here&#39;s what happens:</p>
+<ol>
+<li>You step on the scale and it displays your weight in pounds and sends it to the fitbit.com database.</li>
+<li>TrendWeight makes an API request and fitbit.com returns your recent weight readings in kilograms and <em>rounded to 1 decimal place</em>.</li>
+<li>TrendWeight converts your recent weight readings back into pounds.</li>
+</ol>
+<p>The problem is the <em>highlighted</em> part of step #2.  When your weight gets converted to kilograms and <em>rounded to 1 decimal place</em> and then converted back into pounds, the 0.1 - 0.2 lbs error gets introduced.</p>
+<p>If only there was a way to tell the Fitbit API that I want the results in pounds (for users who are using pounds) so that I don&#39;t have to convert them myself, then this problem would go away... Oh wait.  There is. Doh!</p>
+<p>By asking Fitbit for weights directly in pounds, TrendWeight now gets actual scale weights that exactly match what was displayed on your scale and what you see on fitbit.com.  I should have realized this a long time ago, and so I feel a little foolish.  Sorry.</p>
+<p>TrendWeight&#39;s logic has been updated, and the next time you visit your dashboard, your weight readings for the past 21 days will automatically be re-downloaded and &quot;fixed&quot;.  That will result in an accurate current &#39;trend weight&#39; (because that trend weight is based, essentially, on the past 20 days of weight readings).</p>
+<p>If you really want to retroactively fix all your historical scale readings, you can do so by going into your <a href="https://trendweight.com/settings">settings</a> and clicking the &#39;Resync All Data&#39; button at the bottom of the page. However, <strong>do not click this</strong> if you have more than 3or 4 years of historical data in TrendWeight or you will risk running into <a href="http://www.ewal.net/2013/06/08/dealing-with-lots-of-historical-data/">the other Fitbit limitation</a> that prevents TrendWeight from loading lots of historical data.  If you have that much old data, you&#39;ll want to wait until that other limitation has been addressed.</p>
+<p><strong>Side Note</strong></p>
+<p>I also want to mention that I am actively working on a new version of the TrendWeight backend that addresses that <a href="http://www.ewal.net/2013/06/08/dealing-with-lots-of-historical-data/">Fitbit API limitation</a> and also opens up the doors for addressing some of the long requested enhancements you all have made.  I still have a bunch of work left to finish before it is ready, but at least the work is in progress...</p>
+<p>As always, email me at <a href="mailto:support@trendweight.com">&#x73;&#117;&#112;&#112;&#111;&#x72;&#116;&#x40;&#116;&#x72;&#x65;&#110;&#100;&#x77;&#x65;&#x69;&#x67;&#104;&#116;&#x2e;&#x63;&#111;&#x6d;</a> if you have any questions or concerns.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>iOS 7 and TrendWeight</title>
+        <link href="http://www.ewal.net/2013/11/04/ios7-and-trendweight/"/>
+        <updated>2013-11-04T16:24:00.000Z</updated>
+        <id>/2013/11/04/ios7-and-trendweight/</id>
+        <content type="html"><![CDATA[<p>I have gotten several reports of problems with using TrendWeight on iOS7 devices.  Most commonly, I hear that TrendWeight seems to force you to login every time you open the site.</p>
+<p>The underlying issue seems to be a bug or a series of bugs in Safari/iOS7 related to storing <a href="http://en.wikipedia.org/wiki/HTTP_cookie">cookies</a>.  This Apple bug appears to affect all web apps, and not just TrendWeight, and other people are also <a href="http://www.infoworld.com/t/html5/bad-news-ios-7s-html5-full-of-bugs-227685">reporting</a> <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">problems</a> with iOS7 on this front.  There have always been oddities in iOS with web apps that are pinned to the home screen, but it appears that iOS 7 made things noticeably worse.</p>
+<p>Unfortunately, there is not anything I can do to fix the underlying problem, but I did make a small change that should cause TrendWeight to launch in the full Safari app instead of by itself.  For some users, this seems to make your login session last longer, but it isn&#39;t a real fix and you&#39;ll eventually be asked to login again.</p>
+<p>Until Apple addresses the underlying problems, there are two other workarounds I can suggest:</p>
+<ul>
+<li>Instead of bookmarking your normal TrendWeight dashboard, bookmark (or add to your home screen) your public &quot;sharing URL&quot; (which you can find on your <a href="https://trendweight.com/settings/">settings</a> page).  Your public &quot;sharing URL&quot; doesn&#39;t require you to login, so you won&#39;t see a login page when you visit that page regardless of if cookies are working or not.</li>
+<li>You can also choose to use <a href="http://itunes.apple.com/us/app/chrome/id535886823">Chrome</a> instead of Safari as a browser on iOS as cookies work fine in Chrome and so it will have no problem remembering your login.</li>
+</ul>
+<p>If I hear more about the underlying Apple bug, I&#39;ll let you all know.  Until then, if you have questions or concerns, email me at <a href="mailto:support@trendweight.com">&#x73;&#x75;&#x70;&#112;&#111;&#114;&#x74;&#x40;&#x74;&#x72;&#x65;&#x6e;&#x64;&#119;&#101;&#x69;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>TrendWeight Maintenance [All Clear]</title>
+        <link href="http://www.ewal.net/2013/06/18/site-maintenance/"/>
+        <updated>2013-06-19T03:00:00.000Z</updated>
+        <id>/2013/06/18/site-maintenance/</id>
+        <content type="html"><![CDATA[<p>Just a quick note that I am adjusting some of the TrendWeight server settings.  As a result, you may get an SSL error from your browser saying that the name of ther server does not match the name of the web site.  Example error dialog boxes are below (these are only a couple examples, your specific browser may look different).  This is a benign error and should be resolved soon.  You can safely ignore these errors.</p>
+<p>I&#39;ll post again when things are back to normal.  Sorry for the inconvenience.</p>
+<p>--</p>
+<p><strong>Update (6/19, 10:28am):</strong></p>
+<p>The SSL certificate issues seem to have been resolved.  Everything is working again.  Note, I reserve the right to screw it up again as I keep tinkering :)</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Dealing with Lots of Historical Data</title>
+        <link href="http://www.ewal.net/2013/06/08/dealing-with-lots-of-historical-data/"/>
+        <updated>2013-06-09T03:00:00.000Z</updated>
+        <id>/2013/06/08/dealing-with-lots-of-historical-data/</id>
+        <content type="html"><![CDATA[<p>So, a TrendWeight user contacted me this week to let me know he was getting an error about the FitBit website not working.  It happened right after he loaded 10 years worth of historical data into FitBit and changed his TrendWeight start date to a date in 2013.  At the same time that the email from this user arrived in my inbox, I also received an automated email from FitBit telling me that a user had exceeded the API request limits and had been temporarily blocked for 1 hour.  Oops.</p>
+<p>There are two &quot;rules&quot; that FitBit enforces on their API that are the heart of this problem:</p>
+<ul>
+<li>No single request for data can retrieve more than 1 month of data at a time.</li>
+<li>No single user can make more than 150 requests in a single hour (or they get blocked temporarily).</li>
+</ul>
+<p>Add in that the API requires separate requests for weight and body fat data.  Now, let&#39;s do the math on how many requests are required to load 10 years worth of data:</p>
+<p>10 years <em> 12 months/year </em> 2 requests/month = <strong>240 requests</strong></p>
+<p>So, 240 requests are needed to load 10 years worth of data, but FitBit blocks requests after 150.  What it boils down it is that, current, it is not possible to tell TrendWeight to use a start date 10 years in the past.</p>
+<p>I have looked more carefully at the FitBit API and there are basically two options that I can think of to resolve this:</p>
+<p><strong>Option 1:</strong> I could create a queuing system so that when you need to load 10 years worth of data, it doesn&#39;t do it all right away.  Instead it would do a few years, wait and hour, do another few years, wait an hour, etc, until all the data was loaded.</p>
+<p><strong>Option 2:</strong> I could use a different API for &quot;old&quot; data.  FitBit has an alternate API that allows me to request up to 3 years of weight or body fat data in a single request.  The catch is that they only return a <em>single</em> data point per day.  If you weight yourself multiple times in a single day, the FitBit API appears to return the <em>last</em> weight of the day.  This is different than what TrendWeight does right now.  Currently, if you weigh yourself multiple times in a single day, TrendWeight uses the <em>first</em> weight of the day because if you weigh yourself right after you wake up, the weight readings tend to be more consistent.  My approach would probably be to use the existing API for any data in the past 12 months and to use the less-precise bulk API for data older than 1 year.</p>
+<p>Neither option is really very good, in my opinion.  Option 1 is a pain for users.  I wouldn&#39;t want to have to wait several hours just to see my data.  This delay would happen not only when you first setup your account, but it happens any time TrendWeight has to do a full resync: when you change your start date, when you change your time zone, when you change your weight units, when you click the &#39;Resync All Data&#39; button.</p>
+<p>Option 2 is a little better because it means you can get all your data pretty much instantaneously, but it isn&#39;t perfect either. The biggest issue would be that your weight for any given day might subtly change after 1 year.  For example, let&#39;s say I weigh myself today (June 8, 2013) in the morning and weigh 220 lbs.  Then I weigh myself in the evening after a large meal and weigh 224 lbs.  For the next few months, TrendWeight will use 220 lbs as my scale reading for the day.  However, if I need to do a resync 13 months from now, TrendWeight will suddenly start using 224 lbs as my scale reading for June 8, 2013.  </p>
+<p>In the grand scheme of things, maybe this doesn&#39;t matter all that much.  It won&#39;t affect the trend weight calculations for July 2014 because the trend weight math is generally unaffected by weight readings older than 20 days or so.  Mostly, the graph will have a slightly different shape than it did before if I happen to look back in time at that older-than-one-year data.</p>
+<p>My inclination is to go ahead and program Option 2 because having approximately correct old data is better than not having old data at all, but what do you guys think?  Would Option 1&#39;s queuing system be better even if it meant that you you have to wait an hour or two to see your data anytime TrendWeight decides it needs to do a full resync?</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>May 2013: General Updates</title>
+        <link href="http://www.ewal.net/2013/05/11/may-2013-general-updates/"/>
+        <updated>2013-05-12T03:00:00.000Z</updated>
+        <id>/2013/05/11/may-2013-general-updates/</id>
+        <content type="html"><![CDATA[<p>It&#39;s been a while since I posted about TrendWeight and wanted to give you a quick update of what&#39;s been happening and what&#39;s on my todo list...</p>
+<p>It&#39;s been a busy winter with my primary focus, outside of my day job, has been on staying healthy.  As such, I haven&#39;t gotten much done with TrendWeight in a few months.  That said, I am probably going to spend a little time doing some work on it in the next month or two and here&#39;s what&#39;s on tap:</p>
+<h2 id="arrows-for-lean-mass">Arrows for Lean Mass</h2>
+<p>Right now, the arrow shown when you are <em>gaining</em> lean mass is red and the arrow for <em>losing</em> lean mass is green.  This is backwards of what most people expect, so I&#39;ll be flipping the color scheme when in lean mass mode.</p>
+<p><img class="border" src="http://www.ewal.net/stuff/trendweight-leanmassarrows.png"></p>
+<h2 id="data-export">Data Export</h2>
+<p>I&#39;ll be adding a way to download your data from TrendWeight as a <a href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> file that can be opened in Excel or any other spreadsheet to do your own analysis or to make your own charts.  </p>
+<p>Actually, this functionality is already there, but not publicized.  If you visit <a href="https://trendweight.com/export/">https://trendweight.com/export/</a> you&#39;ll get a CSV version of your TrendWeight data including Scale and Trend values for total weight as well as fat %, fat mass, and lean mass.</p>
+<p>That said, I&#39;ll be adding a button to do this data download to the TrendWeight web site so that it is easier to find in the future.</p>
+<h2 id="account-management">Account Management</h2>
+<p>Finally, I&#39;ll be adding a couple minor features: a way to change your email address and a way to completely delete your account if don&#39;t want it anymore.  Mostly I am adding these features to reduce the time I spend manually doing these things when people email me asking for help.</p>
+<h2 id="then-what-">Then What?</h2>
+<p>Well, I&#39;m not sure.  There certainly have been many suggestions.  Some are significant changes (or additions) to the site.  Others are probably doable in a single weekend.  But before I decide what I want to do next, I thought it would be interesting to get your feedback.  To that end, I created a UserVoice site for TrendWeight where you can add your own suggestions and vote on suggestions that others have already made:</p>
+<p><a href="http://support.trendweight.com">http://support.trendweight.com</a></p>
+<p>I pre-populated the site with most of the suggestions I have received by email over the past few months, but feel free to add your own if you have an idea that is not already there.</p>
+<p>Remember that this is a free-time project for me and so I make no promises about when any suggestion from that site will get done.  But when I do have some time to work on TrendWeight, I&#39;d just assume spend time working on the things that users want the most.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>iHealth Support?</title>
+        <link href="http://www.ewal.net/2013/01/19/ihealth-support/"/>
+        <updated>2013-01-20T04:00:00.000Z</updated>
+        <id>/2013/01/19/ihealth-support/</id>
+        <content type="html"><![CDATA[<p>I just noticed that there is another WiFi scale on the market from <a href="http://ihealthlabs.com/">iHealth</a>. In fact, it may have been on the market for a while.  Actually, they have two scales: a low cost bluetooth only, weight-only scale and a $110 wifi + bluetooth scale that does weight and various other measurements like body fat.</p>
+<p>Does anyone have one of these scales?  Do you like it?</p>
+<p>They appear to have an open API similar to FitBit and Withings and so I could add support to TrendWeight for these devices.  I can do the programming with just their API documentation, but I don&#39;t have one of their scales to test with.</p>
+<p>If you have one of these scales and would like to help me try it with TrendWeight, let me know by emailing me at <a href="mailto:support@trendweight.com">&#x73;&#117;&#x70;&#112;&#111;&#114;&#x74;&#x40;&#x74;&#114;&#101;&#110;&#x64;&#119;&#101;&#x69;&#103;&#104;&#116;&#x2e;&#99;&#x6f;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Heart Failure: Tracking Weight Changes</title>
+        <link href="http://www.ewal.net/2013/01/13/heart-failure-tracking-weight-changes/"/>
+        <updated>2013-01-14T04:00:00.000Z</updated>
+        <id>/2013/01/13/heart-failure-tracking-weight-changes/</id>
+        <content type="html"><![CDATA[<p><em>Note: There <strong>is</strong> a discussion of a new TrendWeight feature eventually in this post, but it is preceded by a bit more of my personal story than I normally share.  If you have or know someone that has heart failure or CHF, I encourage you to keep reading even though this is long.  If you don&#39;t, you probably won&#39;t care about this new feature and so can skip reading this post if you like.</em></p>
+<p>Sometimes life throws you a curve ball.  Late last November, I was diagnosed with <a href="http://en.wikipedia.org/wiki/Heart_failure">heart failure</a>.  In a nutshell, that means my heart muscle is weak and doesn&#39;t pump as well as it should.  Fortunately, I am currently doing fine (thanks to modern medications).</p>
+<p>One aspect of living with heart failure is that you have to weigh yourself every day and keep track of day to day changes.  That shouldn&#39;t be hard, right?  I already weigh myself every day and keep track of changes, and I have this nice web app that makes it easy.  Sort of.</p>
+<p>Without getting into too many boring details, let me give you a little background.  When a person&#39;s heart gets weaker, a common symptom is that they start retaining water.  It was explained to me like this: You heart is not pumping as strongly as it used to, and your kidney notices and thinks the problem may be that there is a shortage of blood, and so your kidney starts keeping more water in your body to help make up for the perceived shortage.  The result is that a person will steadily gain weight from additional water over days or weeks.  Doctors want to watch for this happening, and so heart failure patients weigh themselves every day looking for sudden or steady increases in weight (which might indicate that their heart failure has gotten worse).</p>
+<p>Since I have been weighing myself every day for the past year or so, I have some interesting pre-diagnosis data to look at.  Here is my summer / fall:</p>
+<p><img class="fancybox" src="http://www.ewal.net/stuff/trendweight-chf-chart1.png"></p>
+<p>At the time, I didn&#39;t know what was going on, but I did know or at least strongly suspect that I was gaining water weight and not fat.  When you look at just October and November and compare my total weight gain with my change in fat mass, you can clearly see that I was not gaining fat (I was also certain that I was not gaining muscle because at the time I was nearly completely unable to do any kind of exercise):</p>
+<p><img class="fancybox" src="http://www.ewal.net/stuff/trendweight-chf-chart3.png"></p>
+<p>When I finally got in front of a cardiologist at the end of November, it didn&#39;t take them long to figure out that I was suffering from heart failure.  The good news is that with just some medications, all this extra retained water drained off quickly, my symptoms disappeared, and I am back to feeling &quot;normal&quot; and have a normal level of physical activity including daily exercise.</p>
+<p><img class="fancybox" src="http://www.ewal.net/stuff/trendweight-chf-chart2.png"></p>
+<p><img class="float-right border" src="http://www.ewal.net/stuff/trendweight-chf-table1.png" width="300"></p>
+<p>Ok, so let me get back to TrendWeight.</p>
+<p>I weigh myself every day, and that data already shows up in TrendWeight automatically, so monitoring my weight for unexpected increases should be easy, right?.  But what matters, this time, is the actual scale reading and not the trend.  That&#39;s kind of the opposite of the normal TrendWeight philosophy which is all about helping you ignore the actual scale weight and instead focusing on the slower changing trend over time.</p>
+<p>When you are trying to lose weight (fat), you want to ignore the day to day changes caused by varying amounts of water retention.  But when watching for weight changes in the context of heart failure, it&#39;s the water retention that we&#39;re looking for.  The smoothing of day to day weight changes is counter productive, in this case.</p>
+<p>I <em>could</em> just look at the normal TrendWeight dashboard, look at the &quot;Actual&quot; column of the recent weight readings table and do math in my head.  For example, you can see (to the right) that from Jan 7 to Jan 8, I gained 1.6 lbs.  But wait.  Manually doing math in my head every day?  Isn&#39;t avoiding that kind of thing the main reason I developed TrendWeight in the first place?  I can do better than that :)</p>
+<p>So, I have been working on a sort of &quot;CHF Dashboard&quot; that uses the same data from WiFi scales, but analyzes it and presents it in a different way.  In particular, it doesn&#39;t show the &quot;trend&quot; weight at all, because that is not the important data point.  It also automatically calculates daily and weekly weight changes and highlights days where there are higher than normal changes.  Per my doctors, what I am looking for is a change of more than 2 pounds in a single day or 5 pounds in a week.  If that happens, I call my doctors/nurses and they will likely make adjustments to my medication doses to get things back under control.</p>
+<h2 id="the-dashboard">The Dashboard</h2>
+<p>This is still a work in progress, but I have a beta version of the CHF dashboard that I am now using daily (in addition to the normal dashboard, because I am also still trying to lose more fat).  If you have CHF and want to try this today, you can view <em>your</em> version of this dashboard by visiting <a href="https://trendweight.com/chf/">https://trendweight.com/chf/</a>.</p>
+<p><img class="fancybox border" src="http://www.ewal.net/stuff/trendweight-chf-dashboard.png"></p>
+<p>The table shows the last 28 days of weight readings and the relative weight changes for that day (1 day and 7 day).  As a side note, I expect this will be helpful for my doctors and nurses as well.  They usually want to see my weight changes every time I have an appointment with them, and I can show them this dashboard on my iPad instead of keeping track redundantly on a sheet of paper that I give them.</p>
+<p>Single day changes of more than 1 pound are highlighted (whether it is an increase or a decrease--they want to know about significant changes either way).  Weekly changes of more than 4 pounds are highlighted as well.  You might notice that the 7 day column usually has 2 numbers in it.  The reason is that my weight today may represent both a gain in weight from the lowest weight I had in the past week while at the same time being a drop in weight from the highest weight I had in the past week.  So the table shows both unless today&#39;s weight <em>is</em> the highest or lowest weight in the past week.</p>
+<p>I use this dashboard every day to see if my weight today is different enough to need to call the doctor (I am fortunate that that has never happened).  In reality, I can usually remember what my weight was yesterday, so I usually know, even when just standing on the scale, if my weight has changed by more than 2 lbs in the past day.  But I definitely need this tool in order to identify if my weight has changed by more than 5 pounds in a week.</p>
+<p>As I said, this is still a work in progress, and it lacks a certain amount of polish.  But if you have a reason to want to track your day to day weight changes, feel free to use it.  As with the rest of TrendWeight, I created this primarily for myself, but there are millions people with heart failure in the world, so if this is a useful tool for some part of that community, I&#39;m happy to share it.</p>
+<p>As always, if you have feedback or comments, feel free to email me at <a href="mailto:support@trendweight.com">&#x73;&#x75;&#112;&#112;&#x6f;&#x72;&#x74;&#x40;&#x74;&#x72;&#x65;&#110;&#x64;&#x77;&#x65;&#105;&#103;&#x68;&#116;&#46;&#x63;&#111;&#x6d;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Major Update: Body Fat Tracking is Here</title>
+        <link href="http://www.ewal.net/2012/10/26/major-update-body-fat-tracking-is-here/"/>
+        <updated>2012-10-27T03:00:00.000Z</updated>
+        <id>/2012/10/26/major-update-body-fat-tracking-is-here/</id>
+        <content type="html"><![CDATA[<p>I just released a new version of TrendWeight that includes a bunch of changes:</p>
+<ul>
+<li>Body fat tracking</li>
+<li>Decent mobile support for more devices</li>
+<li>Configurable day start</li>
+<li>Access to raw scale readings</li>
+<li>Lots of behind the scenes improvements</li>
+</ul>
+<p>Also, I&#39;ll take this opportunity to apologize in advance.  This update involved a nearly complete rewrite of the user dashboard (the page with the chart and the stats).  I probably broke a lot of things in the process.  I have tested the new version a fair amount and fixed a lot of small issues, but I probably didn&#39;t find them all.  I&#39;ll be watching the error logs closely for the next few days, but if you notice anything that seems wrong, please email me the details at <a href="mailto:support@trendweight.com">&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#x40;&#116;&#114;&#101;&#110;&#100;&#x77;&#x65;&#x69;&#103;&#x68;&#x74;&#x2e;&#99;&#x6f;&#x6d;</a> and I&#39;ll look at it right away.</p>
+<h2 id="body-fat">Body Fat</h2>
+<p>If you have body fat data in your connected Withings or FitBit accounts, you&#39;ll now see some new buttons on your dashboard that let you look at body-fat-related trends.  There are three new options:</p>
+<ul>
+<li><strong>Fat %</strong>.  This is the percent of your total body weight that the scale thinks is fat.</li>
+<li><strong>Fat Mass</strong>.  This is how many pounds or kilograms of fat you have in your body.  This is calculated by multiplying your total body weight by your body fat %.  If you are trying to lose weight, watching for this trend line to go down over time may be interesting.</li>
+<li><strong>Lean Mass</strong>.  This is how many pounds or kilograms of non-fat you have in your body.  This is calculated by subtracting your fat mass from your total body weight.  If you are actively trying to build muscle, watching this trend line go up over time may be interesting.  On the other hand, if you are trying to lose <em>fat</em>, making sure that this trend line is <em>not</em> dropping over time may also be interesting.</li>
+</ul>
+<p><img class="border" src="http://www.ewal.net/stuff/trendweight-bodyfat.png"></p>
+<p><em>Fair warning</em>:  In my experience, neither the Withings nor FitBit wifi scales are particularly precise with body fat estimation.  What I mean is that your scale readings may change significantly from day to day even though your body hasn&#39;t really changed much at all.  The result is that you should expect the body-fat-related charts to be more erratic than the total weight chart.  Looking at your body fat trends may still be interesting, but my suggestion is not to worry as much about short term changes. If you care about body fat trends, watch the trends over a slightly longer term than you do for total weight (e.g. look at changes over 3 months and don&#39;t obsess about changes over 2 weeks).</p>
+<p>You can also play with this using the <a href="https://trendweight.com/demo/">Sample Dashboard</a>.  Keep in mind that the sample user has entirely fabricated data and the body fat data may not be realistically random.  On a side note, if you have at least 9 months of weight and body fat data and are interested in volunteering your weight data to be used (anonymously) by the the sample user dashboard, let me know.</p>
+<h2 id="trendweight-on-your-smartphone">TrendWeight on your SmartPhone</h2>
+<p>As part of this update, the mobile-optimized dashboard is now available on more devices (almost any device in theory as long as it has a decent browser).  I have only tested it on an iPhone, though, since that is all I have available.</p>
+<p><img class="border" src="http://www.ewal.net/stuff/trendweight-iphone.png"></p>
+<h2 id="day-start">Day Start</h2>
+<p>You can now specify what time of day you want TrendWeight to use when deciding which day a weight reading occurs on.  See <a href="http://www.ewal.net/2012/08/29/whats-next-for-trendweight/">this post</a> for a more thorough discussion of the motivation for this feature.  Most people can probably just leave this set at midnight and not worry about it.</p>
+<p><img src="http://www.ewal.net/stuff/trendweight-daystart.png"></p>
+<h2 id="raw-scale-readings">Raw Scale Readings</h2>
+<p>Several people have noticed that the scale readings displayed in TrendWeight do not match the scale readings displayed on the FitBit website.  After some investigation, this seems to be because the two websites round numbers differently.  The FitBit and Withings APIs actually return weight readings with many decimal places (e.g. 141.4972 lbs).  On TrendWeight when that weight is used in calculations, it is used with the full precision (all the decimal places).  When weights are displayed, they are generally rounded to a single decimal place (e.g 141.5 lbs).  On the FitBit website, that weight would be displayed as 141.4 lbs though because it always rounds <em>down</em> to the nearest tenth of a pound.</p>
+<p>Anyway, in order to allow people to better determine if there are discrepancies between TrendWeight and FitBit/Withings, you can now go to a page which shows the raw scale readings that came from the FitBit/Withings API.  You can get to this page by clicking a new button on your settings page:</p>
+<p><img src="http://www.ewal.net/stuff/trendweight-scalereadings1.png"></p>
+<p>Again, if you notice anything not working or fishy, please email me at <a href="mailto:support@trendweight.com">&#115;&#x75;&#x70;&#x70;&#x6f;&#114;&#116;&#x40;&#116;&#114;&#x65;&#x6e;&#x64;&#119;&#x65;&#105;&#x67;&#104;&#116;&#x2e;&#99;&#111;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+</feed>

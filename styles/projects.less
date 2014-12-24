@@ -1,0 +1,44 @@
+.project {
+  clear: both;
+  margin: 40px 0;
+
+  img {
+    margin-bottom: 10px;
+    border: 1px solid @seperator-color;
+    display: block;
+    max-width: 100%; // Part 1: Set a maximum relative to the parent
+    height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+  }
+
+  .project-description {
+    h2 {
+      padding-top: 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    border-top: 1px solid @seperator-color;
+    padding-top: 40px;
+
+    img {
+      width: 240px;
+      max-width: 240px;
+      float: left;
+      margin-bottom: 0;
+    }
+
+    .project-description {
+      padding-left: 260px;
+
+      h2 {
+        padding-top: 0;
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.project + .project {
+  border-top: 1px solid @seperator-color;
+  padding-top: 40px;
+}

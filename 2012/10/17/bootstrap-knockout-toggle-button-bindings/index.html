@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Bootstrap + Knockout: Toggle Button Bindings - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Oct 17th, 2012</div>
+    
+    <h1>Bootstrap + Knockout: Toggle Button Bindings</h1>
+    
+    <div class="post-content">
+        <p>I am in the middle of an overhaul of the <a href="/trendweight/">TrendWeight</a> user dashboards, and as part of that project, I found myself looking for ways to bring <a href="http://twitter.github.com/bootstrap/javascript.html#buttons">Bootstrap button groups</a> and <a href="http://knockoutjs.com/">Knockout</a> together in peace and harmony.  In other words, when someone clicks on one of the buttons in the radio button group, I need the associated observable on the ViewModel to be updated with the value associated with that particular radio button.</p>
+<p>My first attempt worked fine, but left something to be desired.  Here is the markup I had:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;2w&#39;}, click: function() { $root.range(&#39;2w&#39;) }&quot;&gt;2 weeks&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;4w&#39;}, click: function() { $root.range(&#39;4w&#39;) }&quot;&gt;4 weeks&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;3m&#39;}, click: function() { $root.range(&#39;3m&#39;) }&quot;&gt;3 months&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;6m&#39;}, click: function() { $root.range(&#39;6m&#39;) }&quot;&gt;6 months&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;1y&#39;}, click: function() { $root.range(&#39;1y&#39;) }&quot;&gt;1 year&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>That&#39;s pretty verbose and repetitive.  This seems like the perfect opportunity to use a custom binding, but custom bindings have always seemed intimidating for some reason.  <a href="http://www.knockmeout.net/">Ryan Niemeyer</a> has been selling me on the idea that custom bindings are really not that scary and that I should embrace them instead of fearing them.  After receiving a small pep talk this week, I decided to take the plunge.</p>
+<p>My goal is to enable markup that looks like this instead of the markup above:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot; data-bind=&quot;radio: range&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;2w&quot;&gt;2 Weeks&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;4w&quot;&gt;4 Weeks&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;3m&quot;&gt;3 Months&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;6m&quot;&gt;6 Months&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;1y&quot;&gt;1 Year&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Here, there is a binding on the btn-group element that says, &quot;Hey, these buttons should act like radio buttons and be bound to the &#39;range&#39; observable, please.&quot;  Additionally, each button in the group has a <code>data-value</code> attribute that tells the binding what value should be associated with each button.</p>
+<p>In the binding I ended up writing, the <code>data-value</code> attribute is actually optional.  If you are ok with the value of your observable being the same as the captions on your buttons, you can leave the attribute off and the binding will use the inner text of the button instead.</p>
+<p>While I was at it, I also made the binding handle the alternate markup below where the binding is on each individual button instead of on the button group.  This may be useful if you want radio button behavior without putting the buttons in a button group.  And for variety, this markup specifies the value for each radio button with <code>radioValue</code> property in the binding itself (although you the <code>data-value</code> attribute still would work as well):</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;left&#39;&quot;&gt;Left&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;middle&#39;&quot;&gt;Middle&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;right&#39;&quot;&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>After all that, I felt empowered and thought I might as well make a binding for checkbox behavior as well.  In other words, each button would be bound to a boolean observable and would be toggled when that observable was true.  So markup like this:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;checkbox: important&quot;&gt;Important&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;checkbox: urgent&quot;&gt;Urgent&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Before I get into the code for the bindings, here is a working <a href="http://jsfiddle.net/ervwalter/ccjnj">jsFiddle demo</a> that shows the user interface behavior I&#39;m talking about.</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/ervwalter/ccjnj/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>Ok, so the code...  Of course, since I am on a CoffeeScript kick at the moment, I wrote these bindings in CoffeeScript.  If CoffeeScript isn&#39;t your thing, you can hit the jsFiddle link above to see the JavaScript version of the bindings.</p>
+<pre><code class="lang-coffeescript">ko.bindingHandlers.radio = {
+    init: (element, valueAccessor, allBindings, data, context) -&gt;
+        observable = valueAccessor()
+
+        if not ko.isWriteableObservable(observable)
+            throw &quot;You must pass an observable or writeable computed&quot;
+
+        $element = $(element)
+        if $element.hasClass(&quot;btn&quot;)
+            $buttons = $element
+        else
+            $buttons = $(&quot;.btn&quot;, $element)
+
+        elementBindings = allBindings()
+        $buttons.each -&gt;
+            btn = @
+            $btn = $(btn)
+
+            radioValue =
+                elementBindings.radioValue || #this is really only useful when the binding is on the button, itself
+                $btn.attr(&quot;data-value&quot;)  ||
+                $btn.attr(&quot;value&quot;)  ||
+                $btn.text()
+
+            $btn.on &quot;click&quot;, -&gt;
+                observable ko.utils.unwrapObservable(radioValue)
+                return
+
+            ko.computed disposeWhenNodeIsRemoved: btn, read: -&gt;
+                $btn.toggleClass &quot;active&quot;, observable() == ko.utils.unwrapObservable(radioValue)
+                return
+
+        return
+}
+
+ko.bindingHandlers.checkbox = {
+    init: (element, valueAccessor, allBindings, data, context) -&gt;
+        observable = valueAccessor()
+
+        if not ko.isWriteableObservable(observable)
+            throw &quot;You must pass an observable or writeable computed&quot;
+
+        $element = $(element)
+
+        $element.on &quot;click&quot;, -&gt;
+            observable not observable()
+            return
+
+        ko.computed disposeWhenNodeIsRemoved: element, read: -&gt;
+            $element.toggleClass &quot;active&quot;, observable()
+            return
+
+        return
+}
+</code></pre>
+<p>One caveat: while Knockout does not depend on jQuery, these binding do. If you want to use them, you either have to have jQuery on your page, or you have to rewrite these appropriately.  Since jQuery is a dependency of Bootstrap&#39;s JavaScript plugins, I didn&#39;t feel like this was an unreasonable dependency here.</p>
+<p>The radio button binding is the more interesting of the two bindings.  The first thing it does in the &#39;init&#39; function (besides some checking for error conditions) is determine if the binding is directly on a button or not.  If it is on a button, it&#39;s going to wire up the button directly.  If it is not, it&#39;s going to look for any descendant buttons and wire each of them up.</p>
+<p>Next, I loop through each of the buttons (which might just be the single button if the binding is directly on a button).  For each button, I first figure out what the radioButton value should be for that button.  Then I wire up a click event handler that sets the observable to the right value.  Finally, I create a computed observable that will fire any time the main observable changes.  The computed observable adds or removes the &#39;active&#39; css class depending on if the value of the observable matches the button&#39;s assigned value.</p>
+<p>Normally, you&#39;d put the code to respond to changes from the main observable in a custom binding&#39;s &#39;update&#39; function.  However in this case, I did it with an explicit computed observable because I needed access to the radioValue variable, and there is no convenient way to pass state between the &#39;init&#39; function and the &#39;update&#39; function.  Having an explicit computed observable accomplishes the same thing as using an &#39;update&#39; function because &#39;update&#39; functions essentially get turned into computed observables behind the scenes anyway.</p>
+<p>The checkbox binding is similar but a bit simpler.  It is always used directly on a button, so the part about looping through descendant buttons is not there.  The binding just directly wires up a similar click event handler and creates a similar computed observable to toggle the right css class.  In this case, I <em>could</em> have used an &#39;update&#39; function, but chose not to just to keep it consistent with how I structured the radio button binding.</p>
+<p>I think I am mostly over my fear of custom bindings, and I expect that I&#39;ll now be looking for opportunities to use them even where they aren&#39;t really needed :)</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/bootstrap/'>Bootstrap</a>, <a href='/tags/knockout/'>Knockout</a>, <a href='/tags/coffeescript/'>CoffeeScript</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2012/10/17/bootstrap-knockout-toggle-button-bindings/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Bootstrap + Knockout: Toggle Button Bindings';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Bitcoin Command: A Mining &amp; Wallet Management Web App - Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            <article id="post" class="post">
+    <div class="post-date">Sep 24th, 2013</div>
+    
+    <h1>Bitcoin Command: A Mining &amp; Wallet Management Web App</h1>
+    
+    <div class="post-content">
+        <p>This is one of two posts about my Bitcoin Command app.  </p>
+<ul>
+<li>The first post (this post) focuses on the actual functionality of the app and will be of interest mostly to other Bitcoin miners.</li>
+<li>The <a href="/2013/09/24/bitcoin-command-fun-with-angularjs/">second post</a> focuses on the technology I used to create the app and may be of interest to other web developers regardless of their interest in Bitcoin.</li>
+</ul>
+<p>A month or so ago, in <a href="/2013/08/15/bitcoin-mining-update-butterfly-labs-sc-singles/">post about my BFL Singles</a>, I mentioned that I had a custom bitcoin dashboard that I used to monitor my mining operation.  I also mentioned that I was in the process of rewriting the dashboard and would post the source when I finished that effort.  Well, I am not entirely done with my rewrite, but it is &quot;done enough&quot;, so I&#39;m putting it out there for anyone that might be interested in adapting the code to their own operation.</p>
+<h2 id="what-is-it-">What Is It?</h2>
+<p>It&#39;s a combination mining dashboard and a web-based frontend to a bitcoind wallet.</p>
+<p>Features include...</p>
+<ul>
+<li>Stats on current mining devices and current pools <em>based on shares submitted to pools</em></li>
+<li>Stats on expected and actual income per day</li>
+<li>Pool stats (unpaid balances, etc) for active pools</li>
+<li>A nearly complete wallet frontend<ul>
+<li>Recent transactions list</li>
+<li>Send bitcoins to others</li>
+<li>New address creation</li>
+<li>Address management (renaming labels, archiving address)</li>
+</ul>
+</li>
+<li>Mobile-optimized to work well on modern smartphone browsers (Safari, Chrome, etc).</li>
+</ul>
+<p>Here are some screenshots of current functionality (click to enlarge)...</p>
+<p><img class="fancybox border" src="/stuff/btc-cc-1.png" width="150" />
+<img class="fancybox border" src="/stuff/btc-cc-2.png" width="150" />
+<img class="fancybox border" src="/stuff/btc-cc-3.png" width="150" />
+<img class="fancybox border" src="/stuff/btc-cc-4.png" width="150" />
+<img class="fancybox border" src="/stuff/btc-cc-5.png" width="150" /></p>
+<p>And on a smartphone...</p>
+<p><img class="fancybox border" src="/stuff/btc-cc-6.png" width="100" />
+<img class="fancybox border" src="/stuff/btc-cc-7.png" width="100" />
+<img class="fancybox border" src="/stuff/btc-cc-8.png" width="100" /></p>
+<p>When the app is actively running, you also see live updates as shares are found by your miners:</p>
+<p><img class="border" src="/stuff/btc-cc-mining.gif" /></p>
+<h2 id="technical-requirements">Technical Requirements</h2>
+<p>First and foremost, <strong>you probably need to be a developer or have a developer friend to get this up and running.</strong></p>
+<p>This is not a polished, ready to install software package aimed at end users.  This is the source code of my own, personal, dashboard, and while I made many things configurable (like where your database is hosted and how to connect to your bitcoind server), many other assumptions are hardwired into the code (like the fact that I prefer the coinbase USD exchange rate API since that is where I sell my BTC). If you would like to use it, you will almost certainly need to have an understanding of the technologies involved and you&#39;ll need to be comfortable reading and editing the source code to make things work for your specific setup.  I suggest reading the <a href="http://blog.dev/2013/09/24/bitcoin-command-an-adventure-with-angularjs/">other blog post</a> as well so that you have a better understanding of how the technical pieces fit together.</p>
+<p>The major technologies you&#39;ll need to have installed and be comfortable with are:</p>
+<ul>
+<li><a href="http://nodejs.org/">Node.js</a> as the web server</li>
+<li><a href="http://angularjs.org/">AngularJS</a> as the frontend application framework</li>
+<li><a href="http://www.mongodb.org/">MongoDB</a> as the backend database</li>
+<li><a href="http://coffeescript.org/">CoffeeScript</a> as the programming language (vs. raw JavaScript)</li>
+<li><a href="http://compass-style.org/">Compass</a> for CSS management</li>
+</ul>
+<p>These are all open source technologies that, in general, these are all relatively easy to get up and running on a Linux or OS X box and also relatively painful to get running on a windows box.  I, personally, use an OS X box for my development server and a Debian Linux box for my &quot;production&quot; server.</p>
+<p>The specific details of getting these up and running are left as an exercise for the reader, but at a high level, the steps are:</p>
+<ol>
+<li>Get the source code from GitHub: <a href="https://github.com/ervwalter/bitcoin-command">https://github.com/ervwalter/bitcoin-command</a></li>
+<li>Install Node, Mongo, and Compass</li>
+<li>Run <code>npm install -g coffee-script</code> to install the coffeescript command line tool on your system</li>
+<li>Run <code>npm install</code> from the root directory of this project to install all the require node modules</li>
+<li>Configure the application by either editing the default.coffee file in the <code>config</code> folder, or by creating a <a href="http://lorenwest.github.io/node-config/latest/">host-specific config file</a></li>
+<li>Make sure MongoDB is running</li>
+<li>Run <code>coffee app.coffee</code> to start the web server.</li>
+<li>Point your web browser at the server you just started.</li>
+</ol>
+<h2 id="connecting-your-miners">Connecting Your Miners</h2>
+<p>After you get the application working, you&#39;ll see an empty and generally useless dashboard.  In order for any of the mining functionality to work, you&#39;ll need to feed the dashboard with information from your miners.  </p>
+<p>All of the mining statistics that the dashboard shows are calculated based on the <em>actual shares your miners find</em>.  That means everytime one of your miners finds a share, you need to automatically submit the specifics of that share in the dashboard.</p>
+<p>If you are using cgminer, the easiest solution is to use my <a href="https://github.com/ervwalter/share-monitor/">cgminer share monitor</a>.  This is another NodeJS script that integrates with cgminer&#39;s <code>-sharelog</code> feature and sends details from each share to the dashboard.  You can either have cgminer log shares to an actual file and just have the share monitor script watch that file for changes, or you can use cgminer&#39;s <code>-monitor</code> feature to have cgminer pipe the sharelog to the share monitor script without the sharelog ever going to disk.  Details of how to set this up are on <a href="https://github.com/ervwalter/share-monitor/wiki">GitHub</a>.</p>
+<p>This script (and the dashboard in general) may work with bfgminer, but I have not personally tested it, so I can&#39;t say for sure.</p>
+<p>In the next few weeks, I will also be creating a modified version of slush&#39;s stratum proxy that submits shares to the dashboard as they are found.  This will be useful in cases where you&#39;re mining with a piece of hardware not supported by cgminer (e.g. the BitFury rig that I will be receiving sometime next month).  I&#39;ll make another post when that modified proxy is available.</p>
+<h2 id="what-s-next-">What&#39;s Next?</h2>
+<p>As I said, I&#39;m not done with this project.  I will be adding at least the following features over the next few weeks:</p>
+<ul>
+<li>Idle or Unhealthy device detection:<ul>
+<li>Email notifications when a device is misbehaving</li>
+<li>Color coding or some kind of visual indication on the dashboard for unhealthy devices</li>
+</ul>
+</li>
+<li>Sign/Verify support for the wallet</li>
+<li>Socket.io support for wallet updates.  This will reduce the number of RPC calls made to bitcoind when sitting on the dashboard.  The reduction in RPC calls may even be enough to make it practical to point the app at a <a href="http://blockchain.info">blockchain.info</a> wallet since they have a bitcoind-compatible RPC interface but restrict the volume of RPC calls you can make.</li>
+</ul>
+<h2 id="questions">Questions</h2>
+<p>If you have <em>specific</em> questions about getting this running, I&#39;d be happy to answer them.  Note, <em>&#39;How do I get this up and running?&#39;</em> and <em>&#39;How do I install NodeJS?&#39;</em> are not what I mean by <em>specific</em>.  On the other hand <em>&#39;How does the code determine what kind of mining device (Block Eruptor vs BFL SC Single) something is?&#39;</em> is a perfectly reasonable question.  Post your question in the comments or just email me at <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#x65;&#114;&#x76;&#64;&#x65;&#119;&#x61;&#108;&#46;&#x6e;&#x65;&#x74;">&#x65;&#114;&#x76;&#64;&#x65;&#119;&#x61;&#108;&#46;&#x6e;&#x65;&#x74;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/bitcoin/'>Bitcoin</a>, <a href='/tags/gadgets/'>Gadgets</a>
+    </div>
+    
+</article>
+            <div id="disqus_thread"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+<script type="text/javascript">
+    var disqus_shortname = 'ewalnet';
+    var disqus_url = 'http://www.ewal.net/2013/09/24/bitcoin-command-a-mining-slash-wallet-management-web-app/';
+    var disqus_identifier = disqus_url;
+    var disqus_title = 'Bitcoin Command: A Mining &amp; Wallet Management Web App';
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+
+            <div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>

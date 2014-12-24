@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Ewal.net</title>
+    <link href="http://www.ewal.net/feed.xml" rel="self"/>
+    <link href="http://www.ewal.net"/>
+    <updated>2014-12-24T05:03:09.735Z</updated>
+    <id>http://www.ewal.net</id>
+    <author>
+        <name>Erv Walter</name>
+        <email>erv@ewal.net</email>
+    </author>
+
+    
+    <entry>
+        <title>Dealing with Heartbleed</title>
+        <link href="http://www.ewal.net/2014/04/18/dealing-with-heartbleed/"/>
+        <updated>2014-04-19T03:30:00.000Z</updated>
+        <id>tag:www.ewal.net,2014-04-19,/2014/04/18/dealing-with-heartbleed/</id>
+        <content type="html"><![CDATA[<p>If you have been on the internet for the last couple weeks, you have likely heard of the Heartbleed bug.  If not, read about it <a href="http://heartbleed.com/">here</a>.  Here&#39;s what you need to know about TrendWeight.</p>
+<h2 id="fitbit-and-withings-connections">FitBit and Withings Connections</h2>
+<p>FitBit has announced that they were affected (like many other sites) by this bug and they are recommending that FitBit users reauthorize third party applications like TrendWeight.  I have not heard anything from Withings, but it doesn&#39;t hurt to reauthorize your Withings account just in case as well.  Doing this is easy regardless of if you use FitBit or Withings.</p>
+<ol>
+<li>Go to your <a href="https://trendweight.com">Settings</a> page and scroll to the bottom.</li>
+<li>Click the <strong>Disconnect Scale</strong> button.  This will deauthorize TrendWeight from getting at your FitBit or Withings data.</li>
+<li>You&#39;ll be taken back to a page where you can reconnect to FitBit or Withings.  Once you do this, new authentication keys will be generated for you, and your data will be completely redownloaded (you won&#39;t lose anything).</li>
+<li>You&#39;re done.  There is no step 4.</li>
+</ol>
+<h2 id="trendweight-itself">TrendWeight Itself</h2>
+<p>Our SSL provider, CloudFlare, has already fixed their servers, and in fact <a href="http://blog.cloudflare.com/staying-ahead-of-openssl-vulnerabilities">fixed them before the bug was made public</a>.  I have no reason to believe that anyone exploited the bug to attack TrendWeight prior to CloudFlare fixing the bug. That said, better safe than sorry, as they say.  If you want to be extra cautious, you may want to consider changing your TrendWeight password <a href="https://trendweight.com/changepassword/">here</a>.</p>
+<p>Isn&#39;t the Internet fun?  If you have any questions, feel free to email me at <a href="mailto:support@trendweight.com">&#x73;&#117;&#112;&#x70;&#111;&#x72;&#116;&#64;&#x74;&#114;&#101;&#110;&#100;&#119;&#x65;&#105;&#103;&#x68;&#116;&#46;&#99;&#x6f;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Fat Mass is Missing for Withings Users [Resolved]</title>
+        <link href="http://www.ewal.net/2014/03/26/withings-fat-mass-problems/"/>
+        <updated>2014-03-26T13:30:00.000Z</updated>
+        <id>tag:www.ewal.net,2014-03-26,/2014/03/26/withings-fat-mass-problems/</id>
+        <content type="html"><![CDATA[<p>Multiple Withings users have let me know that their Fat Mass data has disappeared from TrendWeight.  Apparently something is going on with the Withings API.  I don&#39;t know what the problem is yet, but I am investigating.  Please stay tuned.</p>
+<p><strong>3/27 Update:</strong>  I have confirmed with multiple users that the body fat data is simply missing from the data that the Withings API is giving TrendWeight.  At this point, I don&#39;t know of anything I can do to change that.  I still don&#39;t know why it is only happening to some people and not others.  I have sent an email to Withings support asking if they know of anything that might have changed, and someone from Withings has already responded and is actively investigating the problem.</p>
+<p><strong>3/28 Updated:</strong> A developer at Withings emailed me to let me know that they found and fixed the problem.  I confirmed that body mass data is once again appearing for several of the people who I know were affected and everything looks good.  I automatically did a full resync for all Withings users who updated in the last week (which should catch anyone who might have been affected), so your missing data should now be back.  If you notice anything wrong, though, don&#39;t hesitate to contact me.</p>
+<p> And thanks to the folks at Withings for finding and fixing the problem so quickly.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Bitcoin Mining with 240V</title>
+        <link href="http://www.ewal.net/2014/02/10/bitcoin-mining-with-240v/"/>
+        <updated>2014-02-11T02:22:00.000Z</updated>
+        <id>tag:www.ewal.net,2014-02-11,/2014/02/10/bitcoin-mining-with-240v/</id>
+        <content type="html"><![CDATA[<p>I have two <a href="http://cointerra.com/">CoinTerra</a> TerraMiner IVs on order, one in the December batch and one in the March batch.  As the December batch orders are now shipping, I spent the past week planning for the device&#39;s arrival and wanted to share the details for others in the U.S. that may also need to make similar preparation.</p>
+<p>Why are preparations necessary?  First, let me say that I am in the U.S. and all of the following is specific to U.S. electrical standards.  Anyway, it turns out that CoinTerra missed their power utilization goals and these devices use between 1900 and 2100 watts <em>each</em>.  That is far too much for a single 110V 15A circuit which is what is typically found in U.S. homes.  In theory, you can connect each of these devices to two separate 110V circuits (they presumably have two 1200 watt power supplies that each will be plugged in), but that is a major hassle if you don&#39;t have multiple unused circuits in close proximity.</p>
+<p>The solution is to use 240V circuits. Electrical devices use less current (amps) when run at higher voltage and so a single 240V circuit can power a CoinTerra miner (instead of multiple 110V circuits).  Adding a 240V circuit sounds hard if you don&#39;t have any experience with electrical work and I had no idea how to even begin to getting that done.  After a little research and a couple conversations with some local electricians, it turned out to not be too bad, after all.</p>
+<p>You essentially need two things to make this work:</p>
+<ol>
+<li>A 240V circuit with an appropriate receptacle.</li>
+<li>Some way to connect a standard computer <a href="http://amzn.com/B008Q7HUR0?tag=ewalnet-20">power supply</a> to that circuit.</li>
+</ol>
+<h2 id="getting-power">Getting Power</h2>
+<p>Getting a 240V circuit should hopefully be straightforward.  In the U.S., home circuits are typically either 110V or 240V, and most home probably already have at least one 240V circuit for things like an air conditioner or an electric range.  Adding another one should be straightforward as long as your breaker box has capacity.  Just call an electrician and ask them to install an additional 240V circuit.  You&#39;ll have to let them know what kind of receptacle you want, and how many Amps you want the circuit to be (more on that later).</p>
+<p>The only challenge might be finding a location for the receptacle.  If you don&#39;t want to keep your Bitcoin miners near your breaker box, you might be looking at a larger project as the electrician may need to run wires through walls (i.e. a much larger project).  In my case, my Bitcoin miners are all in the unfinished portion of my basement right next to the electrical panel, so getting the additional circuits was painless.</p>
+<h2 id="distributing-the-power">Distributing the Power</h2>
+<p>Choosing the type of receptacle and the number of amps will depend on your specific power needs and what kind of cable you plan to plug into it.</p>
+<p>You probably aren&#39;t going to want to plug your miners directly into your 240V receptacle.  First you&#39;d need an outlet for each item you wanted to plug in and that is not particularly cost effective for the electrician to install.  Second, and more importantly, you aren&#39;t going to easily find a cable that can connect a typical computer power supply to typical high amperage 240V receptacles.  The answer is to get a Power Distribution Unit (or PDU).  These are essentially specialized power strips for computer hardware.  They are typically used in data centers, but can also be used in your home without any significant problems.</p>
+<p>After some tips from some folks on bitcointalk.org, I settled on these two PDUs as good choices:</p>
+<ul>
+<li><a href="http://amzn.com/B004P3X4ZQ?tag=ewalnet-20">Tripp Lite 240V 20A PDU</a>.</li>
+<li><a href="http://amzn.com/B0012VN0I0?tag=ewalnet-20">Tripp Lite 240V 30A PDU</a>.</li>
+</ul>
+<p>The first one is a horizontal PDU that uses a NEMA L6-20P plug and needs a 20 amp circuit with an L6-20P receptacle. The second one is a vertical PDU that uses a NEMA L6-30P plug (similar but not identical) and needs a 30 amp circuit with a L6-30P receptacle.</p>
+<p>For my own project, I decided to get one of each and to have the electrician install two circuits: a 20A L6-20P receptacle and a 30A L6-30P receptacle.  I decided to get both because I wanted to convert all my existing mining hardware over to 240V as part of this project because it is slightly more efficient.  I will use the 30A circuit for my CoinTerra miners (at 240V, 2200 watts = 9.2 amps), and I am using the 20A circuit for all the rest of my hardware.</p>
+<p>The 20A version can just sit on a shelf easily enough.  I mounted the 30A version to the wall next to my shelves, but had to get creative with the mounting hardware since this is designed to be mounted to a rack in a data center and not to a basement wall :)</p>
+<p>To calculate what kind of capacity you&#39;ll need, remember that Amps = Watts / Volts.</p>
+<h2 id="cables">Cables</h2>
+<p>Ok, so now you have a PDU, but you&#39;ll also need cables to connect the mining power supplies to the PDU.  I bought several of <a href="http://amzn.com/B002O0KMJS?tag=ewalnet-20">these</a> cables.  They have a C13/C14 connectors that will plug into your PDU on one end and directly into your computer power supply on the other.</p>
+<h2 id="results">Results</h2>
+<p>Both PDUs are up and running, and I switched all my existing miners over to 240V.  Now I just need to wait for the first TerraMiner to arrive.  Here are a couple photos (click to view larger)...</p>
+<p><img class="fancybox border" src="http://www.ewal.net/stuff/cointerra-outlets.jpg" width="250">
+<img class="fancybox border" src="http://www.ewal.net/stuff/cointerra-l6-30p.jpg" width="250">
+<img class="fancybox border" src="http://www.ewal.net/stuff/cointerra-full-setup.jpg" width="250"></p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Mystery Solved: FitBit Rounding Error</title>
+        <link href="http://www.ewal.net/2014/01/27/mystery-solved-fitbit-rounding-error/"/>
+        <updated>2014-01-27T21:34:00.000Z</updated>
+        <id>tag:www.ewal.net,2014-01-27,/2014/01/27/mystery-solved-fitbit-rounding-error/</id>
+        <content type="html"><![CDATA[<p>A long-standing mystery has finally been solved...</p>
+<p><strong>Short Version:</strong></p>
+<p>If your TrendWeight account is connected to Fitbit, and you don&#39;t use the metric system (kilograms), you may have noticed that the actual weights shown on TrendWeight were often different from the weights show on fitbit.com by 0.1 - 0.2 pounds.  This doesn&#39;t happen anymore.</p>
+<p><strong>Long Version:</strong></p>
+<p>Sometimes Trendweight shows my actual scale weight as 0.1 lb higher or lower than what I remember the scale actually showing.  I&#39;ve noticed it on and off for a while, and I have gotten quite a few emails about it.  I had looked into it in the past several times and confirmed that I am displaying <em>exactly</em> what Fitbit tells me in their API.  So, I chalked it up to an idiosyncrasy on the Fitbit side.  Who cares about 0.1 lb anyway?</p>
+<p>Well, after yet another email today, I started looking into it again.  After some research (aka Google searches), I found a couple other cases where people were having similar problems and in those reports was the nudge I needed to finally understand the problem.  The problem is a rounding error when converting between Metric and English weight units.  Here&#39;s what happens:</p>
+<ol>
+<li>You step on the scale and it displays your weight in pounds and sends it to the fitbit.com database.</li>
+<li>TrendWeight makes an API request and fitbit.com returns your recent weight readings in kilograms and <em>rounded to 1 decimal place</em>.</li>
+<li>TrendWeight converts your recent weight readings back into pounds.</li>
+</ol>
+<p>The problem is the <em>highlighted</em> part of step #2.  When your weight gets converted to kilograms and <em>rounded to 1 decimal place</em> and then converted back into pounds, the 0.1 - 0.2 lbs error gets introduced.</p>
+<p>If only there was a way to tell the Fitbit API that I want the results in pounds (for users who are using pounds) so that I don&#39;t have to convert them myself, then this problem would go away... Oh wait.  There is. Doh!</p>
+<p>By asking Fitbit for weights directly in pounds, TrendWeight now gets actual scale weights that exactly match what was displayed on your scale and what you see on fitbit.com.  I should have realized this a long time ago, and so I feel a little foolish.  Sorry.</p>
+<p>TrendWeight&#39;s logic has been updated, and the next time you visit your dashboard, your weight readings for the past 21 days will automatically be re-downloaded and &quot;fixed&quot;.  That will result in an accurate current &#39;trend weight&#39; (because that trend weight is based, essentially, on the past 20 days of weight readings).</p>
+<p>If you really want to retroactively fix all your historical scale readings, you can do so by going into your <a href="https://trendweight.com/settings">settings</a> and clicking the &#39;Resync All Data&#39; button at the bottom of the page. However, <strong>do not click this</strong> if you have more than 3or 4 years of historical data in TrendWeight or you will risk running into <a href="http://www.ewal.net/2013/06/08/dealing-with-lots-of-historical-data/">the other Fitbit limitation</a> that prevents TrendWeight from loading lots of historical data.  If you have that much old data, you&#39;ll want to wait until that other limitation has been addressed.</p>
+<p><strong>Side Note</strong></p>
+<p>I also want to mention that I am actively working on a new version of the TrendWeight backend that addresses that <a href="http://www.ewal.net/2013/06/08/dealing-with-lots-of-historical-data/">Fitbit API limitation</a> and also opens up the doors for addressing some of the long requested enhancements you all have made.  I still have a bunch of work left to finish before it is ready, but at least the work is in progress...</p>
+<p>As always, email me at <a href="mailto:support@trendweight.com">&#x73;&#117;&#112;&#112;&#111;&#x72;&#116;&#x40;&#116;&#x72;&#x65;&#110;&#100;&#x77;&#x65;&#x69;&#x67;&#104;&#116;&#x2e;&#x63;&#111;&#x6d;</a> if you have any questions or concerns.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>iOS 7 and TrendWeight</title>
+        <link href="http://www.ewal.net/2013/11/04/ios7-and-trendweight/"/>
+        <updated>2013-11-04T16:24:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-11-04,/2013/11/04/ios7-and-trendweight/</id>
+        <content type="html"><![CDATA[<p>I have gotten several reports of problems with using TrendWeight on iOS7 devices.  Most commonly, I hear that TrendWeight seems to force you to login every time you open the site.</p>
+<p>The underlying issue seems to be a bug or a series of bugs in Safari/iOS7 related to storing <a href="http://en.wikipedia.org/wiki/HTTP_cookie">cookies</a>.  This Apple bug appears to affect all web apps, and not just TrendWeight, and other people are also <a href="http://www.infoworld.com/t/html5/bad-news-ios-7s-html5-full-of-bugs-227685">reporting</a> <a href="http://www.mobilexweb.com/blog/safari-ios7-html5-problems-apis-review">problems</a> with iOS7 on this front.  There have always been oddities in iOS with web apps that are pinned to the home screen, but it appears that iOS 7 made things noticeably worse.</p>
+<p>Unfortunately, there is not anything I can do to fix the underlying problem, but I did make a small change that should cause TrendWeight to launch in the full Safari app instead of by itself.  For some users, this seems to make your login session last longer, but it isn&#39;t a real fix and you&#39;ll eventually be asked to login again.</p>
+<p>Until Apple addresses the underlying problems, there are two other workarounds I can suggest:</p>
+<ul>
+<li>Instead of bookmarking your normal TrendWeight dashboard, bookmark (or add to your home screen) your public &quot;sharing URL&quot; (which you can find on your <a href="https://trendweight.com/settings/">settings</a> page).  Your public &quot;sharing URL&quot; doesn&#39;t require you to login, so you won&#39;t see a login page when you visit that page regardless of if cookies are working or not.</li>
+<li>You can also choose to use <a href="http://itunes.apple.com/us/app/chrome/id535886823">Chrome</a> instead of Safari as a browser on iOS as cookies work fine in Chrome and so it will have no problem remembering your login.</li>
+</ul>
+<p>If I hear more about the underlying Apple bug, I&#39;ll let you all know.  Until then, if you have questions or concerns, email me at <a href="mailto:support@trendweight.com">&#x73;&#x75;&#x70;&#112;&#111;&#114;&#x74;&#x40;&#x74;&#x72;&#x65;&#x6e;&#x64;&#119;&#101;&#x69;&#103;&#104;&#116;&#x2e;&#x63;&#111;&#109;</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Automatic CoffeeScript Translation in Blog Posts</title>
+        <link href="http://www.ewal.net/2013/10/17/automatic-coffeescript-translation/"/>
+        <updated>2013-10-18T04:05:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-10-18,/2013/10/17/automatic-coffeescript-translation/</id>
+        <content type="html"><![CDATA[<p>I like <a href="http://coffeescript.org/">CoffeeScript</a>, and I often include CoffeeScript code samples in blog posts.  But not everyone likes or has learned CoffeeScript.  To make my posts useful to a broader crowd, I could manually include the JavaScript equivalent for each CoffeeScript code block, but that is extra work for me, and it makes the posts more verbose.  Instead, I decided to see if I could automatically detect my CoffeeScript code blocks, and automatically make JavaScript translations available to readers on the fly.</p>
+<p>It turns out it wasn&#39;t that hard.  In fact, you can see it in action in this blog post, itself.  Keep in mind that because this is client-side code, it won&#39;t be visible for people reading the blog in an RSS reader.  Those users will just see the normal CoffeeScript code blocks as before.</p>
+<p>The first step was to remove <a href="http://softwaremaniacs.org/soft/highlight/en/">highlight.js</a> processing from the server side of my DocPad blog engine and move it to the client side.  I did this because highlight.js adds additional markup to the code blocks, and I needed access to the unmolested CoffeeScript code.  Removing highlight.js from the server side was as easy as <code>npm remove --save docpad-plugin-highlightjs</code>.</p>
+<p>The next step was to include highlight.js and coffee-script.js in my web pages.  I chose to most vendor scripts from the excellent <a href="http://cdnjs.com/">cdnjs</a>, but have to serve highlight.js myself because the CDN version doesn&#39;t have support for all the languages I care about (notably, CoffeeScript is not included).</p>
+<pre><code class="lang-html">&lt;script src=&quot;/scripts/vendor/highlight.pack.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Next, in my site&#39;s JavaScript code, I look for any code samples that are flagged as CoffeeScript by looking for the css class <code>lang-coffeescript</code>.  This css class is added by the markdown engine in DocPad when I add code blocks to my blog posts.  For each code block, I retrieve the CoffeeScript source code, compile it into JavaScript and then insert a new code block with the JavaScript source.  The extra markup uses Bootstrap tabs to make it easy to toggle between the two sets of code.</p>
+<pre><code class="lang-coffeescript">codeIndex = 0
+$(&#39;pre code.lang-coffeescript&#39;).each -&gt;
+    codeIndex++
+    $code = $(this)
+    $pre = $code.parent()
+
+    # add the markup to create the tabbed display
+    $tabContent = $pre.wrap(&quot;&lt;div class=&#39;tab-content&#39;&gt;&lt;div class=&#39;tab-pane active&#39; id=&#39;code-#{codeIndex}-coffee&#39;&gt;&lt;/div&gt;&lt;/div&gt;&quot;).parent().parent()
+    $(&quot;&lt;ul class=&#39;nav nav-tabs auto-coffee&#39;&gt;&lt;li class=&#39;active&#39;&gt;&lt;a href=&#39;#code-#{codeIndex}-coffee&#39; data-toggle=&#39;tab&#39;&gt;CoffeeScript&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&#39;#code-#{codeIndex}-js&#39; data-toggle=&#39;tab&#39;&gt;JavaScript&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&quot;).insertBefore($tabContent)
+
+    # compile into javascript
+    coffeeSource = $code.text()
+    jsSource = CoffeeScript.compile(coffeeSource, {bare: true})
+
+    # add the javascript code block
+    $tabContent.append(&quot;&lt;div class=&#39;tab-pane&#39; id=&#39;code-#{codeIndex}-js&#39;&gt;&lt;pre&gt;&lt;code class=&#39;lang-javascript&#39;&gt;#{htmlEncode(jsSource)}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&quot;)
+</code></pre>
+<p>The second-to-last step is to translate a couple language aliases I use.  <code>coffeescript-nojs</code> is an alias for <code>coffeescript</code> that just bypasses the code above and so won&#39;t be auto-translated.  <code>none</code> is just a shorter alias for highligh.js&#39;s normal <code>no-highlight</code>.  For example, I&#39;ll use <code>coffeescript-nojs</code> on the following code block to prevent the CoffeeScript/JavaScript UI from appearing:</p>
+<pre><code class="lang-coffeescript-nojs">$(&#39;.lang-coffeescript-nojs&#39;).removeClass(&#39;lang-coffeescript-nojs&#39;).addClass(&#39;lang-coffeescript&#39;)
+$(&#39;.lang-none&#39;).removeClass(&#39;lang-none&#39;).addClass(&#39;lang-no-highlight&#39;)
+</code></pre>
+<p>The last step is to use highlight.js to format any code blocks on the page.  First, the code translates any <code>lang-whatever</code> classes into <code>language-whatever</code> because that is what the client-side highlight.js class is expecting.  Then highlight.js is called on any code blocks to do its thing.</p>
+<pre><code class="lang-coffeescript">$(&#39;pre code&#39;).each (index, element) -&gt;
+    $code = $(this)
+    classes = $code.attr(&#39;class&#39;)?.split(&#39; &#39;)
+    if classes? then for origClass in classes
+        fixedClass = origClass.replace /^lang-/, &#39;language-&#39;
+        $code.removeClass(origClass).addClass(fixedClass) if fixedClass isnt origClass
+    hljs.highlightBlock(element)
+</code></pre>
+<p>Throw in some CSS to make things look the way I wanted, and there you have it.</p>
+<p>To see what the markdown source for this post looks like, look <a href="https://raw.github.com/ervwalter/ewalnet-docpad/master/src/documents/posts/2013-10-17-automatic-coffeescript-translation.html.md">here</a>.  And as always, you can find the complete source for my blog on GitHub, <a href="https://github.com/ervwalter/ewalnet-docpad">here</a>.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Draft Posts With DocPad</title>
+        <link href="http://www.ewal.net/2013/10/13/draft-posts-with-docpad/"/>
+        <updated>2013-10-13T18:52:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-10-13,/2013/10/13/draft-posts-with-docpad/</id>
+        <content type="html"><![CDATA[<p>Here is a quick tip.  I use <a href="http://docpad.org">DocPad</a> to <a href="http://www.ewal.net/2013/10/08/blogging-with-docpad/">generate my blog</a>, and one of the things I was used to with OctoPress was the ability to have a number of draft blog posts in progress that would appear in development mode, but would not appear when I generated the production site.</p>
+<p>DocPad <em>does</em> recognize <code>draft</code>, <code>published</code>, <code>skip</code>, <code>ignore</code>, and <code>ignored</code> as metadata properties in a document, but those properties cause the document to be <em>completely</em> ignored.  Even in development mode, a <code>draft: true</code> document will be invisible.  That wasn&#39;t what I wanted, so I took a different approach.</p>
+<p>In my blog, any document in the <code>drafts/</code> subfolder is not included in any site index files when the site is generated with <code>docpad -e static generate</code>.</p>
+<p>I accomplish this by defining a collection named <code>posts</code> in my <code>docpad.coffee</code>.  By default, the collection contains only the documents in the <code>posts/</code> subfolder.  But when run in development mode, the documents from <code>drafts/</code> are included in the collection and I sort them to the top so that they are always visible on the main blog index.</p>
+<pre><code class="lang-coffeescript-nojs">collections:
+    posts: -&gt;
+        @getCollection(&#39;documents&#39;).findAllLive({relativeDirPath: &#39;posts&#39;}, [date: -1])
+
+environments:
+    development:
+        collections:
+            posts: -&gt;
+                @getCollection(&#39;documents&#39;).findAllLive({relativeDirPath: {&#39;$in&#39; : [&#39;posts&#39;, &#39;drafts&#39;]}}, [relativeDirPath: 1,  date: -1])
+</code></pre>
+<p>Now that there is a collection named <code>posts</code>, I use it in all of the places in the blog that loop over blog posts, and so each of those places automatically includes draft posts during development mode and leaves them out otherwise.  This includes all these places:</p>
+<ul>
+<li>The main <a href="http://www.ewal.net/">blog index</a></li>
+<li>The <a href="http://www.ewal.net/archives/">archives</a> page</li>
+<li><a href="http://www.ewal.net/tags/docpad/">Tag index</a> pages</li>
+<li>The <a href="http://www.ewal.net/feed.xml">atom feed</a></li>
+</ul>
+<p>There is an important second step, though.  Even though the draft posts are not includes in any indexes, they <em>are</em> still being generated by docpad and so can be directly accessed if someone knows the URL.  I address this by doing two things.  First, I have the <code>drafts</code> folder in my <a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/src/documents/.gitignore">.gitignore</a> file, so that my draft documents only ever live on my own hard drive and don&#39;t get pushed to my <a href="https://github.com/ervwalter/ewalnet-docpad/">github repository</a> or to my blog&#39;s host.  Keep in mind that my entire blog&#39;s working folder is in a <a href="https://db.tt/L0B0IUI">DropBox</a> folder, so even though my draft posts aren&#39;t ever committed to git, they are available on <em>all</em> of my computers and are effectively backed up to the cloud as well.</p>
+<p>In normal circumstances, the <code>.gitignore</code> entry is sufficient, but I also have added <code>drafts</code> to the ignore list of my <a href="http://www.ewal.net/2013/10/10/deploying-docpad-sites-to-azure/">Windows Azure deployment script</a> as good measure just in case a draft document makes it into git somehow.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Deploying DocPad Sites To Windows Azure</title>
+        <link href="http://www.ewal.net/2013/10/10/deploying-docpad-sites-to-azure/"/>
+        <updated>2013-10-11T00:16:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-10-11,/2013/10/10/deploying-docpad-sites-to-azure/</id>
+        <content type="html"><![CDATA[<p>There are many ways you can deploy a <a href="http://docpad.org">DocPad</a> site.  One of the simplest options is just to generate a static set of HTML/JavaScript/CSS/etc files and upload them to your favorite web host.  Or you can upload your source files to a Node.js host and run the DocPad Node app interactively.  I&#39;m going to talk about a hybrid approach, specifically with Windows Azure Web Sites.</p>
+<h2 id="why-azure-">Why Azure?</h2>
+<p>I like Azure.  I&#39;m not going to try to argue that it&#39;s &#39;better&#39; than other cloud hosting vendors.  A lot of it comes down to personal preference.  Part of it comes from my background as a Microsoft-ecosystem developer (C#, ASP.NET MVC, etc).  But Azure is not just a cloud provider for Microsoft-ecosystem projects anymore.  They&#39;ve broadened their horizons in the past few years, and have made a push to attack developers from popular non-Microsoft communities to Azure including Node.js, PHP, Ruby, and Python developers.</p>
+<p>Windows Azure <a href="http://www.windowsazure.com/en-us/documentation/services/web-sites/">Web Sites</a> are an interesting service.  They are similar to services like Heroku in that they abstract away the management of the platform and OS and you just deploy &#39;apps&#39;.  They have free, cheap, and not-cheap pricing tiers depending on what features you want and what level of scalability you need. </p>
+<p>A couple of my other <a href="http://www.ewal.net/projects/">projects</a> are hosted on Azure Web Sites, and <a href="https://trendweight.com">TrendWeight</a>, in particular, is running on the &#39;standard&#39; tier which essentially means I have an entire VM to myself that I can use for as many web apps as I want.</p>
+<h2 id="static-site-vs-live-node-js-app-">Static Site vs Live Node.js App?</h2>
+<p>As I mentioned, DocPad sites can be either run as live Node.js apps, or you can generate a static site on your development machine and upload the static files.  There are pros and cons to each.  </p>
+<p>If you run a live Node.js app, you can write additional code to change the behavior of the app at runtime (e.g. dynamically intercepting requests and redirecting them based on whatever criteria you like, etc.)  You upload your DocPad source files to the web server and they get run by Node.js dynamically at runtime.</p>
+<p>My blog doesn&#39;t need that level of dynamic behavior, so my preference was for a static site just for raw speed.  Azure (IIS 8.0, really) is really good at serving up static files, and core IIS functionality, configured by web.config, can handle all the extra stuff I need (e.g. redirecting requests that leave the &#39;www&#39; off the hostname).</p>
+<p>But what I <em>didn&#39;t</em> want to have is a painful authoring workflow:</p>
+<ol>
+<li>Write a blog post by creating a markdown file</li>
+<li>Commit my markdown file to my local git repo</li>
+<li>Open a terminal window</li>
+<li>Manually run <code>docpad -e static clean</code> and then <code>docpad -e static generate</code> to regenerate the static files</li>
+<li>Copy the generated static files to Azure via one of their supported deployment options.</li>
+</ol>
+<p>I was intrigued by the Windows Azure <a href="http://docpad.org/docs/deploy">deployment instructions</a> on the DocPad site, but they didn&#39;t do exactly what I wanted and more importantly, they don&#39;t work anymore (Microsoft must have changed something to break them).  The idea of this approach is that you push your DocPad <em>source</em> to Azure and then leverage the fact that Azure servers already have Node.js installed on them (since they support running Node.js apps) and run the DocPad generation command directly on the Azure server at deployment time instead of on your local development workstation.</p>
+<p><img class="fancybox border float-right" src="http://www.ewal.net/stuff/docpad-azure-deploy.png" width="250"></p>
+<p>I chose to use the GitHub integration, but you can also use DropBox or simply <code>git push</code> to get your files up to Azure. With this process, the authoring workflow looks like this:</p>
+<ol>
+<li>Write a blog post by creating a markdown file</li>
+<li>Commit my markdown file to my local git repo</li>
+<li>Push my changes to GitHub</li>
+</ol>
+<p>GitHub notifies Azure about the new commits, Azure pulls them, and runs the deployment script to generate fresh static files, then copies the new set of static files to the folder where the site is being served from (see the screenshot for an example).</p>
+<h2 id="how-">How?</h2>
+<p>Put these three files in the root folder of your source tree (next to docpad.coffee) and push your changes to Azure:</p>
+<ul>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/.deployment">.deployment</a></li>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/web.config">web.config</a></li>
+<li><a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/azure-deploy.cmd">azure-deploy.cmd</a></li>
+</ul>
+<p>These files are <em>almost</em> completely generic and can be made to work with any DocPad site, not just <em>my</em> docpad site.  They automatically figure out things like the version of node your project requires, etc.  There is essentially only one thing you might need to tweak in azure-deploy.cmd, and it&#39;s explained below.</p>
+<p>That said, I&#39;ll explain how so that they are less magical...</p>
+<h3 id="-deployment">.deployment</h3>
+<p>The <code>.deployment</code> file is a special file that Azure looks at to decide how to deploy your site.  If you have a <code>.deployment</code> file, Azure will do what it says instead of trying to auto-detect what kind of project you have.  Our file is simple and just tells Azure to run the <code>azure-deploy.cmd</code> script to do the actual deployment:</p>
+<pre><code>[config]
+command = azure-deploy.cmd
+</code></pre><h3 id="web-config">web.config</h3>
+<p>This <code>web.config</code> file is just a dummy file.  It is <em>not</em> the <code>web.config</code> file that will actually be used by your website once deployed.  If yout want a <code>web.config</code> file for your site, you should put it in <code>./src/files/web.config</code> and it will be copied to the root of your site by the DocPad static file generation process.  </p>
+<p>This file is just there to trick Microsoft&#39;s node/npm version detection script that we&#39;re going to use.  If you don&#39;t have one, it gives you a (benign) warning message currently.  Technically this file isn&#39;t necessary today, but I include one anyway because in the future Microsoft may change their script to do something not-benign if they don&#39;t detect an existing <code>web.config</code>.</p>
+<h3 id="azure-deploy-cmd">azure-deploy.cmd</h3>
+<p>This is the meat of the magic.  It does these main things:</p>
+<h4 id="setup">Setup</h4>
+<p>The Setup&#39; section initializes a number of variables that hold things like the path to our source code and the path to the root folder of our web site.</p>
+<h4 id="node-version-detection">Node Version Detection</h4>
+<p>Next, this code uses a Microsoft-provided script to parse our package.json file to determine what version of Node and NPM we need and it initializes a couple variables to hold the paths to those two executables.</p>
+<pre><code class="lang-dos">:: 1. Select node version
+call :SelectNodeVersion
+</code></pre>
+<h4 id="install-modules">Install Modules</h4>
+<p>Next, this section of code runs <code>npm install</code> to install the required node modules.</p>
+<pre><code class="lang-dos">:: 2. Install npm packages
+echo Installing npm packages...
+pushd &quot;%DEPLOYMENT_SOURCE%&quot;
+call !NPM_CMD! install --production
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+</code></pre>
+<p>I use an <a href="https://npmjs.org/doc/shrinkwrap.html">npm-shrinkwrap.json</a> file to ensure that dependencies only change when I have tested them on my development machine.  Keep in mind that if you remove a dependency, it will not get removed from the <code>node_modules</code> folder on azure automatically with this approach.  Usually, that isn&#39;t a problem and just amounts to a small amount of wasted disk space.  I did experiment, for a while, with deleting the <code>node_modules</code> folder and reinstalling everything from scratch with every deployment, but that made deployments take a very long time, so I stopped doing that.</p>
+<h4 id="generate-static-files">Generate Static Files</h4>
+<p>The next bit of code runs <code>docpad -e static generate</code> to generate your site.  Again, prior to running the command, it deletes the existing <code>out</code> folder so that you always have exactly the right files every time you deploy even if you remove files over time.</p>
+<pre><code class="lang-dos">:: 2. Build DocPad site
+echo Building DocPad site...
+pushd &quot;%DEPLOYMENT_SOURCE%&quot;
+rd /s /q out
+IF !ERRORLEVEL! NEQ 0 goto error
+&quot;!NODE_EXE!&quot; .\node_modules\docpad\bin\docpad -e static generate
+IF !ERRORLEVEL! NEQ 0 goto error
+popd
+</code></pre>
+<h4 id="copy-files">Copy Files</h4>
+<p>Finally, we use the Microsoft file-copy tool to copy the generated files to the root folder of our web site:</p>
+<pre><code class="lang-dos">:: 3. KuduSync
+echo Copying Files...
+call %KUDU_SYNC_CMD% -v 500 -i &quot;posts;drafts&quot; -f &quot;%DEPLOYMENT_SOURCE%\out&quot; -t &quot;%DEPLOYMENT_TARGET%&quot; -n &quot;%NEXT_MANIFEST_PATH%&quot; -p &quot;%PREVIOUS_MANIFEST_PATH%&quot;
+IF !ERRORLEVEL! NEQ 0 goto error
+</code></pre>
+<p><strong>Note:</strong> This is the one section you might need to tweak.  Notice the <code>-i &quot;posts;drafts&quot;</code> in the third line.  That tells the <a href="https://github.com/projectkudu/KuduSync.NET">KuduSync</a> tool to not copy anything in the <code>posts/</code> or <code>drafts/</code> folders.  This is specific to my particular blog and you may want to remove it or modify it for your own purposes.  I don&#39;t copy anything from <code>posts/</code> because I am using the <a href="https://github.com/mgroves84/docpad-plugin-dateurls/">dateurls</a> plugin which changes the URLs of documents in that folder to live elsewhere.  I ignore that folder because I don&#39;t want the left over files from the <code>posts/</code> folder to be copied to the live site. I also exclude files in the &#39;drafts/&#39; folder because, well, they are drafts and I don&#39;t want them to appear on the live site.  I&#39;ll talk more about how I handle draft posts in my next blog post.</p>
+<h2 id="summary">Summary</h2>
+<p>That&#39;s it.  Add those three files and you get easy continuous integration support with Azure and DocPad.  Pretty sweet.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Atom Feeds With DocPad</title>
+        <link href="http://www.ewal.net/2013/10/09/atom-feeds-with-docpad/"/>
+        <updated>2013-10-10T04:45:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-10-10,/2013/10/09/atom-feeds-with-docpad/</id>
+        <content type="html"><![CDATA[<p>If you are generating a blog or a blog-like site with DocPad, you&#39;ll probably want to create a atom or rss feed for the site.  Doing so is reasonably straightforward, but there is one little trick to be aware of.  The trick is that you need to convert any relative URLs in your blog content to absolute URLs.</p>
+<p>First, start with a <code>feed.xml.eco</code> document that looks like this:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;&gt;
+    &lt;title&gt;&lt;%= @site.title %&gt;&lt;/title&gt;
+    &lt;link href=&quot;&lt;%= @site.url %&gt;/feed.xml&quot; rel=&quot;self&quot;/&gt;
+    &lt;link href=&quot;&lt;%= @site.url %&gt;&quot;/&gt;
+    &lt;updated&gt;&lt;%= @site.date.toISOString() %&gt;&lt;/updated&gt;
+    &lt;id&gt;&lt;%= @site.url %&gt;&lt;/id&gt;
+    &lt;author&gt;
+        &lt;name&gt;&lt;%= @site.author %&gt;&lt;/name&gt;
+        &lt;email&gt;&lt;%= @site.email %&gt;&lt;/email&gt;
+    &lt;/author&gt;
+
+    &lt;% for document in @getCollection(&#39;posts&#39;).toJSON()[0..9]: %&gt;
+    &lt;entry&gt;
+        &lt;title&gt;&lt;%= document.title %&gt;&lt;/title&gt;
+        &lt;link href=&quot;&lt;%= @site.url %&gt;&lt;%= document.url %&gt;&quot;/&gt;
+        &lt;updated&gt;&lt;%= document.date.toISOString() %&gt;&lt;/updated&gt;
+        &lt;id&gt;&lt;%= @getIdForDocument(document) %&gt;&lt;/id&gt;
+        &lt;content type=&quot;html&quot;&gt;&lt;![CDATA[&lt;%- @fixLinks(document.contentRenderedWithoutLayouts) %&gt;]]&gt;&lt;/content&gt;
+    &lt;/entry&gt;
+    &lt;% end %&gt;
+&lt;/feed&gt;
+</code></pre>
+<p>You can see that the document is reasonably straightforward.  It generates a basic atom <code>feed</code> element, fills in the required elements using values from your docpad configuration.  Then it creates an <code>entry</code> for each of the 10 most recent blog posts.  It fills in each <code>entry</code> element with details about each post.</p>
+<p>Notice the <code>@fixLinks()</code> call inside the <code>content</code> element.  This is the trick I mentioned.  This function parses the HTML content of each blog post looking for URLs in <code>&lt;a&gt;</code> and <code>&lt;img&gt;</code> tags that don&#39;t include a scheme (e.g. http://) and hostname in them and adds the site&#39;s base url (e.g. <a href="http://www.ewal.net">http://www.ewal.net</a>).  For example this html in a blog post:</p>
+<pre><code>&lt;a href=&quot;/2013/10/08/blogging-with-docpad/&quot;&gt;My last post&lt;/a&gt;
+&lt;img src=&quot;/stuff/forsalebyowner.png&quot; /&gt;
+</code></pre><p>becomes:</p>
+<pre><code>&lt;a href=&quot;http://www.ewal.net/2013/10/08/blogging-with-docpad/&quot;&gt;My last post&lt;/a&gt;
+&lt;img src=&quot;http://www.ewal.net/stuff/forsalebyowner.png&quot; /&gt;
+</code></pre><p>This is very important if you include links in your blog posts that don&#39;t always include your domain&#39;s hostname.  Without this fix, people will see broken images and your internal site links won&#39;t work if they read you blog in a newsreader.</p>
+<p>The <code>@getIdForDocument()</code> call just creates an appropriate unique Id for each post using <a href="http://web.archive.org/web/20110514113830/http://diveintomark.org/archives/2004/05/28/howto-atom-id">Mark Pilgrim&#39;s guidelines</a>.</p>
+<p>The code for <code>fixLinks</code> and <code>getIdForDocument</code> lives in <code>docpad.coffee</code> as functions added to templateData.  They look like this:</p>
+<pre><code class="lang-coffeescript">docpadConfig = {
+    templateData:
+
+        getIdForDocument: (document) -&gt;
+            hostname = url.parse(@site.url).hostname
+            date = document.date.toISOString().split(&#39;T&#39;)[0]
+            path = document.url
+            &quot;tag:#{hostname},#{date},#{path}&quot;
+
+        fixLinks: (content) -&gt;
+            baseUrl = @site.url
+            regex = /^(http|https|ftp|mailto):/
+
+            $ = cheerio.load(content)
+            $(&#39;img&#39;).each -&gt;
+                $img = $(@)
+                src = $img.attr(&#39;src&#39;)
+                $img.attr(&#39;src&#39;, baseUrl + src) unless regex.test(src)
+            $(&#39;a&#39;).each -&gt;
+                $a = $(@)
+                href = $a.attr(&#39;href&#39;)
+                $a.attr(&#39;href&#39;, baseUrl + href) unless regex.test(href)
+            $.html()
+}
+</code></pre>
+<p>These two functions use a couple node modules&mdash;one named <a href="http://matthewmueller.github.io/cheerio/">cheerio</a> to parse the HTML using a jQuery-like API and the standard <code>url</code> module from node.js.  Add references to them at the top of docpad.coffee (after you <code>npm install --save cheerio</code> of course):</p>
+<pre><code>cheerio = require(&#39;cheerio&#39;)
+url = require(&#39;url&#39;)
+</code></pre><p>You can see this code &quot;in context&quot; in <a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/docpad.coffee">docpad.coffee</a> and <a href="https://github.com/ervwalter/ewalnet-docpad/blob/master/src/documents/feed.xml.eco">feed.xml.eco</a> from my blog&#39;s source code.</p>
+<p>That&#39;s basically all there is too it. My site generates an atom feed, but you could just as easily use this technique to create an rss feed instead of or in addition to an atom feed if you prefer.</p>
+]]></content>
+    </entry>
+    
+    <entry>
+        <title>Blogging With DocPad</title>
+        <link href="http://www.ewal.net/2013/10/08/blogging-with-docpad/"/>
+        <updated>2013-10-09T03:00:00.000Z</updated>
+        <id>tag:www.ewal.net,2013-10-09,/2013/10/08/blogging-with-docpad/</id>
+        <content type="html"><![CDATA[<p>Over the past couple weeks, I have been <a href="http://www.ewal.net/2013/10/06/for-sale-by-owner/">playing</a> with <a href="http://docpad.org">DocPad</a> for another project. As I was learning about DocPad, I started to get the itch to move my blog engine to it (from <a href="http://www.ewal.net/2012/09/08/octopress-customizations/">Octopress</a>).  Why? Mostly because trying something new is usually more fun than the status quo :)  But also because I prefer NodeJS and JavaScript over Ruby.</p>
+<h2 id="docpad-vs-octopress">DocPad vs. Octopress</h2>
+<p>Don&#39;t get me wrong.  Octopress was working perfectly fine for me.  It&#39;s a great engine.  But because it is a ruby application (or perhaps it&#39;s built on top of Jekyll, which is a ruby application), I was never going to fully understand its internals well enough to tinker and contribute back to the open source project.</p>
+<p>DocPad, on the other hand is a <a href="http://nodejs.org">NodeJS</a> application, and so is something I am comfortable enough with to do some tinkering.  So, I spent a weekend and a couple late nights toiling away, and you&#39;re looking at the results.  My blog is now generated by DocPad and I accomplished that without losing any significant functionality in the migration.  In the process of getting this revised blog engine up and running, I found several features I needed that were missing, so I have already submitted a handful of pull requests to the DocPad team and to other plugin authors.</p>
+<p>To be fair, DocPad probably compares more closely with <a href="http://jekyllrb.com/">Jekyll</a> than it does with Octopress.  DocPad and Jekyll are both static website generators. Both are kind of swiss army knives and can be used to create any kind of static website, not just blogs. The downside is that if you want to create a blog with either of them, you have to build it out yourself. Octopress, on the other hand, is a collection of scripts and templates for Jekyll that makes it much easier to create a blog without having to really learn Jekyll.</p>
+<h2 id="getting-started-quickly">Getting Started Quickly</h2>
+<p>I looked, and as far as I can tell, there is no one who has really created a comprehensive blog template (or &quot;skeleton&quot;, in DocPad terms) that lets you get started as quickly and easily as with Octopress.  Fortunately, it wasn&#39;t <em>that</em> hard to create one from scratch.  I was able to get all of the things I cared about working:</p>
+<ul>
+<li>Blog posts generated from Markdown files</li>
+<li>CSS stylesheets generated from Less files</li>
+<li>Blog post URLs based on the date of the post</li>
+<li>Disqus support for post comments</li>
+<li>Tags and tag index pages</li>
+<li>Good syntax highlighting of code blocks</li>
+<li>FancyBox support for images in blog posts</li>
+<li>Arbitrary additional web pages (e.g. my &#39;Projects&#39; page in the header above)</li>
+<li>A functional atom feed with relative urls (images, etc) automatically converted to fully qualified URLs</li>
+<li>A reasonable workflow for draft posts that aren&#39;t ready to be published</li>
+<li>Windows Azure hosting with automatic production-site updates anytime I update GitHub</li>
+</ul>
+<p>If you&#39;d like to build off of what I have done, you&#39;re absolutely welcome to.  The source for this website is available on GitHub:</p>
+<p><a href="https://github.com/ervwalter/ewalnet-docpad">https://github.com/ervwalter/ewalnet-docpad</a></p>
+<p>Keep in mind that it has all my content in it (which you would need to clean out), and it has <em>my</em> blog&#39;s look and feel (which you may not want), but it may be a helpful starting point.</p>
+<p>That said, I also plan to create another copy of the code that has my content stripped out and has a more generic look and feel that may be useful as an true skeleton project you can use to get started very quickly.</p>
+<h2 id="building-blocks">Building Blocks</h2>
+<p>For those that are more interested in building there own projects, there are a few non-obvious things I wrote about related to my use of DocPad:</p>
+<ul>
+<li><a href="http://www.ewal.net/2013/10/09/atom-feeds-with-docpad/">Generating Functional Atom Feeds</a></li>
+<li><a href="http://www.ewal.net/2013/10/10/deploying-docpad-sites-to-azure/">Deploying DocPad Sites to Windows Azure</a></li>
+<li><a href="http://www.ewal.net/2013/10/13/draft-posts-with-docpad/">Dealing With Draft Posts</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+</feed>

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+    <script type="text/javascript">
+        // do not remove this hostname restriction unless you also change the API key below...
+        if (window.location.hostname == 'www.ewal.net') {
+            var analytics=analytics||[];(function(){var e=["identify","track","trackLink","trackForm","trackClick","trackSubmit","page","pageview","ab","alias","ready","group"],t=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var n=0;n<e.length;n++)analytics[e[n]]=t(e[n])})(),analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n)};
+
+            // if you clone this app, please change the API key below to your own...
+            analytics.load("83mu6lzb7f");
+        }
+    </script>
+
+    <title>Ewal.net</title>
+    <meta name="author" content="Erv Walter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/feed.xml" rel="alternate" title="Ewal.net" type="application/atom+xml">
+    <link rel="icon" sizes="300x300" href="/icon.png">
+    <link rel="icon" sizes="196x196" href="/icon-196.png">
+    <link rel="icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+    <link href="/favicon.png" rel="shortcut icon">
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Bootstrap -->
+    <link href="/styles/site.css?1419397389559" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/scripts/vendor/html5shiv.js"></script>
+    <script src="/scripts/vendor/respond.min.js"></script>
+    <![endif]-->
+
+    <meta name="generator" content="DocPad v6.69.1" />
+    
+</head>
+<body>
+
+<a href="https://plus.google.com/103974853049200513652?rel=author" class="google googleplus-hidden" title="Google+">Google+</a>
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">// <span class="text-primary">Ewal.net</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="/">Blog</a></li>-->
+                <li><a href="/archives/">Archives</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="/games/"><span class="header-if-wide">Board </span>Games</a></li>
+                <li class="hidden-xs">
+                    <a href="/feed.xml" class="rss"><span class="icon icon-feed"></span></a>
+                    <a href="http://twitter.com/ervwalter" class="twitter"><span class="icon icon-twitter"></span></a>
+                    <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+                  method="get">
+                <div class="form-group">
+                    <input type="search" name="q" class="form-control" placeholder="Search">
+                    <input type="hidden" name="q" value="site:www.ewal.net">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10">
+            
+    <article id="post" class="post">
+    <div class="post-date">Jan 13th, 2013</div>
+    
+    <h1><a href='/2013/01/13/heart-failure-tracking-weight-changes/'>Heart Failure: Tracking Weight Changes</a></h1>
+    
+    <div class="post-content">
+        <p><em>Note: There <strong>is</strong> a discussion of a new TrendWeight feature eventually in this post, but it is preceded by a bit more of my personal story than I normally share.  If you have or know someone that has heart failure or CHF, I encourage you to keep reading even though this is long.  If you don&#39;t, you probably won&#39;t care about this new feature and so can skip reading this post if you like.</em></p>
+<p>Sometimes life throws you a curve ball.  Late last November, I was diagnosed with <a href="http://en.wikipedia.org/wiki/Heart_failure">heart failure</a>.  In a nutshell, that means my heart muscle is weak and doesn&#39;t pump as well as it should.  Fortunately, I am currently doing fine (thanks to modern medications).</p>
+<p>One aspect of living with heart failure is that you have to weigh yourself every day and keep track of day to day changes.  That shouldn&#39;t be hard, right?  I already weigh myself every day and keep track of changes, and I have this nice web app that makes it easy.  Sort of.</p>
+<p>Without getting into too many boring details, let me give you a little background.  When a person&#39;s heart gets weaker, a common symptom is that they start retaining water.  It was explained to me like this: You heart is not pumping as strongly as it used to, and your kidney notices and thinks the problem may be that there is a shortage of blood, and so your kidney starts keeping more water in your body to help make up for the perceived shortage.  The result is that a person will steadily gain weight from additional water over days or weeks.  Doctors want to watch for this happening, and so heart failure patients weigh themselves every day looking for sudden or steady increases in weight (which might indicate that their heart failure has gotten worse).</p>
+<p>Since I have been weighing myself every day for the past year or so, I have some interesting pre-diagnosis data to look at.  Here is my summer / fall:</p>
+<p><img class="fancybox" src="/stuff/trendweight-chf-chart1.png" /></p>
+<p>At the time, I didn&#39;t know what was going on, but I did know or at least strongly suspect that I was gaining water weight and not fat.  When you look at just October and November and compare my total weight gain with my change in fat mass, you can clearly see that I was not gaining fat (I was also certain that I was not gaining muscle because at the time I was nearly completely unable to do any kind of exercise):</p>
+<p><img class="fancybox" src="/stuff/trendweight-chf-chart3.png" /></p>
+<p>When I finally got in front of a cardiologist at the end of November, it didn&#39;t take them long to figure out that I was suffering from heart failure.  The good news is that with just some medications, all this extra retained water drained off quickly, my symptoms disappeared, and I am back to feeling &quot;normal&quot; and have a normal level of physical activity including daily exercise.</p>
+<p><img class="fancybox" src="/stuff/trendweight-chf-chart2.png" /></p>
+<p><img class="float-right border" src="/stuff/trendweight-chf-table1.png" width="300" /></p>
+<p>Ok, so let me get back to TrendWeight.</p>
+<p>I weigh myself every day, and that data already shows up in TrendWeight automatically, so monitoring my weight for unexpected increases should be easy, right?.  But what matters, this time, is the actual scale reading and not the trend.  That&#39;s kind of the opposite of the normal TrendWeight philosophy which is all about helping you ignore the actual scale weight and instead focusing on the slower changing trend over time.</p>
+<p>When you are trying to lose weight (fat), you want to ignore the day to day changes caused by varying amounts of water retention.  But when watching for weight changes in the context of heart failure, it&#39;s the water retention that we&#39;re looking for.  The smoothing of day to day weight changes is counter productive, in this case.</p>
+<p>I <em>could</em> just look at the normal TrendWeight dashboard, look at the &quot;Actual&quot; column of the recent weight readings table and do math in my head.  For example, you can see (to the right) that from Jan 7 to Jan 8, I gained 1.6 lbs.  But wait.  Manually doing math in my head every day?  Isn&#39;t avoiding that kind of thing the main reason I developed TrendWeight in the first place?  I can do better than that :)</p>
+<p>So, I have been working on a sort of &quot;CHF Dashboard&quot; that uses the same data from WiFi scales, but analyzes it and presents it in a different way.  In particular, it doesn&#39;t show the &quot;trend&quot; weight at all, because that is not the important data point.  It also automatically calculates daily and weekly weight changes and highlights days where there are higher than normal changes.  Per my doctors, what I am looking for is a change of more than 2 pounds in a single day or 5 pounds in a week.  If that happens, I call my doctors/nurses and they will likely make adjustments to my medication doses to get things back under control.</p>
+<h2 id="the-dashboard">The Dashboard</h2>
+<p>This is still a work in progress, but I have a beta version of the CHF dashboard that I am now using daily (in addition to the normal dashboard, because I am also still trying to lose more fat).  If you have CHF and want to try this today, you can view <em>your</em> version of this dashboard by visiting <a href="https://trendweight.com/chf/">https://trendweight.com/chf/</a>.</p>
+<p><img class="fancybox border" src="/stuff/trendweight-chf-dashboard.png" /></p>
+<p>The table shows the last 28 days of weight readings and the relative weight changes for that day (1 day and 7 day).  As a side note, I expect this will be helpful for my doctors and nurses as well.  They usually want to see my weight changes every time I have an appointment with them, and I can show them this dashboard on my iPad instead of keeping track redundantly on a sheet of paper that I give them.</p>
+<p>Single day changes of more than 1 pound are highlighted (whether it is an increase or a decrease--they want to know about significant changes either way).  Weekly changes of more than 4 pounds are highlighted as well.  You might notice that the 7 day column usually has 2 numbers in it.  The reason is that my weight today may represent both a gain in weight from the lowest weight I had in the past week while at the same time being a drop in weight from the highest weight I had in the past week.  So the table shows both unless today&#39;s weight <em>is</em> the highest or lowest weight in the past week.</p>
+<p>I use this dashboard every day to see if my weight today is different enough to need to call the doctor (I am fortunate that that has never happened).  In reality, I can usually remember what my weight was yesterday, so I usually know, even when just standing on the scale, if my weight has changed by more than 2 lbs in the past day.  But I definitely need this tool in order to identify if my weight has changed by more than 5 pounds in a week.</p>
+<p>As I said, this is still a work in progress, and it lacks a certain amount of polish.  But if you have a reason to want to track your day to day weight changes, feel free to use it.  As with the rest of TrendWeight, I created this primarily for myself, but there are millions people with heart failure in the world, so if this is a useful tool for some part of that community, I&#39;m happy to share it.</p>
+<p>As always, if you have feedback or comments, feel free to email me at <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#x3a;&#x73;&#x75;&#112;&#112;&#x6f;&#x72;&#x74;&#x40;&#x74;&#x72;&#x65;&#110;&#x64;&#x77;&#x65;&#105;&#103;&#x68;&#116;&#46;&#x63;&#111;&#x6d;">&#x73;&#x75;&#112;&#112;&#x6f;&#x72;&#x74;&#x40;&#x74;&#x72;&#x65;&#110;&#x64;&#x77;&#x65;&#105;&#103;&#x68;&#116;&#46;&#x63;&#111;&#x6d;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Oct 26th, 2012</div>
+    
+    <h1><a href='/2012/10/26/major-update-body-fat-tracking-is-here/'>Major Update: Body Fat Tracking is Here</a></h1>
+    
+    <div class="post-content">
+        <p>I just released a new version of TrendWeight that includes a bunch of changes:</p>
+<ul>
+<li>Body fat tracking</li>
+<li>Decent mobile support for more devices</li>
+<li>Configurable day start</li>
+<li>Access to raw scale readings</li>
+<li>Lots of behind the scenes improvements</li>
+</ul>
+<p>Also, I&#39;ll take this opportunity to apologize in advance.  This update involved a nearly complete rewrite of the user dashboard (the page with the chart and the stats).  I probably broke a lot of things in the process.  I have tested the new version a fair amount and fixed a lot of small issues, but I probably didn&#39;t find them all.  I&#39;ll be watching the error logs closely for the next few days, but if you notice anything that seems wrong, please email me the details at <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#x40;&#116;&#114;&#101;&#110;&#100;&#x77;&#x65;&#x69;&#103;&#x68;&#x74;&#x2e;&#99;&#x6f;&#x6d;">&#x73;&#117;&#x70;&#112;&#111;&#x72;&#116;&#x40;&#116;&#114;&#101;&#110;&#100;&#x77;&#x65;&#x69;&#103;&#x68;&#x74;&#x2e;&#99;&#x6f;&#x6d;</a> and I&#39;ll look at it right away.</p>
+<h2 id="body-fat">Body Fat</h2>
+<p>If you have body fat data in your connected Withings or FitBit accounts, you&#39;ll now see some new buttons on your dashboard that let you look at body-fat-related trends.  There are three new options:</p>
+<ul>
+<li><strong>Fat %</strong>.  This is the percent of your total body weight that the scale thinks is fat.</li>
+<li><strong>Fat Mass</strong>.  This is how many pounds or kilograms of fat you have in your body.  This is calculated by multiplying your total body weight by your body fat %.  If you are trying to lose weight, watching for this trend line to go down over time may be interesting.</li>
+<li><strong>Lean Mass</strong>.  This is how many pounds or kilograms of non-fat you have in your body.  This is calculated by subtracting your fat mass from your total body weight.  If you are actively trying to build muscle, watching this trend line go up over time may be interesting.  On the other hand, if you are trying to lose <em>fat</em>, making sure that this trend line is <em>not</em> dropping over time may also be interesting.</li>
+</ul>
+<p><img class="border" src="/stuff/trendweight-bodyfat.png" /></p>
+<p><em>Fair warning</em>:  In my experience, neither the Withings nor FitBit wifi scales are particularly precise with body fat estimation.  What I mean is that your scale readings may change significantly from day to day even though your body hasn&#39;t really changed much at all.  The result is that you should expect the body-fat-related charts to be more erratic than the total weight chart.  Looking at your body fat trends may still be interesting, but my suggestion is not to worry as much about short term changes. If you care about body fat trends, watch the trends over a slightly longer term than you do for total weight (e.g. look at changes over 3 months and don&#39;t obsess about changes over 2 weeks).</p>
+<p>You can also play with this using the <a href="https://trendweight.com/demo/">Sample Dashboard</a>.  Keep in mind that the sample user has entirely fabricated data and the body fat data may not be realistically random.  On a side note, if you have at least 9 months of weight and body fat data and are interested in volunteering your weight data to be used (anonymously) by the the sample user dashboard, let me know.</p>
+<h2 id="trendweight-on-your-smartphone">TrendWeight on your SmartPhone</h2>
+<p>As part of this update, the mobile-optimized dashboard is now available on more devices (almost any device in theory as long as it has a decent browser).  I have only tested it on an iPhone, though, since that is all I have available.</p>
+<p><img class="border" src="/stuff/trendweight-iphone.png" /></p>
+<h2 id="day-start">Day Start</h2>
+<p>You can now specify what time of day you want TrendWeight to use when deciding which day a weight reading occurs on.  See <a href="/2012/08/29/whats-next-for-trendweight/">this post</a> for a more thorough discussion of the motivation for this feature.  Most people can probably just leave this set at midnight and not worry about it.</p>
+<p><img src="/stuff/trendweight-daystart.png" /></p>
+<h2 id="raw-scale-readings">Raw Scale Readings</h2>
+<p>Several people have noticed that the scale readings displayed in TrendWeight do not match the scale readings displayed on the FitBit website.  After some investigation, this seems to be because the two websites round numbers differently.  The FitBit and Withings APIs actually return weight readings with many decimal places (e.g. 141.4972 lbs).  On TrendWeight when that weight is used in calculations, it is used with the full precision (all the decimal places).  When weights are displayed, they are generally rounded to a single decimal place (e.g 141.5 lbs).  On the FitBit website, that weight would be displayed as 141.4 lbs though because it always rounds <em>down</em> to the nearest tenth of a pound.</p>
+<p>Anyway, in order to allow people to better determine if there are discrepancies between TrendWeight and FitBit/Withings, you can now go to a page which shows the raw scale readings that came from the FitBit/Withings API.  You can get to this page by clicking a new button on your settings page:</p>
+<p><img src="/stuff/trendweight-scalereadings1.png" /></p>
+<p>Again, if you notice anything not working or fishy, please email me at <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#x3a;&#115;&#x75;&#x70;&#x70;&#x6f;&#114;&#116;&#x40;&#116;&#114;&#x65;&#x6e;&#x64;&#119;&#x65;&#105;&#x67;&#104;&#116;&#x2e;&#99;&#111;&#109;">&#115;&#x75;&#x70;&#x70;&#x6f;&#114;&#116;&#x40;&#116;&#114;&#x65;&#x6e;&#x64;&#119;&#x65;&#105;&#x67;&#104;&#116;&#x2e;&#99;&#111;&#109;</a>.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Oct 17th, 2012</div>
+    
+    <h1><a href='/2012/10/17/bootstrap-knockout-toggle-button-bindings/'>Bootstrap + Knockout: Toggle Button Bindings</a></h1>
+    
+    <div class="post-content">
+        <p>I am in the middle of an overhaul of the <a href="/trendweight/">TrendWeight</a> user dashboards, and as part of that project, I found myself looking for ways to bring <a href="http://twitter.github.com/bootstrap/javascript.html#buttons">Bootstrap button groups</a> and <a href="http://knockoutjs.com/">Knockout</a> together in peace and harmony.  In other words, when someone clicks on one of the buttons in the radio button group, I need the associated observable on the ViewModel to be updated with the value associated with that particular radio button.</p>
+<p>My first attempt worked fine, but left something to be desired.  Here is the markup I had:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;2w&#39;}, click: function() { $root.range(&#39;2w&#39;) }&quot;&gt;2 weeks&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;4w&#39;}, click: function() { $root.range(&#39;4w&#39;) }&quot;&gt;4 weeks&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;3m&#39;}, click: function() { $root.range(&#39;3m&#39;) }&quot;&gt;3 months&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;6m&#39;}, click: function() { $root.range(&#39;6m&#39;) }&quot;&gt;6 months&lt;/button&gt;
+    &lt;button class=&quot;btn&quot; data-bind=&quot;css: {active: range() == &#39;1y&#39;}, click: function() { $root.range(&#39;1y&#39;) }&quot;&gt;1 year&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>That&#39;s pretty verbose and repetitive.  This seems like the perfect opportunity to use a custom binding, but custom bindings have always seemed intimidating for some reason.  <a href="http://www.knockmeout.net/">Ryan Niemeyer</a> has been selling me on the idea that custom bindings are really not that scary and that I should embrace them instead of fearing them.  After receiving a small pep talk this week, I decided to take the plunge.</p>
+<p>My goal is to enable markup that looks like this instead of the markup above:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot; data-bind=&quot;radio: range&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;2w&quot;&gt;2 Weeks&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;4w&quot;&gt;4 Weeks&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;3m&quot;&gt;3 Months&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;6m&quot;&gt;6 Months&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-value=&quot;1y&quot;&gt;1 Year&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Here, there is a binding on the btn-group element that says, &quot;Hey, these buttons should act like radio buttons and be bound to the &#39;range&#39; observable, please.&quot;  Additionally, each button in the group has a <code>data-value</code> attribute that tells the binding what value should be associated with each button.</p>
+<p>In the binding I ended up writing, the <code>data-value</code> attribute is actually optional.  If you are ok with the value of your observable being the same as the captions on your buttons, you can leave the attribute off and the binding will use the inner text of the button instead.</p>
+<p>While I was at it, I also made the binding handle the alternate markup below where the binding is on each individual button instead of on the button group.  This may be useful if you want radio button behavior without putting the buttons in a button group.  And for variety, this markup specifies the value for each radio button with <code>radioValue</code> property in the binding itself (although you the <code>data-value</code> attribute still would work as well):</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;left&#39;&quot;&gt;Left&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;middle&#39;&quot;&gt;Middle&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;radio: alignment, radioValue: &#39;right&#39;&quot;&gt;Right&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>After all that, I felt empowered and thought I might as well make a binding for checkbox behavior as well.  In other words, each button would be bound to a boolean observable and would be toggled when that observable was true.  So markup like this:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;checkbox: important&quot;&gt;Important&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-bind=&quot;checkbox: urgent&quot;&gt;Urgent&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>Before I get into the code for the bindings, here is a working <a href="http://jsfiddle.net/ervwalter/ccjnj">jsFiddle demo</a> that shows the user interface behavior I&#39;m talking about.</p>
+<iframe width="100%" height="300" src="http://jsfiddle.net/ervwalter/ccjnj/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+<p>Ok, so the code...  Of course, since I am on a CoffeeScript kick at the moment, I wrote these bindings in CoffeeScript.  If CoffeeScript isn&#39;t your thing, you can hit the jsFiddle link above to see the JavaScript version of the bindings.</p>
+<pre><code class="lang-coffeescript">ko.bindingHandlers.radio = {
+    init: (element, valueAccessor, allBindings, data, context) -&gt;
+        observable = valueAccessor()
+
+        if not ko.isWriteableObservable(observable)
+            throw &quot;You must pass an observable or writeable computed&quot;
+
+        $element = $(element)
+        if $element.hasClass(&quot;btn&quot;)
+            $buttons = $element
+        else
+            $buttons = $(&quot;.btn&quot;, $element)
+
+        elementBindings = allBindings()
+        $buttons.each -&gt;
+            btn = @
+            $btn = $(btn)
+
+            radioValue =
+                elementBindings.radioValue || #this is really only useful when the binding is on the button, itself
+                $btn.attr(&quot;data-value&quot;)  ||
+                $btn.attr(&quot;value&quot;)  ||
+                $btn.text()
+
+            $btn.on &quot;click&quot;, -&gt;
+                observable ko.utils.unwrapObservable(radioValue)
+                return
+
+            ko.computed disposeWhenNodeIsRemoved: btn, read: -&gt;
+                $btn.toggleClass &quot;active&quot;, observable() == ko.utils.unwrapObservable(radioValue)
+                return
+
+        return
+}
+
+ko.bindingHandlers.checkbox = {
+    init: (element, valueAccessor, allBindings, data, context) -&gt;
+        observable = valueAccessor()
+
+        if not ko.isWriteableObservable(observable)
+            throw &quot;You must pass an observable or writeable computed&quot;
+
+        $element = $(element)
+
+        $element.on &quot;click&quot;, -&gt;
+            observable not observable()
+            return
+
+        ko.computed disposeWhenNodeIsRemoved: element, read: -&gt;
+            $element.toggleClass &quot;active&quot;, observable()
+            return
+
+        return
+}
+</code></pre>
+<p>One caveat: while Knockout does not depend on jQuery, these binding do. If you want to use them, you either have to have jQuery on your page, or you have to rewrite these appropriately.  Since jQuery is a dependency of Bootstrap&#39;s JavaScript plugins, I didn&#39;t feel like this was an unreasonable dependency here.</p>
+<p>The radio button binding is the more interesting of the two bindings.  The first thing it does in the &#39;init&#39; function (besides some checking for error conditions) is determine if the binding is directly on a button or not.  If it is on a button, it&#39;s going to wire up the button directly.  If it is not, it&#39;s going to look for any descendant buttons and wire each of them up.</p>
+<p>Next, I loop through each of the buttons (which might just be the single button if the binding is directly on a button).  For each button, I first figure out what the radioButton value should be for that button.  Then I wire up a click event handler that sets the observable to the right value.  Finally, I create a computed observable that will fire any time the main observable changes.  The computed observable adds or removes the &#39;active&#39; css class depending on if the value of the observable matches the button&#39;s assigned value.</p>
+<p>Normally, you&#39;d put the code to respond to changes from the main observable in a custom binding&#39;s &#39;update&#39; function.  However in this case, I did it with an explicit computed observable because I needed access to the radioValue variable, and there is no convenient way to pass state between the &#39;init&#39; function and the &#39;update&#39; function.  Having an explicit computed observable accomplishes the same thing as using an &#39;update&#39; function because &#39;update&#39; functions essentially get turned into computed observables behind the scenes anyway.</p>
+<p>The checkbox binding is similar but a bit simpler.  It is always used directly on a button, so the part about looping through descendant buttons is not there.  The binding just directly wires up a similar click event handler and creates a similar computed observable to toggle the right css class.  In this case, I <em>could</em> have used an &#39;update&#39; function, but chose not to just to keep it consistent with how I structured the radio button binding.</p>
+<p>I think I am mostly over my fear of custom bindings, and I expect that I&#39;ll now be looking for opportunities to use them even where they aren&#39;t really needed :)</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/bootstrap/'>Bootstrap</a>, <a href='/tags/knockout/'>Knockout</a>, <a href='/tags/coffeescript/'>CoffeeScript</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Oct 5th, 2012</div>
+    
+    <h1><a href='/2012/10/05/day-to-day-weight-fluctuations-and-mental-stress/'>Day-to-Day Weight Fluctuations and Mental Stress</a></h1>
+    
+    <div class="post-content">
+        <p>A common question on various weight loss forums I see is, &quot;How often should I weigh myself?&quot;  There are lots of reasonable answers to that question, but I tend to favor &quot;Every Day&quot; as the best answer, but there is a catch!  If you don&#39;t want to go insane, <strong>you absolutely must ignore what the scale says each day</strong> and only look at the trend over time.  What does that mean?</p>
+<h2 id="normal-daily-weight-fluctuations">Normal Daily Weight Fluctuations</h2>
+<p><img class="right" src="/stuff/weight-changes-inout.png" /></p>
+<p>John Walker talks about this in much more detail in his book, <a href="http://www.fourmilab.ch/hackdiet/">The Hacker&#39;s Diet</a>, but I&#39;ll summarize the key point here.  A lot goes into your body every day and a lot comes out.  The food you eat, the liquids you drink, the air you breath, etc all come in.  And in general, an equal amount of those things come back out as well.  For a typical person, these add up to 13.5 pounds of &quot;stuff&quot; coming in and out of your body each day:</p>
+<p>But keep in mind that that balance of 13.5 pounds in and 13.5 pounds out is only an average over time.  On any given day, at any given time of the day, your intake may be more or less than your outputs often by as much as 1-2 pounds.  Keep this in mind:  <em>Even if you are not gaining or losing weight (i.e. fat or muscle), if you weigh yourself every day, the scale will still show your weight going up and down each day, often by as much as 1-2 pounds.</em>  That&#39;s just the way it is.  What matters is that, in that example, the fluctuations will be consistently around a particular weight.</p>
+<h2 id="mental-stress">Mental Stress</h2>
+<p>Losing weight is hard.  Really hard.  And a good portion of it is mental.  It takes real mental effort to really change your lifestyle or behavior in order to lose weight.  I you are trying to lose weight and you step on the scale tomorrow morning and it says you gained half a pound, that may psychologically crush you and make you question your resolve, not to mention how it would feel to see that happen 5 out of every 10 days. But as I just explained, if you weigh yourself every day, the scale is going to go up on some days.</p>
+<p>The solution is to focus on the weight trend and not any individual day&#39;s weight.  By focusing on the weight trend, the random day-to-day fluctuations will fade into the background and you can focus on the fact that you&#39;re making consistent progress towards your goal. Figuring out your weight trend is pretty easy to do, but I&#39;ll come back to that in a minute.</p>
+<p>Wait, if weighing yourself every day has all these issues, why do it?  Why not just weigh your self less often?  That is an alternative option, but remember that if random day-to-day changes may often be as much as 1-2 pounds and you want to make sure that real weight loss isn&#39;t hidden by these, they you may have to weigh yourself really infrequently.</p>
+<p>If you are trying to lose 1 pound per week, you&#39;d have to weigh yourself only once every 2-3 weeks in order to make sure that your real weight loss always shows through the &quot;noise&quot; of random daily fluctuation.  That&#39;s a long time to go without any positive feedback.  By weighing yourself every day and focusing on the trend instead of the number on scale, I get daily reinforcement that I am slowly but surely making progress.  That helps.  A lot.</p>
+<h2 id="focusing-on-the-trend">Focusing on the Trend</h2>
+<p>Let me show you in pictures what this really means.  I have been weighing myself nearly every day for the past year.  First let&#39;s look at what my day-to-day weight changes have been over the past year.  In this picture, the green arrows are days where the scale showed a lower number than the day before (yay! I lost weight), and the red arrows are days where the scale showed a higher number than the day before (oops! I gained weight):</p>
+<p><img src="/stuff/weight-changes-arrows-scale.png" /></p>
+<p>So how did I do?  Over the long term, if you looked at the actual numbers, it would be obvious that I lost weight, but in the trenches, day-to-day, if I was focusing on the number on the scale, I would have felt like I was on a crazy roller-coaster and likely I would have been highly frustrated:</p>
+<p><img src="/stuff/weight-changes-faces-scale.png" /></p>
+<p>Ok, so that sucks.  But what kind of difference does it make if I look at the weight trend each day instead of the number on the scale?  Let&#39;s say each day I figure out what my average weight was over the past 10 days (let&#39;s call that my &quot;trend weight&quot;).  Because this trend weight is an average of many days, the random day-to-day fluctuations will mostly cancel each other out, and the trend weight will slowly go down each day if my weight is decreasing over time.  You may commonly hear this idea of a trend weight referred to as a &quot;moving average&quot;.</p>
+<p>But let&#39;s not worry about the math right now, and let&#39;s just see what this does to my day to day mental stress.  If I take my daily weight data for the last year and look at trend weights instead of what the scale said on any given day, here is the result:</p>
+<p><img src="/stuff/weight-changes-faces-trend.png" /></p>
+<p>What a difference!  For the first two thirds of that time range, I was pretty happy almost every day because almost every day, the trend weight got a little smaller day after day.  I can tell you that this reinforcement was a huge help, especially at the beginning when I was not sure I had it in me to lose the weight I needed to lose.</p>
+<p>In the last third of this time range, I had some hiccups.  I really <em>was</em> gaining weight, so the trend weight wasn&#39;t lying.  If you are curious, the first long stretch of weight gain was the result of a change to my blood pressure medications that affected how much water I retained and as a result, I gained 10 pounds over the course of two weeks.   And the second long stretch was a family vacation where I fell off the wagon, so to speak.  The good news is that I&#39;m back on track and have re-lost all the pounds I gained over the summer.</p>
+<p>Ignore the specifics of my situation for a moment, and look at the two pictures again.  I hope you can see what a difference looking at the weight trend makes.  I think the daily, positive reinforcement was key to my really getting over the initial mental hurdle at the start.</p>
+<h2 id="how-">How?</h2>
+<p>Ok, so I think you get my point that I am a huge fan of daily weight measurement combined with the use of a moving average to look at the weight trend instead of any individual scale reading.  Doing this is not as hard as you might imagine and doesn&#39;t require you to be a math wiz either.</p>
+<p>In my opinion, the best actual technique to monitor your weight trend over time is the one that John Walker describes in The Hacker&#39;s Diet in the &quot;Signal and Noise&quot; chapter.  There are lots of free tools available that handle all the math that John talks about so that you don&#39;t have to worry about it.</p>
+<p>First, is the web application I built, initially just for myself, to do this kind of tracking for people that have <a href="http://amzn.com/B0077L8YFI?tag=trendweight-20">FitBit</a> or <a href="http://amzn.com/B002JE2PSA?tag=trendweight-20">Withings</a> WiFi scales.  If you have one of those scales, <a href="https://trendweight.com">TrendWeight</a> is free and will automatically pull your weight readings each day and show you your weight trend.  Note, you actually don&#39;t need a WiFi scale to use TrendWeight.  It works just as well even if you just have a FitBit.com account and are using their iPhone app to manually enter your weight each day.</p>
+<p>But there are lots of other options if you don&#39;t have a fancy electronic scale as well.  There are both <a href="http://itunes.apple.com/app/fatwatch/id285580720?mt=8">iPhone</a> <a href="http://itunes.apple.com/app/true-weight/id287941226?mt=8">apps</a> and <a href="https://play.google.com/store/apps/details?id=net.cachapa.libra&amp;hl=en">Android apps</a> that have this approach baked in.  You manually enter your weight each day, and they do all the math for you.</p>
+<p>If you don&#39;t want to use your smartphone, there are websites that will let you manually enter your weight each day and will also do all the math.  John Walker created the <a href="http://www.fourmilab.ch/hackdiet/online/hdo.html">Hacker&#39;s Diet Online</a> to do this, and <a href="http://physicsdiet.com/">Physics Diet</a> is another popular choice.</p>
+<p>And last but not least, you don&#39;t even need a computer to do this.  John Walker also explains how you can do this yourself with a sheet of paper and a pencil you keep next to your bathroom scale and all you need is basic addition and subtraction (no calculator needed).  You can read about it in the <a href="http://www.fourmilab.ch/hackdiet/e4/">Paper and Pencil</a> chapter of his book.</p>
+<p>If you are trying to lose weight, first, good for you!  Second, I hope I have convinced you to at least try weighing yourself daily and calculating your trend weight.  I honestly believe this approach will help you see your daily successes without getting distracted by random day-to-day fluctuations.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/trendweight/'>TrendWeight</a>, <a href='/tags/weight-loss/'>Weight Loss</a>
+    </div>
+    
+</article>
+
+    <article id="post" class="post">
+    <div class="post-date">Oct 4th, 2012</div>
+    
+    <h1><a href='/2012/10/04/knockout-samples-in-coffeescript/'>Knockout Samples in CoffeeScript</a></h1>
+    
+    <div class="post-content">
+        <p>In my <a href="/2012/09/28/coffeescript-and-knockout-hello-world/">last post</a>, I talked about my initial experiments with using Knockout with CoffeeScript.  In this post, I want to share the results of my conversions of several of the standard Knockout samples.  As someone said in my first post, this stuff isn&#39;t exactly rocket science.  On the other hand, I know I often learn new tech more quickly by looking at other people&#39;s sample code, so I&#39;m putting these here in case someone else might find them useful.</p>
+<h2 id="grid-editor">Grid Editor</h2>
+<p>The original Knockout sample page can be found <a href="http://knockoutjs.com/examples/gridEditor.html">here</a>.</p>
+<p>My conversion of this one is pretty straightforward.  As a general rule with these conversions, my goal was to remain faithful to the original sample javascript both in how it was solving problems and how the view models were organizaed.  At the same time I tried to use native CoffeeScript features where they made sense (e.g. string interpolation in this example, and comprehensions over arrays in the other examples).</p>
+<p>A fully functional version of this conversion can be found in <a href="http://jsfiddle.net/ervwalter/4CLRh/">this jsFiddle</a>, but here is the CoffeeScript:</p>
+<pre><code class="lang-coffeescript">class GiftModel
+    constructor: (gifts) -&gt;
+        @gifts = ko.observableArray gifts
+
+        @addGift = =&gt;
+            @gifts.push
+                name: &quot;&quot;
+                price: &quot;&quot;
+
+        @removeGift = (gift) =&gt;
+            @gifts.remove gift
+
+        @save = (form) =&gt;
+            alert &quot;Could now transmit to server: #{ko.utils.stringifyJson @gifts}&quot;
+
+$ -&gt;
+    viewModel = new GiftModel(
+        [
+            { name: &quot;Tall Hat&quot;, price: &quot;39.95&quot; }
+            { name: &quot;Long Cloak&quot;, price: &quot;120.00&quot;}
+        ])
+    ko.applyBindings viewModel
+    $(&quot;form&quot;).validate submitHandler: viewModel.save
+</code></pre>
+<h2 id="contacts-editor">Contacts Editor</h2>
+<p>The original Knockout sample page can be found <a href="http://knockoutjs.com/examples/contactsEditor.html">here</a>.</p>
+<p>This conversion uses a couple more features of CoffeeScript including the use of comprehensions in place of <code>ko.utils.arrayMap()</code> and <code>$.each()</code>.</p>
+<p>A fully functional version of my conversion can be found in <a href="http://jsfiddle.net/ervwalter/Rj3pk/">this jsFiddle</a>.  Here is the CoffeeScript:</p>
+<pre><code class="lang-coffeescript">initialData = [
+    { firstName: &quot;Danny&quot;, lastName: &quot;LaRusso&quot;, phones: [
+        { type: &quot;Mobile&quot;, number: &quot;(555) 121-2121&quot; },
+        { type: &quot;Home&quot;, number: &quot;(555) 123-4567&quot;}]
+    },
+    { firstName: &quot;Sensei&quot;, lastName: &quot;Miyagi&quot;, phones: [
+        { type: &quot;Mobile&quot;, number: &quot;(555) 444-2222&quot; },
+        { type: &quot;Home&quot;, number: &quot;(555) 999-1212&quot;}]
+    }
+]
+
+class ContactsModel
+    constructor: (contacts) -&gt;
+        @contacts = ko.observableArray({
+                firstName: contact.firstName
+                lastName: contact.lastName
+                phones: ko.observableArray(contact.phones)
+            } for contact in contacts)
+
+        @addContact = =&gt;
+            @contacts.push
+                firstName: &quot;&quot;
+                lastName: &quot;&quot;
+                phones: ko.observableArray()
+
+        @removeContact = (contact) =&gt;
+            @contacts.remove(contact)
+
+        @addPhone = (contact) =&gt;
+            contact.phones.push
+                type: &quot;&quot;
+                number: &quot;&quot;
+
+        @removePhone = (phone) =&gt;
+            contact.phones.remove phone for contact in @contacts()
+
+        @save = =&gt;
+            @lastSavedJson JSON.stringify(ko.toJS(@contacts), null, 2)
+
+        @lastSavedJson = ko.observable &quot;&quot;
+
+$ -&gt;
+    ko.applyBindings(new ContactsModel(initialData))
+</code></pre>
+<h2 id="shopping-cart-editor">Shopping Cart Editor</h2>
+<p>The original Knockout sample page can be found <a href="http://knockoutjs.com/examples/cartEditor.html">here</a>.</p>
+<p>This one is similar to the last two, but includes a second class to hold represent individual items in the shopping cart.</p>
+<p>A fully functional version of my conversion can be found in <a href="http://jsfiddle.net/ervwalter/qyDr2/">this jsFiddle</a>, and here is the CoffeeScript:</p>
+<pre><code class="lang-coffeescript">window.formatCurrency = (value) -&gt;
+    &quot;$&quot; + value.toFixed(2)
+
+class CartLine
+    constructor: -&gt;
+        @category = ko.observable()
+        @product = ko.observable()
+        @quantity = ko.observable 1
+        @subtotal = ko.computed =&gt;
+            if @product() then @product().price * parseInt(&quot;0&quot; + @quantity()) else 0
+
+        @category.subscribe =&gt;
+            @product undefined
+
+class Cart
+    constructor: -&gt;
+        @lines = ko.observableArray [new CartLine()]
+
+        @grandTotal = ko.computed =&gt;
+            total = 0
+            total += line.subtotal() for line in @lines()
+            total
+
+        @addLine = =&gt;
+            @lines.push new CartLine()
+
+        @removeLine = (line) =&gt;
+            @lines.remove line
+
+        @save = =&gt;
+            dataToSave = ({
+                productName: line.product().name
+                quantity: line.quantity()
+            } for line in @lines() when line.product())
+            alert &quot;Could now send this to server: #{JSON.stringify dataToSave}&quot;
+
+$ -&gt;
+    ko.applyBindings new Cart()
+</code></pre>
+<h2 id="twitter-client">Twitter Client</h2>
+<p>And last but not least, the original version of the most complex Knockout sample page can be found <a href="http://knockoutjs.com/examples/twitter.html">here</a>.</p>
+<p>This one exercises a few more knockout features, but was relatively easy to convert using the same basic CoffeeScript patterns I used in the other samples.</p>
+<p>A fully functional version of this conversion can be found in <a href="http://jsfiddle.net/ervwalter/95UBd/">this jsFiddle</a>, and here is the CoffeeScript:</p>
+<pre><code class="lang-coffeescript">savedLists = [
+    { name: &quot;Celebrities&quot;, userNames: [&#39;JohnCleese&#39;, &#39;MCHammer&#39;, &#39;StephenFry&#39;, &#39;algore&#39;, &#39;StevenSanderson&#39;]}
+    { name: &quot;Microsoft people&quot;, userNames: [&#39;BillGates&#39;, &#39;shanselman&#39;, &#39;ScottGu&#39;]}
+    { name: &quot;Tech pundits&quot;, userNames: [&#39;Scobleizer&#39;, &#39;LeoLaporte&#39;, &#39;techcrunch&#39;, &#39;BoingBoing&#39;, &#39;timoreilly&#39;, &#39;codinghorror&#39;]}
+]
+
+class TwitterListModel
+    constructor: (lists, selectedList) -&gt;
+
+        @savedLists = ko.observableArray lists
+        @editingList = name: ko.observable(selectedList), userNames: ko.observableArray()
+        @userNameToAdd = ko.observable &quot;&quot;
+        @currentTweets = ko.observableArray []
+
+        @findSavedList = (name) -&gt;
+            lists = @savedLists()
+            ko.utils.arrayFirst lists, (list) -&gt;
+                list.name == name
+
+        @hasUnsavedChanges = ko.computed =&gt;
+            if not @editingList.name()
+                @editingList.userNames().length &gt; 0
+            else
+                savedData = @findSavedList(@editingList.name()).userNames
+                editingData = @editingList.userNames()
+                savedData.join(&quot;|&quot;) != editingData.join(&quot;|&quot;)
+
+        @userNameToAddIsValid = ko.computed =&gt;
+            (@userNameToAdd() == &quot;&quot;) || (@userNameToAdd().match(/^\s*[a-zA-Z0-9_]{1,15}\s*$/) != null)
+
+        @canAddUserName = ko.computed =&gt;
+            @userNameToAddIsValid &amp;&amp; @userNameToAdd != &quot;&quot;
+
+        @addUser = =&gt;
+            if @userNameToAdd() &amp;&amp; @userNameToAddIsValid()
+                @editingList.userNames.push @userNameToAdd()
+                @userNameToAdd &quot;&quot;
+
+        @removeUser = (userName) =&gt;
+            @editingList.userNames.remove userName
+
+        @saveChanges = =&gt;
+            saveAs = prompt &quot;Save as&quot;, @editingList.name()
+            if saveAs
+                dataToSave = @editingList.userNames()[..]
+                existingSavedList = @findSavedList(saveAs)
+                if (existingSavedList)
+                    existingSavedList.userNames = dataToSave
+                else
+                    @savedLists.push { name: saveAs, userNames: dataToSave }
+                @editingList.name(saveAs)
+
+        @deleteList = =&gt;
+            nameToDelete @editingList.name()
+            savedListsExceptOneToDelete = (list for list in @savedLists() when list.name != nameToDelete)
+            @editingList.name(if savedListsExceptOneToDelete.length == 0 then null else savedListsExceptOneToDelete[0].name)
+            @savedLists savedListsExceptOneToDelete
+
+        ko.computed =&gt;
+            savedList = @findSavedList @editingList.name()
+            if savedList
+                userNamesCopy = savedList.userNames[..]
+                @editingList.userNames userNamesCopy
+            else
+                @editingList.userNames []
+
+        ko.computed =&gt;
+            twitterApi.getTweetsForUsers @editingList.userNames(), @currentTweets
+
+$ -&gt;
+    ko.applyBindings new TwitterListModel(savedLists, &quot;Tech pundits&quot;)
+    $(&quot;.loadingIndicator&quot;).ajaxStart(-&gt; $(@).fadeIn()).ajaxComplete(-&gt; $(@).fadeOut())
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>In all of these conversions, I feel like the resulting CoffeeScript is easier to read and easier to maintain than the original JavaScript versions.  I will definitely be writing in CoffeeScript for my next Knockout-using project.</p>
+
+    </div>
+    
+    <div class="post-tags">
+        Posted In: <a href='/tags/knockout/'>Knockout</a>, <a href='/tags/coffeescript/'>CoffeeScript</a>
+    </div>
+    
+</article>
+
+
+<div class="page-nav">
+    
+    <a class="page-nav-older" href="/page/6/"><span class="icon icon-arrow-left-2"></span> Older</a>
+    
+    
+    <a class="page-nav-newer" href="/page/4/">Newer <span class="icon icon-arrow-right-2"></span></a>
+    
+    <div class="page-nav-archives"><a href="/archives/">- Blog Archives -</a></div>
+</div>
+
+<div id="me">
+    <p>
+        <img src="http://en.gravatar.com/avatar/5fcc0f8df1923f433513b0f731c99402?s=100" alt="Erv Walter" />
+        I'm <b>Erv Walter</b>, a software developer, a computer geek, and a board game addict living in Sun Prairie, Wisconsin.  My interests include Azure, ASP.NET, Node.js, AngularJS, Knockout, and web development in general. And I'm a sucker for any kind of gadget.
+    </p>
+    <p>
+        <a href="http://twitter.com/ervwalter">@ErvWalter</a> &#8226;
+        <a href="https://github.com/ervwalter">GitHub</a> &#8226;
+        <a href="mailto:erv@ewal.net">Email Me</a>
+    </p>
+</div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="navbar navbar-footer">
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+    </div>
+</div>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<script src="/scripts/vendor/highlight.pack.js?1419397389559"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+<script src="/scripts/site.js?1419397389559"></script>
+
+
+
+<script type="text/javascript">
+	var $buoop = {
+		url: 'http://whatbrowser.org/',
+        reminder: 0,
+		newwindow: false,
+		'text': 'You are using an outdated browser (%s). <a%s>More information &#187;</a>',
+		'text_af': 'Jy gebruik \'n verouderde webblaaier (%s). <a%s>Meer inligting &#187;</a>',
+		'text_cs': 'Používáte zastaralý prohlížeč (%s). <a%s>Více informací &#187;</a>',
+		'text_da': 'Du bruger en ældre browser (%s). <a%s>Mere information &#187;</a>',
+		'text_de': 'Sie benutzen einen veralteten Browser (%s). <a%s>Mehr Informationen &#187;</a>',
+		'text_el': 'Χρησιμοποιείτε ένα ξεπερασμένο πρόγραμμα περιήγησης. <a%s>Περισσότερες πληροφορίες &#187;</a>',
+		'text_es': 'Su navegador está obsoleto (%s). <a%s>M&aacute;s informaci&oacute;n &#187;</a>',
+		'text_fi': 'Käytät vanhentunutta selainta (%s). <a%s>Lisää tietoa &#187;</a>',
+		'text_fr': 'Votre navigateur n\'est pas à jour (%s). <a%s>Plus d\'information &#187;</a>',
+		'text_hu': 'A böngészője elavult (%s). <a%s>További információ &#187;</a>',
+		'text_id': 'Anda menggunakan web browser versi lama (%s). <a%s>Informasi selengkapnya &#187;</a>',
+		'text_is': 'Þú ert að nota úreltan vafra (%s). <a%s>Nánari upplýsingar &#187;</a>',
+		'text_it': 'Stai usando un browser datato (%s). <a%s>Ulteriori informazioni &#187;</a>',
+		'text_nl': 'U gebruikt op dit moment een verouderde webbrowser (%s). <a%s>Meer informatie &#187;</a>',
+		'text_pl': 'Używasz przestarzałej przeglądarki (%s). <a%s>Więcej informacji &#187;</a>',
+		'text_pt': 'Você está usando um navegador antigo (%s). <a%s>Mais informações &#187;</a>',
+		'text_ro': 'Browserul dumneavoastră este depăşit (%s). <a%s>Mai multe informații &#187;</a>',
+		'text_ru': 'Вы используете устаревший браузер (%s). <a%s>Подробнее &#187;</a>',
+		'text_sk': 'Používate zastaralý prehliadač (%s). <a%s>Viac informácií &#187;</a>',
+		'text_sr': 'Vi koristite zastarelu verziju browsera (%s). <a%s>Vi&#353;e informacija &#187;</a>',
+		'text_sv': 'Du använder en gammal webbläsare (%s). <a%s>Mer information &#187;</a>',
+		'text_tr': 'Çok eski bir tarayıcı kullanıyorsunuz (%s). <a%s>Daha fazla bilgi &#187;</a>',
+		'text_vi': 'Trình duyệt bạn dùng đã lỗi thời rồi (%s). <a%s>Thêm thông tin &#187;</a>'
+	};
+	$buoop.ol = window.onload;
+	window.onload=function(){
+		try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+		var e = document.createElement("script");
+		e.setAttribute("type", "text/javascript");
+		e.setAttribute("src", "//browser-update.org/update.js");
+		document.body.appendChild(e);
+	}
+</script>
+
+</body>
+</html>
