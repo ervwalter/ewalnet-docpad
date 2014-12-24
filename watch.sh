@@ -1,0 +1,1 @@
+gulp --cwd ./games watch

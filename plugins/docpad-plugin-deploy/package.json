@@ -1,0 +1,11 @@
+{
+  "name": "docpad-plugin-deploy",
+  "version": "2.0.1",
+  "keywords": [
+    "docpad",
+    "docpad-plugin",
+    "something",
+    "somethingelse"
+  ],
+  "main": "./src/deploy.plugin.coffee"
+}

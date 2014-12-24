@@ -24,7 +24,10 @@
     "docpad-plugin-sitemap": "^2.2.0",
     "docpad-plugin-tags": "^2.0.7",
     "moment": "^2.8.4",
-    "safeps": "^2.2.12"
+    "rimraf": "^2.2.8",
+    "safefs": "^3.1.2",
+    "safeps": "^2.2.12",
+    "taskgroup": "^4.0.5"
   },
   "devDependencies": {},
   "engines": {
