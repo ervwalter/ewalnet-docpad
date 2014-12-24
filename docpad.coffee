@@ -83,7 +83,10 @@ docpadConfig = {
 			@getCollection('html').findAllLive(skipCleanUrls: $ne: true)
 
 	environments:
+		static:
+			outPath: '.azure'
 		development:
+			outPath: '.out'
 			collections:
 				posts: ->
 					@getCollection('documents').findAllLive({relativeDirPath: {'$in' : ['posts', 'drafts']}}, [relativeDirPath: 1,  date: -1])
