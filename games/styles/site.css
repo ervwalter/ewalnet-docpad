@@ -9263,57 +9263,61 @@ a.float-left,
 #games .games-recent-item {
   padding: 0 2px 2px 0;
   display: inline-block;
+  visibility: hidden;
 }
 #games .games-recent-item img {
   height: 100px;
-  -webkit-animation: fadeIn 0.3s;
-  animation: fadeIn 0.3s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
 }
 @media (min-width: 768px) {
   #games .games-recent-item img {
     height: 175px;
   }
 }
+#games .games-recent-item .loaded {
+  visibility: visible;
+  -webkit-animation: fadeIn 0.3s;
+  animation: fadeIn 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 #games .games-recent-item:nth-child(1) img {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 #games .games-recent-item:nth-child(2) img {
-  -webkit-animation-delay: 0.15s;
+  -webkit-animation-delay: 0.2s;
   animation-delay: 0.15s;
 }
 #games .games-recent-item:nth-child(3) img {
-  -webkit-animation-delay: 0.2s;
+  -webkit-animation-delay: 0.3s;
   animation-delay: 0.2s;
 }
 #games .games-recent-item:nth-child(4) img {
-  -webkit-animation-delay: 0.25s;
+  -webkit-animation-delay: 0.4s;
   animation-delay: 0.25s;
 }
 #games .games-recent-item:nth-child(5) img {
-  -webkit-animation-delay: 0.3s;
+  -webkit-animation-delay: 0.5s;
   animation-delay: 0.3s;
 }
 #games .games-recent-item:nth-child(6) img {
-  -webkit-animation-delay: 0.35s;
+  -webkit-animation-delay: 0.6s;
   animation-delay: 0.35s;
 }
 #games .games-recent-item:nth-child(7) img {
-  -webkit-animation-delay: 0.4s;
+  -webkit-animation-delay: 0.65s;
   animation-delay: 0.4s;
 }
 #games .games-recent-item:nth-child(8) img {
-  -webkit-animation-delay: 0.45s;
+  -webkit-animation-delay: 0.7s;
   animation-delay: 0.45s;
 }
 #games .games-recent-item:nth-child(9) img {
-  -webkit-animation-delay: 0.5s;
+  -webkit-animation-delay: 0.75s;
   animation-delay: 0.5s;
 }
 #games .games-recent-item:nth-child(10) img {
-  -webkit-animation-delay: 0.55s;
+  -webkit-animation-delay: 0.8s;
   animation-delay: 0.55s;
 }
 #games .games-recent.wireframe .games-recent-item img {

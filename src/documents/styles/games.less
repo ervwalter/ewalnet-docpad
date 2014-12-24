@@ -36,58 +36,63 @@
     .games-recent-item {
         padding: 0 2px 2px 0;
         display: inline-block;
+        visibility: hidden;
 
         img {
             height: 100px;
-            -webkit-animation: fadeIn 0.3s;
-            animation: fadeIn 0.3s;
-            -webkit-animation-fill-mode: both;
-            animation-fill-mode: both;
 
             @media (min-width: 768px) {
                 height: 175px;
             }
         }
 
+        .loaded {
+            visibility: visible;
+            -webkit-animation: fadeIn 0.3s;
+            animation: fadeIn 0.3s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
         &:nth-child(1) img {
+            -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+        }
+        &:nth-child(2) img {
             -webkit-animation-delay: 0.1s;
             animation-delay: 0.1s;
         }
-        &:nth-child(2) img {
-            -webkit-animation-delay: 0.2s;
-            animation-delay: 0.15s;
-        }
         &:nth-child(3) img {
-            -webkit-animation-delay: 0.3s;
+            -webkit-animation-delay: 0.2s;
             animation-delay: 0.2s;
         }
         &:nth-child(4) img {
-            -webkit-animation-delay: 0.4s;
-            animation-delay: 0.25s;
-        }
-        &:nth-child(5) img {
-            -webkit-animation-delay: 0.5s;
+            -webkit-animation-delay: 0.3s;
             animation-delay: 0.3s;
         }
+        &:nth-child(5) img {
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+        }
         &:nth-child(6) img {
-            -webkit-animation-delay: 0.6s;
-            animation-delay: 0.35s;
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
         }
         &:nth-child(7) img {
-            -webkit-animation-delay: 0.65s;
-            animation-delay: 0.4s;
+            -webkit-animation-delay: 0.6s;
+            animation-delay: 0.6s;
         }
         &:nth-child(8) img {
             -webkit-animation-delay: 0.7s;
-            animation-delay: 0.45s;
+            animation-delay: 0.7s;
         }
         &:nth-child(9) img {
-            -webkit-animation-delay: 0.75s;
-            animation-delay: 0.5s;
+            -webkit-animation-delay: 0.8s;
+            animation-delay: 0.8s;
         }
         &:nth-child(10) img {
-            -webkit-animation-delay: 0.8s;
-            animation-delay: 0.55s;
+            -webkit-animation-delay: 0.9s;
+            animation-delay: 0.9s;
         }
 
     }

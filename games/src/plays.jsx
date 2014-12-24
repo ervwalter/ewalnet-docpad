@@ -53,6 +53,14 @@ function htmlEncode (value) {
 var PlayItem = React.createClass({
 	componentDidMount() {
 		var el = this.refs.link.getDOMNode();
+		this.refs.image.getDOMNode().addEventListener('load', (e) => {
+			var img = e.target;
+			if (img.classList) {
+				img.classList.add('loaded');
+			} else {
+				img.className = 'loaded';
+			}
+		});
 		if ($) {
 			var play = this.props.play;
 			var playDetails = this.props.play.plays.map(entry => {
