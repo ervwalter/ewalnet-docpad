@@ -1,5 +1,6 @@
 var Fluxxor = require('fluxxor'),
-	helper = require('./helper');
+	helper = require('./helper'),
+	Lazy = require('lazy.js');
 
 var Collection = React.createClass({
 	mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin('CollectionStore')],
@@ -8,7 +9,9 @@ var Collection = React.createClass({
 		var store = this.getFlux().store('CollectionStore');
 		return {
 			loading: store.loading,
-			games: store.games
+			games: store.games,
+			gamesCount: store.gamesCount,
+			expansionsCount: store.expansionsCount
 		};
 	},
 
@@ -21,7 +24,7 @@ var Collection = React.createClass({
 			<div className="row">
 				<div className="col-xs-12">
 					<h2>My Game Collection - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a>
-						<GameCount loading={this.state.loading} count={this.state.games.length} />
+						<GameCount loading={this.state.loading} games={this.state.gamesCount} expansions={this.state.expansionsCount}/>
 					</h2>
 					<CollectionTable loading={this.state.loading} games={this.state.games} />
 				</div>
@@ -90,6 +93,7 @@ var CollectionRow = React.createClass({
 			<tr>
 				<td>
 					<a href={'http://boardgamegeek.com/boardgame/' + game.gameId}>{game.name}</a>
+					<ExpansionLink game={game} />
 				</td>
 				<td className="games-times-played">
 					<TimesPlayed count={game.numPlays}/>
@@ -102,6 +106,50 @@ var CollectionRow = React.createClass({
 	}
 });
 
+
+var ExpansionLink = React.createClass({
+	componentDidMount() {
+		if ($) {
+			var game = this.props.game;
+			if (game.expansionsOwnedCount > 0) {
+				var expansionNames = Lazy(game.expansions).where({owned: true}).sortBy('sortableName').pluck('name').toArray();
+				var tooltipContent = expansionNames.join(",<br/>");
+				var el = this.refs.link.getDOMNode();
+				$(el).qtip({
+					content: {
+						title: 'Expansions',
+						text: tooltipContent
+					},
+					position: {
+						my: 'bottom center',
+						at: 'top center',
+						target: $(el),
+						viewport: $(window)
+					},
+					hide: { fixed: true },
+					style: { classes: 'qtip-bootstrap qtip-play'}
+				});
+			}
+		}
+	},
+	componentWillUnmount() {
+		var el = this.refs.link.getDOMNode();
+		if ($) {
+			$(el).qtip('destroy');
+		}
+	},
+	render() {
+		var game = this.props.game;
+		if (game.expansionsOwnedCount > 0) {
+			return (
+				<span ref="link" className="games-expansions games-expansions-link wide-only">{ '' + game.expansionsOwnedCount + (game.expansionsOwnedCount > 1 ? ' expansions' : ' expansion') }</span>
+			);
+		} else {
+			return null;
+		}
+
+	}
+});
 
 var TimesPlayed = React.createClass({
 	render() {
@@ -151,7 +199,7 @@ var GameCount = React.createClass({
 		if (!this.props.loading) {
 			return (
 				<span className="pull-right hidden-xs game-counts fade-in-slow">
-					<b>{ this.props.count }</b> games, <b>many</b> expansions</span>
+					<b>{ this.props.games }</b> games, <b>{ this.props.expansions }</b> expansions</span>
 			)
 		}
 		return null;

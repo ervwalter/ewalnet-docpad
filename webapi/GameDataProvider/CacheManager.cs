@@ -166,7 +166,8 @@ namespace GamesDataProvider
 
 		private static ITableStorageProvider TableStorageProvider()
 		{
-			return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).WithDataSerializer(new JsonDataSerializer()).BuildTableStorage();
+			//return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).WithDataSerializer(new JsonDataSerializer()).BuildTableStorage();
+			return CloudStorage.ForAzureConnectionString(ConfigurationManager.ConnectionStrings["CacheManagerStorage"].ConnectionString).BuildTableStorage();
 		}
 
 		private static string GetCacheKey(string key, Type type)

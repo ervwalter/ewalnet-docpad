@@ -1,13 +1,17 @@
+unless Array.isArray
+	Array.isArray = (arg) ->
+		Object::toString.call(arg) is "[object Array]"
+
 String::trimStart = (c) ->
 	return this  if @length is 0
-	c = (if c? then (if _.isArray(c) then c else [c]) else [' '])
+	c = (if c? then (if Array.isArray(c) then c else [c]) else [' '])
 	i = 0
 	while @charAt(i) in c and i < @length
 		i++
 	@substring i
 
 String::trimEnd = (c) ->
-	c = (if c? then (if _.isArray(c) then c else [c]) else [' '])
+	c = (if c? then (if Array.isArray(c) then c else [c]) else [' '])
 	i = @length - 1
 	while i >= 0 and @charAt(i) in c
 		i--

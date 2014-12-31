@@ -110,13 +110,18 @@
 
     .games-expansions {
         display: inline-block;
-        padding-left: 10px;
-        color: #222;
+        margin-left: 15px;
+        color: #aaa;
+        font-size: 0.8em;
         cursor: default;
     }
 
+    .collection-table tr:hover .games-expansions {
+        color: #222;
+    }
+
     .games-expansions-link {
-        border-bottom: 1px dotted #999;
+        border-bottom: 1px solid #ddd;
     }
 
     .games-times-played, .games-rating {
@@ -268,8 +273,8 @@
 
 
 .fade-in {
-    -webkit-animation: fadeIn 0.1s;
-    animation: fadeIn 0.1s;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
 }
 
 .fade-in-slow {
@@ -277,6 +282,14 @@
     animation: fadeIn 1s;
 }
 
+.delayed-fadein {
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+}
 
 
 

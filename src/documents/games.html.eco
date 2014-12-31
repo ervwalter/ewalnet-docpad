@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Board Games
+noFooter: true
 scripts:
 - //cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js
 - /scripts/traceur-runtime.js
@@ -11,7 +12,12 @@ scripts:
 
 <div id="games"></div>
 
-<%- @partial('me', false) %>
 
+<div class="delayed-fadein">
+<%- @partial('me', false) %>
+</div>
+
+<br/>
+<br/>
 
 

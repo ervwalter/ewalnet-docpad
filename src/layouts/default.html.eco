@@ -81,11 +81,14 @@
     </div>
 </div>
 <%- @content %>
+
+<% unless @document.meta.noFooter: %>
 <div class="container">
     <div class="navbar navbar-footer">
-        <p class="navbar-center navbar-text">Copyright &copy; 2011-2013 Erv Walter</p>
+        <p class="navbar-center navbar-text">Copyright &copy; 2011-2015 Erv Walter</p>
     </div>
 </div>
+<% end %>
 
 <%- @getBlock('scripts').toHTML() %>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

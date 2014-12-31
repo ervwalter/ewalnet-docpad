@@ -18,6 +18,8 @@ namespace CacheUpdateJob
 			Console.WriteLine();
 			Console.WriteLine("Starting update.");
 
+
+
 			UpdatePlays();
 			UpdateCollections();
 			UpdateGames();
@@ -86,7 +88,11 @@ namespace CacheUpdateJob
 			var table = CacheManager.GetTable<GameDetails>();
 			var cutoff = DateTimeOffset.UtcNow.AddHours(-6);
 			var entities = table.Get().ToList();
-			var outdated = entities.Where(e => e.Value.Timestamp < cutoff).ToList();
+			var random = new Random();
+
+			// only update games which are out of date, but add a fudge factor to the game update timestamp
+			// so that all games don't get updated at the same time
+			var outdated = entities.Where(e => e.Value.Timestamp.AddHours(random.NextDouble()) < cutoff).ToList();
 			Console.WriteLine("Found {0} games, {1} needing updates.", entities.Count, outdated.Count);
 
 			foreach (var entity in outdated)

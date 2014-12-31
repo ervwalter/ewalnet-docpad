@@ -1,3 +1,3 @@
-gulp --cwd ./games build
-docpad deploy -e static
-
+@echo off
+call gulp --cwd ./games build
+call docpad deploy -e static

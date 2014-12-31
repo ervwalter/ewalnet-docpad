@@ -18,7 +18,7 @@ namespace GamesDataProvider
 	{
 		private static SemaphoreSlim _semaphore = new SemaphoreSlim(1);
 		private static DateTimeOffset _lastDownloadCompleted = DateTimeOffset.MinValue;
-		private static readonly TimeSpan MinimumTimeBetweenDownloads = new TimeSpan(0, 0, 0, 0, 500); //250 ms between BGG requests to prevent them from blocking us
+		private static readonly TimeSpan MinimumTimeBetweenDownloads = new TimeSpan(0, 0, 0, 1, 100); // 1.1 second between BGG requests to prevent them from blocking us
 
 		private const string BaseUrl = "http://www.boardgamegeek.com/xmlapi2/";
 
