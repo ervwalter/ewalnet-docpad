@@ -15,11 +15,12 @@ namespace GamesWebAPI
     {
         [EnableCors("*","*","*")]
 		[CacheOutput(ClientTimeSpan = 60)]
-		public async Task<List<CollectionItem>> Get()
+		public async Task<IEnumerable<CollectionItem>> Get()
         {
-            var collection = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (k) => {
+			var collection = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (username) =>
+			{
                 var provider = new BggDataProvider();
-                return await provider.GetCollection("edwalter");
+				return await provider.GetCollection(username);
             });
             return collection.Games;
         }
@@ -28,16 +29,33 @@ namespace GamesWebAPI
     public class PlaysController : ApiController
     {
 		[CacheOutput(ClientTimeSpan = 60)]
-		public async Task<List<PlayItem>> Get()
+		public async Task<IEnumerable<PlayItem>> Get()
         {
-            var plays = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (k) =>
+            var plays = await CacheManager.GetOrCreateObjectAsync("edwalter", true, 15, async (username) =>
             {
                 var provider = new BggDataProvider();
-                return await provider.GetPlays("edwalter");
+				return await provider.GetPlays(username);
             });
-            return plays.Items;
+            return plays.Items.Take(100);
         }
 
     }
+
+	public class MenuExclusionsController : ApiController
+	{
+		[CacheOutput(ClientTimeSpan = 60)]
+		public async Task<IEnumerable<string>> Get()
+		{
+			var geeklist = await CacheManager.GetOrCreateObjectAsync("183821", true, 15, async (id) =>
+			{
+				var provider = new BggDataProvider();
+				return await provider.GetGeekList(id);
+			});
+
+			return geeklist.Items.Select(i => i.GameId);
+		}
+
+	}
+
 
 }

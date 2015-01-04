@@ -35,7 +35,7 @@ namespace GamesDataProvider
 							 select g;
 
 			var gameIds = new HashSet<string>(games.Select(g => g.GameId));
-			var gameDetailsById = await CacheManager.GetOrCreateObjectsAsync(gameIds, true, 60, async (id) => await GetGame(id));
+			var gameDetailsById = await CacheManager.GetOrCreateObjectsAsync(gameIds, true, 600, async (id) => await GetGame(id));
 
 			foreach (var game in games)
 			{
@@ -101,6 +101,23 @@ namespace GamesDataProvider
 					orderby removeArticles.Replace(g.Name.ToLower(), "")
 					select g;
 
+			var plays = await CacheManager.GetOrCreateObjectAsync(username, true, 15, async (u) => await this.GetPlays(u));
+			var playsByGame = plays.Items.ToLookup(p => p.GameId);
+
+			foreach (var game in games)
+			{
+				if (playsByGame.Contains(game.GameId))
+				{
+					game.PlayDates = (from play in playsByGame[game.GameId]
+									  where play.PlayDate.HasValue
+									  select play.PlayDate.Value).ToList();
+				}
+				else
+				{
+					game.PlayDates = new List<DateTime>();
+				}
+			}
+
 			return new Collection
 			{
 				Username = username,
@@ -137,6 +154,13 @@ namespace GamesDataProvider
 			var game = await _client.GetGame(gameId);
 			game.Timestamp = DateTimeOffset.UtcNow;
 			return game;
+		}
+
+		public async Task<GeekList> GetGeekList(string id)
+		{
+			var geeklist = await _client.GetGeekList(id);
+			geeklist.Timestamp = DateTimeOffset.UtcNow;
+			return geeklist;
 		}
 	}
 }

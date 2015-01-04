@@ -36,9 +36,10 @@ namespace GamesDataProvider
         public List<string> Publishers { get; set; }
         public List<string> Artists { get; set; }
 
-        public int NumPlays { get; set; }
-        public decimal? Rating { get; set; }
-
+		public decimal? Rating { get; set; }
+		public int NumPlays { get; set; }
+		public List<DateTime> PlayDates { get; set; }
+		
         public bool Owned { get; set; }
         public bool PreOrdered { get; set; }
         public bool ForTrade { get; set; }
@@ -160,5 +161,24 @@ namespace GamesDataProvider
         public string Name { get; set; }
         public string GameId { get; set; }
     }
+
+	public class GeekList
+	{
+		public string GeekListId { get; set; }
+		public string Username { get; set; }
+		public string Title { get; set; }
+		public string Description { get; set; }
+		public List<GeekListItem> Items { get; set; }
+		public DateTimeOffset Timestamp { get; set; }
+	}
+
+	public class GeekListItem
+	{
+		public string GameId { get; set; }
+		public string Name { get; set; }
+		public string Username { get; set; }
+		public string ImageId { get; set; }
+		public string Description { get; set; }
+	}
 
 }

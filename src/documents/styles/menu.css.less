@@ -1,0 +1,255 @@
+@import url(http://fonts.googleapis.com/css?family=Josefin+Slab|Kranky|Kalam:400,700);
+@import "bootstrap/bootstrap";
+@import "icomoon";
+@import "animate";
+@import "mixins";
+@import "variables";
+
+@darkred: #9d2c27;
+
+body, html, #menu {
+    height: 100%;
+}
+
+body {
+    font-family: 'Josefin Slab', serif;
+    margin: 0;
+
+    @media screen {
+        overflow-y: scroll;
+        background-color: #f9f6ef;
+        background-image: url(/images/paper.jpg);
+
+        @media (min-width: 768px) {
+            background-color: @darkred;
+            background-image: url(/images/table.jpg);
+        }
+    }
+}
+
+a {
+    color: @text-color;
+}
+
+a:hover {
+    color: @darkred;
+}
+
+@media print {
+    a[href]:after {
+        content: none !important;
+    }
+}
+
+.container {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media screen {
+        min-height: 100%;
+        //margin-top: 10px;
+        //margin-bottom: 10px;
+        padding-bottom: 40px;
+
+        @media (min-width: 768px) {
+            background-color: #f9f6ef;
+            background-image: url(/images/paper.jpg);
+            //margin-top: 20px;
+            //margin-bottom: 20px;
+        }
+    }
+//    @media print {
+//        margin-top: 0;
+//    }
+}
+
+#title {
+    font-family: 'Kranky', cursive;
+    text-align: center;
+    font-size: 2.5em;
+
+    a:hover {
+        text-decoration: none;
+        color: @text-color;
+    }
+
+    @media (min-width: @screen-sm) {
+        font-size: 3em;
+        margin-top: 20px;
+    }
+
+    @media (min-width: @screen-md) {
+        font-size: 4em;
+        margin-top: 30px;
+    }
+
+    @media print {
+        font-size: 2.5em;
+        margin-top: 0;
+    }
+}
+
+#subtitle {
+    font-size: 1.5em;
+    text-align: center;
+
+    @media (min-width: @screen-sm) {
+        font-size: 1.6em;
+    }
+
+    @media (min-width: @screen-md) {
+        font-size: 2em;
+    }
+
+    @media print {
+        font-size: 1.5em;
+    }
+
+}
+
+#loading {
+    display: none;
+    position: absolute;;
+    top: 30%;
+    left: 50%;
+    height: 64px;
+    width: 64px;
+    margin: -32px 0 0 -32px;
+
+    img {
+        height: 64px;
+        width: 64px;
+    }
+}
+
+#actions {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: right;
+    font-size: 2em;
+
+    @media (min-width: @screen-sm) {
+        bottom: auto;
+        top: 10px;
+    }
+
+    @media print {
+        display: none;
+    }
+
+    a {
+        color: #f2eee2;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .adjust-down {
+        position: relative;
+        top: 2px;
+    }
+}
+
+.no-touchevents #actions a:hover {
+    color: #e6e2da;
+}
+
+.category {
+    padding: 10px 20px;
+
+    @media (min-width: @screen-sm) {
+        padding: 10px 40px;
+    }
+
+    @media (min-width: @screen-md) {
+        padding: 15px 50px;
+    }
+
+    @media print {
+        padding: 10px 20px;
+    }
+
+}
+
+.category-title {
+    font-family: 'Kranky', cursive;
+    font-size: 1.8em;
+    color: @darkred !important;
+
+    @media (min-width: @screen-sm) {
+        font-size: 2em;
+    }
+
+    @media (min-width: @screen-md) {
+        font-size: 2.5em;
+    }
+
+    @media print {
+        font-size: 1.8em;
+    }
+
+}
+
+.item {
+    margin-top: 8px;
+
+    .name {
+        font-weight: bold;
+        font-size: 1.4em;
+
+        @media (min-width: @screen-md) {
+            font-size: 1.5em;
+        }
+        @media print {
+            font-size: 1.2em;
+        }
+    }
+
+    .year {
+        font-weight: normal;
+    }
+
+    .mechanics {
+        font-style: italic;
+    }
+
+    .time {
+        font-weight: bold;
+    }
+
+    @media print {
+        .year, .mechanics, .time {
+            font-size: 0.8em;
+        }
+    }
+
+}
+
+.favorite {
+    display: inline-block;
+    margin-left: 5px;
+    color: #ffcc00 !important;
+    font-size: 0.9em;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.new {
+    display: inline-block;
+    font-size: 0.8em;
+    font-family: 'Kalam', cursive;
+    color: #ca0000 !important;
+    .rotate(10deg);
+    margin-left: 8px;
+}
+
+.fade-in {
+    .animation(fadeIn, 0.3s);
+}
+

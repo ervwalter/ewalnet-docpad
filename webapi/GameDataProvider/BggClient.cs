@@ -21,6 +21,7 @@ namespace GamesDataProvider
 		private static readonly TimeSpan MinimumTimeBetweenDownloads = new TimeSpan(0, 0, 0, 1, 100); // 1.1 second between BGG requests to prevent them from blocking us
 
 		private const string BaseUrl = "http://www.boardgamegeek.com/xmlapi2/";
+		private const string LegacyBaseUrl = "http://www.boardgamegeek.com/xmlapi/";
 
 
 		public async Task<List<CollectionItem>> GetPartialCollection(string username, bool expansions)
@@ -112,20 +113,40 @@ namespace GamesDataProvider
 				excludesubtype = "videogame"
 			});
 
-			var data = await DownloadData(url.ToString());
+			var dataPages = new List<XDocument>();
+			dataPages.Add(await DownloadData(url.ToString()));
+			var totalPlays = dataPages[0].Element("plays").AttributeAs<int>("total");
+			if (totalPlays > 100)
+			{
+				int remaining = totalPlays - 100;
+				int page = 2;
+				while (remaining > 0)
+				{
+					url.SetQueryParam("page", page);
+					dataPages.Add(await DownloadData(url.ToString()));
+					page++;
+					remaining -= 100;
+				}
+			}
 
-			var plays = from play in data.Element("plays").Elements("play")
-						select new PlayItem
-						{
-							GameId = play.Element("item").AttributeAs<string>("objectid"),
-							Name = play.Element("item").AttributeAs<string>("name"),
-							PlayDate = ParseDate(play.AttributeAs<string>("date")),
-							NumPlays = play.AttributeAs<int>("quantity"),
-							Comments = play.Element("comments").As<string>()
-						};
+			var plays = new List<PlayItem>();
+
+			foreach (var data in dataPages)
+			{
+				plays.AddRange(from play in data.Element("plays").Elements("play")
+						  select new PlayItem
+						  {
+							  GameId = play.Element("item").AttributeAs<string>("objectid"),
+							  Name = play.Element("item").AttributeAs<string>("name"),
+							  PlayDate = ParseDate(play.AttributeAs<string>("date")),
+							  NumPlays = play.AttributeAs<int>("quantity"),
+							  Comments = play.Element("comments").As<string>()
+						  });
+			}
+
+			return plays;
 
 
-			return plays.ToList();
 		}
 
 		private DateTime? ParseDate(string value)
@@ -195,16 +216,43 @@ namespace GamesDataProvider
 											 GameId = link.AttributeAs<string>("id")
 										 }).ToList(),
 						   Expands = (from link in item.Elements("link")
-										 where link.AttributeAs<string>("type") == "boardgameexpansion"
-											&& link.AttributeAs<bool>("inbound") == true
-										 select new BoardGameLink
-										 {
-											 Name = link.AttributeAs<string>("value"),
-											 GameId = link.AttributeAs<string>("id")
-										 }).ToList()
+									  where link.AttributeAs<string>("type") == "boardgameexpansion"
+										 && link.AttributeAs<bool>("inbound") == true
+									  select new BoardGameLink
+									  {
+										  Name = link.AttributeAs<string>("value"),
+										  GameId = link.AttributeAs<string>("id")
+									  }).ToList()
 					   };
 
 			return game.FirstOrDefault();
+
+		}
+
+		public async Task<GeekList> GetGeekList(string id)
+		{
+			var url = new Url(LegacyBaseUrl).AppendPathSegment("/geeklist/").AppendPathSegment(id);
+			var data = await DownloadData(url.ToString());
+
+			var gl = data.Element("geeklist");
+
+			return new GeekList
+			{
+				GeekListId = id,
+				Username = gl.Element("username").As<string>(),
+				Title = gl.Element("title").As<string>(),
+				Description = gl.Element("description").As<string>(),
+				Items = (from item in gl.Elements("item")
+						 where item.AttributeAs<string>("objecttype") == "thing" && item.AttributeAs<string>("subtype") == "boardgame"
+						 select new GeekListItem
+						 {
+							 GameId = item.AttributeAs<string>("objectid"),
+							 ImageId = item.AttributeAs<string>("imageid"),
+							 Username = item.AttributeAs<string>("username"),
+							 Name = item.AttributeAs<string>("objectname"),
+							 Description = item.AttributeAs<string>("body")
+						 }).ToList()
+			};
 
 		}
 

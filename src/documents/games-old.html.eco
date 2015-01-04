@@ -13,7 +13,7 @@ scripts:
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-sanitize.min.js
 - //ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-animate.min.js
 - /scripts/vendor/ui-bootstrap-custom-tpls-0.10.0.js
-- /scripts/games.js
+- /scripts/games-old.js
 ---
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" media="screen">

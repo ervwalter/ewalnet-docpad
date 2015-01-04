@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Board Game Menu</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="icon" sizes="300x300" href="/icon.png">
+	<link rel="icon" sizes="196x196" href="/icon-196.png">
+	<link rel="icon" sizes="128x128" href="/icon-128.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="/icon-128.png">
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="/icon-128.png">
+	<link href="/favicon.png" rel="shortcut icon">
+
+	<style>
+		@media screen {
+			body {
+				background-color: #f9f6ef;
+				background-image: url(/images/paper.jpg);
+			}
+		}
+		@media screen and (min-width: 768px) {
+			html {
+				height: 100%;
+			}
+			body {
+				background-color: #9d2c27;
+				background-image: url(/images/table.jpg);
+				/*min-height: 100%;*/
+				/*border: 50px solid transparent;*/
+				/*border-bottom: none;*/
+				/*border-image-source: url(/images/wooden-frame.jpg);*/
+				/*border-image-slice: 45 45;*/
+
+			}
+		}
+
+	</style>
+
+	<link href="/styles/menu.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="menu"></div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.js"></script>
+<script src="/scripts/traceur-runtime.js"></script>
+<script src="/scripts/common.js"></script>
+<script src="/scripts/menu.js"></script>
+
+</body>
+</html>

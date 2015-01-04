@@ -18,10 +18,9 @@ namespace CacheUpdateJob
 			Console.WriteLine();
 			Console.WriteLine("Starting update.");
 
-
-
 			UpdatePlays();
 			UpdateCollections();
+			UpdateGeekLists();
 			UpdateGames();
 
 			Console.WriteLine();
@@ -50,6 +49,31 @@ namespace CacheUpdateJob
 					PartitionKey = entity.PartitionKey,
 					RowKey = entity.RowKey,
 					Value = collection
+				});
+				Thread.Sleep(2000); // slow down the queries to make sure we don't hit the bgg throttling code
+			}
+		}
+
+		private static void UpdateGeekLists()
+		{
+			Console.WriteLine();
+			Console.WriteLine("Updating geeklists.");
+			var provider = new BggDataProvider();
+			var table = CacheManager.GetTable<GeekList>();
+			var cutoff = DateTimeOffset.UtcNow.AddMinutes(-2);
+			var entities = table.Get().ToList();
+			var outdated = entities.Where(e => e.Value.Timestamp < cutoff).ToList();
+			Console.WriteLine("Found {0} geeklists, {1} needing updates.", entities.Count, outdated.Count);
+
+			foreach (var entity in outdated)
+			{
+				Console.WriteLine("Updating geeklist {0} [{1}].", entity.Value.Title, entity.Value.GeekListId);
+				var geeklist = provider.GetGeekList(entity.Value.GeekListId).Result;
+				table.Upsert(new CloudEntity<GeekList>
+				{
+					PartitionKey = entity.PartitionKey,
+					RowKey = entity.RowKey,
+					Value = geeklist
 				});
 				Thread.Sleep(2000); // slow down the queries to make sure we don't hit the bgg throttling code
 			}

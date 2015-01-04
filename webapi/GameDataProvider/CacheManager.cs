@@ -23,39 +23,6 @@ namespace GamesDataProvider
 		{
 			var result = await GetOrCreateObjectsAsync(new string[] { key }, alwaysUseStorageCache, memoryCacheDuration, creator);
 			return result[key];
-
-			//var type = typeof(T);
-			//var cacheKey = GetCacheKey(key, type);
-			//T result = null;
-			//try
-			//{
-			//	result = _cache.Get(cacheKey) as T;
-			//}
-			//catch
-			//{
-			//	//absorb
-			//}
-
-			//// not in memory cache
-			//if (result == null)
-			//{
-			//	if (alwaysUseStorageCache)
-			//	{
-			//		var table = GetTable<T>(type);
-			//		var entity = table.Get(PartitionKey, key);
-			//		if (entity != null && entity.HasValue)
-			//		{
-			//			result = entity.Value.Value;
-			//		}
-
-			//	}
-			//	if (result == null)
-			//	{
-			//		result = await creator(key);
-			//		await AddObjectAsync(key, memoryCacheDuration, result);
-			//	}
-			//}
-			//return result;
 		}
 
 		public static async Task<Dictionary<string, T>> GetOrCreateObjectsAsync<T>(IEnumerable<string> keys, bool alwaysUseStorageCache, int memoryCacheDuration, CreatorMethodAsync<T> creator) where T : class

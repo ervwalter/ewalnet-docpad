@@ -1,3 +1,3 @@
 @echo off
-call gulp --cwd ./games build
+call gulp --cwd ./react build
 call docpad deploy -e static
