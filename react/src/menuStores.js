@@ -88,10 +88,11 @@ var MenuStore = Fluxxor.createStore({
 
 				// Increase chance for games not played recently
 				if (game.playDates && game.playDates.length > 0) {
-					var today = moment().startOf('day');
+					var tomorrow = moment().startOf('day').add(1, 'day');
 					var lastPlay = moment(helper.jsonStringToDate(game.playDates[0]));
-					if (lastPlay.isBefore(today)) {
-						var daysSinceLastPlay = today.diff(lastPlay, 'days');
+					if (lastPlay.isBefore(tomorrow)) {
+						var daysSinceLastPlay = tomorrow.diff(lastPlay, 'days') - 1;
+						game.daysSinceLastPlay = daysSinceLastPlay;
 						if (daysSinceLastPlay > 60) {
 							daysSinceLastPlay = 60;
 						}
@@ -99,9 +100,9 @@ var MenuStore = Fluxxor.createStore({
 					}
 				}
 
-				if (games.numPlays === 0) {
+				if (!game.numPlays) {
 					// Significantly increase chance for games never played
-					score *= 2;
+					score *= 3;
 				} else 	if (games.numPlays < 5) {
 					// Increase chance for games played less than 5 times
 					score *= 1.1;
@@ -115,20 +116,24 @@ var MenuStore = Fluxxor.createStore({
 				game.score = score;
 			});
 
-			//if (console.table) {
-			//	console.table(games.sortBy('score', true).toArray(), ['name', 'score', 'rating', 'playingTime', 'minPlayers', 'maxPlayers']);
-			//}
-
 			this._games = games.toArray();
 
 			var categories = games.groupBy(game => {
-				if (game.playingTime < 90) {
+				if (game.playingTime <= 60) {
 					return 'litefare';
 				}
 				else {
 					return 'entree';
 				}
 			}).toObject();
+
+			if (console.table) {
+				console.log("Lite Fare Games:");
+				console.table(Lazy(categories.litefare).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay']);
+				console.log("Entree Games:");
+				console.table(Lazy(categories.entree).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay']);
+			}
+
 
 			for (var category in categories) {
 				if (categories.hasOwnProperty(category)) {

@@ -70,7 +70,7 @@
                     <a href="https://github.com/ervwalter" class="github"><span class="icon icon-github"></span></a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right hidden-xs" role="search" action="http://google.com/search"
+            <form class="navbar-form navbar-right hidden-xs" role="search" action="https://google.com/search"
                   method="get">
                 <div class="form-group">
                     <input type="search" name="q" class="form-control" placeholder="Search">

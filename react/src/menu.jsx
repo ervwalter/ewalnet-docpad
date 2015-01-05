@@ -27,19 +27,21 @@ var MenuPage = React.createClass({
 	render() {
 		if (this.state.litefare.length === 0) {
 			return (
-				<div id="loading"><img src="/images/loading-bubbles.svg" alt="Loading..." /></div>
+				<div className="container"></div>
 			);
 		} else {
 			return (
-				<div className="container fade-in">
-					<div id="actions">
-						<a href="/games/"><span className="icon icon-th-list adjust-down"></span></a>
-						<a href="" onClick={this.onReseedClick}><span className="icon icon-refresh3"></span></a>
+				<div className="container">
+					<div className="fade-in">
+						<div id="actions">
+							<a href="/games/"><span className="icon icon-th-list adjust-down"></span></a>
+							<a href="" onClick={this.onReseedClick}><span className="icon icon-refresh3"></span></a>
+						</div>
+						<div id="title"><a href="/menu/">Board Game Menu</a></div>
+						<div id="subtitle">&mdash; Games for Two Players &mdash;</div>
+						<Category key="litefare" title="Snacks / Lite Fare" games={this.state.litefare} />
+						<Category key="entrees" title="Entreés" games={this.state.entree} />
 					</div>
-					<div id="title"><a href="/menu/">Board Game Menu</a></div>
-					<div id="subtitle">&mdash; Games for Two Players &mdash;</div>
-					<Category title="Snacks / Lite Fare" games={this.state.litefare} />
-					<Category title="Entreés" games={this.state.entree} />
 				</div>
 			);
 		}
@@ -52,7 +54,7 @@ var Category = React.createClass({
 			<div className="category">
 				<div className="category-title">{this.props.title}</div>
 				{this.props.games.map(game => {
-					return <MenuItem game={game} />;
+					return <MenuItem key={game.gameId} game={game} />;
 				})}
 			</div>
 		);

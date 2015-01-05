@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Josefin+Slab|Kranky|Kalam:400,700);
+@import url(//fonts.googleapis.com/css?family=Josefin+Slab|Kranky|Kalam:400,700);
 /*!
  * Bootstrap v3.0.0
  *
@@ -7084,8 +7084,8 @@ Copyright (c) 2014 Daniel Eden
 @-webkit-keyframes fadeInUp {
   0% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
   }
   100% {
     opacity: 1;
@@ -7096,8 +7096,8 @@ Copyright (c) 2014 Daniel Eden
 @keyframes fadeInUp {
   0% {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
   }
   100% {
     opacity: 1;
@@ -8765,6 +8765,7 @@ a:hover {
   font-family: 'Kranky', cursive;
   text-align: center;
   font-size: 2.5em;
+  margin-top: 20px;
 }
 #title a:hover {
   text-decoration: none;
@@ -8845,12 +8846,14 @@ a:hover {
   margin-left: 15px;
 }
 #actions a:hover {
-  color: #e6e2da;
   text-decoration: none;
 }
 #actions .adjust-down {
   position: relative;
   top: 2px;
+}
+.no-touchevents #actions a:hover {
+  color: #e6e2da;
 }
 .category {
   padding: 10px 20px;
@@ -8942,6 +8945,6 @@ a:hover {
   margin-left: 8px;
 }
 .fade-in {
-  -webkit-animation: fadeIn 0.3s;
-  animation: fadeIn 0.3s;
+  -webkit-animation: fadeInUp 0.3s;
+  animation: fadeInUp 0.3s;
 }
