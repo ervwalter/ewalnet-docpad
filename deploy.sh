@@ -1,3 +1,3 @@
-gulp --cwd ./react build
+gulp --cwd ./react
 docpad deploy -e static
 

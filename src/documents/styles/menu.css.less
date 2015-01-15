@@ -67,7 +67,7 @@ a:hover {
 #title {
     font-family: 'Kranky', cursive;
     text-align: center;
-    font-size: 2.5em;
+    font-size: 1.8em;
     margin-top: 20px;
 
     a:hover {
@@ -92,7 +92,7 @@ a:hover {
 }
 
 #subtitle {
-    font-size: 1.5em;
+    font-size: 1.1em;
     text-align: center;
 
     @media (min-width: @screen-sm) {
@@ -109,18 +109,31 @@ a:hover {
 
 }
 
-#loading {
+#watermark {
     display: none;
-    position: absolute;;
-    top: 30%;
-    left: 50%;
-    height: 64px;
-    width: 64px;
-    margin: -32px 0 0 -32px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+
+    div {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        padding: 150px 0;
+        opacity: 0.4;
+
+        &.loaded {
+            opacity: 0.05;
+            .transition(opacity 0.3);
+        }
+    }
 
     img {
-        height: 64px;
-        width: 64px;
+        width: 100%;
+
+        @media (min-width: @screen-sm) {
+            width: auto;
+        }
     }
 }
 
@@ -162,7 +175,7 @@ a:hover {
 }
 
 .category {
-    padding: 10px 20px;
+    padding: 10px 0;
 
     @media (min-width: @screen-sm) {
         padding: 10px 40px;
@@ -180,7 +193,7 @@ a:hover {
 
 .category-title {
     font-family: 'Kranky', cursive;
-    font-size: 1.8em;
+    font-size: 1.5em;
     color: @darkred !important;
 
     @media (min-width: @screen-sm) {
@@ -202,18 +215,36 @@ a:hover {
 
     .name {
         font-weight: bold;
-        font-size: 1.4em;
+        font-size: 1.3em;
+
+        @media (min-width: @screen-sm) {
+            font-size: 1.4em;
+        }
 
         @media (min-width: @screen-md) {
             font-size: 1.5em;
         }
+
         @media print {
             font-size: 1.2em;
         }
     }
 
+    &.placeholder .name {
+        font-weight: normal;
+    }
+
     .year {
         font-weight: normal;
+        display: none;
+
+        @media (min-width: @screen-sm) {
+            display: inline;
+        }
+
+        @media print {
+            display: inline;
+        }
     }
 
     .mechanics {
@@ -224,11 +255,15 @@ a:hover {
         font-weight: bold;
     }
 
-    @media print {
-        .year, .mechanics, .time {
-            font-size: 0.8em;
+    .mechanics, .time {
+        font-size: 0.9em;
+
+        @media (min-width: @screen-sm) {
+            font-size: 1em;
         }
     }
+
+
 
 }
 
@@ -236,21 +271,32 @@ a:hover {
     display: inline-block;
     margin-left: 5px;
     color: #ffcc00 !important;
-    font-size: 0.9em;
+    font-size: 0.8em;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
+
+    @media (min-width: @screen-sm) {
+        font-size: 0.9em;
+    }
 }
 
 .new {
     display: inline-block;
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-family: 'Kalam', cursive;
     color: #ca0000 !important;
-    .rotate(10deg);
     margin-left: 8px;
+
+    @media (min-width: @screen-sm) {
+        .rotate(10deg);
+        font-size: 0.8em;
+    }
 }
 
-.fade-in {
-    .animation(fadeInUp, 0.3s);
+.fadein {
+    .animation(fadeIn, 0.3s);
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
 }
+
 

@@ -1,9 +1,10 @@
-var Fluxxor = require('fluxxor'),
-	actions = require('./actions'),
-	stores = require('./gamesStores'),
-	Collection = require('./collection'),
-	Plays = require('./plays'),
-	ProfileBox = require('./profile');
+var React = require('react');
+var Fluxxor = require('fluxxor');
+var actions = require('./actions');
+var stores = require('./gamesStores');
+var Collection = require('./collection');
+var Plays = require('./plays');
+var ProfileBox = require('./profile');
 
 var GamesPage = React.createClass({
 	mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin('CollectionStore')],

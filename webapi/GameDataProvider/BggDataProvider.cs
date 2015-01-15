@@ -44,6 +44,7 @@ namespace GamesDataProvider
 					var gameDetails = gameDetailsById[game.GameId];
 					game.Mechanics = gameDetails.Mechanics;
 					game.BGGRating = gameDetails.BggRating;
+					game.AverageWeight = gameDetails.AverageWeight;
 					game.Artists = gameDetails.Artists;
 					game.Publishers = gameDetails.Publishers;
 					game.Designers = gameDetails.Designers;

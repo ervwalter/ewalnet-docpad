@@ -30,7 +30,7 @@ function isString(value){return typeof value === 'string';}
 function isNumber(value){return typeof value === 'number';}
 
 function isDate(value){
-	return toString.call(value) === '[object Date]';
+	return Object.prototype.toString.call(value) === '[object Date]';
 }
 
 function int(str) {

@@ -65,9 +65,7 @@ var MenuStore = Fluxxor.createStore({
 
 	_processGames() {
 		if (this._exclusions.length > 0 && this._collection.length > 0) {
-			var exclusionsById = Lazy(this._exclusions).indexBy(value => {
-				return value;
-			}).toObject();
+			var exclusionsById = Lazy(this._exclusions).indexBy(value => value).toObject();
 			var games = Lazy(this._collection).filter(game => {
 				if (exclusionsById[game.gameId] || game.minPlayers > 2 || game.maxPlayers < 2) {
 					return false;
@@ -102,7 +100,7 @@ var MenuStore = Fluxxor.createStore({
 
 				if (!game.numPlays) {
 					// Significantly increase chance for games never played
-					score *= 3;
+					score *= 4;
 				} else 	if (games.numPlays < 5) {
 					// Increase chance for games played less than 5 times
 					score *= 1.1;
@@ -119,7 +117,25 @@ var MenuStore = Fluxxor.createStore({
 			this._games = games.toArray();
 
 			var categories = games.groupBy(game => {
-				if (game.playingTime <= 60) {
+				var effectivePlayingTime = game.playingTime;
+				if (game.averageWeight > 0) {
+					var averageWeight = game.averageWeight;
+					if (averageWeight > 3.1) {
+						effectivePlayingTime += 45;
+					} else if (averageWeight > 2.8) {
+						effectivePlayingTime += 30;
+					} else if (averageWeight > 2.5) {
+						effectivePlayingTime += 15;
+					} else if (averageWeight < 1.7) {
+						effectivePlayingTime *= 1/2;
+					} else if (averageWeight < 2) {
+						effectivePlayingTime *= 2/3;
+					}
+				}
+
+				game.effectivePlayingTime = Number(effectivePlayingTime.toFixed(0));
+
+				if (effectivePlayingTime<= 60) {
 					return 'litefare';
 				}
 				else {
@@ -129,25 +145,19 @@ var MenuStore = Fluxxor.createStore({
 
 			if (console.table) {
 				console.log("Lite Fare Games:");
-				console.table(Lazy(categories.litefare).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay']);
+				console.table(Lazy(categories.litefare).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay', 'playingTime', 'effectivePlayingTime', 'averageWeight']);
 				console.log("Entree Games:");
-				console.table(Lazy(categories.entree).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay']);
+				console.table(Lazy(categories.entree).sortBy('score', true).toArray(), ['name', 'score', 'rating', 'daysSinceLastPlay', 'playingTime', 'effectivePlayingTime', 'averageWeight']);
 			}
 
-
-			for (var category in categories) {
-				if (categories.hasOwnProperty(category)) {
-					this[category] = this._chooseGames(categories[category], 4);
-				}
-			}
+			this.litefare = this._chooseGames(categories.litefare, 3);
+			this.entree = this._chooseGames(categories.entree, 3);
 			this.emit('change');
 		}
 	},
 
 	_chooseGames(games, count) {
-		var sum = Lazy(games).sum(game => {
-			return game.score
-		});
+		var sum = Lazy(games).sum(game => game.score);
 
 		games.forEach(game => {
 			game.normalizedScore = game.score / sum;

@@ -10,6 +10,7 @@ var CollectionStore = Fluxxor.createStore({
 		this.games = [];
 		this.gamesCount = 0;
 		this.expansionsCount = 0;
+		this.hIndex = 0;
 		this.sortBy = 'name';
 		this.bindActions(
 			constants.LoadCollection, this.onLoadCollection,
@@ -43,9 +44,16 @@ var CollectionStore = Fluxxor.createStore({
 	},
 
 	_processGames(games) {
-		games = Lazy(games).filter(game => {
-			return game.owned && !game.isExpansion;
-		}).toArray();
+		games = Lazy(games).filter(game => (game.owned && !game.isExpansion));
+		var hIndex = 0;
+		games.sortBy('numPlays', true).each((game, index) => {
+			if (game.numPlays < (index + 1)) {
+				hIndex = index;
+				return false;
+			}
+		});
+		this.hIndex = hIndex;
+		games = games.toArray();
 		var gamesCount = games.length;
 		var expansionsCount = 0;
 		for (let game of games) {
@@ -117,7 +125,7 @@ var PlaysStore = Fluxxor.createStore({
 	},
 
 	_processPlays(plays) {
-		var result = Lazy(plays).groupBy('gameId').map(item => { return item }).sortBy(item => { return item[0].playDate }).reverse().toArray()
+		var result = Lazy(plays).groupBy('gameId').map(item => item).sortBy(item => item[0].playDate).reverse().toArray()
 		var cutoff = result[Math.min(10, result.length)][0].playDate;
 		result = result.map((item) => {
 			var game = {
@@ -125,11 +133,7 @@ var PlaysStore = Fluxxor.createStore({
 				image: item[0].image,
 				name: item[0].name,
 				thumbnail: item[0].thumbnail,
-				plays: Lazy(item).filter((play) => {
-					return play.playDate > cutoff
-				}).map((play) => {
-					return {playDate: play.playDate, comments: play.comments};
-				}).toArray()
+				plays: Lazy(item).filter((play) => play.playDate > cutoff).map((play) => { return {playDate: play.playDate, comments: play.comments}; }).toArray()
 			};
 			return game;
 		});

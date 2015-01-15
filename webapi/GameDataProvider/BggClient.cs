@@ -196,6 +196,7 @@ namespace GamesDataProvider
 						   BggRating = item.Element("statistics").Element("ratings").Element("bayesaverage").AttributeAs<decimal?>("value"),
 						   AverageRating = item.Element("statistics").Element("ratings").Element("average").AttributeAs<decimal?>("value"),
 						   Rank = ParseRanking(item.Element("statistics").Element("ratings")),
+						   AverageWeight = item.Element("statistics").Element("ratings").Element("averageweight").AttributeAs<decimal?>("value"),
 
 						   Designers = (from link in item.Elements("link")
 										where link.AttributeAs<string>("type") == "boardgamedesigner"

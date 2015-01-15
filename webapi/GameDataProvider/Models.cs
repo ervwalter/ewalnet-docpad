@@ -31,6 +31,7 @@ namespace GamesDataProvider
         public decimal? BGGRating { get; set; }
         public decimal? AverageRating { get; set; }
         public int? Rank { get; set; }
+		public decimal? AverageWeight { get; set; }
 
         public List<string> Designers { get; set; }
         public List<string> Publishers { get; set; }
@@ -128,6 +129,7 @@ namespace GamesDataProvider
         public decimal? BggRating { get; set; }
         public decimal? AverageRating { get; set; }
         public int? Rank { get; set; }
+		public decimal? AverageWeight { get; set; }
 
         public List<string> Designers { get; set; }
         public List<string> Publishers { get; set; }

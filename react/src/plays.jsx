@@ -1,6 +1,9 @@
-var Fluxxor = require('fluxxor'),
-	helper = require('./helper'),
-	qtip = require('qtip2');
+var React = require('react');
+var Fluxxor = require('fluxxor');
+var helper = require('./helper');
+//var qtip = require('qtip2');
+var TooltipMixin = require('./tooltipMixin');
+var Tooltip = require('./tooltip');
 
 var Plays = React.createClass({
 	mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin('PlaysStore')],
@@ -21,7 +24,10 @@ var Plays = React.createClass({
 		return (
 			<div className="row">
 				<div className="col-xs-12">
-					<h2>Most Recently Played Games - <a href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a></h2>
+					<h2>Most Recently Played Games
+					&nbsp;-&nbsp;
+						<a href="http://boardgamegeek.com/plays/bydate/user/edwalter/subtype/boardgame">full list</a>
+					</h2>
 					<PlaysTable loading={this.state.loading} plays={this.state.plays} />
 				</div>
 			</div>
@@ -36,7 +42,7 @@ var PlaysTable = React.createClass({
 		} else {
 			var plays = this.props.plays;
 			var items = [];
-			for (let i=0; i < plays.length && i < 10; i++) {
+			for (let i = 0; i < plays.length && i < 10; i++) {
 				items.push(<PlayItem play={plays[i]} key={plays[i].key}/>);
 			}
 			return (
@@ -46,49 +52,31 @@ var PlaysTable = React.createClass({
 	}
 });
 
-function htmlEncode (value) {
+function htmlEncode(value) {
 	return $('<div/>').text(value).html();
 }
 
 var PlayItem = React.createClass({
+	mixins: [TooltipMixin],
 	componentDidMount() {
-		var el = this.refs.link.getDOMNode();
-		this.refs.image.getDOMNode().addEventListener('load', (e) => {
-			var img = e.target;
-			if (img.classList) {
-				img.classList.add('loaded');
-			} else {
-				img.className = 'loaded';
-			}
-		});
-		if ($) {
-			var play = this.props.play;
-			var playDetails = this.props.play.plays.map(entry => {
-				return "<i>Played " + helper.relativeDate(entry.playDate)
-					+ "</i> - " + htmlEncode(entry.comments);
-			});
-			var tooltipContent = playDetails.join("<br/><br/>");
-			$(el).qtip({
-				content: {
-					title: play.name,
-					text: tooltipContent
-				},
-				position: {
-					my: 'bottom center',
-					at: 'top center',
-					target: $(el),
-					viewport: $(window)
-				},
-				hide: { fixed: true },
-				style: { classes: 'qtip-bootstrap qtip-play'}
-			});
-		}
+		this.refs.image.getDOMNode().addEventListener('load', this.onImageLoad);
 	},
 	componentWillUnmount() {
-		var el = this.refs.link.getDOMNode();
-		if ($) {
-			$(el).qtip('destroy');
+		this.refs.image.getDomNode().removeEventListener('load', this.onImageLoad)
+	},
+	onImageLoad(e) {
+		var img = e.target;
+		if (img.classList) {
+			img.classList.add('loaded');
+		} else {
+			img.className = 'loaded';
 		}
+	},
+	tooltipContent() {
+		var playDetails = this.props.play.plays.map(entry => <div className="play"><i>Played {helper.relativeDate(entry.playDate)}</i> - {entry.comments}</div>);
+		return (
+			<Tooltip title={this.props.play.name} className="plays">{playDetails}</Tooltip>
+		);
 	},
 	render() {
 		var play = this.props.play;
@@ -104,7 +92,9 @@ var WireframePlaysList = React.createClass({
 	render() {
 		return (
 			<div className="games-recent wireframe">
-				{ helper.repeat(10, <a className="games-recent-item"><img src="/images/blank.gif" /></a>, 10) }
+				{ helper.repeat(10, <a className="games-recent-item">
+					<img src="/images/blank.gif" />
+				</a>, 10) }
 			</div>
 		)
 	}

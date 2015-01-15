@@ -1,7 +1,9 @@
-var Fluxxor = require('fluxxor'),
-	helper = require('./helper'),
-	Lazy = require('lazy.js'),
-	ProfileBox = require('./profile');
+var React = require('react');
+var Fluxxor = require('fluxxor');
+var helper = require('./helper');
+var Lazy = require('lazy.js');
+var TooltipMixin = require('./tooltipMixin');
+var Tooltip = require('./tooltip');
 
 var Collection = React.createClass({
 	mixins: [Fluxxor.FluxMixin(React), Fluxxor.StoreWatchMixin('CollectionStore')],
@@ -10,8 +12,11 @@ var Collection = React.createClass({
 		var store = this.getFlux().store('CollectionStore');
 		return {
 			games: store.games,
-			gamesCount: store.gamesCount,
-			expansionsCount: store.expansionsCount
+			stats: {
+				gamesCount: store.gamesCount,
+				expansionsCount: store.expansionsCount,
+				hIndex: store.hIndex
+			}
 		};
 	},
 
@@ -23,8 +28,14 @@ var Collection = React.createClass({
 		return (
 			<div className="row">
 				<div className="col-xs-12">
-					<h2>My Game Collection - <a href="/menu/"><span className="wide-only">today's </span>menu</a> - <a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a>
-						<GameCount games={this.state.gamesCount} expansions={this.state.expansionsCount}/>
+					<h2>My Game Collection
+					&nbsp;-&nbsp;
+						<a href="/menu/">
+							<span className="wide-only">today's </span>
+							menu</a>
+					&nbsp;-&nbsp;
+						<a href="http://boardgamegeek.com/collection/user/edwalter?own=1">full list</a>
+						<GameStats stats={this.state.stats} loading={this.state.games.length === 0} />
 					</h2>
 					<CollectionTable games={this.state.games} />
 				</div>
@@ -40,9 +51,7 @@ var CollectionTable = React.createClass({
 				<WireframeCollectionTable />
 			)
 		} else {
-			var rows = this.props.games.map(game => {
-				return (<CollectionRow game={game} key={game.gameId} />)
-			});
+			var rows = this.props.games.map(game => <CollectionRow game={game} key={game.gameId} />);
 
 			return (
 				<table className="collection-table table table-striped">
@@ -107,34 +116,19 @@ var CollectionRow = React.createClass({
 });
 
 var ExpansionLink = React.createClass({
-	componentDidMount() {
-		if ($) {
-			var game = this.props.game;
-			if (game.expansionsOwnedCount > 0) {
-				var expansionNames = Lazy(game.expansions).where({owned: true}).sortBy('sortableName').pluck('name').toArray();
-				var tooltipContent = expansionNames.join(",<br/>");
-				var el = this.refs.link.getDOMNode();
-				$(el).qtip({
-					content: {
-						title: 'Expansions',
-						text: tooltipContent
-					},
-					position: {
-						my: 'bottom center',
-						at: 'top center',
-						target: $(el),
-						viewport: $(window)
-					},
-					hide: { fixed: true },
-					style: { classes: 'qtip-bootstrap qtip-play'}
-				});
+	mixins: [TooltipMixin],
+	tooltipContent() {
+		var game = this.props.game;
+		if (game.expansionsOwnedCount > 0) {
+			var expansionNames = Lazy(game.expansions).where({owned: true}).sortBy('sortableName').pluck('name').toArray();
+			var elements = [];
+			var max = expansionNames.length;
+			for (let i = 0; i < max; i++) {
+				elements.push(<div>{'' + expansionNames[i] + (i < (max - 1) ? ',' : '')}</div>);
 			}
-		}
-	},
-	componentWillUnmount() {
-		var el = this.refs.link.getDOMNode();
-		if ($) {
-			$(el).qtip('destroy');
+			return (
+				<Tooltip title="Expansions" className="expansions">{elements}</Tooltip>
+			);
 		}
 	},
 	render() {
@@ -193,15 +187,29 @@ var Rating = React.createClass({
 	}
 });
 
-var GameCount = React.createClass({
+var GameStats = React.createClass({
+	mixins: [TooltipMixin],
+	tooltipContent() {
+		var hIndex = this.props.stats.hIndex;
+		return (
+			<Tooltip className="stats">
+				<p>My H-index is <b>{hIndex}</b>.</p>
+				<p><i>(I have played {hIndex} different games from my collection at least {hIndex} times each)</i></p>
+			</Tooltip>
+		);
+	},
 	render() {
-		if (!this.props.loading) {
+		if (this.props.loading) {
+			return <span className="hidden"></span>;
+		} else {
 			return (
 				<span className="pull-right hidden-xs game-counts fade-in-slow">
-					<b>{ this.props.games }</b> games, <b>{ this.props.expansions }</b> expansions</span>
+					<b>{ this.props.stats.gamesCount }</b>&nbsp;
+					games,&nbsp;
+					<b>{ this.props.stats.expansionsCount }</b>&nbsp;
+					expansions</span>
 			)
 		}
-		return null;
 	}
 });
 
@@ -212,8 +220,12 @@ var WireframeCollectionTable = React.createClass({
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th><span className="wide-only">Times </span>Played</th>
-						<th><span className="wide-only">My </span>Rating</th>
+						<th>
+							<span className="wide-only">Times </span>
+							Played</th>
+						<th>
+							<span className="wide-only">My </span>
+							Rating</th>
 					</tr>
 				</thead>
 				<tbody>
